@@ -8,9 +8,7 @@ COPY scripts/credentials.sh /usr/bin/credentials
 ARG NODE_DIR="/opt/s3-server"
 ARG NODE_USER="runner"
 
-RUN yum update -y && \
-    amazon-linux-extras install -y epel && \
-    yum install -y \
+RUN yum install -y \
         cronie && \
     curl -sL https://rpm.nodesource.com/setup_14.x | bash - && \
     yum install -y nodejs && \
