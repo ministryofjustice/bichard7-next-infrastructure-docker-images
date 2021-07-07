@@ -1,0 +1,10 @@
+---
+
+version: 0.2
+phases:
+  build:
+    commands:
+      - set -ev
+      - cd Dockerfiles/Nginx_Scan_Portal
+      - /bin/bash ./scripts/build_nginx_scan_portal.sh
+...

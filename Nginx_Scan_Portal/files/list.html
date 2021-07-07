@@ -1,0 +1,29 @@
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{s3Bucket}} Scanning Reports</title>
+  <style>
+    * {
+      font-size: 100%;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+    table {
+      max-width: 90%;
+    }
+  </style>
+</head>
+<body>
+<h3>{{s3Bucket}}</h3>
+<p>These are the vulnerability scanning reports, the latest report set will be found in the _latest subdirectory.</p>
+<p>The current path had a '/' at the end but no index.html inside it.</p>
+<h4>Subfolders</h4>
+<ul>
+  {{#prefixes}}
+  <li>
+    <a href="/{{Prefix}}">{{Prefix}}</a>
+  </li>
+  {{/prefixes}}
+</ul>
+</body>
+</html>
