@@ -3,7 +3,7 @@
 set -ev
 
 readonly REPOSITORY_NAME="openjdk-jre11-slim"
-readonly SOURCE_REPOSITORY_NAME="amazon-linux2"
+readonly SOURCE_REPOSITORY_NAME="amazon-linux2-base"
 readonly REPOSITORY="${AWS_ACCOUNT_ID}.dkr.ecr.eu-west-2.amazonaws.com"
 readonly DOCKER_IMAGE_PREFIX="${REPOSITORY}/${REPOSITORY_NAME}"
 readonly SOURCE_IMAGE_PREFIX="${REPOSITORY}/${SOURCE_REPOSITORY_NAME}"
@@ -19,7 +19,9 @@ DOCKER_IMAGE_HASH=$(aws ecr describe-images --repository-name ${SOURCE_REPOSITOR
 
 echo ${DOCKER_IMAGE_HASH}
 
-docker build --build-arg "BUILD_IMAGE=${SOURCE_IMAGE_PREFIX}@${DOCKER_IMAGE_HASH}" -t ${REPOSITORY_NAME} . 2>&1 | tee /tmp/docker.out
+docker build \
+  --build-arg "BUILD_IMAGE=${SOURCE_IMAGE_PREFIX}@${DOCKER_IMAGE_HASH}" \
+  -t ${REPOSITORY_NAME} . 2>&1 | tee /tmp/docker.out
 
 export SHA_HASH=$(cat /tmp/docker.out | grep digest | cut -d':' -f3-4 | cut -d' ' -f2)
 

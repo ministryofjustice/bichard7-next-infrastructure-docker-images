@@ -1,18 +1,13 @@
-ARG BUILD_IMAGE="amazonlinux:2"
+ARG BUILD_IMAGE="amazon-linux2-base"
 FROM ${BUILD_IMAGE}
 
 LABEL maintainer="CJSE"
 LABEL "origin_source"="https://github.com/docker-library/openjdk/blob/master/11/jre/slim-buster/Dockerfile"
 
 RUN set -eux && \
-	yum update -y && \
 	yum install -y ca-certificates \
 	  p11-kit \
-	  dirmngr \
-	  gnupg \
-	  wget \
-	  tar \
-	  gzip
+	  dirmngr
 
 ENV JAVA_HOME /usr/local/openjdk-11
 RUN { echo '#/bin/sh'; echo 'echo "$JAVA_HOME"'; } > /usr/local/bin/docker-java-home && \
@@ -47,5 +42,6 @@ RUN set -euvx && \
 	ldconfig && \
 	java -Xshare:dump && \
 	java --version && \
-  yum clean all && \
-  rm -rf /var/cache/yum
+	rm -rf /var/log/* && \
+    yum clean all && \
+    rm -rf /var/cache/yum
