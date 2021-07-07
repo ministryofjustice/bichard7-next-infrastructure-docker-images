@@ -5,6 +5,6 @@ phases:
   build:
     commands:
       - set -ev
-      - cd Dockerfiles/Grafana
+      - cd ./Grafana
       - /bin/bash ./scripts/build_docker.sh
 ...
