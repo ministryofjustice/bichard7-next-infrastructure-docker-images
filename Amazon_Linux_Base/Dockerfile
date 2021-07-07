@@ -1,0 +1,15 @@
+ARG BUILD_IMAGE="amazonlinux:2"
+FROM ${BUILD_IMAGE}
+
+LABEL maintainer="CJSE"
+ARG YUM_PACKAGES="python-pip gzip tar unzip openssl shadow-utils xz"
+ARG PIP_PACKAGES="awscli jq"
+
+RUN yum update -y && \
+    amazon-linux-extras install -y epel && \
+    yum install -y deltarpm && \
+    yum install -y ${YUM_PACKAGES} && \
+    pip install ${PIP_PACKAGES} && \
+    rm -rf /var/log/* && \
+    yum clean all && \
+    rm -rf /var/cache/yum
