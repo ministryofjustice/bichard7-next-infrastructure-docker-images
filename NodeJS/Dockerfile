@@ -1,4 +1,4 @@
-ARG BUILD_IMAGE="amazonlinux:2"
+ARG BUILD_IMAGE="amazon-linux2-base"
 FROM ${BUILD_IMAGE}
 
 LABEL maintainer="CJSE"
@@ -6,7 +6,6 @@ LABEL maintainer="CJSE"
 ARG NODE_USER="node"
 ARG NODE_GUID=1000
 ARG ARCH="x64"
-ARG YUM_PACKAGES="deltarpm shadow-utils tar zip gzip xz"
 ARG NODE_VERSION="16.3.0"
 ARG YARN_VERSION="1.22.5"
 
@@ -14,9 +13,7 @@ COPY scripts/docker-entrypoint.sh /usr/local/bin/
 
 WORKDIR /tmp
 
-RUN yum update -y && \
-    yum install -y ${YUM_PACKAGES} && \
-    groupadd --gid ${NODE_GUID} ${NODE_USER} && \
+RUN groupadd --gid ${NODE_GUID} ${NODE_USER} && \
     useradd --uid ${NODE_GUID} --gid ${NODE_USER} --shell /bin/bash --create-home ${NODE_USER} && \
     for key in \
       4ED778F539E3634C779C87C6D7062848A1AB005C \
@@ -58,7 +55,7 @@ RUN yum update -y && \
     ln -s /opt/yarn-v$YARN_VERSION/bin/yarnpkg /usr/local/bin/yarnpkg && \
     rm yarn-v$YARN_VERSION.tar.gz.asc yarn-v$YARN_VERSION.tar.gz && \
     yarn --version && \
-    yum remove -y ${YUM_PACKAGES} && \
+    rm -rf * && \
     yum clean all && \
     rm -rf /var/cache/yum && \
     chmod +x /usr/local/bin/docker-entrypoint.sh

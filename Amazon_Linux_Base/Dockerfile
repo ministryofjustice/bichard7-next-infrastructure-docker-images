@@ -2,7 +2,7 @@ ARG BUILD_IMAGE="amazonlinux:2"
 FROM ${BUILD_IMAGE}
 
 LABEL maintainer="CJSE"
-ARG YUM_PACKAGES="python-pip gzip tar unzip openssl shadow-utils xz"
+ARG YUM_PACKAGES="python-pip gzip tar unzip openssl shadow-utils xz wget gnupg"
 ARG PIP_PACKAGES="awscli jq"
 
 RUN yum update -y && \
