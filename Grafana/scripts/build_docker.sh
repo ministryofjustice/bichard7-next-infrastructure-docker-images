@@ -2,13 +2,13 @@
 
 set -ev
 
-readonly REPOSITORY_NAME="amazon-linux2"
-readonly SOURCE_REPOSITORY_NAME="amazon-linux2-base"
+readonly REPOSITORY_NAME="grafana"
+readonly SOURCE_REPOSITORY_NAME="grafana-staged"
 readonly REPOSITORY="${AWS_ACCOUNT_ID}.dkr.ecr.eu-west-2.amazonaws.com"
 readonly DOCKER_IMAGE_PREFIX="${REPOSITORY}/${REPOSITORY_NAME}"
 readonly SOURCE_IMAGE_PREFIX="${REPOSITORY}/${SOURCE_REPOSITORY_NAME}"
 
-echo "Build Amazon Linux 2 image on `date`"
+echo "Build Grafana image on `date`"
 
 aws ecr get-login-password --region eu-west-2 | docker login \
   --username AWS \
