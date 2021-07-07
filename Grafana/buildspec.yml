@@ -1,0 +1,10 @@
+---
+
+version: 0.2
+phases:
+  build:
+    commands:
+      - set -ev
+      - cd Dockerfiles/Grafana
+      - /bin/bash ./scripts/build_docker_grafana.sh
+...

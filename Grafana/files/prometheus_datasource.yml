@@ -1,0 +1,17 @@
+apiVersion: 1
+datasources:
+  - name: Prometheus
+    type: prometheus
+    access: server
+    orgId: 1
+    uid: e6c0c6c2d40d11ebb8bc0242ac130003
+    url: $PROMETHEUS_URL
+    basicAuth: true
+    basicAuthUser: $PROMETHEUS_USER
+    isDefault: true
+    jsonData:
+      timeInterval: 60s
+    secureJsonData:
+      basicAuthPassword: $PROMETHEUS_PASSWORD
+    version: 1
+    editable: false
