@@ -6,30 +6,12 @@ WORKDIR /
 
 COPY scripts/install_prometheus.sh /tmp/
 COPY scripts/run_nginx.sh /bin/run_nginx
-COPY files/openssl.cnf /tmp/openssl.cnf
 
-RUN mkdir -p {/config,/certs,/nginx_auth,/var/log/supervisor} && \
-  yum update -y && \
-  amazon-linux-extras install -y epel && \
+RUN mkdir -p {/config,/nginx_auth} && \
   ./tmp/install_prometheus.sh && \
-  yum install -y \
-    nginx \
-    supervisor \
-    httpd-tools \
-    openssl && \
   chmod +x /bin/run_nginx && \
   yum clean all && \
-  rm -rf /var/cache/yum && \
-  openssl req \
-    -x509 \
-    -nodes \
-    -days 730 \
-    -newkey rsa:4096 \
-    -out /certs/server.crt \
-    -keyout /certs/server.key \
-    -config /tmp/openssl.cnf \
-    -extensions 'v3_req' && \
-  rm -rf /tmp/openssl.cnf
+  rm -rf /var/cache/yum
 
 EXPOSE     9090
 VOLUME     ["/prometheus", "/config"]
