@@ -3,7 +3,7 @@
 set -ev
 
 readonly REPOSITORY_NAME="prometheus"
-readonly SOURCE_REPOSITORY_NAME="openjdk-jre11-slim"
+readonly SOURCE_REPOSITORY_NAME="nginx-java-supervisord"
 readonly REPOSITORY="${AWS_ACCOUNT_ID}.dkr.ecr.eu-west-2.amazonaws.com"
 readonly DOCKER_IMAGE_PREFIX="${REPOSITORY}/${REPOSITORY_NAME}"
 readonly SOURCE_IMAGE_PREFIX="${REPOSITORY}/${SOURCE_REPOSITORY_NAME}"

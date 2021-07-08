@@ -51,6 +51,18 @@ metrics:
     aws_metric_name: CPUUtilization
     aws_dimensions: [ClusterName, ServiceName]
 
+  - aws_namespace: ECS/ContainerInsights
+    aws_metric_name: RunningTaskCount
+    aws_dimensions: [ClusterName, ServiceName]
+
+  - aws_namespace: ECS/ContainerInsights
+    aws_metric_name: RunningTaskCount
+    aws_dimensions: [ClusterName, ServiceName]
+
+  - aws_namespace: ECS/ContainerInsights
+    aws_metric_name: PendingTaskCount
+    aws_dimensions: [ClusterName, ServiceName]
+
   - aws_namespace: AWS/ES
     aws_metric_name: CPUUtilization
     aws_dimensions: [DomainName, NodeId]
@@ -74,6 +86,10 @@ metrics:
   - aws_namespace: AWS/RDS
     aws_metric_name: DatabaseConnections
     aws_dimensions: [DBClusterIdentifier]
+
+  - aws_namespace: AWS/RDS
+    aws_metric_name: DatabaseConnections
+    aws_dimensions: [DBInstanceIdentifier]
 
   - aws_namespace: AWS/RDS
     aws_metric_name: FreeLocalStorage
