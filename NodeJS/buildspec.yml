@@ -4,6 +4,6 @@ phases:
   build:
     commands:
       - set -ev
-      - cd ./Dockerfiles/NodeJS
+      - cd ./NodeJS
       - /bin/bash ./scripts/build_docker.sh
 ...
