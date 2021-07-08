@@ -8,7 +8,8 @@ COPY scripts/install_prometheus.sh /tmp/
 COPY scripts/run_nginx.sh /bin/run_nginx
 
 RUN mkdir -p {/config,/nginx_auth} && \
-  ./tmp/install_prometheus.sh && \
+  /bin/bash /tmp/install_prometheus.sh && \
+  rm /tmp/install_prometheus.sh && \
   chmod +x /bin/run_nginx && \
   yum clean all && \
   rm -rf /var/cache/yum
