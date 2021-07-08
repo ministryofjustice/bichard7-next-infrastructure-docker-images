@@ -1,4 +1,4 @@
-ARG BUILD_IMAGE="openjdk:11-jre-slim"
+ARG BUILD_IMAGE="nginx-java-supervisord"
 FROM ${BUILD_IMAGE}
 LABEL maintainer="CJSE"
 
