@@ -5,7 +5,7 @@ LABEL maintainer="CJSE"
 LABEL "origin_source"="https://github.com/docker-library/openjdk/blob/master/11/jre/slim-buster/Dockerfile"
 
 RUN set -eux && \
-	yum install -y
+	yum install -y \
         ca-certificates \
 	    p11-kit \
 	    dirmngr
