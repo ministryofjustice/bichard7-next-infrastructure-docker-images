@@ -1,4 +1,4 @@
-ARG BUILD_IMAGE="nginx-supervisord"
+ARG BUILD_IMAGE="nginx-nodejs-supervisord"
 FROM ${BUILD_IMAGE}
 LABEL maintainer="CJSE"
 
@@ -9,9 +9,8 @@ ARG NODE_DIR="/opt/s3-server"
 ARG NODE_USER="runner"
 
 RUN yum install -y \
-        cronie && \
-    curl -sL https://rpm.nodesource.com/setup_14.x | bash - && \
-    yum install -y nodejs && \
+        cronie \
+        git && \
     mkdir -p {/root/.aws,/nginx_auth} && \
     chmod +x /bin/run_nginx && \
     chmod +x /bin/credentials && \
