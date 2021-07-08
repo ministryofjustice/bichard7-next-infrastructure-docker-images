@@ -15,7 +15,7 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
-  "id": 4,
+  "id": 5,
   "links": [],
   "panels": [
     {
@@ -363,11 +363,15 @@
           "exemplar": true,
           "expr": "aws_rds_database_connections_maximum{dbcluster_identifier=\"cjse-e2e-test-bichard-7-aurora-cluster\"}",
           "interval": "",
-          "legendFormat": "DB Connections {{db_cluste_identifier}}",
+          "legendFormat": "DB Connections Application",
           "refId": "A"
         },
         {
+          "exemplar": true,
+          "expr": "aws_rds_database_connections_maximum{dbinstance_identifier=\"cjse-e2e-test-bichard-7-grafana\"}",
           "hide": false,
+          "interval": "",
+          "legendFormat": "DB Connections Monitoring",
           "refId": "B"
         }
       ],
@@ -388,6 +392,5 @@
   },
   "timepicker": {},
   "timezone": "",
-  "title": "Bichard e2e-test status",
-  "version": 4
+  "title": "Bichard e2e-test status"
 }
