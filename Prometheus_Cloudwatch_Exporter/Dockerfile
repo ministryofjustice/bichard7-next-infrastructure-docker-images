@@ -8,6 +8,7 @@ COPY scripts/credentials.sh /usr/bin/credentials
 COPY scripts/install_cloudwatch_exporter.sh /tmp/install_cloudwatch_exporter.sh
 
 RUN mkdir -p ~/.aws && \
+  yum install -y cronie && \
   chmod +x /usr/bin/credentials && \
   mkdir -p /config && \
   bash /tmp/install_cloudwatch_exporter.sh && \
