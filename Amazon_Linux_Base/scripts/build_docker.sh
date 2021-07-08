@@ -2,8 +2,8 @@
 
 set -ev
 
-readonly REPOSITORY_NAME="amazon-linux2"
-readonly SOURCE_REPOSITORY_NAME="amazon-linux2-base"
+readonly REPOSITORY_NAME="amazon-linux2-base"
+readonly SOURCE_REPOSITORY_NAME="amazon-linux2"
 readonly REPOSITORY="${AWS_ACCOUNT_ID}.dkr.ecr.eu-west-2.amazonaws.com"
 readonly DOCKER_IMAGE_PREFIX="${REPOSITORY}/${REPOSITORY_NAME}"
 readonly SOURCE_IMAGE_PREFIX="${REPOSITORY}/${SOURCE_REPOSITORY_NAME}"
@@ -16,8 +16,6 @@ aws ecr get-login-password --region eu-west-2 | docker login \
 
 DOCKER_IMAGE_HASH=$(aws ecr describe-images --repository-name ${SOURCE_REPOSITORY_NAME} --query \
   "{\"tags\": to_string(sort_by(imageDetails,& imagePushedAt)[-1].imageDigest)}" | jq .tags | tr -d '"')
-
-echo ${DOCKER_IMAGE_HASH}
 
 docker build \
     --build-arg "BUILD_IMAGE=${SOURCE_IMAGE_PREFIX}@${DOCKER_IMAGE_HASH}" \
