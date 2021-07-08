@@ -1,14 +1,14 @@
-ARG BUILD_IMAGE="nginx-supervisord"
+ARG BUILD_IMAGE="amazon-linux2-base"
 FROM ${BUILD_IMAGE}
 
 LABEL maintainer="CJSE"
 LABEL "origin_source"="https://github.com/docker-library/openjdk/blob/master/11/jre/slim-buster/Dockerfile"
 
 RUN set -eux && \
-	yum install -y \
-    ca-certificates \
-	p11-kit \
-	dirmngr
+	yum install -y
+        ca-certificates \
+	    p11-kit \
+	    dirmngr
 
 ENV JAVA_HOME /usr/local/openjdk-11
 RUN { echo '#/bin/sh'; echo 'echo "$JAVA_HOME"'; } > /usr/local/bin/docker-java-home && \
