@@ -7,6 +7,7 @@ readonly SOURCE_REPOSITORY_NAME="amazon-linux2-base"
 readonly REPOSITORY="${AWS_ACCOUNT_ID}.dkr.ecr.eu-west-2.amazonaws.com"
 readonly DOCKER_IMAGE_PREFIX="${REPOSITORY}/${REPOSITORY_NAME}"
 readonly SOURCE_IMAGE_PREFIX="${REPOSITORY}/${SOURCE_REPOSITORY_NAME}"
+export DOCKER_IMAGE="${REPOSITORY_NAME}:latest"
 
 echo "Build openJDK11 Jre image on `date`"
 
@@ -23,7 +24,8 @@ docker build \
   --build-arg "BUILD_IMAGE=${SOURCE_IMAGE_PREFIX}@${DOCKER_IMAGE_HASH}" \
   -t ${REPOSITORY_NAME} . 2>&1 | tee /tmp/docker.out
 
-/bin/bash DOCKER_IMAGE="${REPOSITORY_NAME}:latest" ../../scripts/run_goss_tests.sh
+echo "Running tests"
+/bin/bash ../scripts/run_goss_tests.sh
 
 export SHA_HASH=$(cat /tmp/docker.out | grep digest | cut -d':' -f3-4 | cut -d' ' -f2)
 

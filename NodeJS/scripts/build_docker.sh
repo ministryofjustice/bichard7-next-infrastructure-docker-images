@@ -9,6 +9,7 @@ readonly DOCKER_IMAGE_PREFIX="${REPOSITORY}/${REPOSITORY_NAME}"
 readonly SOURCE_IMAGE_PREFIX="${REPOSITORY}/${SOURCE_REPOSITORY_NAME}"
 readonly NODE_VERSION="16.3.0"
 readonly YARN_VERSION="1.22.5"
+export DOCKER_IMAGE="${REPOSITORY_NAME}:latest"
 
 echo "Build NodeJS ${NODE_VERSION} image on `date`"
 
@@ -24,7 +25,8 @@ docker build \
   --build-arg "NODE_VERSION=${NODE_VERSION}" \
   -t ${REPOSITORY_NAME} .
 
-/bin/bash DOCKER_IMAGE="${REPOSITORY_NAME}:latest" ../../scripts/run_goss_tests.sh
+echo "Running tests"
+/bin/bash ../scripts/run_goss_tests.sh
 
 docker tag ${REPOSITORY_NAME}:latest ${DOCKER_IMAGE_PREFIX}:${CODEBUILD_RESOLVED_SOURCE_VERSION}-${CODEBUILD_START_TIME}
 echo "Push Docker image on `date`"
