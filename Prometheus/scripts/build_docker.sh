@@ -7,6 +7,7 @@ readonly SOURCE_REPOSITORY_NAME="nginx-java-supervisord"
 readonly REPOSITORY="${AWS_ACCOUNT_ID}.dkr.ecr.eu-west-2.amazonaws.com"
 readonly DOCKER_IMAGE_PREFIX="${REPOSITORY}/${REPOSITORY_NAME}"
 readonly SOURCE_IMAGE_PREFIX="${REPOSITORY}/${SOURCE_REPOSITORY_NAME}"
+export DOCKER_IMAGE="${REPOSITORY_NAME}:latest"
 
 echo "Build Prometheus image on `date`"
 
@@ -23,6 +24,10 @@ docker build \
   -t ${REPOSITORY_NAME} .
 
 docker tag ${REPOSITORY_NAME}:latest ${DOCKER_IMAGE_PREFIX}:${CODEBUILD_RESOLVED_SOURCE_VERSION}-${CODEBUILD_START_TIME}
+
+echo "Running tests"
+/bin/bash  ../scripts/run_goss_tests.sh
+
 echo "Push Docker image on `date`"
 
 docker push ${DOCKER_IMAGE_PREFIX}:${CODEBUILD_RESOLVED_SOURCE_VERSION}-${CODEBUILD_START_TIME}
