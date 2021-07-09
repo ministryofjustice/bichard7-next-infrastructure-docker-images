@@ -18,6 +18,9 @@ EXPOSE     9090
 VOLUME     ["/prometheus", "/config"]
 WORKDIR    /prometheus
 
+COPY conf/prometheus.yml /etc/prometheus/prometheus.yml
+COPY conf/web-config.yml /etc/prometheus/web-config.yml
+RUN chown nobody:nobody /etc/prometheus/*.yml
 COPY conf/supervisord.conf /etc/supervisord.conf
 COPY conf/nginx.conf /etc/nginx/nginx.conf
 COPY conf/.htpasswd /nginx_auth/.htpasswd
