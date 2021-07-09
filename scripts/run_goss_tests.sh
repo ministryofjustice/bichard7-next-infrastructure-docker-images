@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-set -ev
+set -e
 
 if [ ! -f "/usr/local/bin/goss" ]; then
   curl -L https://github.com/aelsabbahy/goss/releases/latest/download/goss-linux-amd64 -o /usr/local/bin/goss
@@ -11,4 +11,4 @@ if [ ! -f "/usr/local/bin/dgoss" ]; then
   chmod +rx /usr/local/bin/dgoss
 fi
 
-GOSS_SLEEP=15 dgoss run ${DOCKER_IMAGE}
+GOSS_SLEEP=15 dgoss run ${GOSS_ENV} ${DOCKER_IMAGE}
