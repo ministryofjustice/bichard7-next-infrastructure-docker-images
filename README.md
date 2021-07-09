@@ -12,3 +12,9 @@ Docker image builds for the Bichard 7 project
  - [Prometheus Cloudwatch Exporter](./Prometheus_Cloudwatch_Exporter/Dockerfile)  - Prometheus Cloudwatch Exporter with HTTPS via Nginx
  - [Grafana](./Grafana/Dockerfile) - Built from the official Alpine image
  - [Scanning Results Portal](./Scanning_Results_Portal) - Used for exposing our scanning results bucket built from nginx nodejs image
+
+
+## Testing
+
+All images are tested using goss prior to pushing to the relevant registries. For more information on goss/dgoss please see
+https://github.com/aelsabbahy/goss/tree/master/extras/dgoss
