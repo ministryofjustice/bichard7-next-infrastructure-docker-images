@@ -7,8 +7,9 @@ readonly SOURCE_REPOSITORY_NAME="nodejs"
 readonly REPOSITORY="${AWS_ACCOUNT_ID}.dkr.ecr.eu-west-2.amazonaws.com"
 readonly DOCKER_IMAGE_PREFIX="${REPOSITORY}/${REPOSITORY_NAME}"
 readonly SOURCE_IMAGE_PREFIX="${REPOSITORY}/${SOURCE_REPOSITORY_NAME}"
+export DOCKER_IMAGE="${REPOSITORY_NAME}:latest"
 
-echo "Build openJDK11 Jre image on `date`"
+echo "Build Nginx with Nodejs 16 and Supervisord image on `date`"
 
 aws ecr get-login-password --region eu-west-2 | docker login \
   --username AWS \
@@ -26,6 +27,9 @@ docker build \
 export SHA_HASH=$(cat /tmp/docker.out | grep digest | cut -d':' -f3-4 | cut -d' ' -f2)
 
 docker tag ${REPOSITORY_NAME}:latest ${DOCKER_IMAGE_PREFIX}:${CODEBUILD_RESOLVED_SOURCE_VERSION}-${CODEBUILD_START_TIME}
-echo "Push Docker image on `date`"
 
+echo "Running tests"
+/bin/bash  ../scripts/run_goss_tests.sh
+
+echo "Push Docker image on `date`"
 docker push ${DOCKER_IMAGE_PREFIX}:${CODEBUILD_RESOLVED_SOURCE_VERSION}-${CODEBUILD_START_TIME}
