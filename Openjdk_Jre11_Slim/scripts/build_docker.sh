@@ -23,6 +23,8 @@ docker build \
   --build-arg "BUILD_IMAGE=${SOURCE_IMAGE_PREFIX}@${DOCKER_IMAGE_HASH}" \
   -t ${REPOSITORY_NAME} . 2>&1 | tee /tmp/docker.out
 
+/bin/bash DOCKER_IMAGE="${REPOSITORY_NAME}:latest" ../../scripts/run_goss_tests.sh
+
 export SHA_HASH=$(cat /tmp/docker.out | grep digest | cut -d':' -f3-4 | cut -d' ' -f2)
 
 docker tag ${REPOSITORY_NAME}:latest ${DOCKER_IMAGE_PREFIX}:${CODEBUILD_RESOLVED_SOURCE_VERSION}-${CODEBUILD_START_TIME}
