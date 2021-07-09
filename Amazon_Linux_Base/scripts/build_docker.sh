@@ -24,6 +24,8 @@ docker build \
 docker tag ${REPOSITORY_NAME}:latest ${DOCKER_IMAGE_PREFIX}:${CODEBUILD_RESOLVED_SOURCE_VERSION}-${CODEBUILD_START_TIME}
 echo "Push Docker image on `date`"
 
+/bin/bash DOCKER_IMAGE="${REPOSITORY_NAME}:latest" ../../scripts/run_goss_tests.sh
+
 docker push ${DOCKER_IMAGE_PREFIX}:${CODEBUILD_RESOLVED_SOURCE_VERSION}-${CODEBUILD_START_TIME}
 
 aws codebuild start-build --project-name "build-openjdk-jre11-slim-docker" \

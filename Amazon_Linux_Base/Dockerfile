@@ -13,3 +13,5 @@ RUN yum update -y && \
     rm -rf /var/log/* && \
     yum clean all && \
     rm -rf /var/cache/yum
+
+CMD ["tail", "-f", "/dev/null"]
