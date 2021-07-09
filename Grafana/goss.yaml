@@ -1,0 +1,37 @@
+file:
+  /etc/passwd:
+    exists: true
+    mode: "0644"
+    size: 1230
+    owner: root
+    group: root
+    filetype: file
+    contains: []
+  /usr/share/grafana/bin/grafana-server:
+    exists: true
+    mode: "0755"
+    size: 79290488
+    owner: root
+    group: root
+    filetype: file
+    contains: []
+user:
+  grafana:
+    exists: true
+    uid: 472
+    gid: 0
+    groups:
+    - root
+    home: /home/grafana
+    shell: /sbin/nologin
+  nobody:
+    exists: true
+    uid: 65534
+    gid: 65534
+    groups:
+    - nobody
+    home: /
+    shell: /sbin/nologin
+process:
+  grafana-server:
+    running: true
