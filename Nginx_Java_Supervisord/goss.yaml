@@ -23,7 +23,6 @@ file:
     contains: []
   /etc/nginx/nginx.conf:
     exists: true
-    mode: "0664"
     size: 1207
     owner: root
     group: root
@@ -39,7 +38,6 @@ file:
     contains: []
   /etc/supervisord.conf:
     exists: true
-    mode: "0664"
     size: 446
     owner: root
     group: root
