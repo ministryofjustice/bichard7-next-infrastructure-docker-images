@@ -1,0 +1,164 @@
+file:
+  /certs:
+    exists: true
+    mode: "0755"
+    size: 4096
+    owner: root
+    group: root
+    filetype: directory
+    contains: []
+  /certs/server.crt:
+    exists: true
+    mode: "0644"
+    owner: root
+    group: root
+    filetype: file
+    contains: []
+  /certs/server.key:
+    exists: true
+    mode: "0644"
+    owner: root
+    group: root
+    filetype: file
+    contains: []
+  /config/config.yml:
+    exists: true
+    mode: "0664"
+    size: 4689
+    owner: root
+    group: root
+    filetype: file
+    contains: []
+  /etc/nginx/nginx.conf:
+    exists: true
+    mode: "0664"
+    owner: root
+    group: root
+    filetype: file
+    contains: []
+  /etc/passwd:
+    exists: true
+    mode: "0644"
+    size: 692
+    owner: root
+    group: root
+    filetype: file
+    contains: []
+  /etc/supervisord.conf:
+    exists: true
+    mode: "0664"
+    owner: root
+    group: root
+    filetype: file
+    contains: []
+  /root/.aws/config:
+    exists: true
+    mode: "0664"
+    size: 39
+    owner: root
+    group: root
+    filetype: file
+    contains: []
+  /tmp/install_cloudwatch_exporter.sh:
+    exists: false
+    mode: "0664"
+  /tmp/openssl.cnf:
+    exists: false
+    contains: []
+  /usr/bin/credentials:
+    exists: true
+    mode: "0775"
+    size: 419
+    owner: root
+    group: root
+    filetype: file
+    contains: []
+  /var/spool/cron/root:
+    exists: true
+    mode: "0664"
+    size: 43
+    owner: root
+    group: root
+    filetype: file
+    contains: []
+package:
+  cronie:
+    installed: true
+  cronie-anacron:
+    installed: true
+  deltarpm:
+    installed: true
+  epel-release:
+    installed: true
+  nginx:
+    installed: true
+  python:
+    installed: true
+  python2-pip:
+    installed: true
+  shadow-utils:
+    installed: true
+port:
+  tcp:80:
+    listening: false
+  tcp:443:
+    listening: false
+  tcp:9001:
+    listening: true
+    ip:
+    - 127.0.0.1
+  tcp:9106:
+    listening: true
+    ip:
+    - 0.0.0.0
+user:
+  dbus:
+    exists: true
+    uid: 81
+    gid: 81
+    groups:
+    - dbus
+    home: /
+    shell: /sbin/nologin
+  nginx:
+    exists: true
+    uid: 999
+    gid: 998
+    groups:
+    - nginx
+    home: /var/lib/nginx
+    shell: /sbin/nologin
+  nobody:
+    exists: true
+    uid: 99
+    gid: 99
+    groups:
+    - nobody
+    home: /
+    shell: /sbin/nologin
+  systemd-network:
+    exists: true
+    uid: 192
+    gid: 192
+    groups:
+    - systemd-network
+    home: /
+    shell: /sbin/nologin
+command:
+  supervisorctl status:
+    exit-status: 0
+    stdout:
+    - /cloudwatch_exporter\W+RUNNING\W+pid\W\d{1,},\Wuptime\W\S+/
+    - /cron:crond\W+RUNNING\W+pid\W\d{1,},\Wuptime\W\S+/
+    - /nginx\W+RUNNING\W+pid\W\d{1,},\Wuptime\W\S+/
+    stderr: []
+    timeout: 10000
+process:
+  crond:
+    running: true
+  java:
+    running: true
+  nginx:
+    running: true
+  supervisord:
+    running: true

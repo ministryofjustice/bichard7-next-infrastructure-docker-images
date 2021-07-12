@@ -61,7 +61,3 @@ RUN groupadd --gid ${NODE_GUID} ${NODE_USER} && \
     chmod +x /usr/local/bin/docker-entrypoint.sh
 
 WORKDIR /
-
-ENTRYPOINT ["docker-entrypoint.sh"]
-
-CMD [ "node" ]

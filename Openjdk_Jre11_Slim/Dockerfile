@@ -7,8 +7,7 @@ LABEL "origin_source"="https://github.com/docker-library/openjdk/blob/master/11/
 RUN set -eux && \
 	yum install -y \
         ca-certificates \
-	    p11-kit \
-	    dirmngr
+	    p11-kit
 
 ENV JAVA_HOME /usr/local/openjdk-11
 RUN { echo '#/bin/sh'; echo 'echo "$JAVA_HOME"'; } > /usr/local/bin/docker-java-home && \

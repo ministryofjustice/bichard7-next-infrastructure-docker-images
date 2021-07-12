@@ -12,6 +12,7 @@ RUN mkdir -p ~/.aws && \
   chmod +x /usr/bin/credentials && \
   mkdir -p /config && \
   bash /tmp/install_cloudwatch_exporter.sh && \
+  rm /tmp/install_cloudwatch_exporter.sh && \
   yum clean all && \
   rm -rf /var/cache/yum
 
