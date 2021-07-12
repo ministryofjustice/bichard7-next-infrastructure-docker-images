@@ -1,4 +1,12 @@
 file:
+  /bin/alertmanager-sns-forwarder:
+    exists: true
+    mode: "0755"
+    size: 23331523
+    owner: root
+    group: root
+    filetype: file
+    contains: []
   /certs:
     exists: true
     mode: "0755"
@@ -31,7 +39,7 @@ file:
   /etc/passwd:
     exists: true
     mode: "0644"
-    size: 692
+    size: 753
     owner: root
     group: root
     filetype: file
@@ -114,16 +122,22 @@ user:
     home: /
     shell: /sbin/nologin
 command:
+  supervisorctl status nginx:
+    exit-status: 0
+    stdout:
+    - /nginx\W+RUNNING\W+pid\W\d{1,},\Wuptime\W\S+/
+    stderr: []
+    timeout: 10000
   supervisorctl status prometheus:
     exit-status: 0
     stdout:
     - /prometheus\W+RUNNING\W+pid\W\d{1,},\Wuptime\W\S+/
     stderr: []
     timeout: 10000
-  supervisorctl status nginx:
+  supervisorctl status snsalertforwarder:
     exit-status: 0
     stdout:
-    - /nginx\W+RUNNING\W+pid\W\d{1,},\Wuptime\W\S+/
+    - /snsalertforwarder\W+(RUNNING|STARTING)\W+pid\W\d{1,},\Wuptime\W\S+/
     stderr: []
     timeout: 10000
 process:
