@@ -2,18 +2,8 @@
 
 set -e
 
-get_latest_release() {
-  curl --silent "https://api.github.com/repos/$1/releases/latest" | # Get latest release from GitHub api
-    grep '"tag_name":' |                                            # Get tag line
-    sed -E 's/.*"([^"]+)".*/\1/'                                    # Pluck JSON value
-}
-
-install_trivy() {
-  echo "Installing trivy binary"
-  TRIVY_VERSION=$(get_latest_release "aquasecurity/trivy" | sed 's/v//')
-  rpm -ivh https://github.com/aquasecurity/trivy/releases/download/v${TRIVY_VERSION}/trivy_${TRIVY_VERSION}_Linux-64bit.rpm
-}
-
-install_trivy
+pip install ansible
+ansible-galaxy install andrewrothstein.trivy
+ansible localhost -m include_role -a name=andrewrothstein.trivy
 
 trivy image ${DOCKER_IMAGE}
