@@ -9,7 +9,6 @@ file:
     contains: []
   /usr/share/grafana/bin/grafana-server:
     exists: true
-    mode: "0755"
     size: 79290488
     owner: root
     group: root
