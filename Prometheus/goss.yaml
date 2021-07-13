@@ -1,7 +1,6 @@
 file:
   /bin/alertmanager-sns-forwarder:
     exists: true
-    mode: "0755"
     size: 23331523
     owner: root
     group: root
@@ -9,33 +8,25 @@ file:
     contains: []
   /certs:
     exists: true
-    mode: "0755"
     size: 4096
     owner: root
     group: root
     filetype: directory
-    contains: []
   /certs/server.crt:
     exists: true
-    mode: "0644"
     owner: root
     group: root
     filetype: file
-    contains: []
   /certs/server.key:
     exists: true
-    mode: "0644"
     owner: root
     group: root
     filetype: file
-    contains: []
   /etc/nginx/nginx.conf:
     exists: true
-    mode: "0664"
     owner: root
     group: root
     filetype: file
-    contains: []
   /etc/passwd:
     exists: true
     mode: "0644"
@@ -43,25 +34,19 @@ file:
     owner: root
     group: root
     filetype: file
-    contains: []
   /etc/prometheus/prometheus.yml:
     exists: true
-    mode: "0664"
     size: 285
     owner: nobody
     group: nobody
     filetype: file
-    contains: []
   /etc/supervisord.conf:
     exists: true
-    mode: "0664"
     owner: root
     group: root
     filetype: file
-    contains: []
   /tmp/openssl.cnf:
     exists: false
-    contains: []
 package:
   deltarpm:
     installed: true
@@ -132,7 +117,6 @@ command:
     exit-status: 0
     stdout:
     - /prometheus\W+RUNNING\W+pid\W\d{1,},\Wuptime\W\S+/
-    stderr: []
     timeout: 10000
   supervisorctl status snsalertforwarder:
     exit-status: 0

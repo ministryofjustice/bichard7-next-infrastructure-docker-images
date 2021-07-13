@@ -6,7 +6,6 @@ file:
     owner: root
     group: root
     filetype: file
-    contains: []
 package:
   ca-certificates:
     installed: true

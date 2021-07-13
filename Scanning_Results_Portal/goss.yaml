@@ -1,48 +1,38 @@
 file:
   /certs:
     exists: true
-    mode: "0755"
     size: 4096
     owner: root
     group: root
     filetype: directory
-    contains: []
   /certs/server.crt:
     exists: true
-    mode: "0644"
     owner: root
     group: root
     filetype: file
-    contains: []
   /certs/server.key:
     exists: true
-    mode: "0644"
     owner: root
     group: root
     filetype: file
-    contains: []
   /etc/nginx/nginx.conf:
     exists: true
     owner: root
     group: root
     filetype: file
-    contains: []
   /etc/passwd:
     exists: true
     mode: "0644"
     owner: root
     group: root
     filetype: file
-    contains: []
   /etc/supervisord.conf:
     exists: true
     owner: root
     group: root
     filetype: file
-    contains: []
   /tmp/openssl.cnf:
     exists: false
-    contains: []
 package:
   deltarpm:
     installed: true
