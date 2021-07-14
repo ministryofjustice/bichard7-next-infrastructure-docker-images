@@ -33,8 +33,13 @@ RUN mkdir -p {/config,/nginx_auth} && \
 COPY confd /etc/confd/
 
 WORKDIR /
-
+#Sns Alert Manager
+EXPOSE     9088
+#Prometheus
 EXPOSE     9090
+#Prometheus Alert Manager
+EXPOSE     9092
+
 VOLUME     ["/prometheus", "/config"]
 WORKDIR    /prometheus
 

@@ -86,6 +86,14 @@ port:
     listening: true
     ip:
     - 0.0.0.0
+  tcp:9088:
+    listening: true
+    ip:
+    - 0.0.0.0
+  tcp:9092:
+    listening: true
+    ip:
+    - 0.0.0.0
 user:
   dbus:
     exists: true

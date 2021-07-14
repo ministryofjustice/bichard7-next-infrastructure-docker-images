@@ -10,6 +10,6 @@ receivers:
 - name: 'sns-forwarder'
   webhook_configs:
   - send_resolved: True
-    url: 'http://{{getv "/cjse/prometheus/alert/url" "localhost"}}/alert/{{getv "/cjse/prometheus/alert/snstopic" "alerts"}}'
+    url: 'http://{{getv "/cjse/prometheus/alert/url" "localhost"}}:9087/alert/{{getv "/cjse/prometheus/alert/snstopic" "alerts"}}'
 
 ...
