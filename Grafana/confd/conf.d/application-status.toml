@@ -1,0 +1,8 @@
+[template]
+src = "application-status.json.tpl"
+dest = "/opt/grafana/dashboards/application-status.json"
+keys = [
+    "/cjse"
+]
+gid = 998
+uid = 999

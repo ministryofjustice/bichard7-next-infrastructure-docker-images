@@ -1,15 +1,34 @@
 file:
-  /etc/passwd:
+  /bin/confd:
     exists: true
-    mode: "0644"
-    size: 1230
     owner: root
     group: root
     filetype: file
     contains: []
-  /usr/share/grafana/bin/grafana-server:
+  /opt/grafana/dashboards/application-dashboard.json:
     exists: true
-    size: 79290488
+    owner: grafana
+    group: grafana
+    filetype: file
+  /opt/grafana/dashboards/application-status.json:
+    exists: true
+    owner: grafana
+    group: grafana
+    filetype: file
+  /etc/passwd:
+    exists: true
+    owner: root
+    group: root
+    filetype: file
+    contains: []
+  /etc/supervisord.conf:
+    exists: true
+    owner: root
+    group: root
+    filetype: file
+    contains: []
+  /usr/sbin/grafana-server:
+    exists: true
     owner: root
     group: root
     filetype: file
@@ -17,20 +36,22 @@ file:
 user:
   grafana:
     exists: true
-    uid: 472
-    gid: 0
+    uid: 999
+    gid: 998
     groups:
-    - root
-    home: /home/grafana
+    - grafana
+    home: /usr/share/grafana
     shell: /sbin/nologin
   nobody:
     exists: true
-    uid: 65534
-    gid: 65534
+    uid: 99
+    gid: 99
     groups:
     - nobody
     home: /
     shell: /sbin/nologin
 process:
   grafana-server:
+    running: true
+  supervisord:
     running: true

@@ -70,9 +70,9 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "aws_applicationelb_healthy_host_count_average{target_group=\"targetgroup/b7app20210702073027197500000001/0847958c083decc4\"}",
+          "expr": "aws_applicationelb_healthy_host_count_average{target_group=\"targetgroup/{{getenv "/cjse/infra/bichard/targetgroup" ""}}\"}",
           "interval": "",
-          "legendFormat": "Instance count in {{availability_zone}}",
+          "legendFormat": "Instance count in {{"{{"}}availability_zone{{"}}"}}",
           "refId": "A"
         }
       ],
@@ -131,7 +131,7 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "aws_applicationelb_healthy_host_count_average{load_balancer=\"app/cjse-e2e-test-bichard-7-user-ser/205cf4cb225cc5e5\"}",
+          "expr": "aws_applicationelb_healthy_host_count_average{load_balancer=\"app/{{getenv "/cjse/infra/userservice/targetgroup" ""}}\"}",
           "interval": "",
           "legendFormat": "Running Instances",
           "refId": "A"
@@ -188,9 +188,9 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "aws_applicationelb_healthy_host_count_average{load_balancer=~\"app/cjse-e2e-test-bichard-7-monitor/cca05f12e78a6438|app/cjse-e2e-test-bichard-7-grafana/fced5079d84aedeb|app/cjse-e2e-test-bichard-7-cwatch/14d014c517ed5094\"}",
+          "expr": "aws_applicationelb_healthy_host_count_average{load_balancer=~\"app/{{getenv "/cjse/prometheus/alb" "" }}|app/{{getenv "/cjse/grafana/alb" ""}}|app/{{getenv "/cjse/cwatch/alb" "" }}\"}",
           "interval": "",
-          "legendFormat": "Instance count in {{availability_zone}} {{load_balancer}}",
+          "legendFormat": "Instance count in {{"{{"}}availability_zone{{"}}"}} {{"{{"}}load_balancer{{"}}"}}",
           "refId": "A"
         }
       ],
@@ -249,9 +249,9 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "aws_applicationelb_healthy_host_count_average{load_balancer=\"app/cjse-e2e-test-bichard-7-audit-po/702a5155534b7938\"}",
+          "expr": "aws_applicationelb_healthy_host_count_average{load_balancer=\"app/{{getenv "/cjse/audit/alb" "" }}\"}",
           "interval": "",
-          "legendFormat": "Instance count in {{availability_zone}}",
+          "legendFormat": "Instance count in {{"{{"}}availability_zone{{"}}"}}",
           "refId": "A"
         }
       ],
@@ -305,7 +305,7 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "aws_networkelb_healthy_host_count_average{target_group=\"targetgroup/bce2et20210707144919021600000003/c6af8abb15df6329\"}",
+          "expr": "aws_networkelb_healthy_host_count_average{target_group=\"targetgroup/{{getenv "/cjse/beanconnect/nlb" "" }}\"}",
           "interval": "",
           "legendFormat": "Running Instances",
           "refId": "A"
@@ -361,14 +361,14 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "aws_rds_database_connections_maximum{dbcluster_identifier=\"cjse-e2e-test-bichard-7-aurora-cluster\"}",
+          "expr": "aws_rds_database_connections_maximum{dbcluster_identifier=\"cjse-{{getenv "/cjse/infra/envname" ""}}-bichard-7-aurora-cluster\"}",
           "interval": "",
           "legendFormat": "DB Connections Application",
           "refId": "A"
         },
         {
           "exemplar": true,
-          "expr": "aws_rds_database_connections_maximum{dbinstance_identifier=\"cjse-e2e-test-bichard-7-grafana\"}",
+          "expr": "aws_rds_database_connections_maximum{dbinstance_identifier=\"cjse-{{getenv "/cjse/infra/envname" ""}}-bichard-7-grafana\"}",
           "hide": false,
           "interval": "",
           "legendFormat": "DB Connections Monitoring",
@@ -392,5 +392,5 @@
   },
   "timepicker": {},
   "timezone": "",
-  "title": "Bichard e2e-test status"
+  "title": "Bichard {{getenv "/cjse/infra/envname" ""}} status"
 }
