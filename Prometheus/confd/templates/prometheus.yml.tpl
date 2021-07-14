@@ -3,7 +3,8 @@
 alerting:
   alertmanagers:
     - static_configs:
-        - targets: []
+        - targets:
+          - localhost:9093
 
 scrape_configs:
   - job_name: 'prometheus'
