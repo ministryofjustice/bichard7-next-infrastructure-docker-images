@@ -1,11 +1,20 @@
 file:
+  /bin/alertmanager:
+    exists: true
+    owner: nobody
+    group: nobody
+    filetype: file
   /bin/alertmanager-sns-forwarder:
     exists: true
     size: 23331523
     owner: root
     group: root
     filetype: file
-    contains: []
+  /bin/confd:
+    exists: true
+    owner: root
+    group: root
+    filetype: file
   /certs:
     exists: true
     size: 4096
@@ -22,6 +31,11 @@ file:
     owner: root
     group: root
     filetype: file
+  /etc/alertmanager/alertmanager.yml:
+    exists: true
+    owner: nobody
+    group: nobody
+    filetype: file
   /etc/nginx/nginx.conf:
     exists: true
     owner: root
@@ -36,7 +50,6 @@ file:
     filetype: file
   /etc/prometheus/prometheus.yml:
     exists: true
-    size: 285
     owner: nobody
     group: nobody
     filetype: file
@@ -111,7 +124,6 @@ command:
     exit-status: 0
     stdout:
     - /nginx\W+RUNNING\W+pid\W\d{1,},\Wuptime\W\S+/
-    stderr: []
     timeout: 10000
   supervisorctl status prometheus:
     exit-status: 0
@@ -122,8 +134,12 @@ command:
     exit-status: 0
     stdout:
     - /snsalertforwarder\W+(RUNNING|STARTING)\W+pid\W\d{1,},\Wuptime\W\S+/
-    stderr: []
     timeout: 10000
+  supervisorctl status alertmanager:
+      exit-status: 0
+      stdout:
+      - /alertmanager\W+(RUNNING|STARTING)\W+pid\W\d{1,},\Wuptime\W\S+/
+      timeout: 10000
 process:
   nginx:
     running: true

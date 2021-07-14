@@ -9,6 +9,7 @@ COPY scripts/run_nginx.sh /bin/run_nginx
 
 ARG ALERT_USER="alert-forwarder"
 ARG ALERT_GUID=1001
+ARG CONFD_VERSION="0.16.0"
 
 RUN mkdir -p {/config,/nginx_auth} && \
   /bin/bash /tmp/install_prometheus.sh && \
@@ -24,7 +25,12 @@ RUN mkdir -p {/config,/nginx_auth} && \
   cp /tmp/bin/linux/alertmanager-sns-forwarder /bin/. && \
   chmod +x /bin/alertmanager-sns-forwarder && \
   rm -rf /tmp/bin && \
-  rm alertmanager-sns-forwarder-linux_amd64.tar.gz
+  rm alertmanager-sns-forwarder-linux_amd64.tar.gz && \
+  wget -O /bin/confd https://github.com/kelseyhightower/confd/releases/download/v${CONFD_VERSION}/confd-${CONFD_VERSION}-linux-amd64 && \
+  chmod +x /bin/confd && \
+  mkdir -p /etc/confd/{conf.d,templates}
+
+COPY confd /etc/confd/
 
 WORKDIR /
 
