@@ -214,7 +214,7 @@
         },
         {
           "exemplar": true,
-          "expr": "aws_applicationelb_healthy_host_count_average{load_balancer=\"app/cjse-{{getenv "/cjse/infra/envname" "e2e-test" }}-bichard-7/cf337b093435e35c\"}",
+          "expr": "aws_applicationelb_healthy_host_count_average{load_balancer=\"{{getenv "/cjse/infra/bichard/loadbalancer" "" }}\"}",
           "hide": false,
           "interval": "",
           "legendFormat": "Health Hosts {{"{{"}}load_balancer{{"}}"}}",
