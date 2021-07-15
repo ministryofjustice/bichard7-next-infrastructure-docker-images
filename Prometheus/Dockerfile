@@ -7,14 +7,39 @@ WORKDIR /
 COPY scripts/install_prometheus.sh /tmp/
 COPY scripts/run_nginx.sh /bin/run_nginx
 
+ARG ALERT_USER="alert-forwarder"
+ARG ALERT_GUID=1001
+ARG CONFD_VERSION="0.16.0"
+
 RUN mkdir -p {/config,/nginx_auth} && \
   /bin/bash /tmp/install_prometheus.sh && \
   rm /tmp/install_prometheus.sh && \
   chmod +x /bin/run_nginx && \
   yum clean all && \
-  rm -rf /var/cache/yum
+  rm -rf /var/cache/yum && \
+  groupadd --gid ${ALERT_GUID} ${ALERT_USER} && \
+  useradd --uid ${ALERT_GUID} --gid ${ALERT_USER} --shell /bin/bash --create-home ${ALERT_USER} && \
+  cd /tmp && \
+  wget https://github.com/DataReply/alertmanager-sns-forwarder/releases/download/0.2/alertmanager-sns-forwarder-linux_amd64.tar.gz && \
+  tar -xf alertmanager-sns-forwarder-linux_amd64.tar.gz && \
+  cp /tmp/bin/linux/alertmanager-sns-forwarder /bin/. && \
+  chmod +x /bin/alertmanager-sns-forwarder && \
+  rm -rf /tmp/bin && \
+  rm alertmanager-sns-forwarder-linux_amd64.tar.gz && \
+  wget -O /bin/confd https://github.com/kelseyhightower/confd/releases/download/v${CONFD_VERSION}/confd-${CONFD_VERSION}-linux-amd64 && \
+  chmod +x /bin/confd && \
+  mkdir -p /etc/confd/{conf.d,templates}
 
+COPY confd /etc/confd/
+
+WORKDIR /
+#Sns Alert Manager
+EXPOSE     9088
+#Prometheus
 EXPOSE     9090
+#Prometheus Alert Manager
+EXPOSE     9092
+
 VOLUME     ["/prometheus", "/config"]
 WORKDIR    /prometheus
 

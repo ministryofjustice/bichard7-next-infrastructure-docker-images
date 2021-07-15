@@ -1,0 +1,8 @@
+[template]
+src = "prometheus.yml.tpl"
+dest = "/etc/prometheus/prometheus.yml"
+keys = [
+    "/cjse/prometheus"
+]
+gid = 99
+uid = 99

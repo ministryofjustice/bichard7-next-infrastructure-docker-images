@@ -1,0 +1,8 @@
+[template]
+src = "application-dashboard.json.tpl"
+dest = "/opt/grafana/dashboards/application-dashboard.json"
+keys = [
+    "/cjse"
+]
+gid = 998
+uid = 999

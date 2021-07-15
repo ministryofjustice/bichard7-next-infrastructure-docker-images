@@ -1,4 +1,20 @@
 file:
+  /bin/alertmanager:
+    exists: true
+    owner: nobody
+    group: nobody
+    filetype: file
+  /bin/alertmanager-sns-forwarder:
+    exists: true
+    size: 23331523
+    owner: root
+    group: root
+    filetype: file
+  /bin/confd:
+    exists: true
+    owner: root
+    group: root
+    filetype: file
   /certs:
     exists: true
     size: 4096
@@ -15,6 +31,11 @@ file:
     owner: root
     group: root
     filetype: file
+  /etc/alertmanager/alertmanager.yml:
+    exists: true
+    owner: nobody
+    group: nobody
+    filetype: file
   /etc/nginx/nginx.conf:
     exists: true
     owner: root
@@ -23,13 +44,12 @@ file:
   /etc/passwd:
     exists: true
     mode: "0644"
-    size: 692
+    size: 753
     owner: root
     group: root
     filetype: file
   /etc/prometheus/prometheus.yml:
     exists: true
-    size: 285
     owner: nobody
     group: nobody
     filetype: file
@@ -63,6 +83,14 @@ port:
     ip:
     - 127.0.0.1
   tcp:9090:
+    listening: true
+    ip:
+    - 0.0.0.0
+  tcp:9088:
+    listening: true
+    ip:
+    - 0.0.0.0
+  tcp:9092:
     listening: true
     ip:
     - 0.0.0.0
@@ -100,16 +128,26 @@ user:
     home: /
     shell: /sbin/nologin
 command:
-  supervisorctl status prometheus:
-    exit-status: 0
-    stdout:
-    - /prometheus\W+RUNNING\W+pid\W\d{1,},\Wuptime\W\S+/
-    timeout: 10000
   supervisorctl status nginx:
     exit-status: 0
     stdout:
     - /nginx\W+RUNNING\W+pid\W\d{1,},\Wuptime\W\S+/
     timeout: 10000
+  supervisorctl status prometheus:
+    exit-status: 0
+    stdout:
+    - /prometheus\W+RUNNING\W+pid\W\d{1,},\Wuptime\W\S+/
+    timeout: 10000
+  supervisorctl status snsalertforwarder:
+    exit-status: 0
+    stdout:
+    - /snsalertforwarder\W+(RUNNING|STARTING)\W+pid\W\d{1,},\Wuptime\W\S+/
+    timeout: 10000
+  supervisorctl status alertmanager:
+      exit-status: 0
+      stdout:
+      - /alertmanager\W+(RUNNING|STARTING)\W+pid\W\d{1,},\Wuptime\W\S+/
+      timeout: 10000
 process:
   nginx:
     running: true
