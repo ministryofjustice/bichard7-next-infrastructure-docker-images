@@ -70,7 +70,7 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "aws_applicationelb_healthy_host_count_average{target_group=\"targetgroup/{{getenv "/cjse/infra/bichard/targetgroup" ""}}\"}",
+          "expr": "aws_applicationelb_healthy_host_count_average{target_group=\"{{getenv "/cjse/infra/bichard/targetgroup" ""}}\"}",
           "interval": "",
           "legendFormat": "Instance count in {{"{{"}}availability_zone{{"}}"}}",
           "refId": "A"
@@ -131,13 +131,13 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "aws_applicationelb_healthy_host_count_average{load_balancer=\"app/{{getenv "/cjse/infra/userservice/targetgroup" ""}}\"}",
+          "expr": "aws_applicationelb_healthy_host_count_average{load_balancer=\"{{getenv "/cjse/infra/userservice/targetgroup" ""}}\"}",
           "interval": "",
           "legendFormat": "Running Instances",
           "refId": "A"
         }
       ],
-      "title": "Running  User Service Containers",
+      "title": "Running User Service Containers",
       "type": "gauge"
     },
     {
@@ -188,7 +188,7 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "aws_applicationelb_healthy_host_count_average{load_balancer=~\"app/{{getenv "/cjse/prometheus/alb" "" }}|app/{{getenv "/cjse/grafana/alb" ""}}|app/{{getenv "/cjse/cwatch/alb" "" }}\"}",
+          "expr": "aws_applicationelb_healthy_host_count_average{load_balancer=~\"{{getenv "/cjse/prometheus/alb" "" }}|{{getenv "/cjse/grafana/alb" ""}}|{{getenv "/cjse/cwatch/alb" "" }}\"}",
           "interval": "",
           "legendFormat": "Instance count in {{"{{"}}availability_zone{{"}}"}} {{"{{"}}load_balancer{{"}}"}}",
           "refId": "A"
@@ -249,7 +249,7 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "aws_applicationelb_healthy_host_count_average{load_balancer=\"app/{{getenv "/cjse/audit/alb" "" }}\"}",
+          "expr": "aws_applicationelb_healthy_host_count_average{load_balancer=\"{{getenv "/cjse/audit/alb" "" }}\"}",
           "interval": "",
           "legendFormat": "Instance count in {{"{{"}}availability_zone{{"}}"}}",
           "refId": "A"
@@ -305,7 +305,7 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "aws_networkelb_healthy_host_count_average{target_group=\"targetgroup/{{getenv "/cjse/beanconnect/nlb" "" }}\"}",
+          "expr": "aws_networkelb_healthy_host_count_average{target_group=\"{{getenv "/cjse/beanconnect/nlb" "" }}\"}",
           "interval": "",
           "legendFormat": "Running Instances",
           "refId": "A"

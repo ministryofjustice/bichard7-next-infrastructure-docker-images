@@ -100,7 +100,7 @@
         },
         {
           "exemplar": true,
-          "expr": "aws_applicationelb_healthy_host_count_average{availability_zone=~\"eu-west-2a|eu-west-2b|eu-west-2c\",target_group=\"targetgroup/{{getenv "/cjse/infra/bichard/targetgroup" ""}}\"}",
+          "expr": "aws_applicationelb_healthy_host_count_average{availability_zone=~\"eu-west-2a|eu-west-2b|eu-west-2c\",target_group=\"{{getenv "/cjse/infra/bichard/targetgroup" ""}}\"}",
           "hide": false,
           "instant": false,
           "interval": "",
