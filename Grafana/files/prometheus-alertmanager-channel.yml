@@ -10,5 +10,5 @@ notifiers:
     frequency: 1h
     disable_resolve_message: true
     settings:
-      url: $PROMETHEUS_URL:9088
+      url: $PROMETHEUS_URL:9092
 ...
