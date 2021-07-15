@@ -1,0 +1,14 @@
+---
+
+notifiers:
+  - name: Prometheus
+    type: prometheus-alertmanager
+    uid: 3f64e664933e44269405
+    org_name: Main Org.
+    is_default: true
+    send_reminder: true
+    frequency: 1h
+    disable_resolve_message: true
+    settings:
+      url: $PROMETHEUS_URL:9088
+...

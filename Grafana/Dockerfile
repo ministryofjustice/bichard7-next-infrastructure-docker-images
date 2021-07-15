@@ -44,6 +44,7 @@ RUN mkdir -p /certs && \
 
 COPY files/prometheus_datasource.yml /etc/grafana/provisioning/datasources/
 COPY files/bichard_dashboard.yml /etc/grafana/provisioning/dashboards/
+COPY files/prometheus-alertmanager-channel.yml /etc/grafana/provisioning/notifiers/
 COPY files/dashboard/ /opt/grafana/dashboards
 COPY conf/supervisord.conf /etc/supervisord.conf
 COPY ./confd /etc/confd/

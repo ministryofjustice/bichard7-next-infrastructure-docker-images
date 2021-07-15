@@ -5,12 +5,7 @@ file:
     group: root
     filetype: file
     contains: []
-  /opt/grafana/dashboards/application-dashboard.json:
-    exists: true
-    owner: grafana
-    group: grafana
-    filetype: file
-  /opt/grafana/dashboards/application-status.json:
+  /etc/grafana/provisioning/notifiers/prometheus-alertmanager-channel.yml:
     exists: true
     owner: grafana
     group: grafana
@@ -25,6 +20,18 @@ file:
     exists: true
     owner: root
     group: root
+    filetype: file
+    contains: []
+  /opt/grafana/dashboards/application-dashboard.json:
+    exists: true
+    owner: grafana
+    group: grafana
+    filetype: file
+    contains: []
+  /opt/grafana/dashboards/application-status.json:
+    exists: true
+    owner: grafana
+    group: grafana
     filetype: file
     contains: []
   /usr/sbin/grafana-server:
