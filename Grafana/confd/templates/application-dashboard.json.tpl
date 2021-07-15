@@ -769,5 +769,5 @@
   },
   "timepicker": {},
   "timezone": "",
-  "title": "Bichard7 {{E2E}} Test"
+  "title": "Bichard7 {{getv "/cjse/infra/envname" "e2e-test" }} system status"
 }
