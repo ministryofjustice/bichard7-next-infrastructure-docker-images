@@ -10,6 +10,7 @@ COPY scripts/run_nginx.sh /bin/run_nginx
 ARG ALERT_USER="alert-forwarder"
 ARG ALERT_GUID=1001
 ARG CONFD_VERSION="0.16.0"
+ENV LOG_LEVEL="info"
 
 RUN mkdir -p {/config,/nginx_auth} && \
   /bin/bash /tmp/install_prometheus.sh && \
