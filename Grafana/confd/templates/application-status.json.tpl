@@ -586,7 +586,7 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "aws_networkelb_healthy_host_count_average{target_group={target_group=\"{{getv "/cjse/beanconnect/nlb" "" }}\"}",
+          "expr": "aws_networkelb_healthy_host_count_average{target_group=\"{{getv "/cjse/beanconnect/nlb" "" }}\"}",
           "interval": "",
           "legendFormat": "Running Instances",
           "refId": "A"
