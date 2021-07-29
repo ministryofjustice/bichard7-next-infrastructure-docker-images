@@ -1,0 +1,13 @@
+input {
+  stdin {
+  }
+}
+
+output {
+  elasticsearch {
+    hosts => ["{{ getv "/cjse/logstash/es/domain" "http://elasticsearch:9200"}}"]
+    index => ".logstash-%{[@metadata][version]}-%{+YYYY.MM.dd}"
+    user => "{{ getv "/cjse/logstash/es/username" ""}}"
+    password => "{{ getv "/cjse/logstash/es/password" ""}}"
+  }
+}

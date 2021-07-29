@@ -1,0 +1,19 @@
+input {
+  cloudwatch_logs {
+      log_group => ["cjse-bichard7-{{ getv "/cjse/environment" ""}}-base-infra-prometheus"]
+      start_position => "end"
+      access_key_id => "<access_key>"
+      secret_access_key => "<secret_access_key>"
+      region => "eu-west-2"
+      tags => ["cloudwatch_syslog"]
+  }
+}
+
+output {
+  elasticsearch {
+    hosts => ["{{ getv "/cjse/logstash/es/domain" "http://elasticsearch:9200"}}"]
+    index => ".logs-%{[@metadata][version]}-%{+YYYY.MM.dd}"
+    user => "{{ getv "/cjse/logstash/es/username" ""}}"
+    password => "{{ getv "/cjse/logstash/es/password" ""}}"
+  }
+}

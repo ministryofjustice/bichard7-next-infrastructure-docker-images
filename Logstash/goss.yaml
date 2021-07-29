@@ -1,0 +1,80 @@
+file:
+  /bin/confd:
+    exists: true
+    owner: root
+    group: root
+    filetype: file
+  /etc/passwd:
+    exists: true
+    owner: root
+    group: root
+    filetype: file
+  /etc/supervisord.conf:
+    exists: true
+    owner: root
+    group: root
+    filetype: file
+  /tmp/openssl.cnf:
+    exists: false
+package:
+  deltarpm:
+    installed: true
+  epel-release:
+    installed: true
+  python:
+    installed: true
+  python2-pip:
+    installed: true
+  shadow-utils:
+    installed: true
+  logstash:
+    installed: true
+user:
+  dbus:
+    exists: true
+    uid: 81
+    gid: 81
+    groups:
+    - dbus
+    home: /
+    shell: /sbin/nologin
+  nobody:
+    exists: true
+    uid: 99
+    gid: 99
+    groups:
+    - nobody
+    home: /
+    shell: /sbin/nologin
+  systemd-network:
+    exists: true
+    uid: 192
+    gid: 192
+    groups:
+    - systemd-network
+    home: /
+    shell: /sbin/nologin
+#command:
+#  supervisorctl status nginx:
+#    exit-status: 0
+#    stdout:
+#    - /nginx\W+RUNNING\W+pid\W\d{1,},\Wuptime\W\S+/
+#    timeout: 10000
+#  supervisorctl status prometheus:
+#    exit-status: 0
+#    stdout:
+#    - /prometheus\W+RUNNING\W+pid\W\d{1,},\Wuptime\W\S+/
+#    timeout: 10000
+#  supervisorctl status snsalertforwarder:
+#    exit-status: 0
+#    stdout:
+#    - /snsalertforwarder\W+(RUNNING|STARTING)\W+pid\W\d{1,},\Wuptime\W\S+/
+#    timeout: 10000
+#  supervisorctl status alertmanager:
+#      exit-status: 0
+#      stdout:
+#      - /alertmanager\W+(RUNNING|STARTING)\W+pid\W\d{1,},\Wuptime\W\S+/
+#      timeout: 10000
+process:
+  supervisord:
+    running: true
