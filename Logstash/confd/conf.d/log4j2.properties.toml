@@ -1,0 +1,6 @@
+[template]
+src = "log4j2.properties.tmpl"
+dest = "/etc/logstash/log4j2.properties"
+keys = [
+    "/cjse"
+]

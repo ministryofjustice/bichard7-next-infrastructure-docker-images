@@ -12,3 +12,6 @@ aws codebuild start-build --project-name "build-openjdk-jre11-slim-docker" \
 
 aws codebuild start-build --project-name "build-nodejs-16-docker" \
   --environment-variables-override name=DOCKER_IMAGE_HASH,value="${DOCKER_IMAGE_PREFIX}@${SHA_HASH}",type=PLAINTEXT
+
+aws codebuild start-build --project-name "build-logstash-docker" \
+  --environment-variables-override name=DOCKER_IMAGE_HASH,value="${DOCKER_IMAGE_PREFIX}@${SHA_HASH}",type=PLAINTEXT

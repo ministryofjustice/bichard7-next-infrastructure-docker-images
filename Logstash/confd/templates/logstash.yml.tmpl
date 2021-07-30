@@ -1,0 +1,10 @@
+node.name: logstash
+
+path.data: /usr/share/logstash
+pipeline.workers: 1
+path.config: /etc/logstash/conf.d
+config.reload.automatic: true
+config.reload.interval: 10
+
+log.level: {{if exists "/cjse/logstash/debug" }}debug{{else}}info{{end}}
+path.logs: /var/log/logstash

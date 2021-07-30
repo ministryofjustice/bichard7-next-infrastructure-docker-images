@@ -1,0 +1,69 @@
+file:
+  /bin/confd:
+    exists: true
+    owner: root
+    group: root
+    filetype: file
+  /etc/passwd:
+    exists: true
+    owner: root
+    group: root
+    filetype: file
+  /etc/supervisord.conf:
+    exists: true
+    owner: root
+    group: root
+    filetype: file
+  /tmp/openssl.cnf:
+    exists: false
+package:
+  deltarpm:
+    installed: true
+  epel-release:
+    installed: true
+  python:
+    installed: true
+  python2-pip:
+    installed: true
+  shadow-utils:
+    installed: true
+  logstash:
+    installed: true
+  cronie:
+    installed: true
+  cronie-anacron:
+    installed: true
+user:
+  dbus:
+    exists: true
+    uid: 81
+    gid: 81
+    groups:
+    - dbus
+    home: /
+    shell: /sbin/nologin
+  nobody:
+    exists: true
+    uid: 99
+    gid: 99
+    groups:
+    - nobody
+    home: /
+    shell: /sbin/nologin
+  systemd-network:
+    exists: true
+    uid: 192
+    gid: 192
+    groups:
+    - systemd-network
+    home: /
+    shell: /sbin/nologin
+supervisorctl status:
+    exit-status: 0
+    stdout:
+    - /logstash\W+RUNNING\W+pid\W\d{1,},\Wuptime\W\S+/
+    - /cron:crond\W+RUNNING\W+pid\W\d{1,},\Wuptime\W\S+/
+    timeout: 10000
+process:
+  supervisord:
+    running: true

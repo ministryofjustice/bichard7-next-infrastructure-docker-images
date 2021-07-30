@@ -1,0 +1,6 @@
+[template]
+src = "pipelines.yml.tmpl"
+dest = "/etc/logstash/pipelines.yml"
+keys = [
+    "/cjse"
+]

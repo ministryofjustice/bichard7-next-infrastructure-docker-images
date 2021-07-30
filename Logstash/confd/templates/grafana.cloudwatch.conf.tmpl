@@ -1,0 +1,19 @@
+input {
+  cloudwatch_logs {
+      log_group => ["cjse-bichard7-{{ getv "/cjse/environment" ""}}-base-infra-grafana"]
+      start_position => "end"
+      region => "eu-west-2"
+      tags => ["cloudwatch_syslog","grafana","ecs_logs", "monitoring"]
+  }
+}
+
+output {
+  elasticsearch {
+    hosts => ["{{ getv "/cjse/logstash/es/domain" "http://elasticsearch:9200"}}"]
+    index => "{{ getv "/cjse/environment" ""}}-logs-%{+YYYY.MM.dd}"
+    user => "{{ getv "/cjse/logstash/es/username" ""}}"
+    password => "{{ getv "/cjse/logstash/es/password" ""}}"
+    ssl => true
+    ilm_enabled => false
+  }
+}
