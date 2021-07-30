@@ -2,5 +2,5 @@
 src = "logstash.yml.tmpl"
 dest = "/etc/logstash/logstash.yml"
 keys = [
-    "/cjse/logstash"
+    "/cjse"
 ]

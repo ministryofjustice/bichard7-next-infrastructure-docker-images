@@ -2,5 +2,5 @@
 src = "prometheus.cloudwatch.conf.tmpl"
 dest = "/etc/logstash/conf.d/logstash.conf"
 keys = [
-    "/cjse/logstash/pipeline"
+    "/cjse"
 ]
