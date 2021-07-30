@@ -10,7 +10,7 @@ input {
 output {
   elasticsearch {
     hosts => ["{{ getv "/cjse/logstash/es/domain" "http://elasticsearch:9200"}}"]
-    index => ".logs-%{[@metadata][version]}-%{+YYYY.MM.dd}"
+    index => "{{ getv "/cjse/environment" ""}}-logs-%{+YYYY.MM.dd}"
     user => "{{ getv "/cjse/logstash/es/username" ""}}"
     password => "{{ getv "/cjse/logstash/es/password" ""}}"
     ssl => true
