@@ -29,6 +29,10 @@ package:
     installed: true
   logstash:
     installed: true
+  cronie:
+    installed: true
+  cronie-anacron:
+    installed: true
 user:
   dbus:
     exists: true
@@ -54,27 +58,12 @@ user:
     - systemd-network
     home: /
     shell: /sbin/nologin
-#command:
-#  supervisorctl status nginx:
-#    exit-status: 0
-#    stdout:
-#    - /nginx\W+RUNNING\W+pid\W\d{1,},\Wuptime\W\S+/
-#    timeout: 10000
-#  supervisorctl status prometheus:
-#    exit-status: 0
-#    stdout:
-#    - /prometheus\W+RUNNING\W+pid\W\d{1,},\Wuptime\W\S+/
-#    timeout: 10000
-#  supervisorctl status snsalertforwarder:
-#    exit-status: 0
-#    stdout:
-#    - /snsalertforwarder\W+(RUNNING|STARTING)\W+pid\W\d{1,},\Wuptime\W\S+/
-#    timeout: 10000
-#  supervisorctl status alertmanager:
-#      exit-status: 0
-#      stdout:
-#      - /alertmanager\W+(RUNNING|STARTING)\W+pid\W\d{1,},\Wuptime\W\S+/
-#      timeout: 10000
+supervisorctl status:
+    exit-status: 0
+    stdout:
+    - /logstash\W+RUNNING\W+pid\W\d{1,},\Wuptime\W\S+/
+    - /cron:crond\W+RUNNING\W+pid\W\d{1,},\Wuptime\W\S+/
+    timeout: 10000
 process:
   supervisord:
     running: true
