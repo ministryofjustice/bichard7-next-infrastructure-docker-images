@@ -1,6 +1,0 @@
-[template]
-src = "stdin.conf.tmpl"
-dest = "/etc/logstash/conf.d/stdin.conf"
-keys = [
-    "/cjse/logstash/pipeline"
-]
