@@ -11,4 +11,4 @@ if [ ! -f "/usr/local/bin/dgoss" ]; then
   chmod +rx /usr/local/bin/dgoss
 fi
 
-GOSS_SLEEP=15 dgoss run ${GOSS_ENV} ${DOCKER_IMAGE}
+GOSS_SLEEP=${GOSS_SLEEP:-15} dgoss run ${GOSS_ENV} ${DOCKER_IMAGE}
