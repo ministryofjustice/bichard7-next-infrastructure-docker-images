@@ -1,5 +1,5 @@
 node.name: logstash
-
+http.host: {{ getv "/cjse/logstash/host" "0.0.0.0" }}
 path.data: /usr/share/logstash
 pipeline.workers: 1
 path.config: /etc/logstash/conf.d
