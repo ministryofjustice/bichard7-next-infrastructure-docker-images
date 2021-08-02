@@ -1,1 +1,2 @@
 DATETIME_PROM (\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}.?\d{3}?Z)
+%{DATESTAMP} \[%{DATA:source}\] %{LOGLEVEL:level} %{GREEDYDATA:message}
