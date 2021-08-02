@@ -1,9 +1,10 @@
 input {
   cloudwatch_logs {
-      log_group => ["cjse-bichard7-{{ getv "/cjse/environment" ""}}-base-infra-grafana"]
-      start_position => "end"
-      region => "eu-west-2"
-      tags => ["cloudwatch_syslog","grafana","ecs_logs", "monitoring"]
+    codec => json
+    log_group => ["cjse-bichard7-{{ getv "/cjse/environment" ""}}-base-infra-grafana"]
+    start_position => "end"
+    region => "eu-west-2"
+    tags => ["cloudwatch_syslog","grafana","ecs_logs", "monitoring"]
   }
 }
 
