@@ -54,7 +54,7 @@ scrape_configs:
         - https://alerts.{{getv "/cjse/fqdn/suffix" "cjse.org"}}
         - https://elasticsearch.{{getv "/cjse/fqdn/suffix" "cjse.org"}}
         - https://prometheus.{{getv "/cjse/fqdn/suffix" "cjse.org"}}
-- job_name: 'prometheus'
+  - job_name: 'prometheus'
     scheme: "https"
     tls_config:
       cert_file: /certs/server.crt
