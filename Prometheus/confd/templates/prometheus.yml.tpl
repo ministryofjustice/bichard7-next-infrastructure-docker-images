@@ -7,7 +7,54 @@ alerting:
           - localhost:9093
 
 scrape_configs:
-  - job_name: 'prometheus'
+  - job_name: 'blackbox_exporter'
+    honor_labels: true
+    scheme: "https"
+    tls_config:
+      cert_file: /certs/server.crt
+      key_file: /certs/server.key
+      insecure_skip_verify: true
+    static_configs:
+      - targets:
+        - {{getv "/cjse/prometheus/blackbox/exporter/fqdn" "localhost"}}:9116
+  - job_name: 'blackbox_http'
+    metrics_path: '/probe'
+    scheme: 'https'
+    params:
+      module:
+        - http_frontend
+    relabel_configs:
+      - source_labels: [__address__]
+        target_label: __param_target
+      - source_labels: [__param_target]
+        target_label: instance
+      - target_label: __address__
+        replacement: {{getv "/cjse/prometheus/blackbox/exporter/fqdn" "localhost"}}:9116
+    static_configs:
+    - targets:
+        - https://app.{{getv "/cjse/fqdn/suffix" "cjse.org"}}/bichard-ui/index.jsp
+        - https://audit.{{getv "/cjse/fqdn/suffix" "cjse.org"}}
+        - https://grafana.{{getv "/cjse/fqdn/suffix" "cjse.org"}}
+        - https://users.{{getv "/cjse/fqdn/suffix" "cjse.org"}}
+  - job_name: 'blackbox_http_auth'
+    metrics_path: '/probe'
+    scheme: 'https'
+    params:
+      module:
+        - http_auth_required
+    relabel_configs:
+      - source_labels: [__address__]
+        target_label: __param_target
+      - source_labels: [__param_target]
+        target_label: instance
+      - target_label: __address__
+        replacement: {{getv "/cjse/prometheus/blackbox/exporter/fqdn" "localhost"}}:9116
+    static_configs:
+    - targets:
+        - https://alerts.{{getv "/cjse/fqdn/suffix" "cjse.org"}}
+        - https://elasticsearch.{{getv "/cjse/fqdn/suffix" "cjse.org"}}
+        - https://prometheus.{{getv "/cjse/fqdn/suffix" "cjse.org"}}
+- job_name: 'prometheus'
     scheme: "https"
     tls_config:
       cert_file: /certs/server.crt
