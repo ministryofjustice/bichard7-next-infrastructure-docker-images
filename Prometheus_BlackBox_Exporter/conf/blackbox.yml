@@ -1,38 +1,23 @@
 ---
 
 modules:
-  http_2xx:
+  http_frontend:
     prober: http
-  http_post_2xx:
+    valid_http_versions:
+      - "HTTP/1.1"
+      - "HTTP/2.0"
+    fail_if_not_ssl: true
+    preferred_ip_protocol: "ip4"
+    ip_protocol_fallback: false
+  http_auth_required:
     prober: http
-    http:
-      method: POST
-  tcp_connect:
-    prober: tcp
-  pop3s_banner:
-    prober: tcp
-    tcp:
-      query_response:
-      - expect: "^+OK"
-      tls: true
-      tls_config:
-        insecure_skip_verify: false
-  ssh_banner:
-    prober: tcp
-    tcp:
-      query_response:
-      - expect: "^SSH-2.0-"
-      - send: "SSH-2.0-blackbox-ssh-check"
-  irc_banner:
-    prober: tcp
-    tcp:
-      query_response:
-      - send: "NICK prober"
-      - send: "USER prober prober prober :prober"
-      - expect: "PING :([^ ]+)"
-        send: "PONG ${1}"
-      - expect: "^:[^ ]+ 001"
-  icmp:
-    prober: icmp
-
+    valid_status_codes:
+      - 401
+      - 403
+    valid_http_versions:
+      - "HTTP/1.1"
+      - "HTTP/2.0"
+    fail_if_not_ssl: true
+    preferred_ip_protocol: "ip4"
+    ip_protocol_fallback: false
 ...
