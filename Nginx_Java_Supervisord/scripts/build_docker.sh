@@ -12,3 +12,6 @@ aws codebuild start-build --project-name "build-prometheus-cloudwatch-exporter-d
 
 aws codebuild start-build --project-name "build-prometheus-docker" \
   --environment-variables-override name=DOCKER_IMAGE_HASH,value="${DOCKER_IMAGE_PREFIX}@${SHA_HASH}",type=PLAINTEXT
+
+aws codebuild start-build --project-name "build-prometheus-blackbox-exporter-docker" \
+  --environment-variables-override name=DOCKER_IMAGE_HASH,value="${DOCKER_IMAGE_PREFIX}@${SHA_HASH}",type=PLAINTEXT
