@@ -2,7 +2,8 @@
 src = "prometheus.yml.tpl"
 dest = "/etc/prometheus/prometheus.yml"
 keys = [
-    "/cjse/prometheus"
+    "/cjse/prometheus",
+    "/cjse"
 ]
 gid = 99
 uid = 99
