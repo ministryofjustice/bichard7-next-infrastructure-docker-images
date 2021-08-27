@@ -3,21 +3,19 @@
 modules:
   http_frontend:
     prober: http
-    valid_http_versions:
-      - "HTTP/1.1"
-      - "HTTP/2.0"
-    fail_if_not_ssl: true
-    preferred_ip_protocol: "ip4"
-    ip_protocol_fallback: false
+    http:
+      valid_http_versions: ["HTTP/1.1", "HTTP/2"]
+      fail_if_not_ssl: true
+      preferred_ip_protocol: "ip4"
+      ip_protocol_fallback: false
   http_auth_required:
     prober: http
-    valid_status_codes:
-      - 401
-      - 403
-    valid_http_versions:
-      - "HTTP/1.1"
-      - "HTTP/2.0"
-    fail_if_not_ssl: true
-    preferred_ip_protocol: "ip4"
-    ip_protocol_fallback: false
+    http:
+      valid_status_codes:
+        - 401
+        - 403
+      valid_http_versions: ["HTTP/1.1", "HTTP/2"]
+      fail_if_not_ssl: true
+      preferred_ip_protocol: "ip4"
+      ip_protocol_fallback: false
 ...
