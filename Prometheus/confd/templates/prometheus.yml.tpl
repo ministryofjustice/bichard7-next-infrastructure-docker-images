@@ -32,10 +32,10 @@ scrape_configs:
         replacement: {{getv "/cjse/prometheus/blackbox/exporter/fqdn" "localhost"}}:9116
     static_configs:
     - targets:
-        - https://app.{{getv "/cjse/fqdn/suffix" "cjse.org"}}/bichard-ui/index.jsp
+        - https://app.{{getv "/cjse/fqdn/suffix" "cjse.org"}}/bichard-ui/Health
         - https://audit.{{getv "/cjse/fqdn/suffix" "cjse.org"}}
         - https://grafana.{{getv "/cjse/fqdn/suffix" "cjse.org"}}
-        - https://users.{{getv "/cjse/fqdn/suffix" "cjse.org"}}
+        - https://users.{{getv "/cjse/fqdn/suffix" "cjse.org"}}/login
   - job_name: 'blackbox_http_auth'
     metrics_path: '/probe'
     scheme: 'https'
