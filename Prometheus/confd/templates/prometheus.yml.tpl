@@ -20,6 +20,10 @@ scrape_configs:
   - job_name: 'blackbox_http'
     metrics_path: '/probe'
     scheme: 'https'
+    tls_config:
+      cert_file: /certs/server.crt
+      key_file: /certs/server.key
+      insecure_skip_verify: true
     params:
       module:
         - http_frontend
@@ -39,6 +43,10 @@ scrape_configs:
   - job_name: 'blackbox_http_auth'
     metrics_path: '/probe'
     scheme: 'https'
+    tls_config:
+      cert_file: /certs/server.crt
+      key_file: /certs/server.key
+      insecure_skip_verify: true
     params:
       module:
         - http_auth_required
