@@ -20,7 +20,6 @@ file:
     contains: []
   /etc/nginx/nginx.conf:
     exists: true
-    size: 1207
     owner: root
     group: root
     filetype: file

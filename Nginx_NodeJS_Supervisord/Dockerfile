@@ -12,8 +12,6 @@ RUN mkdir -p {/certs,/var/log/supervisor} && \
     nginx \
     supervisor \
     httpd-tools && \
-  yum -y install https://extras.getpagespeed.com/release-latest.rpm && \
-  yum -y install nginx-module-security-headers && \
   yum clean all && \
   rm -rf /var/cache/yum && \
   openssl req \
