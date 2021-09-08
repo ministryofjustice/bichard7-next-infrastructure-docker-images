@@ -19,4 +19,4 @@ aws codebuild start-build --project-name "build-logstash-docker" \
 
 aws codebuild start-build --project-name "build-grafana-ssl-docker"
 
-aws codebuild start-build --project-name "build-grafana-ssl-docker"
+aws codebuild start-build --project-name "build-nginx-supervisord-docker"
