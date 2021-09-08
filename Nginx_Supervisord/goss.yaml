@@ -56,15 +56,15 @@ package:
     installed: true
   shadow-utils:
     installed: true
-port:
-  tcp:80:
-    listening: true
-    ip:
-      - 0.0.0.0
-  tcp:443:
-    listening: true
-    ip:
-      - 0.0.0.0
+#port:
+#  tcp:80:
+#    listening: true
+#    ip:
+#      - 0.0.0.0
+#  tcp:443:
+#    listening: true
+#    ip:
+#      - 0.0.0.0
 user:
   dbus:
     exists: true
@@ -98,9 +98,9 @@ user:
       - systemd-network
     home: /
     shell: /sbin/nologin
-process:
-  nginx:
-    running: true
+#process:
+#  nginx:
+#    running: true
   supervisord:
     running: true
 
