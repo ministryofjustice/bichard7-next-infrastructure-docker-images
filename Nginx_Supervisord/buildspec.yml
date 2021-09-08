@@ -5,6 +5,6 @@ phases:
   build:
     commands:
       - set -ev
-      - cd Nginx_Java_Supervisord
+      - cd Nginx_Supervisord
       - /bin/bash ./scripts/build_docker.sh
 ...
