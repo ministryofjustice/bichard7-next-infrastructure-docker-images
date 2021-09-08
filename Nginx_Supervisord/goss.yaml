@@ -98,7 +98,7 @@ user:
       - systemd-network
     home: /
     shell: /sbin/nologin
-#process:
+process:
 #  nginx:
 #    running: true
   supervisord:
