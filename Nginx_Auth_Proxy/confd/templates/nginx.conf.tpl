@@ -77,18 +77,8 @@ http {
         }
 
         # Allow access to user-service login flow (and necessary assets) without authentication
-        location /users/login {
-            proxy_pass  https://user_service/users/login;
-            proxy_ssl_verify  {{ getv "/cjse/nginx/proxysslverify" "on" }};
-        }
-
-        location /users/_next/static {
-            proxy_pass        https://user_service/users/_next/static;
-            proxy_ssl_verify  {{ getv "/cjse/nginx/proxysslverify" "on" }};
-        }
-
-        location /users/assets {
-            proxy_pass        https://user_service/users/assets;
+        location ~ ^/users/(login|assets|_next/static)(.*)$ {
+            proxy_pass  https://user_service/users/$1$2;
             proxy_ssl_verify  {{ getv "/cjse/nginx/proxysslverify" "on" }};
         }
 
