@@ -48,7 +48,7 @@ http {
         # Use API endpoint in user-service for checking authentication
         location /auth {
             proxy_pass  https://user_service/users/api/auth;
-            proxy_ssl_verify  off;
+            proxy_ssl_verify  {{ getv "/cjse/nginx/proxysslverify" "on" }};
 
             proxy_pass_request_body  off;
             proxy_set_header  Content-Length '0';
@@ -60,7 +60,7 @@ http {
             auth_request /auth;
 
             proxy_pass  https://bichard;
-            proxy_ssl_verify  off;
+            proxy_ssl_verify  {{ getv "/cjse/nginx/proxysslverify" "on" }};
 
             limit_except GET POST PUT DELETE { deny all; }
         }
@@ -71,7 +71,7 @@ http {
             auth_request /auth;
 
             proxy_pass        https://user_service;
-            proxy_ssl_verify  off;
+            proxy_ssl_verify  {{ getv "/cjse/nginx/proxysslverify" "on" }};
 
             limit_except GET POST PUT DELETE { deny all; }
         }
@@ -79,17 +79,17 @@ http {
         # Allow access to user-service login flow (and necessary assets) without authentication
         location /users/login {
             proxy_pass  https://user_service/users/login;
-            proxy_ssl_verify  off;
+            proxy_ssl_verify  {{ getv "/cjse/nginx/proxysslverify" "on" }};
         }
 
         location /users/_next/static {
             proxy_pass        https://user_service/users/_next/static;
-            proxy_ssl_verify  off;
+            proxy_ssl_verify  {{ getv "/cjse/nginx/proxysslverify" "on" }};
         }
 
         location /users/assets {
             proxy_pass        https://user_service/users/assets;
-            proxy_ssl_verify  off;
+            proxy_ssl_verify  {{ getv "/cjse/nginx/proxysslverify" "on" }};
         }
 
         # Healthcheck endpoint
