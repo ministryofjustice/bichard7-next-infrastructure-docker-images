@@ -47,7 +47,7 @@ http {
 
         # Use API endpoint in user-service for checking authentication
         location /auth {
-            proxy_pass  https://user_service/users/api/auth;
+            proxy_pass        https://user_service/users/api/auth;
             proxy_ssl_verify  {{ getv "/cjse/nginx/proxysslverify" "on" }};
 
             proxy_pass_request_body  off;
@@ -59,7 +59,7 @@ http {
             error_page 401 = @error401;
             auth_request /auth;
 
-            proxy_pass  https://bichard;
+            proxy_pass        https://bichard;
             proxy_ssl_verify  {{ getv "/cjse/nginx/proxysslverify" "on" }};
 
             limit_except GET POST PUT DELETE { deny all; }
@@ -78,7 +78,7 @@ http {
 
         # Allow access to user-service login flow (and necessary assets) without authentication
         location ~ ^/users/(login|assets|_next/static)(.*)$ {
-            proxy_pass  https://user_service/users/$1$2;
+            proxy_pass        https://user_service/users/$1$2;
             proxy_ssl_verify  {{ getv "/cjse/nginx/proxysslverify" "on" }};
         }
 
