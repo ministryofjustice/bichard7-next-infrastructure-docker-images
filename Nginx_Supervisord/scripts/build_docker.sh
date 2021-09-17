@@ -6,3 +6,5 @@ export readonly REPOSITORY_NAME="nginx-supervisord"
 export readonly SOURCE_REPOSITORY_NAME="amazon-linux2-base"
 
 /bin/bash ../scripts/build_and_push_image.sh
+
+aws codebuild start-build --project-name "build-nginx-auth-proxy-docker"
