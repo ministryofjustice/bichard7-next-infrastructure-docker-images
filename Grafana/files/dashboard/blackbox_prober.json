@@ -115,7 +115,7 @@
     {
       "alert": {
         "alertRuleTags": {
-          "service": "${instance}",
+          "service": "{{instance}}",
           "severity": "critical"
         },
         "conditions": [
