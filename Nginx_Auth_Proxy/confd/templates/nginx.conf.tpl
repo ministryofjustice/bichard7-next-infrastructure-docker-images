@@ -24,14 +24,6 @@ http {
     include                   /etc/nginx/sites-enabled/*;
     server_tokens             off;
 
-    upstream bichard {
-        server {{ getv "/cjse/nginx/app/domain" }};
-    }
-
-    upstream user_service {
-        server {{ getv "/cjse/nginx/userservice/domain" }};
-    }
-
     server {
         listen                443   ssl;
         ssl_certificate       /certs/server.crt;
@@ -47,7 +39,7 @@ http {
 
         # Use API endpoint in user-service for checking authentication
         location /auth {
-            proxy_pass        https://user_service/users/api/auth;
+            proxy_pass        https://{{ getv "/cjse/nginx/userservice/domain" }}/users/api/auth;
             proxy_ssl_verify  {{ getv "/cjse/nginx/proxysslverify" "on" }};
 
             proxy_pass_request_body  off;
@@ -59,7 +51,7 @@ http {
             error_page 401 = @error401;
             auth_request /auth;
 
-            proxy_pass        https://bichard;
+            proxy_pass        https://{{ getv "/cjse/nginx/app/domain" }};
             proxy_ssl_verify  {{ getv "/cjse/nginx/proxysslverify" "on" }};
 
             limit_except GET POST PUT DELETE { deny all; }
@@ -70,7 +62,7 @@ http {
             error_page 401 = @error401;
             auth_request /auth;
 
-            proxy_pass        https://user_service;
+            proxy_pass        https://{{ getv "/cjse/nginx/userservice/domain" }};
             proxy_ssl_verify  {{ getv "/cjse/nginx/proxysslverify" "on" }};
 
             limit_except GET POST PUT DELETE { deny all; }
@@ -78,7 +70,7 @@ http {
 
         # Allow access to user-service login flow (and necessary assets) without authentication
         location ~ ^/users/(login|assets|_next/static)(.*)$ {
-            proxy_pass        https://user_service/users/$1$2;
+            proxy_pass        https://{{ getv "/cjse/nginx/userservice/domain" }};
             proxy_ssl_verify  {{ getv "/cjse/nginx/proxysslverify" "on" }};
         }
 
