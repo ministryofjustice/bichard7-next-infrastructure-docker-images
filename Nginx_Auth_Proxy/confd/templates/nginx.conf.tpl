@@ -25,12 +25,14 @@ http {
     server_tokens             off;
 
     server {
-        listen                443   ssl;
-        ssl_certificate       /certs/server.crt;
-        ssl_certificate_key   /certs/server.key;
-        ssl_protocols         TLSv1.2;
-        ssl_ciphers           HIGH:!aNULL:!MD5;
-        add_header            Strict-Transport-Security "max-age=31536000; includeSubDomains";
+        listen                          443   ssl;
+        ssl_certificate                 /certs/server.crt;
+        ssl_certificate_key             /certs/server.key;
+        ssl_protocols                   TLSv1.2;
+        ssl_ciphers                     HIGH:!aNULL:!MD5;
+        add_header                      Strict-Transport-Security "max-age=31536000; includeSubDomains";
+
+        proxy_ssl_trusted_certificate   /etc/ssl/certs/ca-bundle.crt;
 
         # Redirect any unauthorised users to the login page
         location @error401 {
