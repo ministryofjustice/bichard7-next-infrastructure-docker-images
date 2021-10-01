@@ -36,7 +36,7 @@ http {
 
         # Redirect any unauthorised users to the login page
         location @error401 {
-            return 302 https://$host/users/login?redirect=https://$host$request_uri;
+            return 302 https://$host/users/login?redirect=$request_uri;
         }
 
         # Use API endpoint in user-service for checking authentication
