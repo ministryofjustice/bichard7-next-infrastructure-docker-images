@@ -25,7 +25,7 @@ http {
     server_tokens             off;
 
     server {
-        listen                          443   ssl;
+        listen                          {{ atoi (getv "/cjse/nginx/port/https" "443") }} ssl;
         ssl_certificate                 /certs/server.crt;
         ssl_certificate_key             /certs/server.key;
         ssl_protocols                   TLSv1.2;
@@ -36,7 +36,7 @@ http {
 
         # Redirect any unauthorised users to the login page
         location @error401 {
-            return 302 https://$host/users/login?redirect=$request_uri;
+            return 302 /users/login?redirect=$request_uri;
         }
 
         # Use API endpoint in user-service for checking authentication
@@ -86,7 +86,7 @@ http {
     }
 
     server {
-      listen        80 default_server;
+      listen        {{ atoi (getv "/cjse/nginx/port/http" "80") }} default_server;
       server_name   _;
       return        301 https://$host$request_uri;
       error_log     /dev/stdout info;
