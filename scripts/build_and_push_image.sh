@@ -37,6 +37,16 @@ echo "Running goss tests against ${DOCKER_IMAGE}"
 docker tag ${REPOSITORY_NAME}:latest ${DOCKER_IMAGE_PREFIX}:${CODEBUILD_RESOLVED_SOURCE_VERSION}-${CODEBUILD_START_TIME}
 
 echo "Pushing ${REPOSITORY_NAME} image on `date`"
-docker push ${DOCKER_IMAGE_PREFIX}:${CODEBUILD_RESOLVED_SOURCE_VERSION}-${CODEBUILD_START_TIME}
+docker push ${DOCKER_IMAGE_PREFIX}:${CODEBUILD_RESOLVED_SOURCE_VERSION}-${CODEBUILD_START_TIME}  | tee /tmp/docker.out
+export IMAGE_SHA_HASH=$(cat /tmp/docker.out | grep digest | cut -d':' -f3-4 | cut -d' ' -f2)
 
-
+if [ "${IS_CD}" = "true" ]; then
+  cat <<EOF>/tmp/${REPOSITORY_NAME}.json
+  {
+    "source-hash" : "${CODEBUILD_RESOLVED_SOURCE_VERSION}",
+    "build-time": "${CODEBUILD_START_TIME}",
+    "image-hash": "${IMAGE_SHA_HASH}"
+ }
+EOF
+  aws s3 cp /tmp/audit-logging.json s3://${ARTIFACT_BUCKET}/semaphores/${REPOSITORY_NAME}.json
+fi
