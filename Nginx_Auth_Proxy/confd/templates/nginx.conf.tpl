@@ -34,9 +34,14 @@ http {
 
         proxy_ssl_trusted_certificate   /etc/ssl/certs/ca-bundle.crt;
 
-        # Redirect any unauthorised users to the login page
+        # Redirect any unauthenticated users to the login page
         location @error401 {
             return 302 /users/login?redirect=$request_uri;
+        }
+
+        # Redirect any unauthorized users to access denied page
+        location @error403 {
+            return 302 /users/access-denied;
         }
 
         # Use API endpoint in user-service for checking authentication
@@ -46,11 +51,13 @@ http {
 
             proxy_pass_request_body  off;
             proxy_set_header  Content-Length '0';
+            proxy_set_header  Referer $request_uri;
         }
 
         # Proxy through to Bichard
         location / {
             error_page 401 = @error401;
+            error_page 403 = @error403;
             auth_request /auth;
 
             proxy_pass        https://{{ getv "/cjse/nginx/app/domain" }};
@@ -62,6 +69,7 @@ http {
         # Proxy through to user-service
         location /users {
             error_page 401 = @error401;
+            error_page 403 = @error403;
             auth_request /auth;
 
             proxy_pass        https://{{ getv "/cjse/nginx/userservice/domain" }};
@@ -71,7 +79,7 @@ http {
         }
 
         # Allow access to user-service login flow (and necessary assets) without authentication
-        location ~ ^/users/(login|assets|_next/static)(.*)$ {
+        location ~ ^/users/(login|assets|_next/static|access-denied)(.*)$ {
             proxy_pass        https://{{ getv "/cjse/nginx/userservice/domain" }};
             proxy_ssl_verify  {{ getv "/cjse/nginx/proxysslverify" "on" }};
         }
