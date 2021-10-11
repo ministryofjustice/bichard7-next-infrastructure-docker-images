@@ -56,15 +56,15 @@ package:
     installed: true
   shadow-utils:
     installed: true
-#port:
-#  tcp:80:
-#    listening: true
-#    ip:
-#      - 0.0.0.0
-#  tcp:443:
-#    listening: true
-#    ip:
-#      - 0.0.0.0
+port:
+  tcp:80:
+    listening: true
+    ip:
+      - 0.0.0.0
+  tcp:443:
+    listening: true
+    ip:
+      - 0.0.0.0
 user:
   dbus:
     exists: true
@@ -77,7 +77,7 @@ user:
   nginx:
     exists: true
     uid: 999
-    gid: 998
+    gid: 999
     groups:
       - nginx
     home: /var/lib/nginx
@@ -99,8 +99,8 @@ user:
     home: /
     shell: /sbin/nologin
 process:
-#  nginx:
-#    running: true
+  nginx:
+    running: true
   supervisord:
     running: true
 
