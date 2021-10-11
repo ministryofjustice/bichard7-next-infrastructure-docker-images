@@ -1,3 +1,5 @@
+---
+
 file:
   /certs:
     exists: true
@@ -52,26 +54,26 @@ port:
   tcp:80:
     listening: true
     ip:
-    - 0.0.0.0
+      - 0.0.0.0
   tcp:443:
     listening: true
     ip:
-    - 0.0.0.0
+      - 0.0.0.0
 user:
   dbus:
     exists: true
     uid: 81
     gid: 81
     groups:
-    - dbus
+      - dbus
     home: /
     shell: /sbin/nologin
   nginx:
     exists: true
     uid: 999
-    gid: 998
+    gid: 999
     groups:
-    - nginx
+      - nginx
     home: /var/lib/nginx
     shell: /sbin/nologin
   nobody:
@@ -79,7 +81,7 @@ user:
     uid: 99
     gid: 99
     groups:
-    - nobody
+      - nobody
     home: /
     shell: /sbin/nologin
   node:
@@ -87,7 +89,7 @@ user:
     uid: 1000
     gid: 1000
     groups:
-    - node
+      - node
     home: /home/node
     shell: /bin/bash
   runner:
@@ -95,7 +97,7 @@ user:
     uid: 998
     gid: 100
     groups:
-    - users
+      - users
     home: /opt/s3-server
     shell: /bin/false
   systemd-network:
@@ -103,15 +105,15 @@ user:
     uid: 192
     gid: 192
     groups:
-    - systemd-network
+      - systemd-network
     home: /
     shell: /sbin/nologin
 command:
   supervisorctl status:
     exit-status: 0
     stdout:
-    - /nginx\W+RUNNING\W+pid\W\d{1,},\Wuptime\W\S+/
-    - /s3\-server\W+RUNNING\W+pid\W\d{1,},\Wuptime\W\S+/
+      - /nginx\W+RUNNING\W+pid\W\d{1,},\Wuptime\W\S+/
+      - /s3\-server\W+RUNNING\W+pid\W\d{1,},\Wuptime\W\S+/
     stderr: []
     timeout: 10000
 process:

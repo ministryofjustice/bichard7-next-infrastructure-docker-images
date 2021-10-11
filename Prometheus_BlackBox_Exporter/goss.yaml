@@ -1,3 +1,5 @@
+---
+
 file:
   /certs:
     exists: true
@@ -61,26 +63,26 @@ port:
   tcp:9001:
     listening: true
     ip:
-    - 127.0.0.1
+      - 127.0.0.1
   tcp:9116:
     listening: true
     ip:
-    - 0.0.0.0
+      - 0.0.0.0
 user:
   dbus:
     exists: true
     uid: 81
     gid: 81
     groups:
-    - dbus
+      - dbus
     home: /
     shell: /sbin/nologin
   nginx:
     exists: true
     uid: 999
-    gid: 998
+    gid: 999
     groups:
-    - nginx
+      - nginx
     home: /var/lib/nginx
     shell: /sbin/nologin
   nobody:
@@ -88,7 +90,7 @@ user:
     uid: 99
     gid: 99
     groups:
-    - nobody
+      - nobody
     home: /
     shell: /sbin/nologin
   systemd-network:
@@ -96,15 +98,15 @@ user:
     uid: 192
     gid: 192
     groups:
-    - systemd-network
+      - systemd-network
     home: /
     shell: /sbin/nologin
 command:
   supervisorctl status:
     exit-status: 0
     stdout:
-    - /nginx\W+RUNNING\W+pid\W\d{1,},\Wuptime\W\S+/
-    - /blackbox_exporter\W+RUNNING\W+pid\W\d{1,},\Wuptime\W\S+/
+      - /nginx\W+RUNNING\W+pid\W\d{1,},\Wuptime\W\S+/
+      - /blackbox_exporter\W+RUNNING\W+pid\W\d{1,},\Wuptime\W\S+/
     timeout: 10000
 process:
   nginx:
