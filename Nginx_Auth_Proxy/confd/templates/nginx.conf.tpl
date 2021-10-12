@@ -66,6 +66,18 @@ http {
             limit_except GET POST PUT DELETE { deny all; }
         }
 
+        # Proxy through to audit-logging
+        location /audit-logging {
+            error_page 401 = @error401;
+            error_page 403 = @error403;
+            auth_request /auth;
+
+            proxy_pass        https://{{ getv "/cjse/nginx/auditlogging/domain" }};
+            proxy_ssl_verify  {{ getv "/cjse/nginx/proxysslverify" "on" }};
+
+            limit_except GET POST PUT DELETE { deny all; }
+        }
+
         # Proxy through to user-service
         location /users {
             error_page 401 = @error401;
