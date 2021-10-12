@@ -37,7 +37,7 @@ scrape_configs:
     static_configs:
     - targets:
         - https://app.{{getv "/cjse/fqdn/suffix" "cjse.org"}}/bichard-ui/Health
-        - https://audit.{{getv "/cjse/fqdn/suffix" "cjse.org"}}
+        - https://audit.{{getv "/cjse/fqdn/suffix" "cjse.org"}}/audit-logging/api/status
         - https://grafana.{{getv "/cjse/fqdn/suffix" "cjse.org"}}
         - https://users.{{getv "/cjse/fqdn/suffix" "cjse.org"}}/users/login
   - job_name: 'blackbox_http_auth'
