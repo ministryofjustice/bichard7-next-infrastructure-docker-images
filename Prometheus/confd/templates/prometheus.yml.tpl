@@ -39,7 +39,7 @@ scrape_configs:
         - https://app.{{getv "/cjse/fqdn/suffix" "cjse.org"}}/bichard-ui/Health
         - https://audit.{{getv "/cjse/fqdn/suffix" "cjse.org"}}
         - https://grafana.{{getv "/cjse/fqdn/suffix" "cjse.org"}}
-        - https://users.{{getv "/cjse/fqdn/suffix" "cjse.org"}}/login
+        - https://users.{{getv "/cjse/fqdn/suffix" "cjse.org"}}/users/login
   - job_name: 'blackbox_http_auth'
     metrics_path: '/probe'
     scheme: 'https'
