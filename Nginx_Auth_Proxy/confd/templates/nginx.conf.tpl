@@ -30,7 +30,6 @@ http {
         ssl_certificate_key             /certs/server.key;
         ssl_protocols                   TLSv1.2;
         ssl_ciphers                     HIGH:!aNULL:!MD5;
-        add_header                      Strict-Transport-Security "max-age=31536000; includeSubDomains; preload";
         add_header                      Set-Cookie "Path=/; HttpOnly; Secure";
         add_header                      Cache-Control "no-store, no-cache, must-revalidate, proxy-revalidate, max-age=0";
         add_header                      Content-Security-Policy "default-src 'self'; frame-src 'self'; frame-ancestors 'self'" always;
