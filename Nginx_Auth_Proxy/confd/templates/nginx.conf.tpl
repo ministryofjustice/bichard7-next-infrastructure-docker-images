@@ -30,11 +30,14 @@ http {
         ssl_certificate_key             /certs/server.key;
         ssl_protocols                   TLSv1.2;
         ssl_ciphers                     HIGH:!aNULL:!MD5;
-        add_header                      Strict-Transport-Security "max-age=31536000; includeSubDomains";
+        add_header                      Strict-Transport-Security "max-age=31536000; includeSubDomains; preload";
         add_header                      Set-Cookie "Path=/; HttpOnly; Secure";
         add_header                      Cache-Control "no-store, no-cache, must-revalidate, proxy-revalidate, max-age=0";
         add_header                      Content-Security-Policy "default-src 'self'; frame-src 'self'; frame-ancestors 'self'" always;
-        add_header                      X-Frame-Options SAMEORIGIN always;
+        add_header                      X-Frame-Options DENY;
+        add_header                      X-Content-Type-Options nosniff;
+        add_header                      X-XSS-Protection "1; mode=block";
+        add_header                      Referrer-Policy "origin";
 
         proxy_ssl_trusted_certificate   /etc/ssl/certs/ca-bundle.crt;
 
@@ -56,6 +59,7 @@ http {
             proxy_pass_request_body  off;
             proxy_set_header  Content-Length '0';
             proxy_set_header  Referer $request_uri;
+            proxy_cookie_flags ~ secure samesite=strict;
         }
 
         # Proxy through to Bichard
@@ -68,6 +72,7 @@ http {
             proxy_ssl_verify  {{ getv "/cjse/nginx/proxysslverify" "on" }};
 
             limit_except GET POST PUT DELETE { deny all; }
+            proxy_cookie_flags ~ secure samesite=strict;
         }
 
         # Proxy through to audit-logging
@@ -80,6 +85,7 @@ http {
             proxy_ssl_verify  {{ getv "/cjse/nginx/proxysslverify" "on" }};
 
             limit_except GET POST PUT DELETE { deny all; }
+            proxy_cookie_flags ~ secure samesite=strict;
         }
 
         # Proxy through to user-service
@@ -92,12 +98,14 @@ http {
             proxy_ssl_verify  {{ getv "/cjse/nginx/proxysslverify" "on" }};
 
             limit_except GET POST PUT DELETE { deny all; }
+            proxy_cookie_flags ~ secure samesite=strict;
         }
 
         # Allow access to user-service login flow (and necessary assets) without authentication
         location ~ ^/users/(login|assets|_next/static|access-denied)(.*)$ {
             proxy_pass        https://{{ getv "/cjse/nginx/userservice/domain" }};
             proxy_ssl_verify  {{ getv "/cjse/nginx/proxysslverify" "on" }};
+            proxy_cookie_flags ~ secure samesite=strict;
         }
 
         # Healthcheck endpoint
@@ -106,6 +114,7 @@ http {
             return       200;
             add_header   Content-Type text/plain;
             limit_except GET POST { deny all; }
+            proxy_cookie_flags ~ secure samesite=strict;
         }
     }
 
