@@ -58,7 +58,6 @@ http {
             proxy_pass_request_body  off;
             proxy_set_header  Content-Length '0';
             proxy_set_header  Referer $request_uri;
-            proxy_cookie_flags ~ secure samesite=strict;
             proxy_cookie_flags ~ httponly secure samesite=strict;
         }
 
