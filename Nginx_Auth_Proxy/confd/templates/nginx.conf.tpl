@@ -31,12 +31,12 @@ http {
         ssl_protocols                   TLSv1.2;
         ssl_ciphers                     HIGH:!aNULL:!MD5;
         add_header                      Set-Cookie "Path=/; HttpOnly; Secure; SameSite=strict";
-        add_header                      Cache-Control "no-store, no-cache, must-revalidate, proxy-revalidate, max-age=0";
-        add_header                      Content-Security-Policy "default-src 'self'; frame-src 'self'; frame-ancestors 'self'" always;
-        add_header                      X-Frame-Options DENY;
-        add_header                      X-Content-Type-Options nosniff;
+        add_header                      Cache-Control "no-store, no-cache, must-revalidate";
+        add_header                      Content-Security-Policy "default-src 'self'; frame-src 'self'; frame-ancestors 'self'; form-action 'self';" always;
         add_header                      X-XSS-Protection "1; mode=block";
         add_header                      Referrer-Policy "origin";
+
+        proxy_hide_header               Content-Security-Policy;
 
         proxy_ssl_trusted_certificate   /etc/ssl/certs/ca-bundle.crt;
 
