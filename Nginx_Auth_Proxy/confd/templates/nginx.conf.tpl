@@ -107,6 +107,13 @@ http {
             proxy_cookie_flags ~ httponly secure samesite=strict;
         }
 
+        # Allow access to bichard-ui health check and connectivity endpoints without authentication
+        location ~ ^/bichard-ui/(Health|Connectivity)$ {
+            proxy_pass        https://{{ getv "/cjse/nginx/app/domain" }};
+            proxy_ssl_verify  {{ getv "/cjse/nginx/proxysslverify" "on" }};
+            proxy_cookie_flags ~ httponly secure samesite=strict;
+        }
+
         # Healthcheck endpoint
         location /elb-status {
             access_log   off;
