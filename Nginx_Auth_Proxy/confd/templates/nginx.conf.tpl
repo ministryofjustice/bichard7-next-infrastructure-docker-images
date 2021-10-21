@@ -42,11 +42,17 @@ http {
 
         # Redirect any unauthenticated users to the login page
         location @error401 {
+            proxy_ssl_server_name on;
+            proxy_ssl_verify_depth 2;
+
             return 302 /users/login?redirect=$request_uri;
         }
 
         # Redirect any unauthorized users to access denied page
         location @error403 {
+            proxy_ssl_server_name on;
+            proxy_ssl_verify_depth 2;
+
             return 302 /users/access-denied;
         }
 
@@ -59,6 +65,9 @@ http {
             proxy_set_header  Content-Length '0';
             proxy_set_header  Referer $request_uri;
             proxy_cookie_flags ~ httponly secure samesite=strict;
+            proxy_ssl_server_name on;
+            proxy_ssl_verify_depth 2;
+
         }
 
         # Proxy through to Bichard
@@ -72,6 +81,9 @@ http {
 
             limit_except GET POST PUT DELETE { deny all; }
             proxy_cookie_flags ~ httponly secure samesite=strict;
+            proxy_ssl_server_name on;
+            proxy_ssl_verify_depth 2;
+
         }
 
         # Proxy through to audit-logging
@@ -85,6 +97,9 @@ http {
 
             limit_except GET POST PUT DELETE { deny all; }
             proxy_cookie_flags ~ httponly secure samesite=strict;
+            proxy_ssl_server_name on;
+            proxy_ssl_verify_depth 2;
+
         }
 
         # Proxy through to user-service
@@ -98,6 +113,9 @@ http {
 
             limit_except GET POST PUT DELETE { deny all; }
             proxy_cookie_flags ~ httponly secure samesite=strict;
+            proxy_ssl_server_name on;
+            proxy_ssl_verify_depth 2;
+
         }
 
         # Allow access to user-service login flow (and necessary assets) without authentication
@@ -105,6 +123,9 @@ http {
             proxy_pass        https://{{ getv "/cjse/nginx/userservice/domain" }};
             proxy_ssl_verify  {{ getv "/cjse/nginx/proxysslverify" "on" }};
             proxy_cookie_flags ~ httponly secure samesite=strict;
+            proxy_ssl_server_name on;
+            proxy_ssl_verify_depth 2;
+
         }
 
         # Allow access to bichard-ui health check and connectivity endpoints without authentication
@@ -121,6 +142,9 @@ http {
             add_header   Content-Type text/plain;
             limit_except GET POST { deny all; }
             proxy_cookie_flags ~ httponly secure samesite=strict;
+            proxy_ssl_server_name on;
+            proxy_ssl_verify_depth 2;
+
         }
     }
 
