@@ -100,6 +100,19 @@ http {
             proxy_cookie_flags ~ httponly secure samesite=strict;
         }
 
+        # Proxy through to report downloads
+        location /reports {
+            error_page 401 = @error401;
+            error_page 403 = @error403;
+            auth_request /auth;
+
+            proxy_pass        https://{{ getv "/cjse/nginx/reportservice/domain" }};
+            proxy_ssl_verify  {{ getv "/cjse/nginx/proxysslverify" "on" }};
+
+            limit_except GET { deny all; }
+            proxy_cookie_flags ~ httponly secure samesite=strict;
+        }
+
         # Allow access to user-service login flow (and necessary assets) without authentication
         location ~ ^/users/(login|assets|_next/static|access-denied)(.*)$ {
             proxy_pass        https://{{ getv "/cjse/nginx/userservice/domain" }};
