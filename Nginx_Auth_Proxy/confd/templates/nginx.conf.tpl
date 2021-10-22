@@ -48,6 +48,20 @@ http {
             return 302 /users/login?redirect=$request_uri;
         }
 
+        # Redirect any page not found
+        error_page 404 /404;
+
+        location = /404 {
+            return 302 /users/404;
+        }
+
+        # Redirect any internal server error issues
+        error_page 500 /500;
+
+        location = /500 {
+            return 302 /users/500;
+        }
+
         # Redirect any unauthorized users to access denied page
         location @error403 {
             proxy_ssl_server_name on;
@@ -71,19 +85,8 @@ http {
         }
 
         # Proxy through to Bichard
-        location / {
-            error_page 401 = @error401;
-            error_page 403 = @error403;
-            auth_request /auth;
-
-            proxy_pass        https://{{ getv "/cjse/nginx/app/domain" }};
-            proxy_ssl_verify  {{ getv "/cjse/nginx/proxysslverify" "on" }};
-
-            limit_except GET POST PUT DELETE { deny all; }
-            proxy_cookie_flags ~ httponly secure samesite=strict;
-            proxy_ssl_server_name on;
-            proxy_ssl_verify_depth 2;
-
+        location = / {
+            return 302 /users;
         }
 
         # Proxy through to audit-logging
