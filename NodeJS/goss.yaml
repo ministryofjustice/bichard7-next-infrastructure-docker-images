@@ -22,7 +22,7 @@ user:
     uid: 99
     gid: 99
     groups:
-    - nobody
+      - nobody
     home: /
     shell: /sbin/nologin
   node:
@@ -30,19 +30,19 @@ user:
     uid: 1000
     gid: 1000
     groups:
-    - node
+      - node
     home: /home/node
     shell: /bin/bash
 command:
   node --version:
     exit-status: 0
     stdout:
-    - v16.3.0
+      - v16.12.0
     stderr: []
     timeout: 10000
   yarn --version:
     exit-status: 0
     stdout:
-    - 1.22.5
+      - 1.22.15
     stderr: []
     timeout: 10000
