@@ -25,6 +25,10 @@ http {
     server_tokens             off;
 
     server {
+        error_page 401 = @error401;
+        error_page 403 = @error403;
+        error_page 404 = @error404;
+        error_page 500 = @error500;
         listen                          {{ atoi (getv "/cjse/nginx/port/https" "443") }} ssl;
         ssl_certificate                 /certs/server.crt;
         ssl_certificate_key             /certs/server.key;
@@ -44,21 +48,20 @@ http {
         location @error401 {
             proxy_ssl_server_name on;
             proxy_ssl_verify_depth 2;
-
             return 302 /users/login?redirect=$request_uri;
         }
 
         # Redirect any page not found
-        error_page 404 /404;
-
-        location = /404 {
+        location @error404 {
+            proxy_ssl_server_name on;
+            proxy_ssl_verify_depth 2;
             return 302 /users/404;
         }
 
         # Redirect any internal server error issues
-        error_page 500 /500;
-
-        location = /500 {
+        location @error500 {
+            proxy_ssl_server_name on;
+            proxy_ssl_verify_depth 2;
             return 302 /users/500;
         }
 
@@ -66,7 +69,6 @@ http {
         location @error403 {
             proxy_ssl_server_name on;
             proxy_ssl_verify_depth 2;
-
             return 302 /users/access-denied;
         }
 
@@ -81,7 +83,6 @@ http {
             proxy_cookie_flags ~ httponly secure samesite=strict;
             proxy_ssl_server_name on;
             proxy_ssl_verify_depth 2;
-
         }
 
         # Proxy through to Bichard
@@ -91,8 +92,6 @@ http {
 
         # Proxy through to audit-logging
         location /audit-logging {
-            error_page 401 = @error401;
-            error_page 403 = @error403;
             auth_request /auth;
 
             proxy_pass        https://{{ getv "/cjse/nginx/auditlogging/domain" }};
@@ -102,13 +101,10 @@ http {
             proxy_cookie_flags ~ httponly secure samesite=strict;
             proxy_ssl_server_name on;
             proxy_ssl_verify_depth 2;
-
         }
 
         # Proxy through to user-service
         location /users {
-            error_page 401 = @error401;
-            error_page 403 = @error403;
             auth_request /auth;
 
             proxy_pass        https://{{ getv "/cjse/nginx/userservice/domain" }};
@@ -118,7 +114,6 @@ http {
             proxy_cookie_flags ~ httponly secure samesite=strict;
             proxy_ssl_server_name on;
             proxy_ssl_verify_depth 2;
-
         }
 
         # Allow access to user-service login flow (and necessary assets) without authentication
@@ -147,7 +142,6 @@ http {
             proxy_cookie_flags ~ httponly secure samesite=strict;
             proxy_ssl_server_name on;
             proxy_ssl_verify_depth 2;
-
         }
     }
 
