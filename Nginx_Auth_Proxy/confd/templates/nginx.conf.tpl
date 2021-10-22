@@ -85,9 +85,19 @@ http {
             proxy_ssl_verify_depth 2;
         }
 
-        # Proxy through to Bichard
+        # Proxy for landing page to Bichard
         location = / {
             return 302 /users;
+        }
+
+        # Proxy through to Bichard
+        location /bichard-ui {
+            auth_request /auth;
+            proxy_pass        https://{{ getv "/cjse/nginx/app/domain" }};
+            proxy_ssl_verify  {{ getv "/cjse/nginx/proxysslverify" "on" }};
+
+            limit_except GET POST PUT DELETE { deny all; }
+            proxy_cookie_flags ~ httponly secure samesite=strict;
         }
 
         # Proxy through to audit-logging
