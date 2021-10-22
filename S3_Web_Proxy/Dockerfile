@@ -20,16 +20,17 @@ RUN yum install -y \
     mkdir -p ${NODE_DIR} && \
     chown -R ${NODE_USER} ${NODE_DIR}
 
+USER root
+RUN npm i -g npm-check-updates
+
 USER runner
 WORKDIR ${NODE_DIR}
-RUN git init && \
-    git remote add origin https://github.com/quintoandar/s3-server.git && \
-    git fetch origin && \
-    git checkout -b master --track origin/master && \
-    git clone https://github.com/quintoandar/s3-server.git
+RUN git clone https://github.com/signalfx/s3-server.git . && \
+    ncu -u && \
+    npm i
 
 USER root
-RUN  npm install -g s3-server
+RUN npm link
 
 WORKDIR /
 
