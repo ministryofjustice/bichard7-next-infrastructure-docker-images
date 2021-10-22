@@ -25,6 +25,10 @@ http {
     server_tokens             off;
 
     server {
+        error_page 401 = @error401;
+        error_page 403 = @error403;
+        error_page 404 = @error404;
+        error_page 500 = @error500;
         listen                          {{ atoi (getv "/cjse/nginx/port/https" "443") }} ssl;
         ssl_certificate                 /certs/server.crt;
         ssl_certificate_key             /certs/server.key;
@@ -42,11 +46,29 @@ http {
 
         # Redirect any unauthenticated users to the login page
         location @error401 {
+            proxy_ssl_server_name on;
+            proxy_ssl_verify_depth 2;
             return 302 /users/login?redirect=$request_uri;
+        }
+
+        # Redirect any page not found
+        location @error404 {
+            proxy_ssl_server_name on;
+            proxy_ssl_verify_depth 2;
+            return 302 /users/404;
+        }
+
+        # Redirect any internal server error issues
+        location @error500 {
+            proxy_ssl_server_name on;
+            proxy_ssl_verify_depth 2;
+            return 302 /users/500;
         }
 
         # Redirect any unauthorized users to access denied page
         location @error403 {
+            proxy_ssl_server_name on;
+            proxy_ssl_verify_depth 2;
             return 302 /users/access-denied;
         }
 
@@ -59,25 +81,17 @@ http {
             proxy_set_header  Content-Length '0';
             proxy_set_header  Referer $request_uri;
             proxy_cookie_flags ~ httponly secure samesite=strict;
+            proxy_ssl_server_name on;
+            proxy_ssl_verify_depth 2;
         }
 
         # Proxy through to Bichard
-        location / {
-            error_page 401 = @error401;
-            error_page 403 = @error403;
-            auth_request /auth;
-
-            proxy_pass        https://{{ getv "/cjse/nginx/app/domain" }};
-            proxy_ssl_verify  {{ getv "/cjse/nginx/proxysslverify" "on" }};
-
-            limit_except GET POST PUT DELETE { deny all; }
-            proxy_cookie_flags ~ httponly secure samesite=strict;
+        location = / {
+            return 302 /users;
         }
 
         # Proxy through to audit-logging
         location /audit-logging {
-            error_page 401 = @error401;
-            error_page 403 = @error403;
             auth_request /auth;
 
             proxy_pass        https://{{ getv "/cjse/nginx/auditlogging/domain" }};
@@ -85,12 +99,12 @@ http {
 
             limit_except GET POST PUT DELETE { deny all; }
             proxy_cookie_flags ~ httponly secure samesite=strict;
+            proxy_ssl_server_name on;
+            proxy_ssl_verify_depth 2;
         }
 
         # Proxy through to user-service
         location /users {
-            error_page 401 = @error401;
-            error_page 403 = @error403;
             auth_request /auth;
 
             proxy_pass        https://{{ getv "/cjse/nginx/userservice/domain" }};
@@ -98,6 +112,8 @@ http {
 
             limit_except GET POST PUT DELETE { deny all; }
             proxy_cookie_flags ~ httponly secure samesite=strict;
+            proxy_ssl_server_name on;
+            proxy_ssl_verify_depth 2;
         }
 
         # Proxy through to report downloads
@@ -118,6 +134,9 @@ http {
             proxy_pass        https://{{ getv "/cjse/nginx/userservice/domain" }};
             proxy_ssl_verify  {{ getv "/cjse/nginx/proxysslverify" "on" }};
             proxy_cookie_flags ~ httponly secure samesite=strict;
+            proxy_ssl_server_name on;
+            proxy_ssl_verify_depth 2;
+
         }
 
         # Allow access to bichard-ui health check and connectivity endpoints without authentication
@@ -134,6 +153,8 @@ http {
             add_header   Content-Type text/plain;
             limit_except GET POST { deny all; }
             proxy_cookie_flags ~ httponly secure samesite=strict;
+            proxy_ssl_server_name on;
+            proxy_ssl_verify_depth 2;
         }
     }
 
