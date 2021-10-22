@@ -1,4 +1,7 @@
 #!/usr/bin/env bash
 
-htpasswd -bc /nginx_auth/.htpasswd bichard ${HTPASSWD}
+if [ "${HTPASSWD}x" != "x" ]
+then
+  htpasswd -bc /nginx_auth/.htpasswd bichard ${HTPASSWD}
+fi
 /usr/sbin/nginx -g "daemon off;"
