@@ -19,10 +19,10 @@ goss:
 
 .PHONY: run-test-nginx
 run-test-nginx:
-	docker run -e CJSE_NGINX_APP_DOMAIN=host.docker.internal:60001 \
-		-e CJSE_NGINX_USERSERVICE_DOMAIN=host.docker.internal:60002 \
-		-e CJSE_NGINX_AUDITLOGGING_DOMAIN=host.docker.internal:60003 \
-		-e CJSE_NGINX_REPORTSERVICE_DOMAIN=host.docker.internal:60004 \
+	docker run -e CJSE_NGINX_APP_DOMAIN=172.17.0.1:60001 \
+		-e CJSE_NGINX_USERSERVICE_DOMAIN=172.17.0.1:60002 \
+		-e CJSE_NGINX_AUDITLOGGING_DOMAIN=172.17.0.1:60003 \
+		-e CJSE_NGINX_REPORTSERVICE_DOMAIN=172.17.0.1:60004 \
 		-e CJSE_NGINX_PROXYSSLVERIFY="off" \
 		-p 6443:443 -d \
 		--name test-nginx-server \
@@ -38,5 +38,5 @@ wait-for-nginx:
 
 .PHONY: unit-test-nginx
 unit-test-nginx: build-test run-test-nginx wait-for-nginx
-	docker run --rm --name nginx-auth-test -p 60001:60001 -p 60002:60002 -p 60003:60003 -p 60004:60004 -e TEST_HOST=host.docker.internal:6443 nginx-auth-test
+	docker run --rm --name nginx-auth-test -p 60001:60001 -p 60002:60002 -p 60003:60003 -p 60004:60004 -e TEST_HOST=172.17.0.1:6443 nginx-auth-test
 	docker rm -f test-nginx-server
