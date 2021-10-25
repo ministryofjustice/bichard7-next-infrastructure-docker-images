@@ -50,4 +50,4 @@ credentials
 *.iml
 packer.log
 .lock_token
-
+Nginx_Auth_Proxy/test/node_modules
