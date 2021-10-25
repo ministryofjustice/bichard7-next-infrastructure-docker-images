@@ -44,6 +44,12 @@ http {
 
         proxy_ssl_trusted_certificate   /etc/ssl/certs/ca-bundle.crt;
 
+        resolver 127.0.0.11 valid=1s;
+        set $app "{{ getv "/cjse/nginx/app/domain" }}";
+        set $userservice "{{ getv "/cjse/nginx/userservice/domain" }}";
+        set $auditlogging "{{ getv "/cjse/nginx/auditlogging/domain" }}";
+        set $reportservice "{{ getv "/cjse/nginx/reportservice/domain" }}";
+
         # Redirect any unauthenticated users to the login page
         location @error401 {
             proxy_ssl_server_name on;
@@ -74,7 +80,7 @@ http {
 
         # Use API endpoint in user-service for checking authentication
         location /auth {
-            proxy_pass        https://{{ getv "/cjse/nginx/userservice/domain" }}/users/api/auth;
+            proxy_pass        https://$userservice/users/api/auth;
             proxy_ssl_verify  {{ getv "/cjse/nginx/proxysslverify" "on" }};
 
             proxy_pass_request_body  off;
@@ -93,7 +99,7 @@ http {
         # Proxy through to Bichard
         location /bichard-ui {
             auth_request /auth;
-            proxy_pass        https://{{ getv "/cjse/nginx/app/domain" }};
+            proxy_pass        https://$app;
             proxy_ssl_verify  {{ getv "/cjse/nginx/proxysslverify" "on" }};
 
             limit_except GET POST PUT DELETE { deny all; }
@@ -104,7 +110,7 @@ http {
         location /audit-logging {
             auth_request /auth;
 
-            proxy_pass        https://{{ getv "/cjse/nginx/auditlogging/domain" }};
+            proxy_pass        https://$auditlogging;
             proxy_ssl_verify  {{ getv "/cjse/nginx/proxysslverify" "on" }};
 
             limit_except GET POST PUT DELETE { deny all; }
@@ -117,7 +123,7 @@ http {
         location /users {
             auth_request /auth;
 
-            proxy_pass        https://{{ getv "/cjse/nginx/userservice/domain" }};
+            proxy_pass        https://$userservice;
             proxy_ssl_verify  {{ getv "/cjse/nginx/proxysslverify" "on" }};
 
             limit_except GET POST PUT DELETE { deny all; }
@@ -132,7 +138,7 @@ http {
             error_page 403 = @error403;
             auth_request /auth;
 
-            proxy_pass        https://{{ getv "/cjse/nginx/reportservice/domain" }};
+            proxy_pass        https://$reportservice;
             proxy_ssl_verify  {{ getv "/cjse/nginx/proxysslverify" "on" }};
 
             limit_except GET { deny all; }
@@ -141,7 +147,7 @@ http {
 
         # Allow access to user-service login flow (and necessary assets) without authentication
         location ~ ^/users/(login|assets|_next/static|access-denied)(.*)$ {
-            proxy_pass        https://{{ getv "/cjse/nginx/userservice/domain" }};
+            proxy_pass        https://$userservice;
             proxy_ssl_verify  {{ getv "/cjse/nginx/proxysslverify" "on" }};
             proxy_cookie_flags ~ httponly secure samesite=strict;
             proxy_ssl_server_name on;
@@ -151,7 +157,7 @@ http {
 
         # Allow access to bichard-ui health check and connectivity endpoints without authentication
         location ~ ^/bichard-ui/(Health|Connectivity)$ {
-            proxy_pass        https://{{ getv "/cjse/nginx/app/domain" }};
+            proxy_pass        https://$app;
             proxy_ssl_verify  {{ getv "/cjse/nginx/proxysslverify" "on" }};
             proxy_cookie_flags ~ httponly secure samesite=strict;
         }
