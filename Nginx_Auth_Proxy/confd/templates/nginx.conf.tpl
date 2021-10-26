@@ -132,6 +132,7 @@ http {
             error_page 403 = @error403;
             auth_request /auth;
 
+            rewrite /reports/(.*) /$1  break;
             proxy_pass        https://{{ getv "/cjse/nginx/reportservice/domain" }};
             proxy_ssl_verify  {{ getv "/cjse/nginx/proxysslverify" "on" }};
 
