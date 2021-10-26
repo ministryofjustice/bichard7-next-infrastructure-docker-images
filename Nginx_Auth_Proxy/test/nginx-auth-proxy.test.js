@@ -67,4 +67,25 @@ describe("Testing Nginx config", () => {
       }
     }
   );
+
+  test.each(routes)(
+    "It should forward cookie from $path with auth: $auth",
+      async ({ path, route, auth, dest }) => {
+      servers.user
+            .get("/users/api/auth")
+            .mockImplementationOnce((ctx) => {
+              ctx.cookies.set(".AUTH", "Realistic", {sameSite: true, secure: true})
+              ctx.status = 200;
+            });
+      const destPath = dest || path;
+      const mock = servers[route].get(destPath).mockImplementationOnce(mock200);
+      const res = await axios.get(`https://${testHost}${path}`, axiosConfig);
+
+      if(auth) {
+        expect(res.headers['set-cookie']).toEqual([ '.AUTH=Realistic; path=/; samesite=strict; secure; httponly' ])
+      }
+      else {
+        expect(res.headers['set-cookie']).toEqual([ "Path=/; HttpOnly; Secure; SameSite=strict" ])
+      }
+    })
 });

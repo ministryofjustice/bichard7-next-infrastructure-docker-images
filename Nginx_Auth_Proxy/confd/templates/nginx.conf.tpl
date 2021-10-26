@@ -99,6 +99,9 @@ http {
         # Proxy through to Bichard
         location /bichard-ui {
             auth_request /auth;
+            auth_request_set $auth_cookie $upstream_http_set_cookie;
+            add_header Set-Cookie $auth_cookie;
+
             proxy_pass        https://$app;
             proxy_ssl_verify  {{ getv "/cjse/nginx/proxysslverify" "on" }};
 
@@ -109,6 +112,8 @@ http {
         # Proxy through to audit-logging
         location /audit-logging {
             auth_request /auth;
+            auth_request_set $auth_cookie $upstream_http_set_cookie;
+            add_header Set-Cookie $auth_cookie;
 
             proxy_pass        https://$auditlogging;
             proxy_ssl_verify  {{ getv "/cjse/nginx/proxysslverify" "on" }};
@@ -122,6 +127,8 @@ http {
         # Proxy through to user-service
         location /users {
             auth_request /auth;
+            auth_request_set $auth_cookie $upstream_http_set_cookie;
+            add_header Set-Cookie $auth_cookie;
 
             proxy_pass        https://$userservice;
             proxy_ssl_verify  {{ getv "/cjse/nginx/proxysslverify" "on" }};
@@ -137,6 +144,8 @@ http {
             error_page 401 = @error401;
             error_page 403 = @error403;
             auth_request /auth;
+            auth_request_set $auth_cookie $upstream_http_set_cookie;
+            add_header Set-Cookie $auth_cookie;
 
             rewrite /reports/(.*) /$1  break;
             proxy_pass        https://$reportservice;
