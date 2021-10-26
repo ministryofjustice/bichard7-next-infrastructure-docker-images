@@ -36,7 +36,7 @@ http {
         ssl_ciphers                     HIGH:!aNULL:!MD5;
         add_header                      Set-Cookie "Path=/; HttpOnly; Secure; SameSite=strict";
         add_header                      Cache-Control "no-store, no-cache, must-revalidate";
-        add_header                      Content-Security-Policy "default-src 'self'; frame-src 'self'; frame-ancestors 'self'; form-action 'self'; img-src 'self' data:;" always;
+        add_header                      Content-Security-Policy "default-src 'self'; frame-src 'self'; frame-ancestors 'self'; form-action 'self'; img-src 'self' data:; style-src 'self' 'unsafe-inline';" always;
         add_header                      X-XSS-Protection "1; mode=block";
         add_header                      Referrer-Policy "origin";
 
