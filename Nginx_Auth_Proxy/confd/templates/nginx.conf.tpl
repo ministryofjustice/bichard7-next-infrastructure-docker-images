@@ -165,8 +165,8 @@ http {
 
         }
 
-        # Allow access to bichard-ui health check and connectivity endpoints without authentication
-        location ~ ^/bichard-ui/(Health|Connectivity)$ {
+        # Allow access to bichard-ui health check, connectivity and static endpoints without authentication
+        location ~ ^/bichard-ui/(Health|Connectivity|images|css).*$ {
             proxy_pass        https://$app;
             proxy_ssl_verify  {{ getv "/cjse/nginx/proxysslverify" "on" }};
             proxy_cookie_flags ~ httponly secure samesite=strict;
