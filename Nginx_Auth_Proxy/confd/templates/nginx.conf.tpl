@@ -99,7 +99,7 @@ http {
         # Proxy through to Bichard
         location /bichard-ui {
             auth_request /auth;
-            proxy_pass        https://$app;
+            proxy_pass        https://$app$request_uri;
             proxy_ssl_verify  {{ getv "/cjse/nginx/proxysslverify" "on" }};
 
             limit_except GET POST PUT DELETE { deny all; }
@@ -110,7 +110,7 @@ http {
         location /audit-logging {
             auth_request /auth;
 
-            proxy_pass        https://$auditlogging;
+            proxy_pass        https://$auditlogging$request_uri;
             proxy_ssl_verify  {{ getv "/cjse/nginx/proxysslverify" "on" }};
 
             limit_except GET POST PUT DELETE { deny all; }
@@ -123,7 +123,7 @@ http {
         location /users {
             auth_request /auth;
 
-            proxy_pass        https://$userservice;
+            proxy_pass        https://$userservice$request_uri;
             proxy_ssl_verify  {{ getv "/cjse/nginx/proxysslverify" "on" }};
 
             limit_except GET POST PUT DELETE { deny all; }
@@ -138,7 +138,7 @@ http {
             error_page 403 = @error403;
             auth_request /auth;
 
-            proxy_pass        https://$reportservice;
+            proxy_pass        https://$reportservice$request_uri;
             proxy_ssl_verify  {{ getv "/cjse/nginx/proxysslverify" "on" }};
 
             limit_except GET { deny all; }
@@ -147,7 +147,7 @@ http {
 
         # Allow access to user-service login flow (and necessary assets) without authentication
         location ~ ^/users/(login|assets|_next/static|access-denied)(.*)$ {
-            proxy_pass        https://$userservice;
+            proxy_pass        https://$userservice$request_uri;
             proxy_ssl_verify  {{ getv "/cjse/nginx/proxysslverify" "on" }};
             proxy_cookie_flags ~ httponly secure samesite=strict;
             proxy_ssl_server_name on;
@@ -157,7 +157,7 @@ http {
 
         # Allow access to bichard-ui health check and connectivity endpoints without authentication
         location ~ ^/bichard-ui/(Health|Connectivity)$ {
-            proxy_pass        https://$app;
+            proxy_pass        https://$app$request_uri;
             proxy_ssl_verify  {{ getv "/cjse/nginx/proxysslverify" "on" }};
             proxy_cookie_flags ~ httponly secure samesite=strict;
         }
