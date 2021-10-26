@@ -139,7 +139,7 @@ http {
             auth_request /auth;
 
             rewrite /reports/(.*) /$1  break;
-            proxy_pass        https://$reportservice$request_uri;
+            proxy_pass        https://$reportservice;
             proxy_ssl_verify  {{ getv "/cjse/nginx/proxysslverify" "on" }};
 
             limit_except GET { deny all; }
