@@ -44,7 +44,7 @@ http {
 
         proxy_ssl_trusted_certificate   /etc/ssl/certs/ca-bundle.crt;
 
-        resolver {{ getv "/cjse/nginx/dns/resolver" "127.0.0.11" }} valid=1s;
+        resolver {{ getv "/cjse/nginx/dns/resolver" "127.0.0.11" }} valid=10s;
         set $app "{{ getv "/cjse/nginx/app/domain" }}";
         set $userservice "{{ getv "/cjse/nginx/userservice/domain" }}";
         set $auditlogging "{{ getv "/cjse/nginx/auditlogging/domain" }}";
