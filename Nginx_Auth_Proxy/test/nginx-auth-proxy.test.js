@@ -1,7 +1,6 @@
 const { MockServer } = require("jest-mock-server");
 const https = require("https");
 const axiosClass = require("axios").default;
-const { waitForDebugger } = require("inspector");
 const axios = axiosClass.create({
   httpsAgent: new https.Agent({
     rejectUnauthorized: false,
