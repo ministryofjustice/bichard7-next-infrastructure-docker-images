@@ -34,7 +34,7 @@ describe("Testing Nginx config", () => {
 
   const routes = [
     { path: "/bichard-ui/x", route: "bichard", auth: true },
-    { path: "/reports/x", route: "reports", auth: true },
+    { path: "/reports/x", route: "reports", auth: true, dest: "/x" },
     { path: "/users/x", route: "user", auth: true },
     { path: "/audit-logging/x", route: "audit", auth: true },
     { path: "/users/login", route: "user", auth: false },
@@ -46,7 +46,7 @@ describe("Testing Nginx config", () => {
 
   test.each(routes)(
     "Path $path routes to $route with auth: $auth",
-    async ({ path, route, auth }) => {
+    async ({ path, route, auth, dest }) => {
       let authMock;
       if (auth) {
         authMock = servers.user
@@ -54,7 +54,8 @@ describe("Testing Nginx config", () => {
           .mockImplementationOnce(mock200);
       }
 
-      const mock = servers[route].get(path).mockImplementationOnce(mock200);
+      const destPath = dest || path;
+      const mock = servers[route].get(destPath).mockImplementationOnce(mock200);
 
       const res = await axios.get(`https://${testHost}${path}`, axiosConfig);
 
