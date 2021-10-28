@@ -17,12 +17,29 @@ http {
     default_type              application/octet-stream;
     ssl_protocols             TLSv1.2; # Dropping SSLv3, ref: POODLE
     ssl_prefer_server_ciphers on;
-    error_log                 /dev/stdout info;
-    access_log                /dev/stdout combined;
+    error_log                 /dev/stdout error;
+    access_log                /dev/stdout json;
     gzip                      on;
     include                   /etc/nginx/conf.d/*.conf;
     include                   /etc/nginx/sites-enabled/*;
     server_tokens             off;
+
+    log_format json escape=json '{'
+        '"@timestamp": "$time_iso8601", '
+        '"message": "$remote_addr - $remote_user [$time_local] \\\"$request\\\" $status $body_bytes_sent \\\"$http_referer\\\" \\\"$http_user_agent\\\"", '
+        '"tags": ["nginx_access"], '
+        '"realip": ""$remote_addr", '
+        '"proxyip": "$http_x_forwarded_for", '
+        '"remote_user": "$remote_user", '
+        '"contenttype": "$sent_http_content_type", '
+        '"bytes": $body_bytes_sent, '
+        '"duration": "$request_time", '
+        '"status": "$status", '
+        '"request": "$request", '
+        '"method": "$request_method", '
+        '"referrer": "$http_referer", '
+        '"useragent": "$http_user_agent"'
+    '}';
 
     server {
         listen                443   ssl;
@@ -54,7 +71,5 @@ http {
       listen        80 default_server;
       server_name   _;
       return        301 https://$host$request_uri;
-      error_log     /dev/stdout info;
-      access_log    /dev/stdout combined;
-    }
+     }
 }
