@@ -17,8 +17,8 @@ http {
     default_type              application/octet-stream;
     ssl_protocols             TLSv1.2; # Dropping SSLv3, ref: POODLE
     ssl_prefer_server_ciphers on;
-    error_log                 /dev/stdout error;
-    access_log                /dev/stdout json;
+    error_log                 /dev/stdout;
+    access_log                /dev/stdout combined;
     gzip                      on;
     include                   /etc/nginx/conf.d/*.conf;
     include                   /etc/nginx/sites-enabled/*;
@@ -48,6 +48,7 @@ http {
         ssl_protocols         TLSv1.2;
         ssl_ciphers           HIGH:!aNULL:!MD5;
         add_header            Strict-Transport-Security "max-age=31536000; includeSubDomains";
+        access_log            /dev/stdout json;
 
         location /bichard {
             proxy_pass https://{{ getv "/cjse/nginx/userservice/domain" "users"}};
@@ -71,5 +72,6 @@ http {
       listen        80 default_server;
       server_name   _;
       return        301 https://$host$request_uri;
-     }
+      access_log    /dev/stdout json;
+    }
 }
