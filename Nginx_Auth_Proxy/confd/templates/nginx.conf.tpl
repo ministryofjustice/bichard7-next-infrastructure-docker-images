@@ -25,10 +25,6 @@ http {
     server_tokens             off;
 
     server {
-        error_page 401 = @error401;
-        error_page 403 = @error403;
-        error_page 404 = @error404;
-        error_page 500 = @error500;
         listen                          {{ atoi (getv "/cjse/nginx/port/https" "443") }} ssl;
         ssl_certificate                 /certs/server.crt;
         ssl_certificate_key             /certs/server.key;
@@ -50,32 +46,24 @@ http {
         set $auditlogging "{{ getv "/cjse/nginx/auditlogging/domain" }}";
         set $reportservice "{{ getv "/cjse/nginx/reportservice/domain" }}";
 
+
         # Redirect any unauthenticated users to the login page
+        error_page 401 = @error401;
         location @error401 {
             proxy_ssl_server_name on;
             proxy_ssl_verify_depth 2;
             return 302 /users/login?redirect=$request_uri;
         }
 
-        # Redirect any page not found
-        location @error404 {
+        # Display error page for 403, 404 and 500 errors
+        error_page 403 =403 /403;
+        error_page 404 =404 /404;
+        error_page 500 =500 /500;
+        location ~ ^/(403|404|500)$ {
+            proxy_ssl_verify  {{ getv "/cjse/nginx/proxysslverify" "on" }};
             proxy_ssl_server_name on;
             proxy_ssl_verify_depth 2;
-            return 302 /users/404;
-        }
-
-        # Redirect any internal server error issues
-        location @error500 {
-            proxy_ssl_server_name on;
-            proxy_ssl_verify_depth 2;
-            return 302 /users/500;
-        }
-
-        # Redirect any unauthorized users to access denied page
-        location @error403 {
-            proxy_ssl_server_name on;
-            proxy_ssl_verify_depth 2;
-            return 302 /users/access-denied;
+            rewrite /(.*) /users/$1;
         }
 
         # Use API endpoint in user-service for checking authentication
@@ -107,6 +95,7 @@ http {
 
             limit_except GET POST PUT DELETE { deny all; }
             proxy_cookie_flags ~ httponly secure samesite=strict;
+            proxy_intercept_errors on;
         }
 
         # Proxy through to audit-logging
@@ -122,6 +111,7 @@ http {
             proxy_cookie_flags ~ httponly secure samesite=strict;
             proxy_ssl_server_name on;
             proxy_ssl_verify_depth 2;
+            proxy_intercept_errors on;
         }
 
         # Proxy through to user-service
@@ -137,6 +127,7 @@ http {
             proxy_cookie_flags ~ httponly secure samesite=strict;
             proxy_ssl_server_name on;
             proxy_ssl_verify_depth 2;
+            proxy_intercept_errors on;
         }
 
         # Proxy through to report downloads
@@ -153,10 +144,11 @@ http {
 
             limit_except GET { deny all; }
             proxy_cookie_flags ~ httponly secure samesite=strict;
+            proxy_intercept_errors on;
         }
 
         # Allow access to user-service login flow (and necessary assets) without authentication
-        location ~ ^/users/(login|assets|_next/static|access-denied)(.*)$ {
+        location ~ ^/users/(login|assets|_next/static|access-denied|403|404|500)(.*)$ {
             proxy_pass        https://$userservice;
             proxy_ssl_verify  {{ getv "/cjse/nginx/proxysslverify" "on" }};
             proxy_cookie_flags ~ httponly secure samesite=strict;
