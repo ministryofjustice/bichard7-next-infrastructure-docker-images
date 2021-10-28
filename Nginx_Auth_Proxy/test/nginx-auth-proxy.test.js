@@ -1,14 +1,19 @@
 const { MockServer } = require("jest-mock-server");
 const https = require("https");
 const axiosClass = require("axios").default;
+const { isTypedArray } = require("util/types");
 const axios = axiosClass.create({
   httpsAgent: new https.Agent({
     rejectUnauthorized: false,
   }),
 });
 const axiosConfig = { validateStatus: false };
-const mock200 = (ctx) => {
-  ctx.status = 200;
+const mockStatus = (status) => (ctx) => {
+  ctx.status = status;
+};
+const mockResponse = (status, body) => (ctx) => {
+  ctx.status = status;
+  ctx.body = body;
 };
 const testHost = process.env.TEST_HOST || "localhost:6443";
 
@@ -40,6 +45,9 @@ describe("Testing Nginx config", () => {
     { path: "/users/login", route: "user", auth: false },
     { path: "/users/assets/x", route: "user", auth: false },
     { path: "/users/access-denied", route: "user", auth: false },
+    { path: "/users/403", route: "user", auth: false },
+    { path: "/users/404", route: "user", auth: false },
+    { path: "/users/500", route: "user", auth: false },
     { path: "/bichard-ui/Health", route: "bichard", auth: false },
     { path: "/bichard-ui/Connectivity", route: "bichard", auth: false },
     { path: "/bichard-ui/images/foo.gif", route: "bichard", auth: false },
@@ -49,24 +57,21 @@ describe("Testing Nginx config", () => {
   test.each(routes)(
     "Path $path routes to $route with auth: $auth",
     async ({ path, route, auth, dest }) => {
-      let authMock;
-      if (auth) {
-        authMock = servers.user
-          .get("/users/api/auth")
-          .mockImplementationOnce(mock200);
-      }
+      const authMock = servers.user
+        .get("/users/api/auth")
+        .mockImplementationOnce(mockStatus(200));
 
       const destPath = dest || path;
-      const mock = servers[route].get(destPath).mockImplementationOnce(mock200);
+      const mock = servers[route]
+        .get(destPath)
+        .mockImplementationOnce(mockStatus(200));
 
       const res = await axios.get(`https://${testHost}${path}`, axiosConfig);
 
       expect(res.status).toEqual(200);
       expect(mock).toHaveBeenCalledTimes(1);
 
-      if (auth) {
-        expect(authMock).toHaveBeenCalledTimes(1);
-      }
+      expect(authMock).toHaveBeenCalledTimes(auth ? 1 : 0);
     }
   );
 
@@ -78,7 +83,9 @@ describe("Testing Nginx config", () => {
         ctx.status = 200;
       });
       const destPath = dest || path;
-      const mock = servers[route].get(destPath).mockImplementationOnce(mock200);
+      const mock = servers[route]
+        .get(destPath)
+        .mockImplementationOnce(mockStatus(200));
       const res = await axios.get(`https://${testHost}${path}`, axiosConfig);
 
       if (auth) {
@@ -90,6 +97,34 @@ describe("Testing Nginx config", () => {
           "Path=/; HttpOnly; Secure; SameSite=strict",
         ]);
       }
+    }
+  );
+
+  test.each([403, 404, 500])(
+    "Should use the %i page in the user service for this status code",
+    async (status) => {
+      const errorPage = `${status} Page`;
+      const authMock = servers.user
+        .get("/users/api/auth")
+        .mockImplementationOnce(mockStatus(200));
+      const mockErrorPage = servers.user
+        .get(`/users/${status}`)
+        .mockImplementationOnce(mockResponse(status, errorPage));
+
+      const mock = servers.bichard
+        .get("/bichard-ui/x")
+        .mockImplementationOnce(mockStatus(status));
+
+      const res = await axios.get(
+        `https://${testHost}/bichard-ui/x`,
+        axiosConfig
+      );
+
+      expect(res.status).toEqual(status);
+      expect(res.data).toEqual(errorPage);
+      expect(authMock).toHaveBeenCalledTimes(1);
+      expect(mock).toHaveBeenCalledTimes(1);
+      expect(mockErrorPage).toHaveBeenCalledTimes(1);
     }
   );
 });

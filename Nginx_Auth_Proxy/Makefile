@@ -1,7 +1,7 @@
 image = nginx-auth-proxy
 
 .PHONY: build-and-test
-build-and-test: build goss unit-test-nginx
+build-and-test: build unit-test-nginx goss
 	
 .PHONY: build
 build:
