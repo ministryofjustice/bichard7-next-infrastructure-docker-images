@@ -17,7 +17,7 @@ http {
     default_type              application/octet-stream;
     ssl_protocols             TLSv1.2; # Dropping SSLv3, ref: POODLE
     ssl_prefer_server_ciphers on;
-    error_log                 /dev/stdout;
+    error_log                 /dev/stderr;
     access_log                /dev/stdout combined;
     gzip                      on;
     include                   /etc/nginx/conf.d/*.conf;
