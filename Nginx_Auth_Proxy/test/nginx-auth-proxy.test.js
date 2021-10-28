@@ -19,6 +19,13 @@ const testHost = process.env.TEST_HOST || "localhost:6443";
 
 describe("Testing Nginx config", () => {
   let servers;
+
+  const mockAuth = () => {
+    return servers.user
+      .get("/users/api/auth")
+      .mockImplementationOnce(mockStatus(200));
+  };
+
   beforeAll(async () => {
     servers = {
       bichard: new MockServer({ port: 60001, https: true }),
@@ -57,9 +64,7 @@ describe("Testing Nginx config", () => {
   test.each(routes)(
     "Path $path routes to $route with auth: $auth",
     async ({ path, route, auth, dest }) => {
-      const authMock = servers.user
-        .get("/users/api/auth")
-        .mockImplementationOnce(mockStatus(200));
+      const authMock = mockAuth();
 
       const destPath = dest || path;
       const mock = servers[route]
@@ -104,9 +109,7 @@ describe("Testing Nginx config", () => {
     "Should use the %i page in the user service for this status code",
     async (status) => {
       const errorPage = `${status} Page`;
-      const authMock = servers.user
-        .get("/users/api/auth")
-        .mockImplementationOnce(mockStatus(200));
+      const authMock = mockAuth();
       const mockErrorPage = servers.user
         .get(`/users/${status}`)
         .mockImplementationOnce(mockResponse(status, errorPage));
@@ -125,6 +128,32 @@ describe("Testing Nginx config", () => {
       expect(authMock).toHaveBeenCalledTimes(1);
       expect(mock).toHaveBeenCalledTimes(1);
       expect(mockErrorPage).toHaveBeenCalledTimes(1);
+    }
+  );
+
+  test.each([
+    { url: "/bichard-ui/x", upstream: "bichard" },
+    { url: "/users/x", upstream: "user" },
+    { url: "/audit-logging/x", upstream: "audit" },
+    { url: "/reports/x", upstream: "reports", dest: "/x" },
+  ])(
+    "Should pass through the host header for $url to $upstream",
+    async ({ url, upstream, dest }) => {
+      const expectedResponse = `Response from ${upstream}`;
+      mockAuth();
+      const mockUpstream = servers[upstream]
+        .get(dest || url)
+        .mockImplementationOnce(mockResponse(200, expectedResponse));
+      const res = await axios.get(`https://${testHost}${url}`, {
+        ...axiosConfig,
+        headers: { Host: "external.host" },
+      });
+
+      expect(res.data).toEqual(expectedResponse);
+      expect(mockUpstream).toHaveBeenCalledTimes(1);
+      expect(mockUpstream.mock.calls[0][0].request.header.host).toEqual(
+        "external.host"
+      );
     }
   );
 });
