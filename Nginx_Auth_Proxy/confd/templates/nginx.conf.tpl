@@ -92,6 +92,7 @@ http {
 
             proxy_pass        https://$app;
             proxy_ssl_verify  {{ getv "/cjse/nginx/proxysslverify" "on" }};
+            proxy_set_header Host $host;
 
             limit_except GET POST PUT DELETE { deny all; }
             proxy_cookie_flags ~ httponly secure samesite=strict;
@@ -106,6 +107,7 @@ http {
 
             proxy_pass        https://$auditlogging;
             proxy_ssl_verify  {{ getv "/cjse/nginx/proxysslverify" "on" }};
+            proxy_set_header Host $host;
 
             limit_except GET POST PUT DELETE { deny all; }
             proxy_cookie_flags ~ httponly secure samesite=strict;
@@ -122,6 +124,7 @@ http {
 
             proxy_pass        https://$userservice;
             proxy_ssl_verify  {{ getv "/cjse/nginx/proxysslverify" "on" }};
+            proxy_set_header Host $host;
 
             limit_except GET POST PUT DELETE { deny all; }
             proxy_cookie_flags ~ httponly secure samesite=strict;
@@ -141,6 +144,7 @@ http {
             rewrite /reports/(.*) /$1  break;
             proxy_pass        https://$reportservice;
             proxy_ssl_verify  {{ getv "/cjse/nginx/proxysslverify" "on" }};
+            proxy_set_header Host $host;
 
             limit_except GET { deny all; }
             proxy_cookie_flags ~ httponly secure samesite=strict;
