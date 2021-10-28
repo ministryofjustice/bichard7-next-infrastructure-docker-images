@@ -72,6 +72,5 @@ http {
       listen        80 default_server;
       server_name   _;
       return        301 https://$host$request_uri;
-      access_log    /dev/stdout json;
     }
 }
