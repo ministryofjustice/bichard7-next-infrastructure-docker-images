@@ -62,7 +62,8 @@ scrape_configs:
         - https://alerts.{{getv "/cjse/fqdn/suffix" "cjse.org"}}
         - https://elasticsearch.{{getv "/cjse/fqdn/suffix" "cjse.org"}}
         - https://prometheus.{{getv "/cjse/fqdn/suffix" "cjse.org"}}
-{{ if and (exists "/cjse/use/smtp/service") (eq getv "/cjse/use/smtp/service" "true") }}
+{{ if exists "/cjse/use/smtp/service" }}
+{{ if eq (getv "/cjse/use/smtp/service" "false") "true" }}
     - job_name: node
       relabel_configs:
         - source_labels: [ __address__ ]
@@ -74,6 +75,7 @@ scrape_configs:
         static_configs:
             - targets:
                 - mail.cjse.org
+{{end}}
 {{end}}
   - job_name: 'blackbox_tcp'
     metrics_path: '/probe'
