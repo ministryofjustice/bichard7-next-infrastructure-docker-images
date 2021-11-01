@@ -23,4 +23,6 @@ modules:
     prober: tcp
     tcp:
       preferred_ip_protocol: "ip4"
+      tls_config:
+        insecure_skip_verify: true
 ...
