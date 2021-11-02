@@ -77,22 +77,6 @@ scrape_configs:
                 - mail.cjse.org
 {{end}}
 {{end}}
-  - job_name: 'blackbox_tcp'
-    metrics_path: '/probe'
-    scheme: 'https'
-    params:
-      module:
-        - tcp_connect
-    relabel_configs:
-      - source_labels: [ __address__ ]
-        target_label: __param_target
-      - source_labels: [ __param_target ]
-        target_label: instance
-      - target_label: __address__
-        replacement: {{getv "/cjse/prometheus/blackbox/exporter/fqdn" "localhost"}}:9116
-    static_configs:
-      - targets:
-          - pnc.cjse.org:{{getv "/cjse/pnc/port" "102" }}
   - job_name: 'prometheus'
     scheme: "https"
     tls_config:
