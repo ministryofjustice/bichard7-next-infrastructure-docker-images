@@ -62,19 +62,19 @@ scrape_configs:
         - https://alerts.{{getv "/cjse/fqdn/suffix" "cjse.org"}}
         - https://elasticsearch.{{getv "/cjse/fqdn/suffix" "cjse.org"}}
         - https://prometheus.{{getv "/cjse/fqdn/suffix" "cjse.org"}}
-{{ if exists "/cjse/use/smtp/service" }}
+{{ if exists "/cjse/use/smtp/service/this/is/disabled" }}
 {{ if eq (getv "/cjse/use/smtp/service" "false") "true" }}
-    - job_name: node
-      relabel_configs:
-        - source_labels: [ __address__ ]
-          target_label: __param_target
-        - source_labels: [ __param_target ]
-          target_label: instance
-        - target_label: __address__
-        replacement: {{getv "/cjse/prometheus/blackbox/exporter/fqdn" "localhost"}}:9116
-        static_configs:
-            - targets:
-                - mail.cjse.org
+  - job_name: node
+    relabel_configs:
+      - source_labels: [ __address__ ]
+        target_label: __param_target
+      - source_labels: [ __param_target ]
+        target_label: instance
+      - target_label: __address__
+        replacement: 'mail.cjse.org:9100'
+    static_configs:
+      - targets:
+        - mail.cjse.org
 {{end}}
 {{end}}
   - job_name: 'prometheus'
