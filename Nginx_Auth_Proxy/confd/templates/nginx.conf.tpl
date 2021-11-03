@@ -52,9 +52,13 @@ http {
         add_header                      Content-Security-Policy "default-src 'self'; frame-src 'self'; frame-ancestors 'self'; form-action 'self';" always;
         add_header                      X-XSS-Protection "1; mode=block";
         add_header                      Referrer-Policy "origin";
+        add_header                      Strict-Transport-Security "max-age=31536000; includeSubDomains" always;
+        add_header                      X-Content-Type-Options nosniff;
+        add_header                      X-Frame-Options DENY;
 
         access_log                      /dev/stdout json;
 
+        proxy_cookie_path               / "/; HTTPOnly; Secure";
         proxy_hide_header               Content-Security-Policy;
         proxy_ssl_trusted_certificate   /etc/ssl/certs/ca-bundle.crt;
 
