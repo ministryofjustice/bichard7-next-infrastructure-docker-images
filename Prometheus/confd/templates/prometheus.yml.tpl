@@ -75,6 +75,17 @@ scrape_configs:
     static_configs:
     - targets:
         - mail.cjse.org
+  - job_name: postfix
+    relabel_configs:
+      - source_labels: [ __address__ ]
+        target_label: __param_target
+      - source_labels: [ __param_target ]
+        target_label: instance
+      - target_label: __address__
+        replacement: 'mail.cjse.org:9154'
+    static_configs:
+    - targets:
+        - mail.cjse.org
 {{end}}
 {{end}}
   - job_name: 'prometheus'
