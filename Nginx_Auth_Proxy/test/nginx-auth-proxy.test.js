@@ -156,4 +156,27 @@ describe("Testing Nginx config", () => {
       );
     }
   );
+
+  test.each([
+    { url: "/bichard-ui/x", upstream: "bichard" },
+    { url: "/users/x", upstream: "user" },
+    { url: "/audit-logging/x", upstream: "audit" },
+    { url: "/reports/x", upstream: "reports", dest: "/x" }
+  ])(
+    "Should not pass when performing OPTIONS requests for $upstream",
+    async ({ url, upstream, dest }) => {
+      const expectedStatus = 403;
+      mockAuth();
+      const mockUpstream = servers[upstream]
+        .get(dest || url)
+        .mockImplementationOnce(mockResponse(200, ""));
+      let res = await axios.options(`https://${testHost}${url}`, axiosConfig);
+
+      expect(res.status).toEqual(expectedStatus);
+      expect(mockUpstream).toHaveBeenCalledTimes(0);
+      res = await axios.get(`https://${testHost}${url}`, axiosConfig);
+
+      expect(res.status).toEqual(200);
+    }
+  );
 });

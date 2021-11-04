@@ -50,11 +50,12 @@ http {
         add_header                      Set-Cookie "Path=/; HttpOnly; Secure; SameSite=strict";
         add_header                      Cache-Control "no-store, no-cache, must-revalidate";
         add_header                      Content-Security-Policy "default-src 'self'; frame-src 'self'; frame-ancestors 'self'; form-action 'self';" always;
+        add_header                      Strict-Transport-Security "max-age=31536000; includeSubDomains" always;
+        add_header                      X-Frame-Options DENY;
+        add_header                      X-Content-Type-Options nosniff;
         add_header                      X-XSS-Protection "1; mode=block";
         add_header                      Referrer-Policy "origin";
-        add_header                      Strict-Transport-Security "max-age=31536000; includeSubDomains" always;
-        add_header                      X-Content-Type-Options nosniff;
-        add_header                      X-Frame-Options DENY;
+
 
         access_log                      /dev/stdout json;
 
@@ -72,6 +73,7 @@ http {
         # Redirect any unauthenticated users to the login page
         error_page 401 = @error401;
         location @error401 {
+            limit_except      GET POST PUT { deny all; }
             proxy_ssl_server_name on;
             proxy_ssl_verify_depth 2;
             return 302 /users/login?redirect=$request_uri;
@@ -83,6 +85,7 @@ http {
         error_page 500 =500 /500;
         location ~ ^/(403|404|500)$ {
             proxy_ssl_verify  {{ getv "/cjse/nginx/proxysslverify" "on" }};
+            limit_except      GET POST PUT { deny all; }
             proxy_ssl_server_name on;
             proxy_ssl_verify_depth 2;
             rewrite /(.*) /users/$1;
@@ -90,6 +93,7 @@ http {
 
         # Use API endpoint in user-service for checking authentication
         location /auth {
+            limit_except      GET POST PUT { deny all; }
             proxy_pass        https://$userservice/users/api/auth;
             proxy_ssl_verify  {{ getv "/cjse/nginx/proxysslverify" "on" }};
 
@@ -103,11 +107,13 @@ http {
 
         # Proxy for landing page to Bichard
         location = / {
+            limit_except GET POST PUT DELETE { deny all; }
             return 302 /users;
         }
 
         # Proxy through to Bichard
         location /bichard-ui {
+            limit_except GET POST PUT DELETE { deny all; }
             auth_request /auth;
             auth_request_set $auth_cookie $upstream_http_set_cookie;
             add_header Set-Cookie $auth_cookie;
@@ -116,13 +122,13 @@ http {
             proxy_ssl_verify  {{ getv "/cjse/nginx/proxysslverify" "on" }};
             proxy_set_header Host $host;
 
-            limit_except GET POST PUT DELETE { deny all; }
             proxy_cookie_flags ~ httponly secure samesite=strict;
             proxy_intercept_errors on;
         }
 
         # Proxy through to audit-logging
         location /audit-logging {
+            limit_except GET POST PUT DELETE { deny all; }
             auth_request /auth;
             auth_request_set $auth_cookie $upstream_http_set_cookie;
             add_header Set-Cookie $auth_cookie;
@@ -131,7 +137,6 @@ http {
             proxy_ssl_verify  {{ getv "/cjse/nginx/proxysslverify" "on" }};
             proxy_set_header Host $host;
 
-            limit_except GET POST PUT DELETE { deny all; }
             proxy_cookie_flags ~ httponly secure samesite=strict;
             proxy_ssl_server_name on;
             proxy_ssl_verify_depth 2;
@@ -140,6 +145,7 @@ http {
 
         # Proxy through to user-service
         location /users {
+            limit_except GET POST PUT DELETE { deny all; }
             auth_request /auth;
             auth_request_set $auth_cookie $upstream_http_set_cookie;
             add_header Set-Cookie $auth_cookie;
@@ -148,7 +154,6 @@ http {
             proxy_ssl_verify  {{ getv "/cjse/nginx/proxysslverify" "on" }};
             proxy_set_header Host $host;
 
-            limit_except GET POST PUT DELETE { deny all; }
             proxy_cookie_flags ~ httponly secure samesite=strict;
             proxy_ssl_server_name on;
             proxy_ssl_verify_depth 2;
@@ -157,8 +162,7 @@ http {
 
         # Proxy through to report downloads
         location /reports {
-            error_page 401 = @error401;
-            error_page 403 = @error403;
+            limit_except GET { deny all; }
             auth_request /auth;
             auth_request_set $auth_cookie $upstream_http_set_cookie;
             add_header Set-Cookie $auth_cookie;
@@ -168,19 +172,19 @@ http {
             proxy_ssl_verify  {{ getv "/cjse/nginx/proxysslverify" "on" }};
             proxy_set_header Host $host;
 
-            limit_except GET { deny all; }
             proxy_cookie_flags ~ httponly secure samesite=strict;
             proxy_intercept_errors on;
         }
 
         # Allow access to user-service login flow (and necessary assets) without authentication
         location ~ ^/users/(login|assets|_next/static|access-denied|403|404|500)(.*)$ {
+            limit_except GET POST PUT { deny all; }
+
             proxy_pass        https://$userservice;
             proxy_ssl_verify  {{ getv "/cjse/nginx/proxysslverify" "on" }};
             proxy_cookie_flags ~ httponly secure samesite=strict;
             proxy_ssl_server_name on;
             proxy_ssl_verify_depth 2;
-
         }
 
         # Allow access to bichard-ui health check, connectivity and static endpoints without authentication
@@ -192,10 +196,10 @@ http {
 
         # Healthcheck endpoint
         location /elb-status {
+            limit_except GET POST { deny all; }
             access_log   off;
             return       200;
             add_header   Content-Type text/plain;
-            limit_except GET POST { deny all; }
             proxy_cookie_flags ~ httponly secure samesite=strict;
             proxy_ssl_server_name on;
             proxy_ssl_verify_depth 2;
