@@ -62,9 +62,14 @@ scrape_configs:
         - https://alerts.{{getv "/cjse/fqdn/suffix" "cjse.org"}}
         - https://elasticsearch.{{getv "/cjse/fqdn/suffix" "cjse.org"}}
         - https://prometheus.{{getv "/cjse/fqdn/suffix" "cjse.org"}}
-{{ if exists "/cjse/use/smtp/service/this/is/disabled" }}
+{{ if exists "/cjse/use/smtp/service" }}
 {{ if eq (getv "/cjse/use/smtp/service" "false") "true" }}
   - job_name: node
+    scheme: "https"
+    tls_config:
+      cert_file: /certs/server.crt
+      key_file: /certs/server.key
+      insecure_skip_verify: true
     relabel_configs:
       - source_labels: [ __address__ ]
         target_label: __param_target
@@ -73,7 +78,23 @@ scrape_configs:
       - target_label: __address__
         replacement: 'mail.cjse.org:9100'
     static_configs:
-      - targets:
+    - targets:
+        - mail.cjse.org
+  - job_name: postfix
+    scheme: "https"
+    tls_config:
+      cert_file: /certs/server.crt
+      key_file: /certs/server.key
+      insecure_skip_verify: true
+    relabel_configs:
+      - source_labels: [ __address__ ]
+        target_label: __param_target
+      - source_labels: [ __param_target ]
+        target_label: instance
+      - target_label: __address__
+        replacement: 'mail.cjse.org:9154'
+    static_configs:
+    - targets:
         - mail.cjse.org
 {{end}}
 {{end}}
