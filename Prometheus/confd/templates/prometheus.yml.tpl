@@ -62,7 +62,7 @@ scrape_configs:
         - https://alerts.{{getv "/cjse/fqdn/suffix" "cjse.org"}}
         - https://elasticsearch.{{getv "/cjse/fqdn/suffix" "cjse.org"}}
         - https://prometheus.{{getv "/cjse/fqdn/suffix" "cjse.org"}}
-{{ if exists "/cjse/use/smtp/service/this/is/disabled" }}
+{{ if exists "/cjse/use/smtp/service" }}
 {{ if eq (getv "/cjse/use/smtp/service" "false") "true" }}
   - job_name: node
     relabel_configs:
@@ -73,7 +73,7 @@ scrape_configs:
       - target_label: __address__
         replacement: 'mail.cjse.org:9100'
     static_configs:
-      - targets:
+    - targets:
         - mail.cjse.org
 {{end}}
 {{end}}
