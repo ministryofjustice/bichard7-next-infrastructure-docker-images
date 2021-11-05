@@ -32,6 +32,7 @@ COPY conf/supervisord.conf /etc/supervisord.conf
 COPY confd /etc/confd/
 COPY conf/logstash/ /etc/logstash
 COPY files/logstash.patterns /etc/logstash/patterns/cjse
+COPY files/postfix.patterns /etc/logstash/patterns/postfix
 COPY conf/config /root/.aws/config
 COPY conf/crontab /var/spool/cron/root
 

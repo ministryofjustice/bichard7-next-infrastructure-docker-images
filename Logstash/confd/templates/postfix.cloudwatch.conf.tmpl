@@ -1,0 +1,63 @@
+input {
+  cloudwatch_logs {
+    codec => multiline {
+      pattern => "^%{DATESTAMP} \[%{DATA:source}\] "
+      negate => true
+      what => "previous"
+    }
+    log_group => ["cjse-{{ getv "/cjse/environment" ""}}-bichard-7/var/log/maillog"]
+    start_position => "end"
+    region => "eu-west-2"
+    tags => ["cloudwatch_syslog","bichard","smtp_logs", "postfix"]
+  }
+}
+
+filter {
+  if ![postfix_queueid] {
+    drop {}
+  } else if [program] == "postfix/qmgr" and [postfix_from]{
+    aggregate {
+      task_id => "%{postfix_queueid}"
+      code => "
+        map['postfix_from'] = event.get('postfix_from')
+        map['postfix_size'] = event.get('postfix_size')
+        map['postfix_nrcpt'] = event.get('postfix_nrcpt')
+      "
+    }
+  } else if [program] == "postfix/smtpd" {
+    aggregate {
+      task_id => "%{postfix_queueid}"
+      code => "
+        map['postfix_client_hostname'] = event.get('postfix_client_hostname')
+        map['postfix_client_ip'] = event.get('postfix_client_ip')
+      "
+    }
+  } else if [program] == "postfix/cleanup" {
+    aggregate {
+      task_id => "%{postfix_queueid}"
+      code => "
+        map['postfix_message-id'] = event.get('postfix_message-id')
+      "
+    }
+  } else if [program] == "postfix/smtp" {
+    aggregate {
+      task_id => "%{postfix_queueid}"
+      code => "
+       map.each do |key, value|
+         event.set(key, value)
+       end
+     "
+    }
+  }
+}
+
+output {
+  elasticsearch {
+    hosts => ["{{ getv "/cjse/logstash/es/domain" "http://elasticsearch:9200"}}"]
+    index => "{{ getv "/cjse/environment" ""}}-logs-%{+YYYY.MM.dd}"
+    user => "{{ getv "/cjse/logstash/es/username" ""}}"
+    password => "{{ getv "/cjse/logstash/es/password" ""}}"
+    ssl => true
+    ilm_enabled => false
+  }
+}
