@@ -1,6 +1,6 @@
 [template]
 src = "logstash.cloudwatch.conf.tmpl"
-dest = "/etc/logstash/conf.d/logstash.conf"
+dest = "/etc/logstash/conf.d/logstash.conf.disabled"
 keys = [
     "/cjse"
 ]

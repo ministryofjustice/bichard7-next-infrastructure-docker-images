@@ -1,10 +1,10 @@
 input {
   cloudwatch_logs {
-    codec => multiline {
-      pattern => "^%{DATESTAMP} \[%{DATA:source}\] "
-      negate => true
-      what => "previous"
-    }
+    #codec => multiline {
+    #  pattern => "^%{DATESTAMP} \[%{DATA:source}\] "
+    #  negate => true
+    #  what => "previous"
+    #}
     log_group => ["cjse-bichard7-{{ getv "/cjse/environment" ""}}-base-infra-bichard7"]
     start_position => "end"
     region => "eu-west-2"
@@ -13,16 +13,21 @@ input {
 }
 
 filter {
-  grok {
-    patterns_dir => ["/etc/logstash/patterns"]
-    match => { "message" => [
-      "%{DATESTAMP:datestamp} \[%{DATA:source}\] %{LOGLEVEL:loglevel} %{GREEDYDATA:message}",
-      "\[%{DATA:loglevel} \] %{DATA:code}: %{GREEDYDATA:message}"
-    ] }
+  json {
+    source => "message"
   }
-
-
 }
+
+#filter {
+#  grok {
+#    patterns_dir => ["/etc/logstash/patterns"]
+#    match => { "message" => [
+#      "%{DATESTAMP:datestamp} \[%{DATA:source}\] %{LOGLEVEL:loglevel} %{GREEDYDATA:message}",
+#      "\[%{DATA:loglevel} \] %{DATA:code}: %{GREEDYDATA:message}"
+#    ] }
+#  }
+#}
+
 output {
   elasticsearch {
     hosts => ["{{ getv "/cjse/logstash/es/domain" "http://elasticsearch:9200"}}"]
@@ -31,5 +36,8 @@ output {
     password => "{{ getv "/cjse/logstash/es/password" ""}}"
     ssl => true
     ilm_enabled => false
+  }
+  stdout {
+    codec => rubydebug
   }
 }
