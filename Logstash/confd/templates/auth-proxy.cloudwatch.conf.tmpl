@@ -1,9 +1,9 @@
 input {
   cloudwatch_logs {
-    log_group => ["cjse-bichard7-{{ getv "/cjse/environment" ""}}-base-infra-user-service"]
+    log_group => ["cjse-bichard7-{{ getv "/cjse/environment" ""}}-base-infra-nginx-auth-proxy"]
     start_position => "end"
     region => "eu-west-2"
-    tags => ["cloudwatch_syslog","user-service","ecs_logs", "application"]
+    tags => ["cloudwatch_syslog","nginx-auth-proxy","ecs_logs", "application"]
   }
 }
 
