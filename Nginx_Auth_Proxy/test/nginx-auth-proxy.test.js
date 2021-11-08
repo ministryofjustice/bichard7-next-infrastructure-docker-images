@@ -51,7 +51,6 @@ describe("Testing Nginx config", () => {
     { path: "/audit-logging/x", route: "audit", auth: true },
     { path: "/users/login", route: "user", auth: false },
     { path: "/users/assets/x", route: "user", auth: false },
-    { path: "/users/access-denied", route: "user", auth: false },
     { path: "/users/403", route: "user", auth: false },
     { path: "/users/404", route: "user", auth: false },
     { path: "/users/500", route: "user", auth: false },
