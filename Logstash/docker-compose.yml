@@ -34,11 +34,12 @@ services:
     depends_on:
       - elasticsearch
     restart: "unless-stopped"
+
   logstash:
     image: logstash
     container_name: logstash
     env_file:
-      - logstash.env
+      - goss.env
     networks:
       - esnet
     depends_on:
