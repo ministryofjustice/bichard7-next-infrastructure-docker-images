@@ -1,0 +1,54 @@
+version: '3'
+services:
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.10.1
+    container_name: elasticsearch
+    environment:
+      - node.name=ws-es-node
+      - discovery.type=single-node
+      - cluster.name=ws-es-data-cluster
+      - bootstrap.memory_lock=true
+      - "ES_JAVA_OPTS=-Xms1024m -Xmx1024m"
+      - logger.level=debug
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    volumes:
+      - esdata:/usr/share/elasticsearch/data
+    ports:
+      - 9200:9200
+      - 9300:9300
+    networks:
+      - esnet
+  kibana:
+    image: docker.elastic.co/kibana/kibana:7.10.1
+    container_name: kibana
+    environment:
+      SERVER_NAME: 127.0.0.1
+      ELASTICSEARCH_HOSTS: http://elasticsearch:9200
+    ports:
+      - "5601:5601"
+    networks:
+      - esnet
+    depends_on:
+      - elasticsearch
+    restart: "unless-stopped"
+
+  logstash:
+    image: logstash
+    container_name: logstash
+    env_file:
+      - goss.env
+    networks:
+      - esnet
+    depends_on:
+      - elasticsearch
+    restart: "unless-stopped"
+
+volumes:
+  esdata:
+    driver: local
+
+networks:
+  esnet:
