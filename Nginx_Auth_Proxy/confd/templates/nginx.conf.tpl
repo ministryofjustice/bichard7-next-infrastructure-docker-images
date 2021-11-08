@@ -177,7 +177,7 @@ http {
         }
 
         # Allow access to user-service login flow (and necessary assets) without authentication
-        location ~ ^/users/(login|assets|_next/static|access-denied|403|404|500)(.*)$ {
+        location ~ ^/users/(login|assets|_next/static|403|404|500)(.*)$ {
             limit_except GET POST PUT { deny all; }
 
             proxy_pass        https://$userservice;
