@@ -1,6 +1,6 @@
 [template]
 src = "postfix.cloudwatch.conf.tmpl"
-dest = "/etc/logstash/conf.d/postfix-cloudwatch.conf"
+dest = "/etc/logstash/conf.d/postfix-cloudwatch.conf.disabled"
 keys = [
     "/cjse"
 ]
