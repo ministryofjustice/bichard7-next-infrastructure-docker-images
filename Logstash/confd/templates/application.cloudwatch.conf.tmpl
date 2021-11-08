@@ -1,10 +1,10 @@
 input {
   cloudwatch_logs {
-    #codec => multiline {
-    #  pattern => "^%{DATESTAMP} \[%{DATA:source}\] "
-    #  negate => true
-    #  what => "previous"
-    #}
+    codec => multiline {
+      pattern => "^%{DATESTAMP} \[%{DATA:source}\] "
+      negate => true
+      what => "previous"
+    }
     log_group => ["cjse-bichard7-{{ getv "/cjse/environment" ""}}-base-infra-bichard7"]
     start_position => "end"
     region => "eu-west-2"
@@ -13,20 +13,14 @@ input {
 }
 
 filter {
-  json {
-    source => "message"
+  grok {
+    patterns_dir => ["/etc/logstash/patterns"]
+    match => { "message" => [
+      "%{DATESTAMP:datestamp} \[%{DATA:source}\] %{LOGLEVEL:loglevel} %{GREEDYDATA:message}",
+      "\[%{DATA:loglevel} \] %{DATA:code}: %{GREEDYDATA:message}"
+    ] }
   }
 }
-
-#filter {
-#  grok {
-#    patterns_dir => ["/etc/logstash/patterns"]
-#    match => { "message" => [
-#      "%{DATESTAMP:datestamp} \[%{DATA:source}\] %{LOGLEVEL:loglevel} %{GREEDYDATA:message}",
-#      "\[%{DATA:loglevel} \] %{DATA:code}: %{GREEDYDATA:message}"
-#    ] }
-#  }
-#}
 
 output {
   elasticsearch {

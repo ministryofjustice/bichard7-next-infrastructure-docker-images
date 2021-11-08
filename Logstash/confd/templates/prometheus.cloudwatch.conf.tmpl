@@ -8,10 +8,20 @@ input {
 }
 
 filter {
-    grok {
+    mutate{
+        replace => [ "message", "%{message}" ]
+        gsub => [ 'message','\n','']
+    }
+
+    if [message] =~ /^{.*}$/ {
+        json { source => message }
+    }
+    else {
+      grok {
         patterns_dir => ["/etc/logstash/patterns"]
         match => { "message" => "%{LOGLEVEL:loglevel} ts=%{DATETIME_PROM:timestamp} %{GREEDYDATA:message}" }
       }
+    }
 }
 
 output {

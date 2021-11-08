@@ -1,6 +1,6 @@
 [template]
 src = "audit-logging.cloudwatch.conf.tmpl"
-dest = "/etc/logstash/conf.d/audit-logging-cloudwatch.conf.disabled"
+dest = "/etc/logstash/conf.d/audit-logging-cloudwatch.conf"
 keys = [
     "/cjse"
 ]
