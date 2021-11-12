@@ -120,7 +120,7 @@ http {
 
             proxy_pass        https://$app;
             proxy_ssl_verify  {{ getv "/cjse/nginx/proxysslverify" "on" }};
-            proxy_set_header Host $host;
+            proxy_set_header Host $http_host;
 
             proxy_cookie_flags ~ httponly secure samesite=strict;
             proxy_intercept_errors on;
