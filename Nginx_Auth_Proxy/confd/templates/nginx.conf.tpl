@@ -67,7 +67,7 @@ http {
         set $app "{{ getv "/cjse/nginx/app/domain" }}";
         set $userservice "{{ getv "/cjse/nginx/userservice/domain" }}";
         set $auditlogging "{{ getv "/cjse/nginx/auditlogging/domain" }}";
-        set $reportservice "{{ getv "/cjse/nginx/reportservice/domain" }}";
+        set $staticservice "{{ getv "/cjse/nginx/staticservice/domain" }}";
 
 
         # Redirect any unauthenticated users to the login page
@@ -167,8 +167,19 @@ http {
             auth_request_set $auth_cookie $upstream_http_set_cookie;
             add_header Set-Cookie $auth_cookie;
 
-            rewrite /reports/(.*) /$1  break;
-            proxy_pass        https://$reportservice;
+            proxy_pass        https://$staticservice;
+            proxy_ssl_verify  {{ getv "/cjse/nginx/proxysslverify" "on" }};
+            proxy_set_header Host $host;
+
+            proxy_cookie_flags ~ httponly secure samesite=strict;
+            proxy_intercept_errors on;
+        }
+
+        # Proxy through to help files without auth
+        location /help {
+            limit_except GET { deny all; }
+
+            proxy_pass        https://$staticservice;
             proxy_ssl_verify  {{ getv "/cjse/nginx/proxysslverify" "on" }};
             proxy_set_header Host $host;
 
