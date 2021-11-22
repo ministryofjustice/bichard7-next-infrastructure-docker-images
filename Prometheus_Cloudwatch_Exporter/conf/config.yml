@@ -139,6 +139,47 @@ metrics:
     aws_metric_name: MemoryUsage
     aws_dimensions: [Broker, Topic]
 
+    # Broker,Queue metrics to graph our message rates
+    - aws_namespace: AWS/AmazonMQ
+      aws_metric_name: DispatchCount
+      aws_dimensions: [Broker, Queue]
+
+    - aws_namespace: AWS/AmazonMQ
+      aws_metric_name: ProducerCount
+      aws_dimensions: [Broker, Queue]
+
+    - aws_namespace: AWS/AmazonMQ
+      aws_metric_name: DequeueCount
+      aws_dimensions: [Broker, Queue]
+
+    - aws_namespace: AWS/AmazonMQ
+      aws_metric_name: EnqueueCount
+      aws_dimensions: [Broker, Queue]
+
+    - aws_namespace: AWS/AmazonMQ
+      aws_metric_name: InFlightCount
+      aws_dimensions: [Broker, Queue]
+
+    - aws_namespace: AWS/AmazonMQ
+      aws_metric_name: MemoryUsage
+      aws_dimensions: [Broker, Queue]
+
+    - aws_namespace: AWS/AmazonMQ
+      aws_metric_name: EnqueueTime
+      aws_dimensions: [Broker, Queue]
+
+    - aws_namespace: AWS/AmazonMQ
+      aws_metric_name: ExpiredCount
+      aws_dimensions: [Broker, Queue]
+
+    - aws_namespace: AWS/AmazonMQ
+      aws_metric_name: ConsumerCount
+      aws_dimensions: [Broker, Queue]
+
+    - aws_namespace: AWS/AmazonMQ
+      aws_metric_name: QueueSize
+      aws_dimensions: [Broker, Queue]
+
   # yamllint disable rule:line-length
   # S3 Storage metrics are published to Cloudwatch 1x per day with a timestamp of midnight UTC, hence period_seconds: 86400
   # Publishing does not always occur at the same time, but it will occur before the next day, hence range_seconds: 172800
