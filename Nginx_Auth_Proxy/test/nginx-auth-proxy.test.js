@@ -31,7 +31,7 @@ describe("Testing Nginx config", () => {
       bichard: new MockServer({ port: 60001, https: true }),
       user: new MockServer({ port: 60002, https: true }),
       audit: new MockServer({ port: 60003, https: true }),
-      reports: new MockServer({ port: 60004, https: true }),
+      static: new MockServer({ port: 60004, https: true }),
     };
     await Promise.all(Object.values(servers).map((server) => server.start()));
   });
@@ -46,7 +46,8 @@ describe("Testing Nginx config", () => {
 
   const routes = [
     { path: "/bichard-ui/x", route: "bichard", auth: true },
-    { path: "/reports/x", route: "reports", auth: true, dest: "/x" },
+    { path: "/reports/x", route: "static", auth: true },
+    { path: "/help/x", route: "static", auth: false },
     { path: "/users/x", route: "user", auth: true },
     { path: "/audit-logging/x", route: "audit", auth: true },
     { path: "/users/login", route: "user", auth: false },
@@ -134,7 +135,7 @@ describe("Testing Nginx config", () => {
     { url: "/bichard-ui/x", upstream: "bichard" },
     { url: "/users/x", upstream: "user" },
     { url: "/audit-logging/x", upstream: "audit" },
-    { url: "/reports/x", upstream: "reports", dest: "/x" },
+    { url: "/reports/x", upstream: "static" },
   ])(
     "Should pass through the host header for $url to $upstream",
     async ({ url, upstream, dest }) => {
@@ -160,7 +161,7 @@ describe("Testing Nginx config", () => {
     { url: "/bichard-ui/x", upstream: "bichard" },
     { url: "/users/x", upstream: "user" },
     { url: "/audit-logging/x", upstream: "audit" },
-    { url: "/reports/x", upstream: "reports", dest: "/x" }
+    { url: "/reports/x", upstream: "static" },
   ])(
     "Should not pass when performing OPTIONS requests for $upstream",
     async ({ url, upstream, dest }) => {

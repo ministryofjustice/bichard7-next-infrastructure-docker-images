@@ -13,7 +13,7 @@ goss:
 			-e CJSE_NGINX_USERSERVICE_DOMAIN="localhost/elb-status" \
 			-e CJSE_NGINX_AUDITLOGGING_DOMAIN="localhost/elb-status" \
 			-e CJSE_NGINX_APP_DOMAIN="localhost/elb-status" \
-			-e CJSE_NGINX_REPORTSERVICE_DOMAIN="localhost/elb-status" \
+			-e CJSE_NGINX_STATICSERVICE_DOMAIN="localhost/elb-status" \
 			-e CJSE_NGINX_PROXYSSLVERIFY="off" \
 			$(image)"
 
@@ -22,7 +22,7 @@ run-test-nginx:
 	docker run -e CJSE_NGINX_APP_DOMAIN=172.17.0.1:60001 \
 		-e CJSE_NGINX_USERSERVICE_DOMAIN=172.17.0.1:60002 \
 		-e CJSE_NGINX_AUDITLOGGING_DOMAIN=172.17.0.1:60003 \
-		-e CJSE_NGINX_REPORTSERVICE_DOMAIN=172.17.0.1:60004 \
+		-e CJSE_NGINX_STATICSERVICE_DOMAIN=172.17.0.1:60004 \
 		-e CJSE_NGINX_PROXYSSLVERIFY="off" \
 		-p 6443:443 -d \
 		--name test-nginx-server \
