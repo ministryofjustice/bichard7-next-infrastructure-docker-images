@@ -45,6 +45,8 @@ services:
     depends_on:
       - elasticsearch
     restart: "unless-stopped"
+    volumes:
+     - ./logstash_conf:/etc/logstash/conf.d
 
 volumes:
   esdata:
