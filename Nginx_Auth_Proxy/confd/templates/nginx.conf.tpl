@@ -132,6 +132,7 @@ http {
             auth_request /auth;
             auth_request_set $auth_cookie $upstream_http_set_cookie;
             add_header Set-Cookie $auth_cookie;
+            add_header Content-Security-Policy "default-src 'self'; frame-src 'self'; frame-ancestors 'self'; form-action 'self'; img-src 'self' data:; style-src 'self' 'unsafe-inline';" always;
 
             proxy_pass        https://$auditlogging;
             proxy_ssl_verify  {{ getv "/cjse/nginx/proxysslverify" "on" }};
