@@ -1,0 +1,8 @@
+[template]
+src = "court-result-input-queue.json.tpl"
+dest = "/opt/grafana/dashboards/court-result-input-queue.json"
+keys = [
+    "/cjse"
+]
+gid = 998
+uid = 999
