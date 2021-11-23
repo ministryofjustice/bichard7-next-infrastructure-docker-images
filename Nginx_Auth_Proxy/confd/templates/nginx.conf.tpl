@@ -87,7 +87,7 @@ http {
         # Use API endpoint in user-service for checking authentication
         location /auth {
             limit_except      GET POST PUT { deny all; }
-            # include /etc/includes/without-auth-headers.conf;
+            include /etc/includes/without-auth-headers.conf;
 
             proxy_pass        https://$userservice/users/api/auth;
             proxy_ssl_verify  {{ getv "/cjse/nginx/proxysslverify" "on" }};
