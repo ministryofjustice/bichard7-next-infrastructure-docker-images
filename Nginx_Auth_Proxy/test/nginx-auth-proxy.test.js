@@ -61,6 +61,15 @@ describe("Testing Nginx config", () => {
     { path: "/bichard-ui/css/style.css", route: "bichard", auth: false },
   ];
 
+  const defaultHeaders = {
+    "Cache-Control": "no-store, no-cache, must-revalidate",
+    "Strict-Transport-Security": "max-age=31536000; includeSubDomains",
+    "X-Frame-Options": "DENY",
+    "X-Content-Type-Options": "nosniff",
+    "X-XSS-Protection": "1; mode=block",
+    "Referrer-Policy": "origin",
+  };
+
   test.each(routes)(
     "Path $path routes to $route with auth: $auth",
     async ({ path, route, auth, dest }) => {
@@ -177,6 +186,32 @@ describe("Testing Nginx config", () => {
       res = await axios.get(`https://${testHost}${url}`, axiosConfig);
 
       expect(res.status).toEqual(200);
+    }
+  );
+
+  test.each(routes)(
+    "It should respond with correct headers: $path",
+    async ({ path, route, auth, dest }) => {
+      servers.user.get("/users/api/auth").mockImplementationOnce((ctx) => {
+        ctx.cookies.set(".AUTH", "Realistic", { sameSite: true, secure: true });
+        ctx.status = 200;
+      });
+      const destPath = dest || path;
+      const mock = servers[route]
+        .get(destPath)
+        .mockImplementationOnce(mockStatus(200));
+      const res = await axios.get(`https://${testHost}${path}`, axiosConfig);
+
+      const actualHeaders = Object.keys(res.headers).reduce(
+        (headers, headerName) => {
+          headers[headerName.toLowerCase()] = res.headers[headerName];
+          return headers;
+        },
+        {}
+      );
+      Object.keys(defaultHeaders).forEach((header) => {
+        expect(actualHeaders[header.toLowerCase()]).toEqual(defaultHeaders[header]);
+      });
     }
   );
 });
