@@ -11,5 +11,5 @@ phases:
     commands:
       - set -ev
       - cd Nginx_Auth_Proxy
-      - /bin/bash source ./scripts/build_docker.sh
+      - . ./scripts/build_docker.sh
 ...
