@@ -27,6 +27,22 @@ metrics:
     aws_metric_name: RequestCount
     aws_dimensions: [LoadBalancer, AvailabilityZone, TargetGroup]
 
+  - aws_namespace: ECS/ApplicationELB
+    aws_metric_name: HTTPCode_Target_2XX_Count
+    aws_dimensions: [LoadBalancer, AvailabilityZone, TargetGroup]
+
+  - aws_namespace: ECS/ApplicationELB
+    aws_metric_name: HTTPCode_Target_3XX_Count
+    aws_dimensions: [LoadBalancer, AvailabilityZone, TargetGroup]
+
+  - aws_namespace: ECS/ApplicationELB
+    aws_metric_name: HTTPCode_Target_4XX_Count
+    aws_dimensions: [LoadBalancer, AvailabilityZone, TargetGroup]
+
+  - aws_namespace: ECS/ApplicationELB
+    aws_metric_name: HTTPCode_Target_5XX_Count
+    aws_dimensions: [LoadBalancer, AvailabilityZone, TargetGroup]
+
   - aws_namespace: AWS/NetworkELB
     aws_metric_name: HealthyHostCount
     aws_dimensions: [LoadBalancer, TargetGroup]
@@ -49,10 +65,6 @@ metrics:
 
   - aws_namespace: AWS/ECS
     aws_metric_name: CPUUtilization
-    aws_dimensions: [ClusterName, ServiceName]
-
-  - aws_namespace: ECS/ContainerInsights
-    aws_metric_name: RunningTaskCount
     aws_dimensions: [ClusterName, ServiceName]
 
   - aws_namespace: ECS/ContainerInsights
