@@ -1,6 +1,11 @@
 ---
 
 version: 0.2
+
+env:
+  exported-variables:
+    - NGINX_AUTH_PROXY_HASH
+
 phases:
   build:
     commands:
