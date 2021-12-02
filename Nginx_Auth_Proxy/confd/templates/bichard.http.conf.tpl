@@ -171,3 +171,4 @@ location /elb-status {
     proxy_ssl_server_name on;
     proxy_ssl_verify_depth 2;
 }
+

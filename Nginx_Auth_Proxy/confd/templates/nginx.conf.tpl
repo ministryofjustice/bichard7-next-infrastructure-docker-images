@@ -49,7 +49,6 @@ http {
         ssl_ciphers                     HIGH:!aNULL:!MD5;
     
         include /etc/includes/bichard.https.conf;
-        proxy_cookie_flags ~ httponly secure samesite=strict;
     }
 
     server {
