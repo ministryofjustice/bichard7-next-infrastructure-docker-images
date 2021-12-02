@@ -19,7 +19,7 @@ file:
     filetype: file
   /config/config.yml:
     exists: true
-    size: 4689
+    size: 5170
     owner: root
     group: root
     filetype: file
