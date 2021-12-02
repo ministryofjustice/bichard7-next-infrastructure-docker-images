@@ -28,6 +28,10 @@ metrics:
     aws_dimensions: [LoadBalancer, AvailabilityZone, TargetGroup]
 
   - aws_namespace: AWS/ApplicationELB
+    aws_metric_name: HTTPCode_ELB_2XX_Count
+    aws_dimensions: [LoadBalancer, AvailabilityZone, TargetGroup]
+
+  - aws_namespace: AWS/ApplicationELB
     aws_metric_name: HTTPCode_Target_2XX_Count
     aws_dimensions: [LoadBalancer, AvailabilityZone, TargetGroup]
 
@@ -40,11 +44,11 @@ metrics:
     aws_dimensions: [LoadBalancer, AvailabilityZone, TargetGroup]
 
   - aws_namespace: AWS/ApplicationELB
-    aws_metric_name: HTTPCode_Target_4XX_Count
+    aws_metric_name: HTTPCode_ELB_4XX_Count
     aws_dimensions: [LoadBalancer, AvailabilityZone, TargetGroup]
 
   - aws_namespace: AWS/ApplicationELB
-    aws_metric_name: HTTPCode_ELB_4XX_Count
+    aws_metric_name: HTTPCode_Target_4XX_Count
     aws_dimensions: [LoadBalancer, AvailabilityZone, TargetGroup]
 
   - aws_namespace: AWS/ApplicationELB
@@ -52,7 +56,19 @@ metrics:
     aws_dimensions: [LoadBalancer, AvailabilityZone, TargetGroup]
 
   - aws_namespace: AWS/ApplicationELB
+    aws_metric_name: HTTPCode_Target_502_Count
+    aws_dimensions: [LoadBalancer, AvailabilityZone, TargetGroup]
+
+  - aws_namespace: AWS/ApplicationELB
     aws_metric_name: HTTPCode_ELB_504_Count
+    aws_dimensions: [LoadBalancer, AvailabilityZone, TargetGroup]
+
+  - aws_namespace: AWS/ApplicationELB
+    aws_metric_name: HTTPCode_Target_504_Count
+    aws_dimensions: [LoadBalancer, AvailabilityZone, TargetGroup]
+
+  - aws_namespace: AWS/ApplicationELB
+    aws_metric_name: HTTPCode_ELB_5XX_Count
     aws_dimensions: [LoadBalancer, AvailabilityZone, TargetGroup]
 
   - aws_namespace: AWS/ApplicationELB
