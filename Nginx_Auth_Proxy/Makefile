@@ -31,7 +31,7 @@ run-test-nginx:
 		-e CJSE_NGINX_STATICSERVICE_DOMAIN=172.17.0.1:60004 \
 		-e CJSE_NGINX_PROXYSSLVERIFY="off" \
 		-p 6443:443 -d \
-		-p 8080:80 -d \
+		-p 7080:80 -d \
 		--name test-nginx-server \
 		$(image)
 
@@ -45,6 +45,6 @@ wait-for-nginx:
 
 .PHONY: unit-test-nginx
 unit-test-nginx: build-test run-test-nginx wait-for-nginx
-	docker run --rm --name nginx-auth-test -p 60001:60001 -p 60002:60002 -p 60003:60003 -p 60004:60004 -e TEST_HOSTS=https://172.17.0.1:6443,http://172.17.0.1:8080 nginx-auth-test
+	docker run --rm --name nginx-auth-test -p 60001:60001 -p 60002:60002 -p 60003:60003 -p 60004:60004 -e TEST_HOSTS=https://172.17.0.1:6443,http://172.17.0.1:7080 nginx-auth-test
 	docker rm -f test-nginx-server
 

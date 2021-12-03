@@ -19,7 +19,10 @@ const mockResponse = (status, body) => (ctx) => {
   ctx.body = body;
 };
 
-const TEST_HOSTS = process.env.TEST_HOSTS.split(",") || ["https://localhost:6443", "http://localhost:8080"];
+const TEST_HOSTS = process.env.TEST_HOSTS.split(",") || [
+  "https://localhost:6443",
+  "http://localhost:8080",
+];
 
 describe("Testing Nginx config", () => {
   let servers;
@@ -67,11 +70,14 @@ describe("Testing Nginx config", () => {
 
   const defaultHeaders = {
     "Cache-Control": "no-store, no-cache, must-revalidate",
-    "Strict-Transport-Security": "max-age=31536000; includeSubDomains",
     "X-Frame-Options": "DENY",
     "X-Content-Type-Options": "nosniff",
     "X-XSS-Protection": "1; mode=block",
     "Referrer-Policy": "origin",
+  };
+
+  const httpsHeaders = {
+    "Strict-Transport-Security": "max-age=31536000; includeSubDomains",
   };
 
   TEST_HOSTS.forEach((testHost) => {
@@ -89,7 +95,6 @@ describe("Testing Nginx config", () => {
 
           const res = await axios.get(`${testHost}${path}`, axiosConfig);
 
-
           expect(res.status).toEqual(200);
           expect(mock).toHaveBeenCalledTimes(1);
 
@@ -101,12 +106,19 @@ describe("Testing Nginx config", () => {
         "It should forward cookie from $path with auth: $auth",
         async ({ path, route, auth, dest }) => {
           servers.user.get("/users/api/auth").mockImplementationOnce((ctx) => {
-            ctx.cookies.set(".AUTH", "Realistic", { sameSite: true, secure: false });
+            ctx.cookies.set(".AUTH", "Realistic", {
+              sameSite: true,
+              secure: false,
+            });
             ctx.status = 200;
           });
           const destPath = dest || path;
 
-          const expectedAuthCookies = [`.AUTH=Realistic; path=/; samesite=strict; httponly${protocol === 'https' ? '; secure' : ''}`]
+          const expectedAuthCookies = [
+            `.AUTH=Realistic; path=/; samesite=strict; httponly${
+              protocol === "https" ? "; secure" : ""
+            }`,
+          ];
 
           const mock = servers[route]
             .get(destPath)
@@ -135,10 +147,7 @@ describe("Testing Nginx config", () => {
             .get("/bichard-ui/x")
             .mockImplementationOnce(mockStatus(status));
 
-          const res = await axios.get(
-            `${testHost}/bichard-ui/x`,
-            axiosConfig
-          );
+          const res = await axios.get(`${testHost}/bichard-ui/x`, axiosConfig);
 
           expect(res.status).toEqual(status);
           expect(res.data).toEqual(errorPage);
@@ -201,7 +210,10 @@ describe("Testing Nginx config", () => {
         "It should respond with correct headers: $path",
         async ({ path, route, auth, dest }) => {
           servers.user.get("/users/api/auth").mockImplementationOnce((ctx) => {
-            ctx.cookies.set(".AUTH", "Realistic", { sameSite: true, secure: true });
+            ctx.cookies.set(".AUTH", "Realistic", {
+              sameSite: true,
+              secure: true,
+            });
             ctx.status = 200;
           });
           const destPath = dest || path;
@@ -225,7 +237,33 @@ describe("Testing Nginx config", () => {
         }
       );
 
-      
+      test.each(routes)(
+        `It should respond with correct headers for ${protocol}: $path`,
+        async ({ path, route, auth, dest }) => {
+          mockAuth();
+          const destPath = dest || path;
+          servers[route].get(destPath).mockImplementationOnce(mockStatus(200));
+          const res = await axios.get(`${testHost}${path}`, axiosConfig);
+
+          const actualHeaders = Object.keys(res.headers).reduce(
+            (headers, headerName) => {
+              headers[headerName.toLowerCase()] = res.headers[headerName];
+              return headers;
+            },
+            {}
+          );
+          Object.keys(httpsHeaders).forEach((header) => {
+            if (protocol === "https") {
+              expect(actualHeaders[header.toLowerCase()]).toEqual(
+                httpsHeaders[header]
+              );
+            } else {
+              expect(actualHeaders[header.toLowerCase()]).toBeUndefined();
+            }
+          });
+        }
+      );
+
       it("should redirect from / with a relative URL", async () => {
         const res = await axios.get(`${testHost}/`, {
           ...axiosConfig,
