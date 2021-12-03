@@ -41,15 +41,29 @@ http {
         '"useragent": "$http_user_agent"'
     '}';
 
+{{ if not ( exists "/cjse/nginx/hosts/1/name" )}}
     server {
         listen                          {{ atoi (getv "/cjse/nginx/port/https" "443") }} ssl;
         ssl_certificate                 /certs/server.crt;
         ssl_certificate_key             /certs/server.key;
-        ssl_protocols                   TLSv1.2;
-        ssl_ciphers                     HIGH:!aNULL:!MD5;
-    
+
         include /etc/includes/bichard.https.conf;
     }
+{{ end }}
+
+{{range $dir := lsdir "/cjse/nginx/hosts"}}
+    {{$cert := printf "/cjse/nginx/hosts/%s/cert" $dir}}
+    {{$name := printf "/cjse/nginx/hosts/%s/name" $dir}}
+    server {
+        listen                          {{ atoi (getv "/cjse/nginx/port/https" "443") }} ssl;
+        ssl_certificate                 {{ getv $cert "/certs/server" }}.crt;
+        ssl_certificate_key             {{ getv $cert "/certs/server" }}.key;
+        
+        server_name {{ getv $name "localhost" }}
+
+        include /etc/includes/bichard.https.conf;
+    }
+{{end}}
 
     server {
         listen        {{ atoi (getv "/cjse/nginx/port/http" "80") }} default_server;
