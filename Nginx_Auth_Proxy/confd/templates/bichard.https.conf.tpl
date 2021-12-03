@@ -17,7 +17,7 @@ set $staticservice "{{ getv "/cjse/nginx/staticservice/domain" }}";
 error_page 401 = @error401;
 location @error401 {
     limit_except      GET POST PUT { deny all; }
-    include /etc/includes/without-auth-headers.conf;
+    include /etc/includes/headers.conf;
     proxy_ssl_server_name on;
     proxy_ssl_verify_depth 2;
     absolute_redirect off;
@@ -31,7 +31,8 @@ error_page 500 =500 /500;
 location ~ ^/(403|404|500)$ {
     proxy_ssl_verify  {{ getv "/cjse/nginx/proxysslverify" "on" }};
     limit_except      GET POST PUT { deny all; }
-    include /etc/includes/without-auth-headers.conf;
+    add_header  Strict-Transport-Security "max-age=31536000; includeSubDomains" always;
+    include /etc/includes/headers.conf;
     proxy_ssl_server_name on;
     proxy_ssl_verify_depth 2;
     rewrite /(.*) /users/$1;
@@ -40,7 +41,8 @@ location ~ ^/(403|404|500)$ {
 # Use API endpoint in user-service for checking authentication
 location /auth {
     limit_except      GET POST PUT { deny all; }
-    include /etc/includes/without-auth-headers.conf;
+    add_header  Strict-Transport-Security "max-age=31536000; includeSubDomains" always;
+    include /etc/includes/headers.conf;
 
     proxy_pass        https://$userservice/users/api/auth;
     proxy_ssl_verify  {{ getv "/cjse/nginx/proxysslverify" "on" }};
@@ -56,7 +58,8 @@ location /auth {
 # Proxy for landing page to Bichard
 location = / {
     limit_except GET POST PUT DELETE { deny all; }
-    include /etc/includes/with-auth-headers.conf;
+    add_header  Strict-Transport-Security "max-age=31536000; includeSubDomains" always;
+    include /etc/includes/headers.conf;
     absolute_redirect off;
     return 302 /users;
 }
@@ -66,7 +69,8 @@ location /bichard-ui {
     limit_except GET POST PUT DELETE { deny all; }
     auth_request /auth;
     auth_request_set $auth_cookie $upstream_http_set_cookie;
-    include /etc/includes/with-auth-headers.conf;
+    add_header  Strict-Transport-Security "max-age=31536000; includeSubDomains" always;
+    include /etc/includes/headers.conf;
     add_header Set-Cookie "$auth_cookie; secure";
 
     proxy_pass        https://$app;
@@ -81,6 +85,7 @@ location /audit-logging {
     limit_except GET POST PUT DELETE { deny all; }
     auth_request /auth;
     auth_request_set $auth_cookie $upstream_http_set_cookie;
+    add_header  Strict-Transport-Security "max-age=31536000; includeSubDomains" always;
     include /etc/includes/audit-logging-headers.conf;
     add_header Set-Cookie "$auth_cookie; secure";
 
@@ -98,7 +103,8 @@ location /users {
     limit_except GET POST PUT DELETE { deny all; }
     auth_request /auth;
     auth_request_set $auth_cookie $upstream_http_set_cookie;
-    include /etc/includes/with-auth-headers.conf;
+    add_header  Strict-Transport-Security "max-age=31536000; includeSubDomains" always;
+    include /etc/includes/headers.conf;
     add_header Set-Cookie "$auth_cookie; secure";
 
     proxy_pass        https://$userservice;
@@ -115,7 +121,8 @@ location /reports {
     limit_except GET { deny all; }
     auth_request /auth;
     auth_request_set $auth_cookie $upstream_http_set_cookie;
-    include /etc/includes/with-auth-headers.conf;
+    add_header  Strict-Transport-Security "max-age=31536000; includeSubDomains" always;
+    include /etc/includes/headers.conf;
     add_header Set-Cookie "$auth_cookie; secure";
 
     proxy_pass        https://$staticservice;
@@ -128,7 +135,8 @@ location /reports {
 # Proxy through to help files without auth
 location /help {
     limit_except GET { deny all; }
-    include /etc/includes/without-auth-headers.conf;
+    add_header  Strict-Transport-Security "max-age=31536000; includeSubDomains" always;
+    include /etc/includes/headers.conf;
 
     proxy_pass        https://$staticservice;
     proxy_ssl_verify  {{ getv "/cjse/nginx/proxysslverify" "on" }};
@@ -141,7 +149,8 @@ location /help {
 # Allow access to user-service login flow (and necessary assets) without authentication
 location ~ ^/users/(login|assets|_next/static|403|404|500)(.*)$ {
     limit_except GET POST PUT { deny all; }
-    include /etc/includes/without-auth-headers.conf;
+    add_header  Strict-Transport-Security "max-age=31536000; includeSubDomains" always;
+    include /etc/includes/headers.conf;
 
     proxy_pass        https://$userservice;
     proxy_ssl_verify  {{ getv "/cjse/nginx/proxysslverify" "on" }};
@@ -152,7 +161,8 @@ location ~ ^/users/(login|assets|_next/static|403|404|500)(.*)$ {
 
 # Allow access to bichard-ui health check, connectivity and static endpoints without authentication
 location ~ ^/bichard-ui/(Health|Connectivity|images|css).*$ {
-    include /etc/includes/without-auth-headers.conf;
+    add_header  Strict-Transport-Security "max-age=31536000; includeSubDomains" always;
+    include /etc/includes/headers.conf;
     proxy_pass        https://$app;
     proxy_ssl_verify  {{ getv "/cjse/nginx/proxysslverify" "on" }};
     proxy_cookie_flags ~ httponly secure samesite=strict;
@@ -161,7 +171,8 @@ location ~ ^/bichard-ui/(Health|Connectivity|images|css).*$ {
 # Healthcheck endpoint
 location /elb-status {
     limit_except GET POST { deny all; }
-    include /etc/includes/without-auth-headers.conf;
+    add_header  Strict-Transport-Security "max-age=31536000; includeSubDomains" always;
+    include /etc/includes/headers.conf;
     access_log   off;
     return       200;
     add_header   Content-Type text/plain;
