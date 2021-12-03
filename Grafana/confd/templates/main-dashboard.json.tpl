@@ -26,7 +26,7 @@
         "x": 0,
         "y": 0
       },
-      "id": 19,
+      "id": 17,
       "panels": [],
       "title": "Rate of Statuses",
       "type": "row"
@@ -48,11 +48,11 @@
               },
               {
                 "color": "#EAB839",
-                "value": 100
+                "value": 1000
               },
               {
                 "color": "red",
-                "value": 250
+                "value": 2500
               }
             ]
           }
@@ -65,7 +65,7 @@
         "x": 0,
         "y": 1
       },
-      "id": 25,
+      "id": 22,
       "options": {
         "colorMode": "value",
         "graphMode": "area",
@@ -85,7 +85,7 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "sum(aws_applicationelb_httpcode_target_2_xx_count_sample_count{})",
+          "expr": "sum(aws_applicationelb_httpcode_target_2_xx_count_sample_count{load_balancer=\"app/cjse-e2e-test-bichard-7-nginx-au/c58ca3284d27c318\"})",
           "interval": "",
           "legendFormat": "",
           "refId": "A"
@@ -110,8 +110,12 @@
                 "value": null
               },
               {
+                "color": "#EAB839",
+                "value": 500
+              },
+              {
                 "color": "red",
-                "value": 80
+                "value": 1000
               }
             ]
           }
@@ -124,7 +128,7 @@
         "x": 6,
         "y": 1
       },
-      "id": 21,
+      "id": 23,
       "options": {
         "colorMode": "value",
         "graphMode": "area",
@@ -144,7 +148,7 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "sum(aws_applicationelb_httpcode_target_3_xx_count_sample_count{})",
+          "expr": "sum(aws_applicationelb_httpcode_target_3_xx_count_sample_count{load_balancer=\"app/cjse-e2e-test-bichard-7-nginx-au/c58ca3284d27c318\"})",
           "interval": "",
           "legendFormat": "",
           "refId": "A"
@@ -174,7 +178,7 @@
               },
               {
                 "color": "red",
-                "value": 25
+                "value": 100
               }
             ]
           }
@@ -187,11 +191,11 @@
         "x": 12,
         "y": 1
       },
-      "id": 17,
+      "id": 25,
       "options": {
         "colorMode": "value",
         "graphMode": "area",
-        "justifyMode": "center",
+        "justifyMode": "auto",
         "orientation": "auto",
         "reduceOptions": {
           "calcs": [
@@ -207,9 +211,7 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "sum(aws_applicationelb_httpcode_target_4_xx_count_sum{})",
-          "format": "time_series",
-          "instant": false,
+          "expr": "sum(aws_applicationelb_httpcode_target_4_xx_count_sample_count{load_balancer=\"app/cjse-e2e-test-bichard-7-nginx-au/c58ca3284d27c318\"})",
           "interval": "",
           "legendFormat": "",
           "refId": "A"
@@ -239,7 +241,7 @@
               },
               {
                 "color": "red",
-                "value": 25
+                "value": 100
               }
             ]
           }
@@ -252,7 +254,7 @@
         "x": 18,
         "y": 1
       },
-      "id": 23,
+      "id": 27,
       "options": {
         "colorMode": "value",
         "graphMode": "area",
@@ -272,7 +274,7 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "sum(aws_applicationelb_httpcode_target_5_xx_count_sample_count{})",
+          "expr": "sum(aws_applicationelb_httpcode_target_5_xx_count_sample_count{load_balancer=\"app/cjse-e2e-test-bichard-7-nginx-au/c58ca3284d27c318\"})",
           "interval": "",
           "legendFormat": "",
           "refId": "A"
@@ -300,7 +302,7 @@
               "tooltip": false,
               "viz": false
             },
-            "lineInterpolation": "smooth",
+            "lineInterpolation": "linear",
             "lineWidth": 1,
             "pointSize": 5,
             "scaleDistribution": {
@@ -318,7 +320,7 @@
           },
           "mappings": [],
           "thresholds": {
-            "mode": "percentage",
+            "mode": "absolute",
             "steps": [
               {
                 "color": "green",
@@ -335,7 +337,7 @@
           {
             "matcher": {
               "id": "byName",
-              "options": "2XX Hits"
+              "options": "2xx Hits"
             },
             "properties": [
               {
@@ -350,7 +352,7 @@
           {
             "matcher": {
               "id": "byName",
-              "options": "3XX Hits"
+              "options": "3xx Hits"
             },
             "properties": [
               {
@@ -365,28 +367,13 @@
           {
             "matcher": {
               "id": "byName",
-              "options": "4XX Hits"
+              "options": "4xx Hits"
             },
             "properties": [
               {
                 "id": "color",
                 "value": {
                   "fixedColor": "orange",
-                  "mode": "fixed"
-                }
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "5XX Hits"
-            },
-            "properties": [
-              {
-                "id": "color",
-                "value": {
-                  "fixedColor": "dark-red",
                   "mode": "fixed"
                 }
               }
@@ -400,12 +387,10 @@
         "x": 0,
         "y": 9
       },
-      "id": 27,
+      "id": 19,
       "options": {
         "legend": {
-          "calcs": [
-            "last"
-          ],
+          "calcs": [],
           "displayMode": "list",
           "placement": "bottom"
         },
@@ -413,43 +398,40 @@
           "mode": "multi"
         }
       },
-      "pluginVersion": "8.0.5",
       "targets": [
         {
           "exemplar": true,
-          "expr": "sum(aws_applicationelb_httpcode_target_2_xx_count_sample_count{})",
-          "hide": false,
+          "expr": "sum(aws_applicationelb_httpcode_target_2_xx_count_sample_count{load_balancer=\"app/cjse-e2e-test-bichard-7-nginx-au/c58ca3284d27c318\"})",
           "interval": "",
-          "legendFormat": "2XX Hits",
-          "refId": "2XX Hits"
+          "legendFormat": "2xx Hits",
+          "refId": "A"
         },
         {
           "exemplar": true,
-          "expr": "sum(aws_applicationelb_httpcode_target_3_xx_count_sample_count{})",
+          "expr": "sum(aws_applicationelb_httpcode_target_3_xx_count_sample_count{load_balancer=\"app/cjse-e2e-test-bichard-7-nginx-au/c58ca3284d27c318\"})",
           "hide": false,
           "interval": "",
-          "legendFormat": "3XX Hits",
-          "refId": "3XX Hits"
+          "legendFormat": "3xx Hits",
+          "refId": "B"
         },
         {
           "exemplar": true,
-          "expr": "sum(aws_applicationelb_httpcode_target_4_xx_count_sample_count{})",
+          "expr": "sum(aws_applicationelb_httpcode_target_4_xx_count_sample_count{load_balancer=\"app/cjse-e2e-test-bichard-7-nginx-au/c58ca3284d27c318\"})",
           "hide": false,
           "interval": "",
-          "intervalFactor": 1,
-          "legendFormat": "4XX Hits",
-          "refId": "4XX Hits"
+          "legendFormat": "4xx Hits",
+          "refId": "C"
         },
         {
           "exemplar": true,
-          "expr": "sum(aws_applicationelb_httpcode_target_5_xx_count_sample_count{})",
+          "expr": "sum(aws_applicationelb_httpcode_target_5_xx_count_sample_count{load_balancer=\"app/cjse-e2e-test-bichard-7-nginx-au/c58ca3284d27c318\"})",
           "hide": false,
           "interval": "",
-          "legendFormat": "5XX Hits",
-          "refId": "5XX Hits"
+          "legendFormat": "5xx Hits",
+          "refId": "D"
         }
       ],
-      "title": "Status Hits",
+      "title": "Status Hits Nginx Auth",
       "type": "timeseries"
     },
     {
@@ -519,7 +501,7 @@
             "h": 6,
             "w": 11,
             "x": 0,
-            "y": 10
+            "y": 1
           },
           "id": 11,
           "options": {
@@ -597,7 +579,7 @@
             "h": 6,
             "w": 11,
             "x": 11,
-            "y": 10
+            "y": 1
           },
           "id": 2,
           "options": {
@@ -678,7 +660,7 @@
             "h": 6,
             "w": 11,
             "x": 0,
-            "y": 16
+            "y": 7
           },
           "id": 13,
           "options": {
@@ -759,7 +741,7 @@
             "h": 6,
             "w": 11,
             "x": 11,
-            "y": 16
+            "y": 7
           },
           "id": 15,
           "options": {
