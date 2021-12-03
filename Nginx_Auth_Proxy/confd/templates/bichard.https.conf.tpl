@@ -1,3 +1,6 @@
+ssl_protocols                   TLSv1.2;
+ssl_ciphers                     HIGH:!aNULL:!MD5;
+
 access_log                      /dev/stdout json;
 
 proxy_hide_header               Content-Security-Policy;
