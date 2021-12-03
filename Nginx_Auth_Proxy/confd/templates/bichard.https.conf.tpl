@@ -70,7 +70,6 @@ location /bichard-ui {
     proxy_ssl_verify  {{ getv "/cjse/nginx/proxysslverify" "on" }};
     proxy_set_header Host $http_host;
 
-    proxy_cookie_flags ~ httponly secure samesite=strict;
     proxy_intercept_errors on;
 }
 
@@ -86,7 +85,6 @@ location /audit-logging {
     proxy_ssl_verify  {{ getv "/cjse/nginx/proxysslverify" "on" }};
     proxy_set_header Host $host;
 
-    proxy_cookie_flags ~ httponly secure samesite=strict;
     proxy_ssl_server_name on;
     proxy_ssl_verify_depth 2;
     proxy_intercept_errors on;
@@ -104,7 +102,6 @@ location /users {
     proxy_ssl_verify  {{ getv "/cjse/nginx/proxysslverify" "on" }};
     proxy_set_header Host $host;
 
-    proxy_cookie_flags ~ httponly secure samesite=strict;
     proxy_ssl_server_name on;
     proxy_ssl_verify_depth 2;
     proxy_intercept_errors on;
@@ -122,7 +119,6 @@ location /reports {
     proxy_ssl_verify  {{ getv "/cjse/nginx/proxysslverify" "on" }};
     proxy_set_header Host $host;
 
-    proxy_cookie_flags ~ httponly secure samesite=strict;
     proxy_intercept_errors on;
 }
 
