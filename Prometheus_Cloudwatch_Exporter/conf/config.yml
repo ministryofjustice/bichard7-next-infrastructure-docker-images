@@ -242,4 +242,20 @@ metrics:
     aws_statistics: [Average]
     range_seconds: 172800
     period_seconds: 86400
+
+  - aws_namespace: AWS/States
+    aws_metric_name: ExecutionsFailed
+    aws_dimensions: [StateMachineArn]
+
+  - aws_namespace: AWS/States
+    aws_metric_name: ExecutionsTimedOut
+    aws_dimensions: [StateMachineArn]
+
+  - aws_namespace: AWS/States
+    aws_metric_name: ExecutionsAborted
+    aws_dimensions: [StateMachineArn]
+
+  - aws_namespace: AWS/States
+    aws_metric_name: ExecutionThrottled
+    aws_dimensions: [StateMachineArn]
 ...
