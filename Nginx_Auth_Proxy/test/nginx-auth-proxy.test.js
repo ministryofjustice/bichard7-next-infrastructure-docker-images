@@ -284,6 +284,24 @@ describe("Testing Nginx config", () => {
         expect(res.headers.location).toEqual("/users/login?redirect=/users");
         expect(authRequest).toHaveBeenCalledTimes(1);
       });
+
+      test.each(["/users/foo", "/users/login"])(
+        "should pass the x-origin header through to the user service for %s",
+        async (path) => {
+          mockAuth();
+          const userRequest = servers.user
+            .get(path)
+            .mockImplementationOnce(mockStatus(200));
+          await axios.get(`${testHost}${path}`, {
+            ...axiosConfig,
+            headers: { Host: "external.host" },
+          });
+
+          expect(
+            userRequest.mock.calls[0][0].request.header["x-origin"]
+          ).toEqual(`${protocol}://external.host`);
+        }
+      );
     });
   });
 });
