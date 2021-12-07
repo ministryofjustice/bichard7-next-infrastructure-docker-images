@@ -110,6 +110,7 @@ location /users {
     proxy_pass        https://$userservice;
     proxy_ssl_verify  {{ getv "/cjse/nginx/proxysslverify" "on" }};
     proxy_set_header Host $host;
+    proxy_set_header X-Origin https://$host;
 
     proxy_ssl_server_name on;
     proxy_ssl_verify_depth 2;
@@ -153,6 +154,7 @@ location ~ ^/users/(login|assets|_next/static|403|404|500)(.*)$ {
     include /etc/includes/headers.conf;
 
     proxy_pass        https://$userservice;
+    proxy_set_header X-Origin https://$host;
     proxy_ssl_verify  {{ getv "/cjse/nginx/proxysslverify" "on" }};
     proxy_cookie_flags ~ httponly secure samesite=strict;
     proxy_ssl_server_name on;
