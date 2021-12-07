@@ -2,13 +2,26 @@
 
 set -e
 
-if [ ! -f "/usr/local/bin/goss" ]; then
-  curl -L https://github.com/aelsabbahy/goss/releases/latest/download/goss-linux-amd64 -o /usr/local/bin/goss
-  chmod +rx /usr/local/bin/goss
-fi
-if [ ! -f "/usr/local/bin/dgoss" ]; then
-  curl -L https://github.com/aelsabbahy/goss/releases/latest/download/dgoss -o /usr/local/bin/dgoss
-  chmod +rx /usr/local/bin/dgoss
-fi
+pull_goss_binary() {
+  echo "Pulling goss binary"
+  aws s3 cp \
+    s3://"${ARTIFACT_BUCKET}"/goss/goss \
+    /usr/local/bin/goss
 
+  chmod +rx /usr/local/bin/goss
+}
+
+pull_dgoss_binary() {
+  echo "Pulling dgoss binary"
+  aws s3 cp \
+    s3://"${ARTIFACT_BUCKET}"/dgoss/dgoss \
+    /usr/local/bin/dgoss
+
+  chmod +rx /usr/local/bin/dgoss
+
+}
+
+pull_goss_binary
+export GOSS_PATH="/usr/local/bin/goss"
+pull_dgoss_binary
 GOSS_SLEEP=${GOSS_SLEEP:-15} dgoss run ${GOSS_ENV} ${DOCKER_IMAGE}
