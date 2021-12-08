@@ -14,7 +14,10 @@ filter {
     }
 
     if [message] =~ /^{.*}$/ {
-        json { source => message }
+        json {
+          skip_on_invalid_json => true
+          source => message
+        }
     }
     else {
       grok {
