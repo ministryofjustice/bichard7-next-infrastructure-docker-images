@@ -1,0 +1,8 @@
+[template]
+src = "blackbox-endpoint-prober.json.tpl"
+dest = "/opt/grafana/dashboards/blackbox-endpoint-prober.json"
+keys = [
+    "/cjse"
+]
+gid = 998
+uid = 999
