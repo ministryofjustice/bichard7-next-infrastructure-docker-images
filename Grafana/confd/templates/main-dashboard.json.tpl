@@ -1087,7 +1087,7 @@
           "exemplar": true,
           "expr": "aws_states_executions_failed_sum",
           "interval": "",
-          "legendFormat": "{{state_machine_arn }}",
+          "legendFormat": "{{"{{"}}state_machine_arn{{"}}"}}",
           "refId": "A"
         }
       ],
@@ -1169,7 +1169,7 @@
           "exemplar": true,
           "expr": "aws_states_executions_timed_out_sum",
           "interval": "",
-          "legendFormat": "{{state_machine_arn }}",
+          "legendFormat": "{{"{{"}}state_machine_arn{{"}}"}}",
           "refId": "A"
         }
       ],
@@ -1251,7 +1251,7 @@
           "exemplar": true,
           "expr": "aws_states_executions_aborted_sum",
           "interval": "",
-          "legendFormat": "{{state_machine_arn }}",
+          "legendFormat": "{{"{{"}}state_machine_arn{{"}}"}}",
           "refId": "A"
         }
       ],
@@ -1333,7 +1333,7 @@
           "exemplar": true,
           "expr": "aws_states_execution_throttled_sum",
           "interval": "",
-          "legendFormat": "{{state_machine_arn }}",
+          "legendFormat": "{{"{{"}}state_machine_arn{{"}}"}}",
           "refId": "A"
         }
       ],
