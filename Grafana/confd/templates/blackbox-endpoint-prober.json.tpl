@@ -232,7 +232,7 @@
           "format": "time_series",
           "interval": "",
           "intervalFactor": 1,
-          "legendFormat": ""{{"{{instance}}"}}"",
+          "legendFormat": "{{"{{"}}instance{{"}}"}}",
           "refId": "A"
         }
       ],
@@ -368,7 +368,7 @@
           "format": "time_series",
           "interval": "",
           "intervalFactor": 1,
-          "legendFormat": ""{{"{{instance}}"}}"",
+          "legendFormat": "{{"{{"}}instance{{"}}"}}",
           "refId": "A"
         }
       ],
@@ -504,7 +504,7 @@
           "format": "time_series",
           "interval": "",
           "intervalFactor": 1,
-          "legendFormat": ""{{"{{instance}}"}}"",
+          "legendFormat": "{{"{{"}}instance{{"}}"}}",
           "refId": "A"
         }
       ],
@@ -640,7 +640,7 @@
           "format": "time_series",
           "interval": "",
           "intervalFactor": 1,
-          "legendFormat": ""{{"{{instance}}"}}"",
+          "legendFormat": "{{"{{"}}instance{{"}}"}}",
           "refId": "A"
         }
       ],
@@ -775,7 +775,7 @@
           "format": "time_series",
           "interval": "",
           "intervalFactor": 1,
-          "legendFormat": ""{{"{{instance}}"}}"",
+          "legendFormat": "{{"{{"}}instance{{"}}"}}",
           "refId": "A"
         }
       ],
@@ -911,7 +911,7 @@
           "format": "time_series",
           "interval": "",
           "intervalFactor": 1,
-          "legendFormat": ""{{"{{instance}}"}}"",
+          "legendFormat": "{{"{{"}}instance{{"}}"}}",
           "refId": "A"
         }
       ],
@@ -976,7 +976,7 @@
           "expr": "probe_dns_lookup_time_seconds",
           "format": "time_series",
           "intervalFactor": 1,
-          "legendFormat": ""{{"{{instance}}"}}"",
+          "legendFormat": "{{"{{"}}instance{{"}}"}}",
           "refId": "A"
         }
       ],
@@ -1089,7 +1089,7 @@
           "format": "table",
           "instant": true,
           "intervalFactor": 1,
-          "legendFormat": ""{{"{{instance}}"}}"",
+          "legendFormat": "{{"{{"}}instance{{"}}"}}",
           "refId": "A"
         }
       ],
@@ -1145,7 +1145,7 @@
           "expr": "probe_duration_seconds",
           "format": "time_series",
           "intervalFactor": 1,
-          "legendFormat": ""{{"{{instance}}"}}"",
+          "legendFormat": "{{"{{"}}instance{{"}}"}}",
           "refId": "A"
         }
       ],
