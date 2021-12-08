@@ -1,0 +1,6 @@
+[template]
+src = "bichard.https.conf.tpl"
+dest = "/etc/includes/bichard.https.conf"
+keys = [
+    "/cjse/nginx"
+]
