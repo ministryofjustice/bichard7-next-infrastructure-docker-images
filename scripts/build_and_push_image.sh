@@ -15,7 +15,8 @@ aws ecr get-login-password --region eu-west-2 | docker login \
 
 IMAGE_HASH=$(aws ecr describe-images \
   --repository-name ${SOURCE_REPOSITORY_NAME}\
-  --query 'to_string(sort_by(imageDetails,& imagePushedAt)[-1].imageDigest)'
+  --query 'to_string(sort_by(imageDetails,& imagePushedAt)[-1].imageDigest)' |
+  head -n 1
 )
 
 IMAGE_HASH=$(echo $IMAGE_HASH | tr -d '"')
