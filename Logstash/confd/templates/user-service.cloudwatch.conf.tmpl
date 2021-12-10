@@ -11,38 +11,13 @@ filter {
   mutate{
       replace => [ "message", "%{message}" ]
       gsub => [ 'message','\n','']
+      gsub => [ 'message','\"\"([^,])','"\1'] # nginx logs were malformed with an extra " on the realip key
   }
 
-  if [message] =~ /^{.*}$/ {
-    json { 
-      skip_on_invalid_json => true 
-      source => message
-      }
-  }
-  else {
-    grok {
-        match => { "message" => ["%{IPORHOST:[nginx][access][remote_ip]} - %{DATA:[nginx][access][user_name]} \[%{HTTPDATE:[nginx][access][time]}\] \"%{WORD:[nginx][access][method]} %{DATA:[nginx][access][url]} HTTP/%{NUMBER:[nginx][access][http_version]}\" %{NUMBER:[nginx][access][response_code]} %{NUMBER:[nginx][access][body_sent][bytes]} \"%{DATA:[nginx][access][referrer]}\" \"%{DATA:[nginx][access][agent]}\""] }
-        remove_field => "message"
+  json { 
+    source => message
+    tag_on_failure => ['_jsonparsefailure']
     }
-    if ![read_timestamp] {
-      mutate {
-          add_field => { "read_timestamp" => "%{@timestamp}" }
-      }
-    }
-    date {
-        match => [ "[nginx][access][time]", "dd/MMM/YYYY:H:m:s Z" ]
-        remove_field => "[nginx][access][time]"
-    }
-    useragent {
-        source => "[nginx][access][agent]"
-        target => "[nginx][access][user_agent]"
-        remove_field => "[nginx][access][agent]"
-     }
-    geoip {
-        source => "[nginx][access][remote_ip]"
-        target => "[nginx][access][geoip]"
-    }
-  }
 }
 
 output {

@@ -16,12 +16,20 @@ AWS_SECURITY_TOKEN=
 Set the `CJSE_ENVIRONMENT` variable to the name of the environment you want to pull
 data from.
 
+run:
+
+`make build`
+
 ### Running against a local ES to develop/debug grok filters
 
 Delete the `CJSE_LOGSTASH_ES_USERNAME` and `CJSE_LOGSTASH_ES_PASSWORD` env vars from
 goss.env
 
-run docker-compose up, bootstrapping the first time will take about 5 minutes. 
+run: 
+
+- `docker-compose up`
+
+bootstrapping the first time will take about 5 minutes. 
 You can then docker exec into the `logstash` container and modify the relevant .conf 
 file. Logstash will reload automatically if they have changed.
 
@@ -40,8 +48,11 @@ Connect to the vpn
 Now get the ES endpoint from AWS and set `CJSE_LOGSTASH_ES_DOMAIN` to point to it, remember the https and to suffix it with :443
 
 Update the CJSE_ENVIRONMENT variable to point to the correct environment, then finally get the 
-`CJSE_LOGSTASH_ES_USERNAME` and `CJSE_LOGSTASH_ES_PASSWORD` values from SSM. Once this is all set, 
-docker-compose up logstash to start just that container.
+`CJSE_LOGSTASH_ES_USERNAME` and `CJSE_LOGSTASH_ES_PASSWORD` values from SSM.
+
+run:
+
+- `docker-compose up logstash`
 
 #### Developing grok filters
 
