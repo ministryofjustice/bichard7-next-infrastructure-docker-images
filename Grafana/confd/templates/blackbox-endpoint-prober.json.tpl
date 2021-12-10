@@ -12,11 +12,10 @@
       }
     ]
   },
-  "editable": true,
   "description": "Quick overview of values from blackbox exporters",
+  "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
-  "id": null,
   "links": [],
   "panels": [
     {
@@ -598,6 +597,139 @@
     },
     {
       "alert": {
+        "alertRuleTags": {},
+        "conditions": [
+          {
+            "evaluator": {
+              "params": [
+                1
+              ],
+              "type": "lt"
+            },
+            "operator": {
+              "type": "and"
+            },
+            "query": {
+              "params": [
+                "A",
+                "5m",
+                "now"
+              ]
+            },
+            "reducer": {
+              "params": [],
+              "type": "avg"
+            },
+            "type": "query"
+          }
+        ],
+        "executionErrorState": "alerting",
+        "for": "5m",
+        "frequency": "1m",
+        "handler": 1,
+        "message": "Bichard Backend endpoint probe is not responding",
+        "name": "Bichard Backend(Up/Down) - Historic alert",
+        "noDataState": "keep_state",
+        "notifications": []
+      },
+      "datasource": null,
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisLabel": "",
+            "axisPlacement": "hidden",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "stepAfter",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "never",
+            "spanNulls": true,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "line+area"
+            }
+          },
+          "decimals": 0,
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "red",
+                "value": null
+              },
+              {
+                "color": "transparent",
+                "value": 0
+              }
+            ]
+          },
+          "unit": "short"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 14,
+        "x": 10,
+        "y": 9
+      },
+      "id": 16,
+      "links": [],
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "table",
+          "placement": "right"
+        },
+        "tooltip": {
+          "mode": "single"
+        }
+      },
+      "pluginVersion": "8.0.5",
+      "targets": [
+        {
+          "exemplar": true,
+          "expr": "probe_success{instance=\"https://bichard-backend.{{getv "/cjse/infra/domain" "cjse.org"}}/bichard-ui/Health\"}",
+          "format": "time_series",
+          "interval": "",
+          "intervalFactor": 1,
+          "legendFormat": "{{"{{"}}instance{{"}}"}}",
+          "refId": "A"
+        }
+      ],
+      "thresholds": [
+        {
+          "colorMode": "critical",
+          "op": "lt",
+          "value": 1,
+          "visible": true
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "Bichard Backend(Up/Down) - Historic",
+      "type": "timeseries"
+    },
+    {
+      "alert": {
         "alertRuleTags": {
           "service": "ElasticSearch"
         },
@@ -692,7 +824,7 @@
         "h": 3,
         "w": 14,
         "x": 10,
-        "y": 9
+        "y": 12
       },
       "id": 11,
       "links": [],
@@ -827,7 +959,7 @@
         "h": 3,
         "w": 14,
         "x": 10,
-        "y": 12
+        "y": 15
       },
       "id": 12,
       "links": [],
@@ -962,7 +1094,7 @@
         "h": 3,
         "w": 14,
         "x": 10,
-        "y": 15
+        "y": 18
       },
       "id": 13,
       "links": [],
@@ -1013,7 +1145,7 @@
         "h": 7,
         "w": 12,
         "x": 0,
-        "y": 18
+        "y": 21
       },
       "hiddenSeries": false,
       "id": 15,
@@ -1191,7 +1323,7 @@
         "h": 7,
         "w": 12,
         "x": 12,
-        "y": 18
+        "y": 21
       },
       "id": 2,
       "links": [],
@@ -1231,6 +1363,7 @@
       "type": "timeseries"
     }
   ],
+  "refresh": "",
   "schemaVersion": 30,
   "style": "dark",
   "tags": [
@@ -1248,6 +1381,5 @@
   "timezone": "",
   "title": "Bichard7 Endpoint Statuses",
   "uid": "L4BnVlcnz",
-  "version": 2
-
+  "version": 145
 }
