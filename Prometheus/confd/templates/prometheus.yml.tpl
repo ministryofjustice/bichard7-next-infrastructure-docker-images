@@ -37,7 +37,6 @@ scrape_configs:
     static_configs:
     - targets:
         - https://bichard-web.{{getv "/cjse/fqdn/suffix" "cjse.org"}}/bichard-ui/Health
-        - https://bichard-web.{{getv "/cjse/fqdn/suffix" "cjse.org"}}/bichard-ui/Connectivity
         - https://bichard-backend.{{getv "/cjse/fqdn/suffix" "cjse.org"}}/bichard-ui/Connectivity
         - https://audit.{{getv "/cjse/fqdn/suffix" "cjse.org"}}/audit-logging/api/status
         - https://grafana.{{getv "/cjse/fqdn/suffix" "cjse.org"}}
