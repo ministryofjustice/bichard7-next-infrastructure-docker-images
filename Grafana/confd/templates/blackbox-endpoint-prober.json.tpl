@@ -707,7 +707,7 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "probe_success{instance=\"https://bichard-backend.{{getv "/cjse/infra/domain" "cjse.org"}}/bichard-ui/Health\"}",
+          "expr": "probe_success{instance=\"https://bichard-backend.{{getv "/cjse/infra/domain" "cjse.org"}}/bichard-ui/Connectivity\"}",
           "format": "time_series",
           "interval": "",
           "intervalFactor": 1,
