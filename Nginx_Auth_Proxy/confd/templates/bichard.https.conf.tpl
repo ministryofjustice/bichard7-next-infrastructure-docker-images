@@ -170,6 +170,11 @@ location ~ ^/bichard-ui/(Health|Connectivity|images|css).*$ {
     proxy_cookie_flags ~ httponly secure samesite=strict;
 }
 
+location /bichard-ui/login.jsp {
+    absolute_redirect off;
+    return 301 /;
+}
+
 # Healthcheck endpoint
 location /elb-status {
     limit_except GET POST { deny all; }
