@@ -21,7 +21,7 @@ const mockResponse = (status, body) => (ctx) => {
 
 const TEST_HOSTS = process.env.TEST_HOSTS.split(",") || [
   "https://localhost:6443",
-  "http://localhost:8080",
+  "http://localhost:7080",
 ];
 
 describe("Testing Nginx config", () => {
@@ -283,6 +283,15 @@ describe("Testing Nginx config", () => {
         });
         expect(res.headers.location).toEqual("/users/login?redirect=/users");
         expect(authRequest).toHaveBeenCalledTimes(1);
+      });
+
+      it(`should redirect the old Bichard login URL to the root`, async () => {
+        const res = await axios.get(`${testHost}/bichard-ui/login.jsp`, {
+          ...axiosConfig,
+          maxRedirects: 0,
+        });
+        expect(res.status).toEqual(301);
+        expect(res.headers.location).toEqual("/");
       });
 
       test.each(["/users/foo", "/users/login"])(
