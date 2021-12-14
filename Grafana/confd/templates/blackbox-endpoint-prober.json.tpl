@@ -114,8 +114,8 @@
     {
       "alert": {
         "alertRuleTags": {
-          "service": "Grafana",
-          "severity": "critical"
+          "service": "Alert Manager",
+          "severity": "warning"
         },
         "conditions": [
           {
@@ -205,7 +205,7 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 3,
+        "h": 4,
         "w": 14,
         "x": 10,
         "y": 0
@@ -230,7 +230,7 @@
           "format": "time_series",
           "interval": "",
           "intervalFactor": 1,
-          "legendFormat": "{{"{{"}}instance{{"}}"}}",
+          "legendFormat": ""{{"{{"}}instance{{"}}"}}"",
           "refId": "A"
         }
       ],
@@ -250,7 +250,8 @@
     {
       "alert": {
         "alertRuleTags": {
-          "service": "Alert Manager"
+          "service": "Alert Manager",
+          "severity": "critical"
         },
         "conditions": [
           {
@@ -340,10 +341,10 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 3,
+        "h": 4,
         "w": 14,
         "x": 10,
-        "y": 3
+        "y": 4
       },
       "id": 9,
       "links": [],
@@ -365,7 +366,7 @@
           "format": "time_series",
           "interval": "",
           "intervalFactor": 1,
-          "legendFormat": "{{"{{"}}instance{{"}}"}}",
+          "legendFormat": ""{{"{{"}}instance{{"}}"}}"",
           "refId": "A"
         }
       ],
@@ -385,7 +386,8 @@
     {
       "alert": {
         "alertRuleTags": {
-          "service": "Bichard Web"
+          "service": "Bichard Web",
+          "severity": "critical"
         },
         "conditions": [
           {
@@ -475,10 +477,10 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 3,
+        "h": 4,
         "w": 14,
         "x": 10,
-        "y": 6
+        "y": 8
       },
       "id": 10,
       "links": [],
@@ -500,7 +502,7 @@
           "format": "time_series",
           "interval": "",
           "intervalFactor": 1,
-          "legendFormat": "{{"{{"}}instance{{"}}"}}",
+          "legendFormat": ""{{"{{"}}instance{{"}}"}}"",
           "refId": "A"
         }
       ],
@@ -587,7 +589,7 @@
           "instant": true,
           "interval": "",
           "intervalFactor": 1,
-          "legendFormat": "{{"{{"}}instance{{"}}"}}",
+          "legendFormat": ""{{"{{"}}instance{{"}}"}}"",
           "refId": "A"
         }
       ],
@@ -597,7 +599,10 @@
     },
     {
       "alert": {
-        "alertRuleTags": {},
+        "alertRuleTags": {
+          "service": "Bichard Backend",
+          "severity": "critical"
+        },
         "conditions": [
           {
             "evaluator": {
@@ -686,10 +691,10 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 3,
+        "h": 4,
         "w": 14,
         "x": 10,
-        "y": 9
+        "y": 12
       },
       "id": 16,
       "links": [],
@@ -707,11 +712,11 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "probe_success{instance=\"https://bichard-backend.{{getv "/cjse/infra/domain" "cjse.org"}}/bichard-ui/Health\"}",
+          "expr": "probe_success{instance=\"https://bichard-backend.{{getv "/cjse/infra/domain" "cjse.org"}}/bichard-ui/Connectivity\"}",
           "format": "time_series",
           "interval": "",
           "intervalFactor": 1,
-          "legendFormat": "{{"{{"}}instance{{"}}"}}",
+          "legendFormat": ""{{"{{"}}instance{{"}}"}}"",
           "refId": "A"
         }
       ],
@@ -731,7 +736,8 @@
     {
       "alert": {
         "alertRuleTags": {
-          "service": "ElasticSearch"
+          "service": "ElasticSearch",
+          "severity": "warning"
         },
         "conditions": [
           {
@@ -821,10 +827,10 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 3,
+        "h": 4,
         "w": 14,
         "x": 10,
-        "y": 12
+        "y": 16
       },
       "id": 11,
       "links": [],
@@ -846,7 +852,7 @@
           "format": "time_series",
           "interval": "",
           "intervalFactor": 1,
-          "legendFormat": "{{"{{"}}instance{{"}}"}}",
+          "legendFormat": ""{{"{{"}}instance{{"}}"}}"",
           "refId": "A"
         }
       ],
@@ -864,9 +870,103 @@
       "type": "timeseries"
     },
     {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": null,
+      "fill": 1,
+      "fillGradient": 0,
+      "gridPos": {
+        "h": 10,
+        "w": 10,
+        "x": 0,
+        "y": 18
+      },
+      "hiddenSeries": false,
+      "id": 15,
+      "legend": {
+        "alignAsTable": true,
+        "avg": false,
+        "current": false,
+        "max": false,
+        "min": false,
+        "rightSide": true,
+        "show": true,
+        "total": false,
+        "values": false
+      },
+      "lines": true,
+      "linewidth": 1,
+      "links": [],
+      "nullPointMode": "null",
+      "options": {
+        "alertThreshold": true
+      },
+      "percentage": false,
+      "pluginVersion": "8.0.5",
+      "pointradius": 5,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "expr": "probe_duration_seconds",
+          "format": "time_series",
+          "intervalFactor": 1,
+          "legendFormat": ""{{"{{"}}instance{{"}}"}}"",
+          "refId": "A"
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "Probe Duration",
+      "tooltip": {
+        "shared": true,
+        "sort": 2,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        },
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
       "alert": {
         "alertRuleTags": {
-          "service": "grafana"
+          "service": "grafana",
+          "severity": "warning"
         },
         "conditions": [
           {
@@ -956,10 +1056,10 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 3,
+        "h": 4,
         "w": 14,
         "x": 10,
-        "y": 15
+        "y": 20
       },
       "id": 12,
       "links": [],
@@ -981,7 +1081,7 @@
           "format": "time_series",
           "interval": "",
           "intervalFactor": 1,
-          "legendFormat": "{{"{{"}}instance{{"}}"}}",
+          "legendFormat": ""{{"{{"}}instance{{"}}"}}"",
           "refId": "A"
         }
       ],
@@ -1001,7 +1101,8 @@
     {
       "alert": {
         "alertRuleTags": {
-          "service": "Prometheus"
+          "service": "Prometheus",
+          "severity": "warning"
         },
         "conditions": [
           {
@@ -1091,10 +1192,10 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 3,
+        "h": 4,
         "w": 14,
         "x": 10,
-        "y": 18
+        "y": 24
       },
       "id": 13,
       "links": [],
@@ -1116,7 +1217,7 @@
           "format": "time_series",
           "interval": "",
           "intervalFactor": 1,
-          "legendFormat": "{{"{{"}}instance{{"}}"}}",
+          "legendFormat": ""{{"{{"}}instance{{"}}"}}"",
           "refId": "A"
         }
       ],
@@ -1131,235 +1232,6 @@
       "timeFrom": null,
       "timeShift": null,
       "title": "Prometheus (Up/Down) - Historic",
-      "type": "timeseries"
-    },
-    {
-      "aliasColors": {},
-      "bars": false,
-      "dashLength": 10,
-      "dashes": false,
-      "datasource": null,
-      "fill": 1,
-      "fillGradient": 0,
-      "gridPos": {
-        "h": 7,
-        "w": 12,
-        "x": 0,
-        "y": 21
-      },
-      "hiddenSeries": false,
-      "id": 15,
-      "legend": {
-        "alignAsTable": true,
-        "avg": false,
-        "current": false,
-        "max": false,
-        "min": false,
-        "rightSide": true,
-        "show": true,
-        "total": false,
-        "values": false
-      },
-      "lines": true,
-      "linewidth": 1,
-      "links": [],
-      "nullPointMode": "null",
-      "options": {
-        "alertThreshold": true
-      },
-      "percentage": false,
-      "pluginVersion": "8.0.5",
-      "pointradius": 5,
-      "points": false,
-      "renderer": "flot",
-      "seriesOverrides": [],
-      "spaceLength": 10,
-      "stack": false,
-      "steppedLine": false,
-      "targets": [
-        {
-          "expr": "probe_duration_seconds",
-          "format": "time_series",
-          "intervalFactor": 1,
-          "legendFormat": "{{"{{"}}instance{{"}}"}}",
-          "refId": "A"
-        }
-      ],
-      "thresholds": [],
-      "timeFrom": null,
-      "timeRegions": [],
-      "timeShift": null,
-      "title": "Probe Duration",
-      "tooltip": {
-        "shared": true,
-        "sort": 2,
-        "value_type": "individual"
-      },
-      "type": "graph",
-      "xaxis": {
-        "buckets": null,
-        "mode": "time",
-        "name": null,
-        "show": true,
-        "values": []
-      },
-      "yaxes": [
-        {
-          "format": "short",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": true
-        },
-        {
-          "format": "short",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": true
-        }
-      ],
-      "yaxis": {
-        "align": false,
-        "alignLevel": null
-      }
-    },
-    {
-      "alert": {
-        "alertRuleTags": {
-          "service": "{{"{{"}}instance{{"}}"}}",
-          "severity": "critical"
-        },
-        "conditions": [
-          {
-            "evaluator": {
-              "params": [
-                1
-              ],
-              "type": "lt"
-            },
-            "operator": {
-              "type": "and"
-            },
-            "query": {
-              "params": [
-                "A",
-                "5m",
-                "now"
-              ]
-            },
-            "reducer": {
-              "params": [],
-              "type": "avg"
-            },
-            "type": "query"
-          }
-        ],
-        "executionErrorState": "alerting",
-        "for": "3m",
-        "frequency": "1m",
-        "handler": 1,
-        "message": "Endpoint probe is not responding",
-        "name": "Endpoint Probes Down",
-        "noDataState": "keep_state",
-        "notifications": []
-      },
-      "datasource": null,
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "palette-classic"
-          },
-          "custom": {
-            "axisLabel": "",
-            "axisPlacement": "hidden",
-            "barAlignment": 0,
-            "drawStyle": "line",
-            "fillOpacity": 0,
-            "gradientMode": "none",
-            "hideFrom": {
-              "legend": false,
-              "tooltip": false,
-              "viz": false
-            },
-            "lineInterpolation": "stepAfter",
-            "lineWidth": 1,
-            "pointSize": 5,
-            "scaleDistribution": {
-              "type": "linear"
-            },
-            "showPoints": "never",
-            "spanNulls": true,
-            "stacking": {
-              "group": "A",
-              "mode": "none"
-            },
-            "thresholdsStyle": {
-              "mode": "line+area"
-            }
-          },
-          "decimals": 0,
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "red",
-                "value": null
-              },
-              {
-                "color": "transparent",
-                "value": 0
-              }
-            ]
-          },
-          "unit": "short"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 7,
-        "w": 12,
-        "x": 12,
-        "y": 21
-      },
-      "id": 2,
-      "links": [],
-      "options": {
-        "legend": {
-          "calcs": [],
-          "displayMode": "table",
-          "placement": "right"
-        },
-        "tooltip": {
-          "mode": "single"
-        }
-      },
-      "pluginVersion": "8.0.5",
-      "targets": [
-        {
-          "exemplar": true,
-          "expr": "probe_success",
-          "format": "time_series",
-          "interval": "",
-          "intervalFactor": 1,
-          "legendFormat": "{{"{{"}}instance{{"}}"}}",
-          "refId": "A"
-        }
-      ],
-      "thresholds": [
-        {
-          "colorMode": "critical",
-          "op": "lt",
-          "value": 1,
-          "visible": true
-        }
-      ],
-      "timeFrom": null,
-      "timeShift": null,
-      "title": "Endpoint Probes (Up/Down) - Historic",
       "type": "timeseries"
     }
   ],
@@ -1381,5 +1253,5 @@
   "timezone": "",
   "title": "Bichard7 Endpoint Statuses",
   "uid": "L4BnVlcnz",
-  "version": 145
+  "version": 214
 }
