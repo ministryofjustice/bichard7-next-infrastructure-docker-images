@@ -10,6 +10,17 @@ modules:
       fail_if_not_ssl: true
       preferred_ip_protocol: "ip4"
       ip_protocol_fallback: false
+  bichard_connectivity:
+    prober: http
+    http:
+      valid_status_codes:
+        - 200
+        - 301
+        - 401
+        - 503
+      fail_if_not_ssl: true
+      preferred_ip_protocol: "ip4"
+      ip_protocol_fallback: false
   http_auth_required:
     prober: http
     http:
