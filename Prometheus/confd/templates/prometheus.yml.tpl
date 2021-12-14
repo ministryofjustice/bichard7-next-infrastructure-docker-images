@@ -36,7 +36,6 @@ scrape_configs:
         replacement: {{getv "/cjse/prometheus/blackbox/exporter/fqdn" "localhost"}}:9116
     static_configs:
     - targets:
-        - https://bichard-web.{{getv "/cjse/fqdn/suffix" "cjse.org"}}/bichard-ui/Health
         - https://bichard-web.{{getv "/cjse/fqdn/suffix" "cjse.org"}}/bichard-ui/Connectivity
         - https://bichard-backend.{{getv "/cjse/fqdn/suffix" "cjse.org"}}/bichard-ui/Connectivity
         - https://audit.{{getv "/cjse/fqdn/suffix" "cjse.org"}}/audit-logging/api/status
