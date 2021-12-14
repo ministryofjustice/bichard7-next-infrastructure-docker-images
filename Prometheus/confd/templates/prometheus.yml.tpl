@@ -36,14 +36,32 @@ scrape_configs:
         replacement: {{getv "/cjse/prometheus/blackbox/exporter/fqdn" "localhost"}}:9116
     static_configs:
     - targets:
-        - https://bichard-web.{{getv "/cjse/fqdn/suffix" "cjse.org"}}/bichard-ui/Health
-        - https://bichard-web.{{getv "/cjse/fqdn/suffix" "cjse.org"}}/bichard-ui/Connectivity
-        - https://bichard-backend.{{getv "/cjse/fqdn/suffix" "cjse.org"}}/bichard-ui/Connectivity
         - https://audit.{{getv "/cjse/fqdn/suffix" "cjse.org"}}/audit-logging/api/status
         - https://grafana.{{getv "/cjse/fqdn/suffix" "cjse.org"}}
         # This url will require us to set an X-ORIGIN header
         # See https://github.com/prometheus/blackbox_exporter/blob/master/example.yml#L10
         # - https://users.{{getv "/cjse/fqdn/suffix" "cjse.org"}}/users/login
+  - job_name: 'bichard_connectivity'
+    metrics_path: '/probe'
+    scheme: 'https'
+    tls_config:
+      cert_file: /certs/server.crt
+      key_file: /certs/server.key
+      insecure_skip_verify: true
+    params:
+      module:
+        - bichard_connectivity
+    relabel_configs:
+      - source_labels: [__address__]
+        target_label: __param_target
+      - source_labels: [__param_target]
+        target_label: instance
+      - target_label: __address__
+        replacement: {{getv "/cjse/prometheus/blackbox/exporter/fqdn" "localhost"}}:9116
+    static_configs:
+      - targets:
+        - https://bichard-web.{{getv "/cjse/fqdn/suffix" "cjse.org"}}/bichard-ui/Connectivity
+        - https://bichard-backend.{{getv "/cjse/fqdn/suffix" "cjse.org"}}/bichard-ui/Connectivity
   - job_name: 'blackbox_http_auth'
     metrics_path: '/probe'
     scheme: 'https'
