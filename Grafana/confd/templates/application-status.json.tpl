@@ -19,45 +19,6 @@
   "links": [],
   "panels": [
     {
-      "alert": {
-        "alertRuleTags": {
-          "service": "Bichard7 Application",
-          "severity": "critical"
-        },
-        "conditions": [
-          {
-            "evaluator": {
-              "params": [
-                1
-              ],
-              "type": "lt"
-            },
-            "operator": {
-              "type": "and"
-            },
-            "query": {
-              "params": [
-                "A",
-                "10m",
-                "now"
-              ]
-            },
-            "reducer": {
-              "params": [],
-              "type": "avg"
-            },
-            "type": "query"
-          }
-        ],
-        "executionErrorState": "alerting",
-        "for": "5m",
-        "frequency": "1m",
-        "handler": 1,
-        "message": "Instance count is below the desired minimum",
-        "name": "Bichard Containers",
-        "noDataState": "keep_state",
-        "notifications": []
-      },
       "datasource": null,
       "fieldConfig": {
         "defaults": {
@@ -152,45 +113,6 @@
       "type": "timeseries"
     },
     {
-      "alert": {
-        "alertRuleTags": {
-          "service": "user service",
-          "severity": "critical"
-        },
-        "conditions": [
-          {
-            "evaluator": {
-              "params": [
-                1
-              ],
-              "type": "lt"
-            },
-            "operator": {
-              "type": "and"
-            },
-            "query": {
-              "params": [
-                "A",
-                "10m",
-                "now"
-              ]
-            },
-            "reducer": {
-              "params": [],
-              "type": "avg"
-            },
-            "type": "query"
-          }
-        ],
-        "executionErrorState": "alerting",
-        "for": "5m",
-        "frequency": "1m",
-        "handler": 1,
-        "message": "Instance count is below the desired minimum",
-        "name": "Running User Service Containers",
-        "noDataState": "keep_state",
-        "notifications": []
-      },
       "datasource": null,
       "fieldConfig": {
         "defaults": {
@@ -342,45 +264,6 @@
       "type": "bargauge"
     },
     {
-      "alert": {
-        "alertRuleTags": {
-          "service": "audit-logging",
-          "severity": "critical"
-        },
-        "conditions": [
-          {
-            "evaluator": {
-              "params": [
-                1
-              ],
-              "type": "lt"
-            },
-            "operator": {
-              "type": "and"
-            },
-            "query": {
-              "params": [
-                "A",
-                "10m",
-                "now"
-              ]
-            },
-            "reducer": {
-              "params": [],
-              "type": "avg"
-            },
-            "type": "query"
-          }
-        ],
-        "executionErrorState": "alerting",
-        "for": "5m",
-        "frequency": "1m",
-        "handler": 1,
-        "message": "Instance count is below the desired minimum",
-        "name": "Audit Logging Containers",
-        "noDataState": "keep_state",
-        "notifications": []
-      },
       "datasource": null,
       "fieldConfig": {
         "defaults": {
@@ -475,45 +358,6 @@
       "type": "timeseries"
     },
     {
-      "alert": {
-        "alertRuleTags": {
-          "service": "beanconnect",
-          "severity": "critical"
-        },
-        "conditions": [
-          {
-            "evaluator": {
-              "params": [
-                1
-              ],
-              "type": "lt"
-            },
-            "operator": {
-              "type": "and"
-            },
-            "query": {
-              "params": [
-                "A",
-                "10m",
-                "now"
-              ]
-            },
-            "reducer": {
-              "params": [],
-              "type": "avg"
-            },
-            "type": "query"
-          }
-        ],
-        "executionErrorState": "alerting",
-        "for": "5m",
-        "frequency": "1m",
-        "handler": 1,
-        "message": "Instance count is below the desired minimum",
-        "name": "Beanconnect Containers",
-        "noDataState": "keep_state",
-        "notifications": []
-      },
       "datasource": null,
       "fieldConfig": {
         "defaults": {
