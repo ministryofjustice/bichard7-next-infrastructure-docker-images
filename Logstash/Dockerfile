@@ -8,7 +8,7 @@ WORKDIR /
 COPY ./files/logstash.repo /etc/yum.repos.d
 COPY scripts/credentials.sh /usr/bin/credentials
 # This must match what is deployed on AWS
-ARG LOGSTASH_VERSION="7.10.1"
+ARG LOGSTASH_VERSION="7.16.2"
 ARG CONFD_VERSION="0.16.0"
 
 RUN mkdir -p /var/log/supervisor && \
@@ -24,7 +24,8 @@ RUN mkdir -p /var/log/supervisor && \
   chmod +x /usr/bin/credentials && \
   mkdir -p /etc/confd/{conf.d,templates} && \
   mkdir -p /etc/logstash/patterns && \
-  /usr/share/logstash/bin/logstash-plugin install logstash-input-cloudwatch_logs
+      /usr/share/logstash/bin/logstash-plugin install logstash-input-cloudwatch_logs logstash-output-opensearch && \
+  chown -R logstash:logstash /usr/share/logstash
 
 EXPOSE     9600
 

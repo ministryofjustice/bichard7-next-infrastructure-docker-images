@@ -2,6 +2,8 @@ node.name: logstash
 http.host: {{ getv "/cjse/logstash/host" "0.0.0.0" }}
 path.data: /usr/share/logstash
 pipeline.workers: 1
+pipeline.ecs_compatibility: disabled
+pipeline.ordered: false
 path.config: /etc/logstash/conf.d
 config.reload.automatic: true
 config.reload.interval: 10
