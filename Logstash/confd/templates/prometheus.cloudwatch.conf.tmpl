@@ -28,15 +28,14 @@ filter {
 }
 
 output {
-  elasticsearch {
+  opensearch {
     hosts => ["{{ getv "/cjse/logstash/es/domain" "http://elasticsearch:9200"}}"]
     index => "{{ getv "/cjse/environment" ""}}-logs-%{+YYYY.MM.dd}"
-# We're using AWS ES and not the local compose
-{{ if exists "/cjse/logstash/es/username" }}
     user => "{{ getv "/cjse/logstash/es/username" ""}}"
     password => "{{ getv "/cjse/logstash/es/password" ""}}"
     ssl => true
-    ilm_enabled => false
+{{ if exists "/cjse/logstash/local" }}
+   ssl_certificate_verification => false
 {{ end }}
   }
 }
