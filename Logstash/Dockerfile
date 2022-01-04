@@ -19,10 +19,11 @@ RUN mkdir -p /var/log/supervisor && \
     cronie && \
   yum clean all && \
   rm -rf /var/cache/yum && \
-  wget -O /bin/confd https://github.com/kelseyhightower/confd/releases/download/v${CONFD_VERSION}/confd-${CONFD_VERSION}-linux-amd64 && \
+  wget -O /bin/confd https://github.com/kelseyhightower/confd/releases/download/v${CONFD_VERSION}/confd-${CONFD_VERSION}-linux-amd64 -nv && \
   chmod +x /bin/confd && \
   chmod +x /usr/bin/credentials && \
-  mkdir -p /etc/confd/{conf.d,templates} && \
+  mkdir -p /etc/confd/conf.d && \
+  mkdir -p /etc/confd/templates && \
   mkdir -p /etc/logstash/patterns && \
       /usr/share/logstash/bin/logstash-plugin install logstash-input-cloudwatch_logs logstash-output-opensearch && \
   chown -R logstash:logstash /usr/share/logstash
