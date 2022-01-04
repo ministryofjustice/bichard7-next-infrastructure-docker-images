@@ -11,7 +11,8 @@ ARG NODE_USER="runner"
 RUN yum install -y \
         cronie \
         git && \
-    mkdir -p {/root/.aws,/nginx_auth} && \
+    mkdir -p /root/.aws && \
+    mkdir -p nginx_auth && \
     chmod +x /bin/run_nginx && \
     chmod +x /bin/credentials && \
     yum clean all && \
@@ -30,7 +31,9 @@ RUN git init && \
 
 COPY files/list.html /opt/s3-server/s3-server/lib/list.html
 
+# hadolint ignore=DL3002
 USER root
+# hadolint ignore=DL3016
 RUN  npm install -g s3-server
 
 WORKDIR /
