@@ -3,6 +3,7 @@ FROM ${BUILD_IMAGE}
 
 LABEL maintainer="CJSE"
 ARG CONFD_VERSION="0.16.0"
+ARG CONFD_CHECKSUM="255d2559f3824dd64df059bdc533fd6b697c070db603c76aaf8d1d5e6b0cc334"
 
 WORKDIR /
 
@@ -27,6 +28,7 @@ RUN mkdir -p /certs && \
     -extensions 'v3_req' && \
   rm -rf /tmp/openssl.cnf && \
   wget -O /bin/confd https://github.com/kelseyhightower/confd/releases/download/v${CONFD_VERSION}/confd-${CONFD_VERSION}-linux-amd64 -nv && \
+  echo "${CONFD_CHECKSUM} /bin/confd" | md5sum -c && \
   chmod +x /bin/confd && \
   mkdir -p /etc/confd/conf.d && \
   mkdir -p /etc/confd/templates
