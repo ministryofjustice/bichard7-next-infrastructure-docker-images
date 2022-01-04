@@ -8,7 +8,8 @@ WORKDIR /
 
 COPY files/openssl.cnf /tmp/openssl.cnf
 
-RUN mkdir -p {/certs,/var/log/supervisor} && \
+RUN mkdir -p /certs && \
+    mkdir -p /var/log/supervisor && \
   yum install -y \
     nginx \
     supervisor \
@@ -25,9 +26,10 @@ RUN mkdir -p {/certs,/var/log/supervisor} && \
     -config /tmp/openssl.cnf \
     -extensions 'v3_req' && \
   rm -rf /tmp/openssl.cnf && \
-  wget -O /bin/confd https://github.com/kelseyhightower/confd/releases/download/v${CONFD_VERSION}/confd-${CONFD_VERSION}-linux-amd64 && \
+  wget -O /bin/confd https://github.com/kelseyhightower/confd/releases/download/v${CONFD_VERSION}/confd-${CONFD_VERSION}-linux-amd64 -nv && \
   chmod +x /bin/confd && \
-  mkdir -p /etc/confd/{conf.d,templates}
+  mkdir -p /etc/confd/conf.d && \
+  mkdir -p /etc/confd/templates
 
 COPY confd /etc/confd/
 
