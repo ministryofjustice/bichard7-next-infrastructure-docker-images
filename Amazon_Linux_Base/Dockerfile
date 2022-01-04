@@ -1,4 +1,5 @@
 ARG BUILD_IMAGE="amazonlinux:2"
+#
 FROM ${BUILD_IMAGE}
 
 LABEL maintainer="CJSE"
@@ -9,7 +10,7 @@ RUN yum update -y && \
     amazon-linux-extras install -y epel && \
     yum install -y deltarpm && \
     yum install -y ${YUM_PACKAGES} && \
-    pip install ${PIP_PACKAGES} && \
+    pip install --no-cache-dir ${PIP_PACKAGES} && \
     rm -rf /var/log/* && \
     yum clean all && \
     rm -rf /var/cache/yum
