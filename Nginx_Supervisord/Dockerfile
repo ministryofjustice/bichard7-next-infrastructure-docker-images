@@ -28,7 +28,7 @@ RUN mkdir -p /certs && \
     -extensions 'v3_req' && \
   rm -rf /tmp/openssl.cnf && \
   wget -O /bin/confd https://github.com/kelseyhightower/confd/releases/download/v${CONFD_VERSION}/confd-${CONFD_VERSION}-linux-amd64 -nv && \
-  echo "${CONFD_CHECKSUM} /bin/confd" | sha256sum -c && \
+  echo "${CONFD_CHECKSUM}  /bin/confd" | sha256sum -c && \
   chmod +x /bin/confd && \
   mkdir -p /etc/confd/conf.d && \
   mkdir -p /etc/confd/templates

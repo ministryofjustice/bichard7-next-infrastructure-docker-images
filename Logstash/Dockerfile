@@ -21,7 +21,7 @@ RUN mkdir -p /var/log/supervisor && \
   yum clean all && \
   rm -rf /var/cache/yum && \
   wget -O /bin/confd https://github.com/kelseyhightower/confd/releases/download/v${CONFD_VERSION}/confd-${CONFD_VERSION}-linux-amd64 -nv && \
-  echo "${CONFD_CHECKSUM} /bin/confd" | sha256sum -c && \
+  echo "${CONFD_CHECKSUM}  /bin/confd" | sha256sum -c && \
   chmod +x /bin/confd && \
   chmod +x /usr/bin/credentials && \
   mkdir -p /etc/confd/conf.d && \
