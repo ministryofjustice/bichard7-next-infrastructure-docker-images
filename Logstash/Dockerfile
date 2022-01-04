@@ -10,6 +10,7 @@ COPY scripts/credentials.sh /usr/bin/credentials
 # This must match what is deployed on AWS
 ARG LOGSTASH_VERSION="7.16.2"
 ARG CONFD_VERSION="0.16.0"
+ARG CONFD_CHECKSUM="255d2559f3824dd64df059bdc533fd6b697c070db603c76aaf8d1d5e6b0cc334"
 
 RUN mkdir -p /var/log/supervisor && \
   yum makecache && \
@@ -20,6 +21,7 @@ RUN mkdir -p /var/log/supervisor && \
   yum clean all && \
   rm -rf /var/cache/yum && \
   wget -O /bin/confd https://github.com/kelseyhightower/confd/releases/download/v${CONFD_VERSION}/confd-${CONFD_VERSION}-linux-amd64 -nv && \
+  echo "${CONFD_CHECKSUM} /bin/confd" | sha256sum -c && \
   chmod +x /bin/confd && \
   chmod +x /usr/bin/credentials && \
   mkdir -p /etc/confd/conf.d && \
