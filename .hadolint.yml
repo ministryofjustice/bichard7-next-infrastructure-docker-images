@@ -4,3 +4,5 @@ ignored:
   - DL3013 # We want the latest pip packages
   - DL3033 # We want the latest packages unless we have pinned them
   - DL4006 # Disable pipefail as we are using bash not sh
+failure-threshold: warning
+...

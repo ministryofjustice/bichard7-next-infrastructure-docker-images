@@ -2,14 +2,17 @@ ARG BUILD_IMAGE="amazon-linux2-base"
 FROM ${BUILD_IMAGE}
 
 LABEL maintainer="CJSE"
-LABEL "origin_source"="https://github.com/docker-library/openjdk/blob/master/11/jre/slim-buster/Dockerfile"
+LABEL source="https://github.com/docker-library/openjdk/blob/master/11/jre/slim-buster/Dockerfile"
 
 RUN set -eux && \
 	yum install -y \
         ca-certificates \
-	    p11-kit
+	    p11-kit && \
+    yum clean all && \
+    rm -rf /var/cache/yum
 
 ENV JAVA_HOME /usr/local/openjdk-11
+# hadolint ignore=SC2016
 RUN { echo '#/bin/sh'; echo 'echo "$JAVA_HOME"'; } > /usr/local/bin/docker-java-home && \
     chmod +x /usr/local/bin/docker-java-home && \
     [ "$JAVA_HOME" = "$(docker-java-home)" ]
@@ -18,6 +21,7 @@ ENV PATH $JAVA_HOME/bin:$PATH
 ENV LANG C.UTF-8
 ENV JAVA_VERSION 11.0.10
 
+# hadolint ignore=SC2016
 RUN set -euvx && \
 	downloadUrl='https://github.com/AdoptOpenJDK/openjdk11-upstream-binaries/releases/download/jdk-11.0.10%2B9/OpenJDK11U-jre_x64_linux_11.0.10_9.tar.gz' && \
 	wget --progress=dot:giga -O openjdk.tgz "$downloadUrl" && \
