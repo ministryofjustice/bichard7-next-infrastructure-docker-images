@@ -11,7 +11,8 @@ ARG NODE_USER="runner"
 RUN yum install -y \
     cronie \
     git && \
-    mkdir -p {/root/.aws,/nginx_auth} && \
+    mkdir -p /root/.aws && \
+    mkdir -p /nginx_auth && \
     chmod +x /bin/run_nginx && \
     chmod +x /bin/credentials && \
     yum clean all && \
@@ -29,6 +30,7 @@ RUN git clone https://github.com/signalfx/s3-server.git . && \
     ncu -u && \
     npm i
 
+# hadolint ignore=DL3002
 USER root
 RUN npm link
 

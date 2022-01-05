@@ -7,7 +7,6 @@ ARG CONFD_VERSION="0.16.0"
 
 COPY ./scripts/run_grafana.sh /bin/
 
-
 ENV PATH="/usr/share/grafana/bin:$PATH" \
     GF_PATHS_CONFIG="/etc/grafana/grafana.ini" \
     GF_PATHS_DATA="/var/lib/grafana" \
@@ -38,9 +37,11 @@ RUN mkdir -p /certs && \
     mkdir -p /opt/grafana/dashboards && \
     chown -R grafana /opt/grafana && \
     chmod +x /bin/run_grafana.sh && \
-    wget -O /bin/confd https://github.com/kelseyhightower/confd/releases/download/v${CONFD_VERSION}/confd-${CONFD_VERSION}-linux-amd64 && \
+    wget -O /bin/confd https://github.com/kelseyhightower/confd/releases/download/v${CONFD_VERSION}/confd-${CONFD_VERSION}-linux-amd64 -nv && \
     chmod +x /bin/confd && \
-    mkdir -p /etc/confd/{conf.d,templates}
+    mkdir -p /etc/confd/conf.d && \
+    mkdir -p /etc/confd/templates
+
 
 COPY files/prometheus_datasource.yml /etc/grafana/provisioning/datasources/
 COPY files/bichard_dashboard.yml /etc/grafana/provisioning/dashboards/
@@ -59,6 +60,3 @@ RUN sed -i 's/;protocol = http/protocol = https/' /etc/grafana/grafana.ini && \
 EXPOSE 3000
 
 CMD ["/usr/bin/supervisord", "-c", "/etc/supervisord.conf"]
-
-
-
