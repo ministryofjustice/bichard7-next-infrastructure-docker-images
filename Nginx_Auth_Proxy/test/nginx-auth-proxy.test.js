@@ -62,6 +62,7 @@ describe("Testing Nginx config", () => {
     { path: "/users/403", route: "user", auth: false },
     { path: "/users/404", route: "user", auth: false },
     { path: "/users/500", route: "user", auth: false },
+    { path: "/users/faq", route: "user", auth: false },
     { path: "/bichard-ui/Health", route: "bichard", auth: false },
     { path: "/bichard-ui/Connectivity", route: "bichard", auth: false },
     { path: "/bichard-ui/images/foo.gif", route: "bichard", auth: false },
