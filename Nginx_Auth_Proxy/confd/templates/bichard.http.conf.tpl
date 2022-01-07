@@ -137,7 +137,7 @@ location /help {
 }
 
 # Allow access to user-service login flow (and necessary assets) without authentication
-location ~ ^/users/(login|assets|_next/static|403|404|500)(.*)$ {
+location ~ ^/users/(login|assets|_next/static|403|404|500|faq)(.*)$ {
     limit_except GET POST PUT { deny all; }
     include /etc/includes/headers.conf;
 
@@ -173,4 +173,3 @@ location /elb-status {
     proxy_ssl_server_name on;
     proxy_ssl_verify_depth 2;
 }
-

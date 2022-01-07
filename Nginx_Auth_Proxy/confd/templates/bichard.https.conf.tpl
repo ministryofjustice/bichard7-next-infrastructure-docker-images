@@ -148,7 +148,7 @@ location /help {
 }
 
 # Allow access to user-service login flow (and necessary assets) without authentication
-location ~ ^/users/(login|assets|_next/static|403|404|500)(.*)$ {
+location ~ ^/users/(login|assets|_next/static|403|404|500|faq)(.*)$ {
     limit_except GET POST PUT { deny all; }
     add_header  Strict-Transport-Security "max-age=31536000; includeSubDomains" always;
     include /etc/includes/headers.conf;
