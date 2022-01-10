@@ -40,8 +40,7 @@ alias_database = hash:/etc/aliases
 debug_peer_level = 2
 #debug_peer_list = 127.0.0.1
 #debug_peer_list = some.domain
-debugger_command =
-PATH=/bin:/usr/bin:/usr/local/bin:/usr/X11R6/bin ddd $daemon_directory/$process_name $process_id & sleep 5
+debugger_command = PATH=/bin:/usr/bin:/usr/local/bin:/usr/X11R6/bin ddd $daemon_directory/$process_name $process_id & sleep 5
 sendmail_path = /usr/sbin/sendmail.postfix
 newaliases_path = /usr/bin/newaliases.postfix
 mailq_path = /usr/bin/mailq.postfix
