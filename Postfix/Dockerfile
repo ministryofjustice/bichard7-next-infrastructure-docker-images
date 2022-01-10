@@ -24,5 +24,7 @@ EXPOSE 25
 EXPOSE 465
 
 COPY ./files/conf/supervisord.conf /etc/supervisord.conf
+COPY ./files/start_postfix.sh /start_postfix.sh
+RUN chmod +x /start_postfix.sh
 
 CMD ["/usr/bin/supervisord", "-c", "/etc/supervisord.conf"]
