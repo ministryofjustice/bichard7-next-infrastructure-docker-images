@@ -1,0 +1,6 @@
+[template]
+src = "main.cf.tpl"
+dest = "/etc/postfix/main.cf"
+keys = [
+    "/cjsm/"
+]

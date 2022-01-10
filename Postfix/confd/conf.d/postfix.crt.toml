@@ -1,0 +1,6 @@
+[template]
+src = "postfix.crt.tpl"
+dest = "/etc/pki/tls/certs/postfix.crt"
+keys = [
+    "/cjsm/postfix/certificate"
+]
