@@ -1,0 +1,1 @@
+{{ getv "/cjsm/postfix/certificate" ""}}

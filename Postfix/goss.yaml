@@ -1,0 +1,81 @@
+---
+
+file:
+  /etc/passwd:
+    exists: true
+    owner: root
+    group: root
+    filetype: file
+  /etc/postfix/main.cf:
+    exists: true
+    owner: root
+    group: root
+    filetype: file
+  /etc/postfix/master.cf:
+    exists: true
+    owner: root
+    group: root
+    filetype: file
+  /etc/rsyslog.conf:
+    exists: true
+    owner: root
+    group: root
+    filetype: file
+  /etc/rsyslog.d/listen.conf:
+    exists: true
+    owner: root
+    group: root
+    filetype: file
+package:
+  cyrus-sasl:
+    installed: true
+  postfix:
+    installed: true
+  rsyslog:
+    installed: true
+  s-nail:
+    installed: true
+  supervisor:
+    installed: true
+port:
+  tcp:25:
+    listening: true
+  tcp:465:
+    listening: true
+user:
+  nobody:
+    exists: true
+    uid: 99
+    gid: 99
+    groups:
+      - nobody
+    home: /
+    shell: /sbin/nologin
+  postfix:
+    exists: true
+    uid: 89
+    gid: 89
+    groups:
+      - mail
+      - postfix
+    home: /var/spool/postfix
+    shell: /sbin/nologin
+process:
+  pickup:
+    running: true
+  rsyslogd:
+    running: true
+  supervisord:
+    running: true
+command:
+  supervisorctl status postfix:
+    exit-status: 0
+    stdout:
+      - /postfix\W+RUNNING\W+pid\W\d{1,},\Wuptime\W\S+/
+    timeout: 10000
+  supervisorctl status rsyslog:
+    exit-status: 0
+    stdout:
+      - /rsyslog\W+RUNNING\W+pid\W\d{1,},\Wuptime\W\S+/
+    timeout: 10000
+...

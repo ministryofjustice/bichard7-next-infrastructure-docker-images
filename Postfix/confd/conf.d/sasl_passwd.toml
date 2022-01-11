@@ -1,0 +1,9 @@
+[template]
+src = "sasl_passwd.tpl"
+dest = "/etc/postfix/sasl_passwd"
+keys = [
+    "/cjsm/"
+]
+
+mode = "0600"
+reload_cmd = "postmap /etc/postfix/sasl_passwd"
