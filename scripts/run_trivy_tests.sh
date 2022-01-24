@@ -29,4 +29,8 @@ mkdir -p trivy/db
 install_trivy
 pull_trivy_db
 
-trivy image ${DOCKER_IMAGE}
+TRIVY_CACHE_DIR=trivy trivy image \
+  --skip-update \
+  --exit-code 1 \
+  --severity "CRITICAL" \
+  ${DOCKER_IMAGE} 
