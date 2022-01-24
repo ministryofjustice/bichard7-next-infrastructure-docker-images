@@ -20,7 +20,7 @@ file:
     group: root
     filetype: file
     size:
-      lt: 3273
+      lt: 3300
       gt: 3267
     contains: []
   /etc/nginx/nginx.conf:
