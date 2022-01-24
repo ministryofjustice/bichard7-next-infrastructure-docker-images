@@ -3,7 +3,6 @@
 file:
   /certs:
     exists: true
-    size: 4096
     owner: root
     group: root
     filetype: directory
