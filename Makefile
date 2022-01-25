@@ -13,11 +13,36 @@ build-scanning-results-portal:
 
 build-all: build-base build-nginx build-monitoring
 
+#
+# Base containers
+#
+
 $(BASE_CONTAINERS):
 	$(MAKE) -C $@
 
-$(NGINX_CONTAINERS):
+Openjdk_Jre11_Slim NodeJS Postfix: Amazon_Linux_Base
+
+#
+# Nginx containers
+#
+
+Nginx_Supervisord Nginx_Java_Supervisord Nginx_NodeJS_Supervisord Nginx_Auth_Proxy:
 	$(MAKE) -C $@
+
+Scanning_Results_Portal: Nginx_NodeJS_Supervisord
+	cd Scanning_Results_Portal && docker build . -t nginx-scanning-portal
+
+Nginx_Supervisord: Amazon_Linux_Base
+Nginx_Java_Supervisord: Openjdk_Jre11_Slim
+Nginx_NodeJS_Supervisord: NodeJS
+Nginx_Auth_Proxy: Nginx_Supervisord NodeJS
+
+#
+# Monitoring containers
+#
 
 $(MONITORING_CONTAINERS):
 	$(MAKE) -C $@
+
+Grafana Logstash: Amazon_Linux_Base
+Prometheus Prometheus_Cloudwatch_Exporter Prometheus_BlackBox_Exporter: Nginx_Java_Supervisord
