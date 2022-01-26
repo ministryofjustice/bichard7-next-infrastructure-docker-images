@@ -258,4 +258,10 @@ metrics:
   - aws_namespace: AWS/States
     aws_metric_name: ExecutionThrottled
     aws_dimensions: [StateMachineArn]
+
+  - aws_namespace: LogMetrics
+    aws_metric_name: PNCConnectionErrorEvents
+
+  - aws_namespace: LogMetrics
+    aws_metric_name: UserLoginEvents
 ...
