@@ -1,4 +1,4 @@
-BASE_CONTAINERS:= Amazon_Linux_Base Openjdk_Jre11_Slim NodeJS Postfix
+BASE_CONTAINERS:= Amazon_Linux_Base Openjdk_Jre11_Slim NodeJS Postfix Codebuild_Base
 NGINX_CONTAINERS:= Nginx_NodeJS_Supervisord Nginx_Supervisord Nginx_Auth_Proxy Nginx_Java_Supervisord S3_Web_Proxy Scanning_Results_Portal
 MONITORING_CONTAINERS:= Grafana Prometheus Prometheus_Cloudwatch_Exporter Logstash Prometheus_BlackBox_Exporter
 
@@ -20,7 +20,7 @@ build-all: build-base build-nginx build-monitoring
 $(BASE_CONTAINERS):
 	$(MAKE) -C $@
 
-Openjdk_Jre11_Slim NodeJS Postfix: Amazon_Linux_Base
+Codebuild_Base Openjdk_Jre11_Slim NodeJS Postfix: Amazon_Linux_Base
 
 #
 # Nginx containers
