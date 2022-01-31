@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+set -e
+
 cd /tmp
 wget https://releases.hashicorp.com/terraform/${TERRAFORM_VERSION}/terraform_${TERRAFORM_VERSION}_linux_amd64.zip
 unzip -o terraform_${TERRAFORM_VERSION}_linux_amd64.zip
