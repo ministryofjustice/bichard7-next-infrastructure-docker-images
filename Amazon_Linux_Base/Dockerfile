@@ -1,5 +1,5 @@
 ARG BUILD_IMAGE="amazonlinux:2"
-#
+
 FROM ${BUILD_IMAGE}
 
 LABEL maintainer="CJSE"

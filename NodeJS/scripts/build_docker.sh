@@ -9,3 +9,5 @@ export readonly SOURCE_REPOSITORY_NAME="amazon-linux2-base"
 
 aws codebuild start-build --project-name "build-nginx-nodejs-supervisord-docker" \
   --environment-variables-override name=DOCKER_IMAGE_HASH,value="${DOCKER_IMAGE_PREFIX}@${SHA_HASH}",type=PLAINTEXT
+
+aws codebuild start-build --project-name "build-codebuild-base"
