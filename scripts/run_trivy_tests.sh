@@ -28,6 +28,7 @@ uname -a
 mkdir -p trivy/db
 install_trivy
 pull_trivy_db
+sed -i 's/\"Version\"\:1/"Version":2/g' trivy/db/metadata.json # very dirty hack to avoid the db schema out of date error, please check that we can remove this ASAP
 
 TRIVY_CACHE_DIR=trivy trivy image \
   --skip-update \
