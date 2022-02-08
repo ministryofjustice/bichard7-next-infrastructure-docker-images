@@ -6,8 +6,8 @@ image = nginx-java-supervisord
 build:
 	set -e; \
 	docker build -t "$(image)" . ;\
-	if [[ "${SKIP_GOSS}x" == "x" ]]; then \
-		GOSS_SLEEP=15 dgoss run $(image); \
+	if [[ "${SKIP_GOSS}x" == "truex" ]]; then \
+  		echo "Skipping dgoss tests"; \
 	else \
-	  echo "Skipping dgoss tests"; \
-	fi \
+		GOSS_SLEEP=15 dgoss run $(image); \
+	fi

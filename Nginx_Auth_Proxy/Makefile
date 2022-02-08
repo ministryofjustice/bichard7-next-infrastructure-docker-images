@@ -17,7 +17,9 @@ build:
 .PHONY: goss
 goss:
 	set -e; \
-	if [[ "${SKIP_GOSS}x" == "x" ]]; then \
+	if [[ "${SKIP_GOSS}x" == "truex" ]]; then \
+	  echo "Skipping dgoss tests"; \
+	else \
 		GOSS_SLEEP=15 dgoss run \
 			-e CJSE_NGINX_USERSERVICE_DOMAIN="localhost/elb-status" \
 			-e CJSE_NGINX_AUDITLOGGING_DOMAIN="localhost/elb-status" \
@@ -25,9 +27,7 @@ goss:
 			-e CJSE_NGINX_STATICSERVICE_DOMAIN="localhost/elb-status" \
 			-e CJSE_NGINX_PROXYSSLVERIFY="off" \
 			$(image); \
-	else \
-	  echo "Skipping dgoss tests"; \
-	fi \
+	fi
 
 .PHONY: run-test-nginx
 run-test-nginx:

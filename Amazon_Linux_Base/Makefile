@@ -6,8 +6,8 @@ image = amazon-linux2-base
 build:
 	set -e; \
 	docker build -t "$(image)" . ;\
-	if [[ "${SKIP_GOSS}x" == "x" ]]; then \
-		GOSS_SLEEP=15 dgoss run $(image); \
-	else \
+	if [[ "${SKIP_GOSS}x" == "truex" ]]; then \
 	  echo "Skipping dgoss tests"; \
-	fi \
+	else \
+		GOSS_SLEEP=15 dgoss run $(image); \
+	fi
