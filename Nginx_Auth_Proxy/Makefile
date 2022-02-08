@@ -1,3 +1,4 @@
+SHELL := /bin/bash # Use bash syntax
 image = nginx-auth-proxy
 
 .PHONY: build-and-test
@@ -8,20 +9,25 @@ build-and-test-no-goss: build unit-test-nginx
 
 .PHONY: build-and-run
 build-and-run: build run-test-nginx
-	
+
 .PHONY: build
 build:
 	docker build -t "$(image)" .
 
 .PHONY: goss
 goss:
-	bash -c "GOSS_SLEEP=15 dgoss run \
+	set -e; \
+	if [[ "${SKIP_GOSS}x" == "truex" ]]; then \
+	  echo "Skipping dgoss tests"; \
+	else \
+		GOSS_SLEEP=15 dgoss run \
 			-e CJSE_NGINX_USERSERVICE_DOMAIN="localhost/elb-status" \
 			-e CJSE_NGINX_AUDITLOGGING_DOMAIN="localhost/elb-status" \
 			-e CJSE_NGINX_APP_DOMAIN="localhost/elb-status" \
 			-e CJSE_NGINX_STATICSERVICE_DOMAIN="localhost/elb-status" \
 			-e CJSE_NGINX_PROXYSSLVERIFY="off" \
-			$(image)"
+			$(image); \
+	fi
 
 .PHONY: run-test-nginx
 run-test-nginx:
@@ -47,4 +53,3 @@ wait-for-nginx:
 .PHONY: unit-test-nginx
 unit-test-nginx: build-test run-test-nginx wait-for-nginx
 	docker run --rm --name nginx-auth-test -p 60001:60001 -p 60002:60002 -p 60003:60003 -p 60004:60004 -e TEST_HOSTS=https://172.17.0.1:6443,http://172.17.0.1:7080 nginx-auth-test
-

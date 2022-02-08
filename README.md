@@ -23,3 +23,7 @@ All images are tested using goss prior to pushing to the relevant registries. Fo
 https://github.com/aelsabbahy/goss/tree/master/extras/dgoss
 
 To scan the images for vulnerabilities we use trivy see https://aquasecurity.github.io/trivy/v0.22.0/getting-started/installation/
+
+## Building locally
+
+You can skip the goss/dgoss requirement by setting the environment variable `SKIP_GOSS=true`
