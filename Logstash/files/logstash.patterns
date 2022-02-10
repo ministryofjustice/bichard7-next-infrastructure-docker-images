@@ -7,4 +7,4 @@ CODE [A-Z0-9]{9,}
 # version account-id interface-id srcaddr dstaddr srcport dstport protocol packets bytes start end action log-status
 # http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/flow-logs.html#flow-log-records
 ACCOUNT_ID ([0-9]{12})
-VPCFLOWLOG %{NUMBER:version} %{ACCOUNT_ID:account-id} %{NOTSPACE:interface-id} %{IPV4:srcaddr} %{IPV4:dstaddr} %{NUMBER:srcport} %{NUMBER:dstport} %{NUMBER:protocol} %{NUMBER:packets} %{NUMBER:bytes} %{NUMBER:start} %{NUMBER:end} %{NOTSPACE:action} %{NOTSPACE:log-status}
+VPCFLOWLOG %{NUMBER:version} %{ACCOUNT_ID:account-id} %{NOTSPACE:interface-id} %{IPV4:srcaddr} %{IPV4:dstaddr} %{NUMBER:srcport} %{NUMBER:dstport} %{NUMBER:protocol} %{NUMBER:packets} %{NUMBER:bytes} %{NUMBER:start} %{NUMBER:end} %{NOTSPACE:action} %{NOTSPACE:log-status} %{NOTSPACE:vpc-id} %{NOTSPACE:subnet-id} %{NOTSPACE:tcp-flags} %{NOTSPACE:type} %{NOTSPACE:pkt-srcaddr} %{NOTSPACE:pkt-dstaddr} %{NOTSPACE:flow-direction} %{NOTSPACE:traffic-path}
