@@ -2,3 +2,9 @@ DATETIME_PROM (\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}.?\d{3}?Z)
 NGINX_LOG %{IPORHOST:[nginx][access][remote_ip]} - %{DATA:[nginx][access][user_name]} \[%{HTTPDATE:[nginx][access][time]}\] \"%{WORD:[nginx][access][method]} %{DATA:[nginx][access][url]} HTTP/%{NUMBER:[nginx][access][http_version]}\" %{NUMBER:[nginx][access][response_code]} %{NUMBER:[nginx][access][body_sent][bytes]} \"%{DATA:[nginx][access][referrer]}\" \"%{DATA:[nginx][access][agent]}\"
 JSON (\{.*?\})
 CODE [A-Z0-9]{9,}
+
+# VPC Flow Log fields
+# version account-id interface-id srcaddr dstaddr srcport dstport protocol packets bytes start end action log-status
+# http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/flow-logs.html#flow-log-records
+ACCOUNT_ID ([0-9]{12})
+VPCFLOWLOG %{NUMBER:version} %{ACCOUNT_ID:account-id} %{NOTSPACE:interface-id} %{IPV4:srcaddr} %{IPV4:dstaddr} %{NUMBER:srcport} %{NUMBER:dstport} %{NUMBER:protocol} %{NUMBER:packets} %{NUMBER:bytes} %{NUMBER:start} %{NUMBER:end} %{NOTSPACE:action} %{NOTSPACE:log-status}

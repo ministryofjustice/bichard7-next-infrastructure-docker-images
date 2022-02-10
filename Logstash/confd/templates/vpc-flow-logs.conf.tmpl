@@ -1,24 +1,24 @@
 input {
   cloudwatch_logs {
-    log_group => ["cjse-bichard7-{{ getv "/cjse/environment" ""}}-base-infra-bichard7"]
+    log_group => ["cjse-bichard7-{{ getv "/cjse/environment" ""}}-base-infravpc-flow-logs"]
     start_position => "end"
     region => "eu-west-2"
-    tags => ["cloudwatch_syslog","bichard","ecs_logs", "application"]
+    tags => ["cloudwatch_syslog","vpc_flow_logs"]
     codec => "plain"
   }
 }
 
 filter {
-  mutate{
-      replace => [ 'message', '%{message}' ]
-      gsub => [ 'message','\n','']
-  }
-
-  json {
-      source => 'message'
-      tag_on_failure => ['_jsonparsefailure']
+    mutate{
+        replace => [ "message", "%{message}" ]
+        gsub => [ 'message','\n','']
     }
-  }
+
+    grok {
+        patterns_dir => ["/etc/logstash/patterns"]
+        match => { "message" => "%{VPCFLOWLOG:message}" }
+    }
+}
 
 output {
   opensearch {
