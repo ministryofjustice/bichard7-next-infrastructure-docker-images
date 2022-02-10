@@ -1,0 +1,6 @@
+[template]
+src = "vpc-flow-logs.conf.tmpl"
+dest = "/etc/logstash/conf.d/vpc-flow-logs.conf"
+keys = [
+    "/cjse"
+]
