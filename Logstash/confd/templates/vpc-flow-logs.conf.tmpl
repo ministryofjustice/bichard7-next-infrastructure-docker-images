@@ -1,0 +1,34 @@
+input {
+  cloudwatch_logs {
+    log_group => ["cjse-bichard7-{{ getv "/cjse/environment" ""}}-base-infravpc-flow-logs"]
+    start_position => "end"
+    region => "eu-west-2"
+    tags => ["cloudwatch_syslog","vpc_flow_logs"]
+    codec => "plain"
+  }
+}
+
+filter {
+    mutate{
+        replace => [ "message", "%{message}" ]
+        gsub => [ 'message','\n','']
+    }
+
+    grok {
+        patterns_dir => ["/etc/logstash/patterns"]
+        match => { "message" => "%{VPCFLOWLOG:message}" }
+    }
+}
+
+output {
+  opensearch {
+    hosts => ["{{ getv "/cjse/logstash/es/domain" "http://elasticsearch:9200"}}"]
+    index => "{{ getv "/cjse/environment" ""}}-logs-%{+YYYY.MM.dd}"
+    user => "{{ getv "/cjse/logstash/es/username" ""}}"
+    password => "{{ getv "/cjse/logstash/es/password" ""}}"
+    ssl => true
+{{ if exists "/cjse/logstash/local" }}
+   ssl_certificate_verification => false
+{{ end }}
+  }
+}
