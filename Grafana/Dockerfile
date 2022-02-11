@@ -55,6 +55,8 @@ RUN sed -i 's/;protocol = http/protocol = https/' /etc/grafana/grafana.ini && \
     sed -i 's/;enable_gzip = false/enable_gzip = true/' /etc/grafana/grafana.ini && \
     sed -i 's/;cert_file =/cert_file = \/certs\/server.crt/' /etc/grafana/grafana.ini && \
     sed -i 's/;cert_key =/cert_key = \/certs\/server.key/' /etc/grafana/grafana.ini && \
+    sed -i 's/;read_timeout =/read_timeout = 500/' /etc/grafana/grafana.ini && \
+    sed -i 's/idle_conn_timeout_seconds = 90/idle_conn_timeout_seconds = 500/' /etc/grafana/grafana.ini && \
     chown -R grafana:grafana /etc/grafana/provisioning /opt/grafana
 
 EXPOSE 3000
