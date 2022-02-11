@@ -4,14 +4,14 @@ pid /run/nginx.pid;
 include /etc/nginx/modules-enabled/*.conf;
 
 events {
-    worker_connections 768;
+    worker_connections 1000;
 }
 
 http {
     sendfile                  on;
     tcp_nopush                on;
     tcp_nodelay               on;
-    keepalive_timeout         65;
+    keepalive_timeout         500;
     types_hash_max_size       2048;
     include                   /etc/nginx/mime.types;
     default_type              application/octet-stream;
