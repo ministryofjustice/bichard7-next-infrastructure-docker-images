@@ -1,6 +1,6 @@
 BASE_CONTAINERS:= Amazon_Linux_Base Openjdk_Jre11_Slim NodeJS Postfix Codebuild_Base
 NGINX_CONTAINERS:= Nginx_NodeJS_Supervisord Nginx_Supervisord Nginx_Auth_Proxy Nginx_Java_Supervisord S3_Web_Proxy Scanning_Results_Portal
-MONITORING_CONTAINERS:= Grafana Prometheus Prometheus_Cloudwatch_Exporter Logstash Prometheus_BlackBox_Exporter
+MONITORING_CONTAINERS:= Grafana Grafana_Codebuild Prometheus Prometheus_Cloudwatch_Exporter Logstash Prometheus_BlackBox_Exporter
 
 .PHONY: $(BASE_CONTAINERS) $(NGINX_CONTAINERS) $(MONITORING_CONTAINERS) build-scanning-results-portal
 
@@ -44,5 +44,5 @@ Nginx_Auth_Proxy: Nginx_Supervisord NodeJS
 $(MONITORING_CONTAINERS):
 	$(MAKE) -C $@
 
-Grafana Logstash: Amazon_Linux_Base
+Grafana_Codebuild Grafana Logstash: Amazon_Linux_Base
 Prometheus Prometheus_Cloudwatch_Exporter Prometheus_BlackBox_Exporter: Nginx_Java_Supervisord
