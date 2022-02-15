@@ -44,10 +44,12 @@ RUN mkdir -p /certs && \
     wget -O /bin/confd https://github.com/kelseyhightower/confd/releases/download/v${CONFD_VERSION}/confd-${CONFD_VERSION}-linux-amd64 -nv && \
     chmod +x /bin/confd && \
     mkdir -p /etc/confd/conf.d && \
-    mkdir -p /etc/confd/templates
-
+    mkdir -p /etc/confd/templates && \
+    mkdir -p ~/.aws
 
 COPY conf/supervisord.conf /etc/supervisord.conf
+COPY conf/config /root/.aws/config
+COPY conf/crontab /var/spool/cron/root
 
 RUN sed -i 's/;protocol = http/protocol = https/' /etc/grafana/grafana.ini && \
     sed -i 's/;router_logging = false/router_logging = true/' /etc/grafana/grafana.ini && \
