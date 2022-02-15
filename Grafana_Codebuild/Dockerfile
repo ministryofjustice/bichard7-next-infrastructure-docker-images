@@ -21,7 +21,8 @@ RUN mkdir -p /certs && \
     yum install -y \
         supervisor \
         httpd-tools \
-        cronie && \
+        cronie \
+        jq && \
     chmod +x /usr/bin/credentials && \
     yum clean all && \
     rm -rf /var/cache/yum && \

@@ -32,8 +32,8 @@ file:
     filetype: file
     contains: []
 package:
-  chronie:
-    installed: false
+  jq:
+    installed: true
   cronie:
     installed: true
     versions:
