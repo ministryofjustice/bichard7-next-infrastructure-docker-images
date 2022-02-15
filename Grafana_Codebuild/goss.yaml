@@ -31,9 +31,19 @@ file:
     group: root
     filetype: file
     contains: []
+  /var/spool/cron/root:
+    exists: true
+    filetype: file
+    owner: root
+    group: root
+  /root/.aws/config:
+    exists: true
+    filetype: file
+    owner: root
+    group: root
 package:
-  chronie:
-    installed: false
+  jq:
+    installed: true
   cronie:
     installed: true
     versions:
