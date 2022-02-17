@@ -30,6 +30,15 @@ RUN mkdir -p /var/log/supervisor && \
       /usr/share/logstash/bin/logstash-plugin install logstash-input-cloudwatch_logs logstash-output-opensearch && \
   chown -R logstash:logstash /usr/share/logstash
 
+WORKDIR /usr/share/logstash/
+
+# Workaround for Sinatra bug
+RUN sed --in-place "s/gem.add_runtime_dependency \"sinatra\", '~> 2'/gem.add_runtime_dependency \"sinatra\", '~> 2.1.0'/g" \
+    /usr/share/logstash/logstash-core/logstash-core.gemspec && \
+    rm Gemfile.lock && \
+    /usr/share/logstash/bin/ruby -S /usr/share/logstash/vendor/bundle/jruby/2.5.0/bin/bundle install
+
+WORKDIR /
 EXPOSE     9600
 
 COPY conf/supervisord.conf /etc/supervisord.conf
