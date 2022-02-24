@@ -31,6 +31,7 @@ pull_trivy_db
 
 TRIVY_CACHE_DIR=trivy trivy image \
   --skip-update \
+  --ignore-unfixed \
   --exit-code 1 \
   --severity "CRITICAL" \
   ${DOCKER_IMAGE} 
