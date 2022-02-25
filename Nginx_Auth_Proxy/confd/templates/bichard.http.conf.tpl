@@ -158,7 +158,7 @@ location ~ ^/bichard-ui/(Health|Connectivity|ResubmitFailedPNCMessages|images|cs
 }
 
 # Allow access to bichard-api resubmit PNC failed messages without authentication
-location ~ ^/bichard-ui/ResubmitFailedPNCMessages.*$ {
+location ~ ^/bichard-api/ResubmitFailedPNCMessages.*$ {
     include /etc/includes/headers.conf;
     proxy_pass        https://$app;
     proxy_ssl_verify  {{ getv "/cjse/nginx/proxysslverify" "on" }};
