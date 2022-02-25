@@ -170,6 +170,15 @@ location ~ ^/bichard-ui/(Health|Connectivity|ResubmitFailedPNCMessages|images|cs
     proxy_cookie_flags ~ httponly secure samesite=strict;
 }
 
+# Allow access to bichard-api resubmit PNC failed messages without authentication
+location ~ ^/bichard-api/ResubmitFailedPNCMessages.*$ {
+    add_header  Strict-Transport-Security "max-age=31536000; includeSubDomains" always;
+    include /etc/includes/headers.conf;
+    proxy_pass        https://$app;
+    proxy_ssl_verify  {{ getv "/cjse/nginx/proxysslverify" "on" }};
+    proxy_cookie_flags ~ httponly secure samesite=strict;
+}
+
 location /bichard-ui/login.jsp {
     absolute_redirect off;
     return 301 /;
