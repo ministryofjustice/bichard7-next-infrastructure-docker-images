@@ -162,7 +162,7 @@ location ~ ^/users/(login|assets|_next/static|403|404|500|faq)(.*)$ {
 }
 
 # Allow access to bichard-ui health check, connectivity and static endpoints without authentication
-location ~ ^/bichard-ui/(Health|Connectivity|images|css).*$ {
+location ~ ^/bichard-ui/(Health|Connectivity|ResubmitFailedPNCMessages|images|css).*$ {
     add_header  Strict-Transport-Security "max-age=31536000; includeSubDomains" always;
     include /etc/includes/headers.conf;
     proxy_pass        https://$app;
