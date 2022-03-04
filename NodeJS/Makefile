@@ -4,10 +4,4 @@ SHELL := /bin/bash # Use bash syntax
 image = nodejs
 
 build:
-	set -e; \
-	docker build -t "$(image)" . ;\
-	if [[ "${SKIP_GOSS}x" == "truex" ]]; then \
-  		echo "Skipping dgoss tests"; \
-	else \
-		GOSS_SLEEP=15 dgoss run $(image); \
-	fi
+	./build.sh
