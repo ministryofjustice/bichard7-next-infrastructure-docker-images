@@ -12,7 +12,7 @@ build-and-run: build run-test-nginx
 
 .PHONY: build
 build:
-	docker build -t "$(image)" .
+	docker build --platform linux/amd64 -t "$(image)" .
 
 .PHONY: goss
 goss:
