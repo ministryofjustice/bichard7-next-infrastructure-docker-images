@@ -8,6 +8,7 @@ proxy_ssl_trusted_certificate   /etc/ssl/certs/ca-bundle.crt;
 
 resolver {{ getv "/cjse/nginx/dns/resolver" "127.0.0.11" }};
 set $app "{{ getv "/cjse/nginx/app/domain" }}";
+set $bichardbackend "{{ getv "/cjse/nginx/bichardbackend/domain" }}";
 set $userservice "{{ getv "/cjse/nginx/userservice/domain" }}";
 set $auditlogging "{{ getv "/cjse/nginx/auditlogging/domain" }}";
 set $staticservice "{{ getv "/cjse/nginx/staticservice/domain" }}";
@@ -173,6 +174,16 @@ location ~ ^/bichard-ui/(Health|Connectivity|images|css).*$ {
 location /bichard-ui/login.jsp {
     absolute_redirect off;
     return 301 /;
+}
+
+# Allow access to bichard-backend /Connectivity without authentication 
+location /bichard-backend/Connectivity {
+    add_header  Strict-Transport-Security "max-age=31536000; includeSubDomains" always;
+    include /etc/includes/headers.conf;
+    proxy_pass        https://$bichardbackend/bichard-ui/Connectivity;
+
+    proxy_ssl_verify  {{ getv "/cjse/nginx/proxysslverify" "on" }};
+    proxy_cookie_flags ~ httponly secure samesite=strict;
 }
 
 # Healthcheck endpoint
