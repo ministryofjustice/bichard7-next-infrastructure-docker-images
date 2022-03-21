@@ -143,7 +143,7 @@
           }
         ],
         "executionErrorState": "alerting",
-        "for": "3m",
+        "for": "5m",
         "frequency": "1m",
         "handler": 1,
         "message": "Endpoint probe is not responding",
@@ -279,7 +279,7 @@
           }
         ],
         "executionErrorState": "alerting",
-        "for": "3m",
+        "for": "5m",
         "frequency": "1m",
         "handler": 1,
         "message": "Audit Logging Endpoint probe is not responding",
@@ -415,7 +415,7 @@
           }
         ],
         "executionErrorState": "alerting",
-        "for": "3m",
+        "for": "5m",
         "frequency": "1m",
         "handler": 1,
         "message": "Bichard Web endpoint probe is not responding",
@@ -765,7 +765,7 @@
           }
         ],
         "executionErrorState": "alerting",
-        "for": "3m",
+        "for": "5m",
         "frequency": "1m",
         "handler": 1,
         "message": "Elasticsearch endpoint probe is not responding",
@@ -994,7 +994,7 @@
           }
         ],
         "executionErrorState": "alerting",
-        "for": "3m",
+        "for": "5m",
         "frequency": "1m",
         "handler": 1,
         "message": "Grafana endpoint probe is not responding",
@@ -1130,7 +1130,7 @@
           }
         ],
         "executionErrorState": "alerting",
-        "for": "3m",
+        "for": "5m",
         "frequency": "1m",
         "handler": 1,
         "message": "Prometheus endpoint probe is not responding",
