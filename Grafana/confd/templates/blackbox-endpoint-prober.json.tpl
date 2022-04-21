@@ -1253,5 +1253,5 @@
   "timezone": "",
   "title": "Bichard7 Endpoint Statuses",
   "uid": "L4BnVlcnz",
-  "version": 214
+  "version": 215
 }
