@@ -4,30 +4,31 @@ FROM ${BUILD_IMAGE}
 LABEL maintainer="CJSE"
 ARG CONFD_VERSION="0.16.0"
 ARG CONFD_CHECKSUM="255d2559f3824dd64df059bdc533fd6b697c070db603c76aaf8d1d5e6b0cc334"
+ARG ARCH="amd64"
 
 WORKDIR /
 
 COPY files/openssl.cnf /tmp/openssl.cnf
 
 RUN mkdir -p /certs && \
-    mkdir -p /var/log/supervisor && \
+  mkdir -p /var/log/supervisor && \
   yum install -y \
-    nginx \
-    supervisor \
-    httpd-tools && \
+  nginx \
+  supervisor \
+  httpd-tools && \
   yum clean all && \
   rm -rf /var/cache/yum && \
   openssl req \
-    -x509 \
-    -nodes \
-    -days 730 \
-    -newkey rsa:4096 \
-    -out /certs/server.crt \
-    -keyout /certs/server.key \
-    -config /tmp/openssl.cnf \
-    -extensions 'v3_req' && \
+  -x509 \
+  -nodes \
+  -days 730 \
+  -newkey rsa:4096 \
+  -out /certs/server.crt \
+  -keyout /certs/server.key \
+  -config /tmp/openssl.cnf \
+  -extensions 'v3_req' && \
   rm -rf /tmp/openssl.cnf && \
-  wget -O /bin/confd https://github.com/kelseyhightower/confd/releases/download/v${CONFD_VERSION}/confd-${CONFD_VERSION}-linux-amd64 -nv && \
+  wget -O /bin/confd https://github.com/kelseyhightower/confd/releases/download/v${CONFD_VERSION}/confd-${CONFD_VERSION}-linux-${ARCH} -nv && \
   echo "${CONFD_CHECKSUM}  /bin/confd" | sha256sum -c && \
   chmod +x /bin/confd && \
   mkdir -p /etc/confd/conf.d && \

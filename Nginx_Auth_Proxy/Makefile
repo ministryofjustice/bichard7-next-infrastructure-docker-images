@@ -14,6 +14,10 @@ build-and-run: build run-test-nginx
 build:
 	docker build --platform linux/amd64 -t "$(image)" .
 
+.PHONY: buildx
+buildx:
+	docker build --platform linux/arm64 --build-arg BUILD_IMAGE=nginx-supervisord:arm -t "$(image)" .
+
 .PHONY: goss
 goss:
 	set -e; \

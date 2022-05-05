@@ -11,3 +11,6 @@ build:
 	else \
 		GOSS_SLEEP=15 dgoss run $(image); \
 	fi
+
+buildx:
+	docker build --platform linux/arm64 -t "$(image):arm" .

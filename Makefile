@@ -46,3 +46,11 @@ $(MONITORING_CONTAINERS):
 
 Grafana_Codebuild Grafana Logstash: Amazon_Linux_Base
 Prometheus Prometheus_Cloudwatch_Exporter Prometheus_BlackBox_Exporter: Nginx_Java_Supervisord
+
+.PHONY: buildx
+buildx:
+	$(MAKE) -C Amazon_Linux_Base buildx
+	$(MAKE) -C Nginx_Supervisord buildx
+	# $(MAKE) -C Nginx_Auth_Proxy buildx
+	$(MAKE) -C NodeJS buildx
+	$(MAKE) -C Nginx_NodeJS_Supervisord buildx
