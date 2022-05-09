@@ -1,7 +1,9 @@
 #!/usr/bin/env bash
 
-set -e
+set -ex
 
+
+yum update -y
 yum install -y deltarpm
 yum groupinstall -y "Development tools"
 yum install -y ${YUM_PACKAGES}
