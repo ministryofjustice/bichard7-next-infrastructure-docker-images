@@ -53,3 +53,4 @@ packer.log
 Nginx_Auth_Proxy/test/node_modules
 logstash_conf/
 Logstash/goss.env
+ci.docker/

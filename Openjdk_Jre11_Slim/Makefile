@@ -5,7 +5,7 @@ image = openjdk-jre11-slim
 
 build:
 	set -e; \
-	docker build -t "$(image)" . ;\
+	docker build --platform linux/amd64 -t "$(image)" . ;\
 	if [[ "${SKIP_GOSS}x" == "truex" ]]; then \
 	  	echo "Skipping dgoss tests"; \
 	else \

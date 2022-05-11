@@ -230,7 +230,7 @@
           "format": "time_series",
           "interval": "",
           "intervalFactor": 1,
-          "legendFormat": ""{{"{{"}}instance{{"}}"}}"",
+          "legendFormat": "{{"{{"}}instance{{"}}"}}",
           "refId": "A"
         }
       ],
@@ -366,7 +366,7 @@
           "format": "time_series",
           "interval": "",
           "intervalFactor": 1,
-          "legendFormat": ""{{"{{"}}instance{{"}}"}}"",
+          "legendFormat": "{{"{{"}}instance{{"}}"}}",
           "refId": "A"
         }
       ],
@@ -498,11 +498,11 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "probe_success{instance=\"https://bichard-web.{{getv "/cjse/infra/domain" "cjse.org"}}/bichard-ui/Health\"}",
+          "expr": "probe_success{instance=\"https://proxy.{{getv "/cjse/infra/domain" "cjse.org"}}/bichard-ui/Connectivity\"}",
           "format": "time_series",
           "interval": "",
           "intervalFactor": 1,
-          "legendFormat": ""{{"{{"}}instance{{"}}"}}"",
+          "legendFormat": "{{"{{"}}instance{{"}}"}}",
           "refId": "A"
         }
       ],
@@ -589,7 +589,7 @@
           "instant": true,
           "interval": "",
           "intervalFactor": 1,
-          "legendFormat": ""{{"{{"}}instance{{"}}"}}"",
+          "legendFormat": "{{"{{"}}instance{{"}}"}}",
           "refId": "A"
         }
       ],
@@ -712,11 +712,11 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "probe_success{instance=\"https://bichard-backend.{{getv "/cjse/infra/domain" "cjse.org"}}/bichard-ui/Connectivity\"}",
+          "expr": "probe_success{instance=\"https://proxy.{{getv "/cjse/infra/domain" "cjse.org"}}/bichard-backend/Connectivity\"}",
           "format": "time_series",
           "interval": "",
           "intervalFactor": 1,
-          "legendFormat": ""{{"{{"}}instance{{"}}"}}"",
+          "legendFormat": "{{"{{"}}instance{{"}}"}}",
           "refId": "A"
         }
       ],
@@ -852,7 +852,7 @@
           "format": "time_series",
           "interval": "",
           "intervalFactor": 1,
-          "legendFormat": ""{{"{{"}}instance{{"}}"}}"",
+          "legendFormat": "{{"{{"}}instance{{"}}"}}",
           "refId": "A"
         }
       ],
@@ -917,7 +917,7 @@
           "expr": "probe_duration_seconds",
           "format": "time_series",
           "intervalFactor": 1,
-          "legendFormat": ""{{"{{"}}instance{{"}}"}}"",
+          "legendFormat": "{{"{{"}}instance{{"}}"}}",
           "refId": "A"
         }
       ],
@@ -1081,7 +1081,7 @@
           "format": "time_series",
           "interval": "",
           "intervalFactor": 1,
-          "legendFormat": ""{{"{{"}}instance{{"}}"}}"",
+          "legendFormat": "{{"{{"}}instance{{"}}"}}",
           "refId": "A"
         }
       ],
@@ -1217,7 +1217,7 @@
           "format": "time_series",
           "interval": "",
           "intervalFactor": 1,
-          "legendFormat": ""{{"{{"}}instance{{"}}"}}"",
+          "legendFormat": "{{"{{"}}instance{{"}}"}}",
           "refId": "A"
         }
       ],
@@ -1253,5 +1253,5 @@
   "timezone": "",
   "title": "Bichard7 Endpoint Statuses",
   "uid": "L4BnVlcnz",
-  "version": 214
+  "version": 215
 }
