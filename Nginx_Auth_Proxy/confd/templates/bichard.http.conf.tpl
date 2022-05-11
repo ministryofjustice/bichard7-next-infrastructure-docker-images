@@ -5,6 +5,7 @@ proxy_ssl_trusted_certificate   /etc/ssl/certs/ca-bundle.crt;
 
 resolver {{ getv "/cjse/nginx/dns/resolver" "127.0.0.11" }};
 set $app "{{ getv "/cjse/nginx/app/domain" }}";
+set $bichardbackend "{{ getv "/cjse/nginx/bichardbackend/domain" }}";
 set $userservice "{{ getv "/cjse/nginx/userservice/domain" }}";
 set $auditlogging "{{ getv "/cjse/nginx/auditlogging/domain" }}";
 set $staticservice "{{ getv "/cjse/nginx/staticservice/domain" }}";
@@ -155,6 +156,15 @@ location ~ ^/bichard-ui/(Health|Connectivity|images|css).*$ {
     proxy_pass        https://$app;
     proxy_ssl_verify  {{ getv "/cjse/nginx/proxysslverify" "on" }};
     proxy_cookie_flags ~ httponly samesite=strict;
+}
+
+# Allow access to bichard-backend /Connectivity without authentication 
+location /bichard-backend/Connectivity {
+    include /etc/includes/headers.conf;
+    proxy_pass        https://$bichardbackend/bichard-ui/Connectivity;
+
+    proxy_ssl_verify  {{ getv "/cjse/nginx/proxysslverify" "on" }};
+    proxy_cookie_flags ~ httponly secure samesite=strict;
 }
 
 location /bichard-ui/login.jsp {

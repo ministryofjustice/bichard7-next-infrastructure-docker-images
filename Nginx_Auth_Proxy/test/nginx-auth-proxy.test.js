@@ -39,6 +39,7 @@ describe("Testing Nginx config", () => {
       user: new MockServer({ port: 60002, https: true }),
       audit: new MockServer({ port: 60003, https: true }),
       static: new MockServer({ port: 60004, https: true }),
+      backend: new MockServer({ port: 60005, https: true }),
     };
     await Promise.all(Object.values(servers).map((server) => server.start()));
   });
@@ -68,6 +69,12 @@ describe("Testing Nginx config", () => {
     { path: "/bichard-ui/Connectivity", route: "bichard", auth: false },
     { path: "/bichard-ui/images/foo.gif", route: "bichard", auth: false },
     { path: "/bichard-ui/css/style.css", route: "bichard", auth: false },
+    {
+      path: "/bichard-backend/Connectivity",
+      route: "backend",
+      dest: "/bichard-ui/Connectivity",
+      auth: false,
+    },
   ];
 
   const defaultHeaders = {
