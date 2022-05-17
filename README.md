@@ -27,3 +27,4 @@ To scan the images for vulnerabilities we use trivy see https://aquasecurity.git
 ## Building locally
 
 You can skip the goss/dgoss requirement by setting the environment variable `SKIP_GOSS=true`
+
