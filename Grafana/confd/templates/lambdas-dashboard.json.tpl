@@ -914,7 +914,7 @@
           "datasource": null,
           "editorMode": "code",
           "exemplar": false,
-          "expr": "sum(aws_lambda_errors_sum{function_name=~\"bichard-7-.*-archive-user-logs|bichard-7-.*-add-archival-events|bichard-7-.*-retry-failed-messages|cjse-bichard7-.*-base-infra-opensearch-snapshot-lambda|.*-query-pnc-connection|bichard-7-.*-resubmit-pnc-failures|secrets_rotation_lambda\"})",
+          "expr": "sum(aws_lambda_errors_sum{function_name=~\"bichard-7-.*-archive-user-logs|bichard-7-.*-add-archival-events|bichard-7-.*-retry-failed-messages|cjse-bichard7-.*-base-infra-opensearch-snapshot-lambda|.*-query-pnc-connection|bichard-7-.*-resubmit-pnc-failures|secrets_rotation_lambda\"}) + sum(logmetrics_add_archival_events_errors)",
           "format": "time_series",
           "instant": false,
           "legendFormat": "Other lambdas",
@@ -1001,7 +1001,7 @@
           "datasource": null,
           "editorMode": "code",
           "exemplar": false,
-          "expr": "sum(aws_lambda_errors_sum{function_name=~\"bichard-7-.*-archive-user-logs|bichard-7-.*-add-archival-events|bichard-7-.*-retry-failed-messages|cjse-bichard7-.*-base-infra-opensearch-snapshot-lambda|.*-query-pnc-connection|bichard-7-.*-resubmit-pnc-failures|secrets_rotation_lambda\"})",
+          "expr": "sum(aws_lambda_errors_sum{function_name=~\"bichard-7-.*-archive-user-logs|bichard-7-.*-add-archival-events|bichard-7-.*-retry-failed-messages|cjse-bichard7-.*-base-infra-opensearch-snapshot-lambda|.*-query-pnc-connection|bichard-7-.*-resubmit-pnc-failures|secrets_rotation_lambda\"}) + sum(logmetrics_add_archival_events_errors)",
           "format": "time_series",
           "instant": false,
           "legendFormat": "Other lambdas",
@@ -5111,7 +5111,7 @@
           "datasource": null,
           "editorMode": "code",
           "exemplar": false,
-          "expr": "sum(aws_lambda_errors_sum{function_name=\"bichard-7-.*-add-archival-events\"})",
+          "expr": "sum(aws_lambda_errors_sum{function_name=\"bichard-7-.*-add-archival-events\"}) + sum(logmetrics_add_archival_events_errors)",
           "format": "time_series",
           "instant": false,
           "interval": "0",
@@ -5235,9 +5235,10 @@
       "pluginVersion": "8.5.2",
       "targets": [
         {
+          "datasource": null,
           "editorMode": "code",
           "exemplar": false,
-          "expr": "aws_lambda_errors_sum{function_name=\"bichard-7-.*-add-archival-events\"}",
+          "expr": "aws_lambda_errors_sum{function_name=\"bichard-7-.*-add-archival-events\"} + sum(logmetrics_add_archival_events_errors)",
           "format": "time_series",
           "instant": false,
           "interval": "0",
@@ -6479,6 +6480,6 @@
   "timezone": "",
   "title": "Bichard Lambdas Errors",
   "uid": "OqdK1Du7z",
-  "version": 4,
+  "version": 6,
   "weekStart": ""
 }
