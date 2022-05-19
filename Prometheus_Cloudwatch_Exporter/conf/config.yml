@@ -264,4 +264,7 @@ metrics:
 
   - aws_namespace: LogMetrics
     aws_metric_name: UserLoginEvents
+
+  - aws_namespace: LogMetrics
+    aws_metric_name: AddArchivalEventsErrors
 ...
