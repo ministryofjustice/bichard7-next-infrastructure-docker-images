@@ -577,7 +577,7 @@
         "frequency": "1m",
         "handler": 1,
         "message": "Error in reporting lambdas",
-        "name": " alert",
+        "name": "Reporting lambdas alert",
         "noDataState": "no_data",
         "notifications": []
       },
@@ -763,7 +763,7 @@
         "frequency": "1m",
         "handler": 1,
         "message": "Error in Audit Log API lambdas",
-        "name": " alert",
+        "name": "Audit Log API lambdas alert",
         "noDataState": "no_data",
         "notifications": []
       },
@@ -1115,7 +1115,7 @@
         "frequency": "1m",
         "handler": 1,
         "message": "Error in Transfer Messages lambda",
-        "name": " alert",
+        "name": "Transfer Messages lambda alert",
         "noDataState": "no_data",
         "notifications": []
       },
@@ -1497,7 +1497,7 @@
         "frequency": "1m",
         "handler": 1,
         "message": "Error in Send to Bichard lambda",
-        "name": " alert",
+        "name": "Send to Bichard lambda alert",
         "noDataState": "no_data",
         "notifications": []
       },
@@ -1710,7 +1710,7 @@
         "frequency": "1m",
         "handler": 1,
         "message": "Error in Record Sent to Bichard Event lambda",
-        "name": " alert",
+        "name": "Record Sent to Bichard Event lambda alert",
         "noDataState": "no_data",
         "notifications": []
       },
@@ -2105,7 +2105,7 @@
         "frequency": "1m",
         "handler": 1,
         "message": "Error in Court Result Input Event Message Receiver",
-        "name": " alert",
+        "name": "Court Result Input Event Message Receiver lambda alert",
         "noDataState": "no_data",
         "notifications": []
       },
@@ -2318,7 +2318,7 @@
         "frequency": "1m",
         "handler": 1,
         "message": "Error in Audit Event Message Receiver lambda",
-        "name": " alert",
+        "name": "Audit Event Message Receiver lambda alert",
         "noDataState": "no_data",
         "notifications": []
       },
@@ -2531,7 +2531,7 @@
         "frequency": "1m",
         "handler": 1,
         "message": "Error in General Event Message Receiver lambda",
-        "name": " alert",
+        "name": "General Event Message Receiver lambda alert",
         "noDataState": "no_data",
         "notifications": []
       },
@@ -2745,7 +2745,7 @@
         "frequency": "1m",
         "handler": 1,
         "message": "Error in Hearing Outcome PNC Update Event Message Receiver lambda",
-        "name": " alert",
+        "name": "Hearing Outcome PNC Update Event Message Receiver lambda alert",
         "noDataState": "no_data",
         "notifications": []
       },
@@ -2960,7 +2960,7 @@
         "frequency": "1m",
         "handler": 1,
         "message": "Error in Hearing Outcome Input Event Message Receiver",
-        "name": " alert",
+        "name": "Hearing Outcome Input Event Message Receiver lambda alert",
         "noDataState": "no_data",
         "notifications": []
       },
@@ -3175,7 +3175,7 @@
         "frequency": "1m",
         "handler": 1,
         "message": "Error in PNC Update Request Event Message Receiver",
-        "name": " alert",
+        "name": "PNC Update Request Event Message Receiver lambda alert",
         "noDataState": "no_data",
         "notifications": []
       },
@@ -5109,7 +5109,7 @@
             "frequency": "1m",
             "handler": 1,
             "message": "Error in Add Archival Event lambda",
-            "name": " alert",
+            "name": "Add Archival Event lambda alert",
             "noDataState": "no_data",
             "notifications": []
           },
@@ -5321,7 +5321,7 @@
             "frequency": "1m",
             "handler": 1,
             "message": "Error in Archive User Logs lambda",
-            "name": " alert",
+            "name": "Archive User Logs lambda alert",
             "noDataState": "no_data",
             "notifications": []
           },
@@ -5531,7 +5531,7 @@
             "frequency": "1m",
             "handler": 1,
             "message": "Error in Retry Failed Messages lambda",
-            "name": " alert",
+            "name": "Retry Failed Messages lambda alert",
             "noDataState": "no_data",
             "notifications": []
           },
@@ -5742,7 +5742,7 @@
             "frequency": "1m",
             "handler": 1,
             "message": "Error in Resubmit PNC failures lambda",
-            "name": " alert",
+            "name": "Resubmit PNC failures lambda alert",
             "noDataState": "no_data",
             "notifications": []
           },
@@ -5953,7 +5953,7 @@
             "frequency": "1m",
             "handler": 1,
             "message": "Error in Maintenance Page lambda",
-            "name": " alert",
+            "name": "Maintenance Page lambda alert",
             "noDataState": "no_data",
             "notifications": []
           },
