@@ -62,7 +62,7 @@ command:
       - /botocore\W+\d{1,}.\d{1,}.\d{1,}/
       - /click\W+\d{1,}.\d{1,}.\d{1,}/
       - /colorama\W+\d{1,}.\d{1,}.\d{1,}/
-      - /docutils\W+\d{1,}.\d{1,}.\d{1,}/
+      - /docutils\W+\d{1,}.\d{1,}(?:.\d{1,})?/
       - /importlib-metadata\W+\d{1,}.\d{1,}.\d{1,}/
       - /install\W+\d{1,}.\d{1,}.\d{1,}/
       - /jmespath\W+\d{1,}.\d{1,}.\d{1,}/
