@@ -1083,7 +1083,7 @@
           "format": "time_series",
           "instant": false,
           "interval": "",
-          "legendFormat": "{{function_name}}",
+          "legendFormat": "{{"{{"}}function_name{{"}}"}}",
           "range": true,
           "refId": "A"
         }
@@ -1210,7 +1210,7 @@
           "format": "time_series",
           "instant": false,
           "interval": "",
-          "legendFormat": "{{function_name}}",
+          "legendFormat": "{{"{{"}}function_name{{"}}"}}",
           "range": true,
           "refId": "A"
         }
@@ -1299,7 +1299,7 @@
           "format": "time_series",
           "instant": false,
           "interval": "",
-          "legendFormat": "{{function_name}}",
+          "legendFormat": "{{"{{"}}function_name{{"}}"}}",
           "range": true,
           "refId": "A"
         }
@@ -1389,7 +1389,7 @@
           "format": "time_series",
           "instant": false,
           "interval": "",
-          "legendFormat": "{{function_name}}",
+          "legendFormat": "{{"{{"}}function_name{{"}}"}}",
           "range": true,
           "refId": "A"
         }
@@ -1470,7 +1470,7 @@
           "format": "time_series",
           "instant": false,
           "interval": "",
-          "legendFormat": "{{function_name}}",
+          "legendFormat": "{{"{{"}}function_name{{"}}"}}",
           "range": true,
           "refId": "A"
         }
@@ -1596,7 +1596,7 @@
           "format": "time_series",
           "instant": false,
           "interval": "",
-          "legendFormat": "{{function_name}}",
+          "legendFormat": "{{"{{"}}function_name{{"}}"}}",
           "range": true,
           "refId": "A"
         }
@@ -1685,7 +1685,7 @@
           "format": "time_series",
           "instant": false,
           "interval": "",
-          "legendFormat": "{{function_name}}",
+          "legendFormat": "{{"{{"}}function_name{{"}}"}}",
           "range": true,
           "refId": "A"
         }
@@ -1811,7 +1811,7 @@
           "format": "time_series",
           "instant": false,
           "interval": "",
-          "legendFormat": "{{function_name}}",
+          "legendFormat": "{{"{{"}}function_name{{"}}"}}",
           "range": true,
           "refId": "A"
         }
@@ -1913,7 +1913,7 @@
           "format": "time_series",
           "instant": false,
           "interval": "",
-          "legendFormat": "{{function_name}}",
+          "legendFormat": "{{"{{"}}function_name{{"}}"}}",
           "range": true,
           "refId": "A"
         }
@@ -2003,7 +2003,7 @@
           "format": "time_series",
           "instant": false,
           "interval": "",
-          "legendFormat": "{{function_name}}",
+          "legendFormat": "{{"{{"}}function_name{{"}}"}}",
           "range": true,
           "refId": "A"
         }
@@ -2084,7 +2084,7 @@
           "format": "time_series",
           "instant": false,
           "interval": "",
-          "legendFormat": "{{function_name}}",
+          "legendFormat": "{{"{{"}}function_name{{"}}"}}",
           "range": true,
           "refId": "A"
         }
@@ -2210,7 +2210,7 @@
           "format": "time_series",
           "instant": false,
           "interval": "",
-          "legendFormat": "{{function_name}}",
+          "legendFormat": "{{"{{"}}function_name{{"}}"}}",
           "range": true,
           "refId": "A"
         }
@@ -2299,7 +2299,7 @@
           "format": "time_series",
           "instant": false,
           "interval": "",
-          "legendFormat": "{{function_name}}",
+          "legendFormat": "{{"{{"}}function_name{{"}}"}}",
           "range": true,
           "refId": "A"
         }
@@ -2425,7 +2425,7 @@
           "format": "time_series",
           "instant": false,
           "interval": "",
-          "legendFormat": "{{function_name}}",
+          "legendFormat": "{{"{{"}}function_name{{"}}"}}",
           "range": true,
           "refId": "A"
         }
@@ -2514,7 +2514,7 @@
           "format": "time_series",
           "instant": false,
           "interval": "",
-          "legendFormat": "{{function_name}}",
+          "legendFormat": "{{"{{"}}function_name{{"}}"}}",
           "range": true,
           "refId": "A"
         }
@@ -2640,7 +2640,7 @@
           "format": "time_series",
           "instant": false,
           "interval": "",
-          "legendFormat": "{{function_name}}",
+          "legendFormat": "{{"{{"}}function_name{{"}}"}}",
           "range": true,
           "refId": "A"
         }
@@ -2729,7 +2729,7 @@
           "format": "time_series",
           "instant": false,
           "interval": "",
-          "legendFormat": "{{function_name}}",
+          "legendFormat": "{{"{{"}}function_name{{"}}"}}",
           "range": true,
           "refId": "A"
         }
@@ -2855,7 +2855,7 @@
           "format": "time_series",
           "instant": false,
           "interval": "",
-          "legendFormat": "{{function_name}}",
+          "legendFormat": "{{"{{"}}function_name{{"}}"}}",
           "range": true,
           "refId": "A"
         }
@@ -2944,7 +2944,7 @@
           "format": "time_series",
           "instant": false,
           "interval": "",
-          "legendFormat": "{{function_name}}",
+          "legendFormat": "{{"{{"}}function_name{{"}}"}}",
           "range": true,
           "refId": "A"
         }
@@ -3070,7 +3070,7 @@
           "format": "time_series",
           "instant": false,
           "interval": "",
-          "legendFormat": "{{function_name}}",
+          "legendFormat": "{{"{{"}}function_name{{"}}"}}",
           "range": true,
           "refId": "A"
         }
@@ -3159,7 +3159,7 @@
           "format": "time_series",
           "instant": false,
           "interval": "",
-          "legendFormat": "{{function_name}}",
+          "legendFormat": "{{"{{"}}function_name{{"}}"}}",
           "range": true,
           "refId": "A"
         }
@@ -3285,7 +3285,7 @@
           "format": "time_series",
           "instant": false,
           "interval": "",
-          "legendFormat": "{{function_name}}",
+          "legendFormat": "{{"{{"}}function_name{{"}}"}}",
           "range": true,
           "refId": "A"
         }
@@ -3387,7 +3387,7 @@
           "format": "time_series",
           "instant": false,
           "interval": "",
-          "legendFormat": "{{function_name}}",
+          "legendFormat": "{{"{{"}}function_name{{"}}"}}",
           "range": true,
           "refId": "A"
         }
@@ -3477,7 +3477,7 @@
           "format": "time_series",
           "instant": false,
           "interval": "",
-          "legendFormat": "{{function_name}}",
+          "legendFormat": "{{"{{"}}function_name{{"}}"}}",
           "range": true,
           "refId": "A"
         }
@@ -3558,7 +3558,7 @@
           "format": "time_series",
           "instant": false,
           "interval": "",
-          "legendFormat": "{{function_name}}",
+          "legendFormat": "{{"{{"}}function_name{{"}}"}}",
           "range": true,
           "refId": "A"
         }
@@ -3648,7 +3648,7 @@
           "format": "time_series",
           "instant": false,
           "interval": "",
-          "legendFormat": "{{function_name}}",
+          "legendFormat": "{{"{{"}}function_name{{"}}"}}",
           "range": true,
           "refId": "A"
         }
@@ -3729,7 +3729,7 @@
           "format": "time_series",
           "instant": false,
           "interval": "",
-          "legendFormat": "{{function_name}}",
+          "legendFormat": "{{"{{"}}function_name{{"}}"}}",
           "range": true,
           "refId": "A"
         }
@@ -3819,7 +3819,7 @@
           "format": "time_series",
           "instant": false,
           "interval": "",
-          "legendFormat": "{{function_name}}",
+          "legendFormat": "{{"{{"}}function_name{{"}}"}}",
           "range": true,
           "refId": "A"
         }
@@ -3900,7 +3900,7 @@
           "format": "time_series",
           "instant": false,
           "interval": "",
-          "legendFormat": "{{function_name}}",
+          "legendFormat": "{{"{{"}}function_name{{"}}"}}",
           "range": true,
           "refId": "A"
         }
@@ -3990,7 +3990,7 @@
           "format": "time_series",
           "instant": false,
           "interval": "",
-          "legendFormat": "{{function_name}}",
+          "legendFormat": "{{"{{"}}function_name{{"}}"}}",
           "range": true,
           "refId": "A"
         }
@@ -4071,7 +4071,7 @@
           "format": "time_series",
           "instant": false,
           "interval": "",
-          "legendFormat": "{{function_name}}",
+          "legendFormat": "{{"{{"}}function_name{{"}}"}}",
           "range": true,
           "refId": "A"
         }
@@ -4161,7 +4161,7 @@
           "format": "time_series",
           "instant": false,
           "interval": "",
-          "legendFormat": "{{function_name}}",
+          "legendFormat": "{{"{{"}}function_name{{"}}"}}",
           "range": true,
           "refId": "A"
         }
@@ -4242,7 +4242,7 @@
           "format": "time_series",
           "instant": false,
           "interval": "",
-          "legendFormat": "{{function_name}}",
+          "legendFormat": "{{"{{"}}function_name{{"}}"}}",
           "range": true,
           "refId": "A"
         }
@@ -4332,7 +4332,7 @@
           "format": "time_series",
           "instant": false,
           "interval": "",
-          "legendFormat": "{{function_name}}",
+          "legendFormat": "{{"{{"}}function_name{{"}}"}}",
           "range": true,
           "refId": "A"
         }
@@ -4425,7 +4425,7 @@
           "format": "time_series",
           "instant": false,
           "interval": "",
-          "legendFormat": "{{function_name}}",
+          "legendFormat": "{{"{{"}}function_name{{"}}"}}",
           "range": true,
           "refId": "A"
         }
@@ -4514,7 +4514,7 @@
           "format": "time_series",
           "instant": false,
           "interval": "",
-          "legendFormat": "{{function_name}}",
+          "legendFormat": "{{"{{"}}function_name{{"}}"}}",
           "range": true,
           "refId": "A"
         }
@@ -4594,7 +4594,7 @@
           "format": "time_series",
           "instant": false,
           "interval": "",
-          "legendFormat": "{{function_name}}",
+          "legendFormat": "{{"{{"}}function_name{{"}}"}}",
           "range": true,
           "refId": "A"
         }
@@ -4683,7 +4683,7 @@
           "format": "time_series",
           "instant": false,
           "interval": "",
-          "legendFormat": "{{function_name}}",
+          "legendFormat": "{{"{{"}}function_name{{"}}"}}",
           "range": true,
           "refId": "A"
         }
@@ -4763,7 +4763,7 @@
           "format": "time_series",
           "instant": false,
           "interval": "",
-          "legendFormat": "{{function_name}}",
+          "legendFormat": "{{"{{"}}function_name{{"}}"}}",
           "range": true,
           "refId": "A"
         }
@@ -4852,7 +4852,7 @@
           "format": "time_series",
           "instant": false,
           "interval": "",
-          "legendFormat": "{{function_name}}",
+          "legendFormat": "{{"{{"}}function_name{{"}}"}}",
           "range": true,
           "refId": "A"
         }
@@ -4932,7 +4932,7 @@
           "format": "time_series",
           "instant": false,
           "interval": "",
-          "legendFormat": "{{function_name}}",
+          "legendFormat": "{{"{{"}}function_name{{"}}"}}",
           "range": true,
           "refId": "A"
         }
@@ -5021,7 +5021,7 @@
           "format": "time_series",
           "instant": false,
           "interval": "",
-          "legendFormat": "{{function_name}}",
+          "legendFormat": "{{"{{"}}function_name{{"}}"}}",
           "range": true,
           "refId": "A"
         }
@@ -5330,7 +5330,7 @@
           "format": "time_series",
           "instant": false,
           "interval": "",
-          "legendFormat": "{{function_name}}",
+          "legendFormat": "{{"{{"}}function_name{{"}}"}}",
           "range": true,
           "refId": "A"
         }
@@ -5455,7 +5455,7 @@
           "format": "time_series",
           "instant": false,
           "interval": "",
-          "legendFormat": "{{function_name}}",
+          "legendFormat": "{{"{{"}}function_name{{"}}"}}",
           "range": true,
           "refId": "A"
         }
@@ -5542,7 +5542,7 @@
           "format": "time_series",
           "instant": false,
           "interval": "",
-          "legendFormat": "{{function_name}}",
+          "legendFormat": "{{"{{"}}function_name{{"}}"}}",
           "range": true,
           "refId": "A"
         }
@@ -5667,7 +5667,7 @@
           "format": "time_series",
           "instant": false,
           "interval": "",
-          "legendFormat": "{{function_name}}",
+          "legendFormat": "{{"{{"}}function_name{{"}}"}}",
           "range": true,
           "refId": "A"
         }
@@ -5755,7 +5755,7 @@
           "format": "time_series",
           "instant": false,
           "interval": "",
-          "legendFormat": "{{function_name}}",
+          "legendFormat": "{{"{{"}}function_name{{"}}"}}",
           "range": true,
           "refId": "A"
         }
@@ -5880,7 +5880,7 @@
           "format": "time_series",
           "instant": false,
           "interval": "",
-          "legendFormat": "{{function_name}}",
+          "legendFormat": "{{"{{"}}function_name{{"}}"}}",
           "range": true,
           "refId": "A"
         }
@@ -5968,7 +5968,7 @@
           "format": "time_series",
           "instant": false,
           "interval": "",
-          "legendFormat": "{{function_name}}",
+          "legendFormat": "{{"{{"}}function_name{{"}}"}}",
           "range": true,
           "refId": "A"
         }
@@ -6093,7 +6093,7 @@
           "format": "time_series",
           "instant": false,
           "interval": "",
-          "legendFormat": "{{function_name}}",
+          "legendFormat": "{{"{{"}}function_name{{"}}"}}",
           "range": true,
           "refId": "A"
         }
@@ -6181,7 +6181,7 @@
           "format": "time_series",
           "instant": false,
           "interval": "",
-          "legendFormat": "{{function_name}}",
+          "legendFormat": "{{"{{"}}function_name{{"}}"}}",
           "range": true,
           "refId": "A"
         }
@@ -6271,7 +6271,7 @@
           "format": "time_series",
           "instant": false,
           "interval": "",
-          "legendFormat": "{{function_name}}",
+          "legendFormat": "{{"{{"}}function_name{{"}}"}}",
           "range": true,
           "refId": "A"
         }
@@ -6351,7 +6351,7 @@
           "format": "time_series",
           "instant": false,
           "interval": "",
-          "legendFormat": "{{function_name}}",
+          "legendFormat": "{{"{{"}}function_name{{"}}"}}",
           "range": true,
           "refId": "A"
         }
@@ -6441,7 +6441,7 @@
           "format": "time_series",
           "instant": false,
           "interval": "",
-          "legendFormat": "{{function_name}}",
+          "legendFormat": "{{"{{"}}function_name{{"}}"}}",
           "range": true,
           "refId": "A"
         }
