@@ -25,7 +25,7 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
-  "id": 192,
+  "id": 226,
   "links": [],
   "liveNow": false,
   "panels": [
@@ -43,7 +43,6 @@
       "type": "row"
     },
     {
-      "datasource": null,
       "description": "",
       "fieldConfig": {
         "defaults": {
@@ -89,10 +88,9 @@
         },
         "textMode": "auto"
       },
-      "pluginVersion": "8.5.2",
+      "pluginVersion": "8.5.3",
       "targets": [
         {
-          "datasource": null,
           "editorMode": "code",
           "exemplar": false,
           "expr": "sum(aws_lambda_errors_sum)",
@@ -190,7 +188,6 @@
       "type": "timeseries"
     },
     {
-      "datasource": null,
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -237,10 +234,9 @@
         },
         "textMode": "auto"
       },
-      "pluginVersion": "8.5.2",
+      "pluginVersion": "8.5.3",
       "targets": [
         {
-          "datasource": null,
           "editorMode": "code",
           "exemplar": false,
           "expr": "sum(aws_lambda_errors_sum{function_name=~\"bichard-7-.*-transfer-messages|bichard-7-.*-record-sent-to-bichard-event|bichard-7-.*-send-to-bichard|bichard-7-.*-store-message|bichard-7-.*-transfer-messages\"})",
@@ -342,7 +338,6 @@
       "type": "timeseries"
     },
     {
-      "datasource": null,
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -387,10 +382,9 @@
         },
         "textMode": "auto"
       },
-      "pluginVersion": "8.5.2",
+      "pluginVersion": "8.5.3",
       "targets": [
         {
-          "datasource": null,
           "editorMode": "code",
           "exemplar": false,
           "expr": "sum(aws_lambda_errors_sum{function_name=~\"bichard-7-.*-message-|bichard-7-.*-store-event\"})",
@@ -489,7 +483,6 @@
       "type": "timeseries"
     },
     {
-      "datasource": null,
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -534,10 +527,9 @@
         },
         "textMode": "auto"
       },
-      "pluginVersion": "8.5.2",
+      "pluginVersion": "8.5.3",
       "targets": [
         {
-          "datasource": null,
           "editorMode": "code",
           "expr": "sum(aws_lambda_errors_sum{function_name=~\"bichard-7-.*-report\"})",
           "format": "time_series",
@@ -676,7 +668,6 @@
       "type": "timeseries"
     },
     {
-      "datasource": null,
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -721,10 +712,9 @@
         },
         "textMode": "auto"
       },
-      "pluginVersion": "8.5.2",
+      "pluginVersion": "8.5.3",
       "targets": [
         {
-          "datasource": null,
           "editorMode": "code",
           "expr": "sum(aws_lambda_errors_sum{function_name=~\"bichard-7-.*-create-audit-log|bichard-7-.*-create-audit-log-event|bichard-7-.*-get-messages|bichard-7-.*-retry-message\"})",
           "format": "time_series",
@@ -863,7 +853,6 @@
       "type": "timeseries"
     },
     {
-      "datasource": null,
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -908,10 +897,9 @@
         },
         "textMode": "auto"
       },
-      "pluginVersion": "8.5.2",
+      "pluginVersion": "8.5.3",
       "targets": [
         {
-          "datasource": null,
           "editorMode": "code",
           "exemplar": false,
           "expr": "sum(aws_lambda_errors_sum{function_name=~\"bichard-7-.*-archive-user-logs|bichard-7-.*-add-archival-events|bichard-7-.*-retry-failed-messages|cjse-bichard7-.*-base-infra-opensearch-snapshot-lambda|.*-query-pnc-connection|bichard-7-.*-resubmit-pnc-failures|secrets_rotation_lambda\"}) + sum(logmetrics_add_archival_events_errors)",
@@ -926,7 +914,6 @@
       "type": "stat"
     },
     {
-      "datasource": null,
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -998,7 +985,6 @@
       "pluginVersion": "8.5.2",
       "targets": [
         {
-          "datasource": null,
           "editorMode": "code",
           "exemplar": false,
           "expr": "sum(aws_lambda_errors_sum{function_name=~\"bichard-7-.*-archive-user-logs|bichard-7-.*-add-archival-events|bichard-7-.*-retry-failed-messages|cjse-bichard7-.*-base-infra-opensearch-snapshot-lambda|.*-query-pnc-connection|bichard-7-.*-resubmit-pnc-failures|secrets_rotation_lambda\"}) + sum(logmetrics_add_archival_events_errors)",
@@ -1026,7 +1012,6 @@
       "type": "row"
     },
     {
-      "datasource": null,
       "description": "",
       "fieldConfig": {
         "defaults": {
@@ -1039,8 +1024,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -1076,7 +1060,6 @@
       "pluginVersion": "8.5.2",
       "targets": [
         {
-          "datasource": null,
           "editorMode": "code",
           "exemplar": false,
           "expr": "sum(aws_lambda_errors_sum{function_name=~\"bichard-7-.*-transfer-messages\"})",
@@ -1129,7 +1112,6 @@
         "noDataState": "no_data",
         "notifications": []
       },
-      "datasource": null,
       "description": "",
       "fieldConfig": {
         "defaults": {
@@ -1170,8 +1152,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -1203,7 +1184,6 @@
       "pluginVersion": "8.5.2",
       "targets": [
         {
-          "datasource": null,
           "editorMode": "code",
           "exemplar": false,
           "expr": "aws_lambda_errors_sum{function_name=~\"bichard-7-.*-transfer-messages\"}",
@@ -1242,7 +1222,6 @@
       "type": "text"
     },
     {
-      "datasource": null,
       "description": "",
       "fieldConfig": {
         "defaults": {
@@ -1255,8 +1234,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -1292,7 +1270,6 @@
       "pluginVersion": "8.5.2",
       "targets": [
         {
-          "datasource": null,
           "editorMode": "code",
           "exemplar": false,
           "expr": "sum(aws_lambda_errors_sum{function_name=~\"bichard-7-.*-store-message\"})",
@@ -1309,7 +1286,6 @@
       "type": "stat"
     },
     {
-      "datasource": null,
       "description": "",
       "fieldConfig": {
         "defaults": {
@@ -1350,8 +1326,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -1413,7 +1388,6 @@
       "type": "text"
     },
     {
-      "datasource": null,
       "description": "",
       "fieldConfig": {
         "defaults": {
@@ -1426,8 +1400,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -1463,7 +1436,6 @@
       "pluginVersion": "8.5.2",
       "targets": [
         {
-          "datasource": null,
           "editorMode": "code",
           "exemplar": false,
           "expr": "sum(aws_lambda_errors_sum{function_name=~\"bichard-7-.*-send-to-bichard\"})",
@@ -1516,7 +1488,6 @@
         "noDataState": "no_data",
         "notifications": []
       },
-      "datasource": null,
       "description": "",
       "fieldConfig": {
         "defaults": {
@@ -1557,8 +1528,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -1628,7 +1598,6 @@
       "type": "text"
     },
     {
-      "datasource": null,
       "description": "",
       "fieldConfig": {
         "defaults": {
@@ -1641,8 +1610,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -1678,7 +1646,6 @@
       "pluginVersion": "8.5.2",
       "targets": [
         {
-          "datasource": null,
           "editorMode": "code",
           "exemplar": false,
           "expr": "sum(aws_lambda_errors_sum{function_name=~\"bichard-7-.*-record-sent-to-bichard-event\"})",
@@ -1731,7 +1698,6 @@
         "noDataState": "no_data",
         "notifications": []
       },
-      "datasource": null,
       "description": "",
       "fieldConfig": {
         "defaults": {
@@ -1772,8 +1738,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -1856,7 +1821,6 @@
       "type": "row"
     },
     {
-      "datasource": null,
       "description": "",
       "fieldConfig": {
         "defaults": {
@@ -1869,8 +1833,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -1906,7 +1869,6 @@
       "pluginVersion": "8.5.2",
       "targets": [
         {
-          "datasource": null,
           "editorMode": "code",
           "exemplar": false,
           "expr": "sum(aws_lambda_errors_sum{function_name=~\"bichard-7-.*-store-event\"})",
@@ -1923,7 +1885,6 @@
       "type": "stat"
     },
     {
-      "datasource": null,
       "description": "",
       "fieldConfig": {
         "defaults": {
@@ -1964,8 +1925,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -2027,7 +1987,6 @@
       "type": "text"
     },
     {
-      "datasource": null,
       "description": "",
       "fieldConfig": {
         "defaults": {
@@ -2040,8 +1999,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -2077,7 +2035,6 @@
       "pluginVersion": "8.5.2",
       "targets": [
         {
-          "datasource": null,
           "editorMode": "code",
           "exemplar": false,
           "expr": "sum(aws_lambda_errors_sum{function_name=~\"bichard-7-.*-court-result-input-event-message.*\"})",
@@ -2130,7 +2087,6 @@
         "noDataState": "no_data",
         "notifications": []
       },
-      "datasource": null,
       "description": "",
       "fieldConfig": {
         "defaults": {
@@ -2171,8 +2127,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -2242,7 +2197,6 @@
       "type": "text"
     },
     {
-      "datasource": null,
       "description": "",
       "fieldConfig": {
         "defaults": {
@@ -2255,8 +2209,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -2292,7 +2245,6 @@
       "pluginVersion": "8.5.2",
       "targets": [
         {
-          "datasource": null,
           "editorMode": "code",
           "exemplar": false,
           "expr": "sum(aws_lambda_errors_sum{function_name=~\"bichard-7-.*-audit-event-message.*\"})",
@@ -2345,7 +2297,6 @@
         "noDataState": "no_data",
         "notifications": []
       },
-      "datasource": null,
       "description": "",
       "fieldConfig": {
         "defaults": {
@@ -2386,8 +2337,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -2457,7 +2407,6 @@
       "type": "text"
     },
     {
-      "datasource": null,
       "description": "",
       "fieldConfig": {
         "defaults": {
@@ -2470,8 +2419,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -2507,7 +2455,6 @@
       "pluginVersion": "8.5.2",
       "targets": [
         {
-          "datasource": null,
           "editorMode": "code",
           "exemplar": false,
           "expr": "sum(aws_lambda_errors_sum{function_name=~\"bichard-7-.*-general-event-message.*\"})",
@@ -2560,7 +2507,6 @@
         "noDataState": "no_data",
         "notifications": []
       },
-      "datasource": null,
       "description": "",
       "fieldConfig": {
         "defaults": {
@@ -2601,8 +2547,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -2672,7 +2617,6 @@
       "type": "text"
     },
     {
-      "datasource": null,
       "description": "",
       "fieldConfig": {
         "defaults": {
@@ -2685,8 +2629,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -2722,7 +2665,6 @@
       "pluginVersion": "8.5.2",
       "targets": [
         {
-          "datasource": null,
           "editorMode": "code",
           "exemplar": false,
           "expr": "sum(aws_lambda_errors_sum{function_name=~\"bichard-7-.*-hearing-outcome-pnc-update-event-message.*\"})",
@@ -2775,7 +2717,6 @@
         "noDataState": "no_data",
         "notifications": []
       },
-      "datasource": null,
       "description": "",
       "fieldConfig": {
         "defaults": {
@@ -2816,8 +2757,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -2887,7 +2827,6 @@
       "type": "text"
     },
     {
-      "datasource": null,
       "description": "",
       "fieldConfig": {
         "defaults": {
@@ -2900,8 +2839,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -2937,7 +2875,6 @@
       "pluginVersion": "8.5.2",
       "targets": [
         {
-          "datasource": null,
           "editorMode": "code",
           "exemplar": false,
           "expr": "sum(aws_lambda_errors_sum{function_name=~\"bichard-7-.*-hearing-outcome-input-event-message.*\"})",
@@ -2990,7 +2927,6 @@
         "noDataState": "no_data",
         "notifications": []
       },
-      "datasource": null,
       "description": "",
       "fieldConfig": {
         "defaults": {
@@ -3031,8 +2967,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -3102,7 +3037,6 @@
       "type": "text"
     },
     {
-      "datasource": null,
       "description": "",
       "fieldConfig": {
         "defaults": {
@@ -3115,8 +3049,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -3152,7 +3085,6 @@
       "pluginVersion": "8.5.2",
       "targets": [
         {
-          "datasource": null,
           "editorMode": "code",
           "exemplar": false,
           "expr": "sum(aws_lambda_errors_sum{function_name=~\"bichard-7-.*-pnc-update-request-event-message.*\"})",
@@ -3205,7 +3137,6 @@
         "noDataState": "no_data",
         "notifications": []
       },
-      "datasource": null,
       "description": "",
       "fieldConfig": {
         "defaults": {
@@ -3246,8 +3177,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -3330,7 +3260,6 @@
       "type": "row"
     },
     {
-      "datasource": null,
       "description": "",
       "fieldConfig": {
         "defaults": {
@@ -3343,8 +3272,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -3380,7 +3308,6 @@
       "pluginVersion": "8.5.2",
       "targets": [
         {
-          "datasource": null,
           "editorMode": "code",
           "exemplar": false,
           "expr": "sum(aws_lambda_errors_sum{function_name=~\"bichard-7-.*-get-messages\"})",
@@ -3397,7 +3324,6 @@
       "type": "stat"
     },
     {
-      "datasource": null,
       "description": "",
       "fieldConfig": {
         "defaults": {
@@ -3438,8 +3364,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -3501,7 +3426,6 @@
       "type": "text"
     },
     {
-      "datasource": null,
       "description": "",
       "fieldConfig": {
         "defaults": {
@@ -3514,8 +3438,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -3551,7 +3474,6 @@
       "pluginVersion": "8.5.2",
       "targets": [
         {
-          "datasource": null,
           "editorMode": "code",
           "exemplar": false,
           "expr": "sum(aws_lambda_errors_sum{function_name=~\"bichard-7-.*-get-events\"})",
@@ -3568,7 +3490,6 @@
       "type": "stat"
     },
     {
-      "datasource": null,
       "description": "",
       "fieldConfig": {
         "defaults": {
@@ -3609,8 +3530,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -3672,7 +3592,6 @@
       "type": "text"
     },
     {
-      "datasource": null,
       "description": "",
       "fieldConfig": {
         "defaults": {
@@ -3685,8 +3604,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -3722,7 +3640,6 @@
       "pluginVersion": "8.5.2",
       "targets": [
         {
-          "datasource": null,
           "editorMode": "code",
           "exemplar": false,
           "expr": "sum(aws_lambda_errors_sum{function_name=~\"bichard-7-.*-create-audit-log\"})",
@@ -3739,7 +3656,6 @@
       "type": "stat"
     },
     {
-      "datasource": null,
       "description": "",
       "fieldConfig": {
         "defaults": {
@@ -3780,8 +3696,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -3843,7 +3758,6 @@
       "type": "text"
     },
     {
-      "datasource": null,
       "description": "",
       "fieldConfig": {
         "defaults": {
@@ -3856,8 +3770,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -3893,7 +3806,6 @@
       "pluginVersion": "8.5.2",
       "targets": [
         {
-          "datasource": null,
           "editorMode": "code",
           "exemplar": false,
           "expr": "sum(aws_lambda_errors_sum{function_name=~\"bichard-7-.*-create-audit-log-event\"})",
@@ -3910,7 +3822,6 @@
       "type": "stat"
     },
     {
-      "datasource": null,
       "description": "",
       "fieldConfig": {
         "defaults": {
@@ -3951,8 +3862,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -4014,7 +3924,6 @@
       "type": "text"
     },
     {
-      "datasource": null,
       "description": "",
       "fieldConfig": {
         "defaults": {
@@ -4027,8 +3936,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -4064,7 +3972,6 @@
       "pluginVersion": "8.5.2",
       "targets": [
         {
-          "datasource": null,
           "editorMode": "code",
           "exemplar": false,
           "expr": "sum(aws_lambda_errors_sum{function_name=~\"bichard-7-.*-sanitise-message\"})",
@@ -4081,7 +3988,6 @@
       "type": "stat"
     },
     {
-      "datasource": null,
       "description": "",
       "fieldConfig": {
         "defaults": {
@@ -4122,8 +4028,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -4185,7 +4090,6 @@
       "type": "text"
     },
     {
-      "datasource": null,
       "description": "",
       "fieldConfig": {
         "defaults": {
@@ -4198,8 +4102,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -4235,7 +4138,6 @@
       "pluginVersion": "8.5.2",
       "targets": [
         {
-          "datasource": null,
           "editorMode": "code",
           "exemplar": false,
           "expr": "sum(aws_lambda_errors_sum{function_name=~\"bichard-7-.*-retry-message\"})",
@@ -4252,7 +4154,6 @@
       "type": "stat"
     },
     {
-      "datasource": null,
       "description": "",
       "fieldConfig": {
         "defaults": {
@@ -4293,8 +4194,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -4369,7 +4269,6 @@
       "type": "row"
     },
     {
-      "datasource": null,
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -4381,8 +4280,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -4418,7 +4316,6 @@
       "pluginVersion": "8.5.2",
       "targets": [
         {
-          "datasource": null,
           "editorMode": "code",
           "exemplar": false,
           "expr": "sum(aws_lambda_errors_sum{function_name=~\"bichard-7-.*-common-platform-report\"})",
@@ -4435,7 +4332,6 @@
       "type": "stat"
     },
     {
-      "datasource": null,
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -4475,8 +4371,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -4538,7 +4433,6 @@
       "type": "text"
     },
     {
-      "datasource": null,
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -4550,8 +4444,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -4587,7 +4480,6 @@
       "pluginVersion": "8.5.2",
       "targets": [
         {
-          "datasource": null,
           "editorMode": "code",
           "exemplar": false,
           "expr": "sum(aws_lambda_errors_sum{function_name=~\"bichard-7-.*-top-exceptions-report\"})",
@@ -4604,7 +4496,6 @@
       "type": "stat"
     },
     {
-      "datasource": null,
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -4644,8 +4535,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -4707,7 +4597,6 @@
       "type": "text"
     },
     {
-      "datasource": null,
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -4719,8 +4608,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -4756,7 +4644,6 @@
       "pluginVersion": "8.5.2",
       "targets": [
         {
-          "datasource": null,
           "editorMode": "code",
           "exemplar": false,
           "expr": "sum(aws_lambda_errors_sum{function_name=~\"bichard-7-.*-automation-report\"})",
@@ -4773,7 +4660,6 @@
       "type": "stat"
     },
     {
-      "datasource": null,
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -4813,8 +4699,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -4876,7 +4761,6 @@
       "type": "text"
     },
     {
-      "datasource": null,
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -4888,8 +4772,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -4925,7 +4808,6 @@
       "pluginVersion": "8.5.2",
       "targets": [
         {
-          "datasource": null,
           "editorMode": "code",
           "exemplar": false,
           "expr": "sum(aws_lambda_errors_sum{function_name=~\"bichard-7-.*-mps-report\"})",
@@ -4942,7 +4824,6 @@
       "type": "stat"
     },
     {
-      "datasource": null,
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -4982,8 +4863,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -5058,7 +4938,6 @@
       "type": "row"
     },
     {
-      "datasource": null,
       "description": "",
       "fieldConfig": {
         "defaults": {
@@ -5071,8 +4950,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -5108,7 +4986,6 @@
       "pluginVersion": "8.5.2",
       "targets": [
         {
-          "datasource": null,
           "editorMode": "code",
           "exemplar": false,
           "expr": "sum(aws_lambda_errors_sum{function_name=\"bichard-7-.*-add-archival-events\"}) + sum(logmetrics_add_archival_events_errors)",
@@ -5161,7 +5038,6 @@
         "noDataState": "no_data",
         "notifications": []
       },
-      "datasource": null,
       "description": "",
       "fieldConfig": {
         "defaults": {
@@ -5202,8 +5078,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -5235,7 +5110,6 @@
       "pluginVersion": "8.5.2",
       "targets": [
         {
-          "datasource": null,
           "editorMode": "code",
           "exemplar": false,
           "expr": "aws_lambda_errors_sum{function_name=\"bichard-7-.*-add-archival-events\"} + sum(logmetrics_add_archival_events_errors)",
@@ -5274,7 +5148,6 @@
       "type": "text"
     },
     {
-      "datasource": null,
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -5286,8 +5159,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -5323,7 +5195,6 @@
       "pluginVersion": "8.5.2",
       "targets": [
         {
-          "datasource": null,
           "editorMode": "code",
           "exemplar": false,
           "expr": "sum(aws_lambda_errors_sum{function_name=~\"bichard-7-.*-archive-user-logs\"})",
@@ -5376,7 +5247,6 @@
         "noDataState": "no_data",
         "notifications": []
       },
-      "datasource": null,
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -5416,8 +5286,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -5487,7 +5356,6 @@
       "type": "text"
     },
     {
-      "datasource": null,
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -5499,8 +5367,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -5535,7 +5402,6 @@
       "pluginVersion": "8.5.2",
       "targets": [
         {
-          "datasource": null,
           "editorMode": "code",
           "exemplar": false,
           "expr": "sum(aws_lambda_errors_sum{function_name=~\"bichard-7-.*-retry-failed-messages\"})",
@@ -5588,7 +5454,6 @@
         "noDataState": "no_data",
         "notifications": []
       },
-      "datasource": null,
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -5628,8 +5493,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -5699,7 +5563,6 @@
       "type": "text"
     },
     {
-      "datasource": null,
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -5711,8 +5574,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -5748,7 +5610,6 @@
       "pluginVersion": "8.5.2",
       "targets": [
         {
-          "datasource": null,
           "editorMode": "code",
           "exemplar": false,
           "expr": "sum(aws_lambda_errors_sum{function_name=~\"bichard-7-.*-resubmit-pnc-failures\"})",
@@ -5801,7 +5662,6 @@
         "noDataState": "no_data",
         "notifications": []
       },
-      "datasource": null,
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -5841,8 +5701,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -5912,7 +5771,6 @@
       "type": "text"
     },
     {
-      "datasource": null,
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -5924,8 +5782,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -5961,7 +5818,6 @@
       "pluginVersion": "8.5.2",
       "targets": [
         {
-          "datasource": null,
           "editorMode": "code",
           "exemplar": false,
           "expr": "sum(aws_lambda_errors_sum{function_name=~\"bichard-7-.*-maintenance-page\"})",
@@ -6014,7 +5870,6 @@
         "noDataState": "no_data",
         "notifications": []
       },
-      "datasource": null,
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -6054,8 +5909,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -6125,7 +5979,6 @@
       "type": "text"
     },
     {
-      "datasource": null,
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -6137,8 +5990,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -6174,7 +6026,6 @@
       "pluginVersion": "8.5.2",
       "targets": [
         {
-          "datasource": null,
           "editorMode": "code",
           "exemplar": false,
           "expr": "sum(aws_lambda_errors_sum{function_name=~\"cjse-bichard7-.*-base-infra-opensearch-snapshot-lambda\"})",
@@ -6191,7 +6042,6 @@
       "type": "stat"
     },
     {
-      "datasource": null,
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -6231,8 +6081,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -6264,7 +6113,6 @@
       "pluginVersion": "8.5.2",
       "targets": [
         {
-          "datasource": null,
           "editorMode": "code",
           "exemplar": false,
           "expr": "aws_lambda_errors_sum{function_name=~\"cjse-bichard7-.*-base-infra-opensearch-snapshot-lambda\"}",
@@ -6295,7 +6143,6 @@
       "type": "text"
     },
     {
-      "datasource": null,
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -6307,8 +6154,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -6344,7 +6190,6 @@
       "pluginVersion": "8.5.2",
       "targets": [
         {
-          "datasource": null,
           "editorMode": "code",
           "exemplar": false,
           "expr": "sum(aws_lambda_errors_sum{function_name=~\"secrets_rotation_lambda\"})",
@@ -6361,7 +6206,6 @@
       "type": "stat"
     },
     {
-      "datasource": null,
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -6401,8 +6245,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -6434,7 +6277,6 @@
       "pluginVersion": "8.5.2",
       "targets": [
         {
-          "datasource": null,
           "editorMode": "code",
           "exemplar": false,
           "expr": "aws_lambda_errors_sum{function_name=~\"secrets_rotation_lambda\"}",
@@ -6480,6 +6322,6 @@
   "timezone": "",
   "title": "Bichard Lambdas Errors",
   "uid": "OqdK1Du7z",
-  "version": 6,
+  "version": 7,
   "weekStart": ""
 }
