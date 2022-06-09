@@ -25,7 +25,6 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
-  "id": 226,
   "links": [],
   "liveNow": false,
   "panels": [
@@ -43,6 +42,10 @@
       "type": "row"
     },
     {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "e6c0c6c2d40d11ebb8bc0242ac130003"
+      },
       "description": "",
       "fieldConfig": {
         "defaults": {
@@ -88,7 +91,7 @@
         },
         "textMode": "auto"
       },
-      "pluginVersion": "8.5.3",
+      "pluginVersion": "8.5.4",
       "targets": [
         {
           "editorMode": "code",
@@ -234,7 +237,7 @@
         },
         "textMode": "auto"
       },
-      "pluginVersion": "8.5.3",
+      "pluginVersion": "8.5.4",
       "targets": [
         {
           "editorMode": "code",
@@ -382,7 +385,7 @@
         },
         "textMode": "auto"
       },
-      "pluginVersion": "8.5.3",
+      "pluginVersion": "8.5.4",
       "targets": [
         {
           "editorMode": "code",
@@ -527,7 +530,7 @@
         },
         "textMode": "auto"
       },
-      "pluginVersion": "8.5.3",
+      "pluginVersion": "8.5.4",
       "targets": [
         {
           "editorMode": "code",
@@ -712,7 +715,7 @@
         },
         "textMode": "auto"
       },
-      "pluginVersion": "8.5.3",
+      "pluginVersion": "8.5.4",
       "targets": [
         {
           "editorMode": "code",
@@ -897,7 +900,7 @@
         },
         "textMode": "auto"
       },
-      "pluginVersion": "8.5.3",
+      "pluginVersion": "8.5.4",
       "targets": [
         {
           "editorMode": "code",
@@ -1024,7 +1027,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": null
               },
               {
                 "color": "red",
@@ -1057,7 +1061,7 @@
         "text": {},
         "textMode": "value"
       },
-      "pluginVersion": "8.5.2",
+      "pluginVersion": "8.5.4",
       "targets": [
         {
           "editorMode": "code",
@@ -1152,7 +1156,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": null
               },
               {
                 "color": "red",
@@ -1218,7 +1223,7 @@
         "content": "## Transfer Messages\nThis lambda transfers messages (uploaded by ExISS) from external incoming messages bucket to internal incoming messages bucket.\n\nThen incoming message handler step function is executed for each new message in S3 bucket.\n\n### Troubleshooting\n- Check cloudwatch logs\n- Check if lambda function has S3 permissions to copy from incoming messages bucket to internal incoming messages bucket.",
         "mode": "markdown"
       },
-      "pluginVersion": "8.5.2",
+      "pluginVersion": "8.5.4",
       "type": "text"
     },
     {
@@ -1234,7 +1239,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": null
               },
               {
                 "color": "red",
@@ -1267,7 +1273,7 @@
         "text": {},
         "textMode": "value"
       },
-      "pluginVersion": "8.5.2",
+      "pluginVersion": "8.5.4",
       "targets": [
         {
           "editorMode": "code",
@@ -1326,7 +1332,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": null
               },
               {
                 "color": "red",
@@ -1384,7 +1391,7 @@
         "content": "## Store Messages\nThis lambda validates and formats the received court result XML.\nThen it creates a record in DynamoDB via Audit Log API and pass the formatted XML to Send to Bichard lambda.\n\n### Troubleshooting\n- Check cloudwatch logs\n- Check if lambda has read access to internal incoming messages bucket (IAM Policy and Security Groups)\n- Check if lambda has access to Audit Log API (Security Groups)",
         "mode": "markdown"
       },
-      "pluginVersion": "8.5.2",
+      "pluginVersion": "8.5.4",
       "type": "text"
     },
     {
@@ -1400,7 +1407,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": null
               },
               {
                 "color": "red",
@@ -1433,7 +1441,7 @@
         "text": {},
         "textMode": "value"
       },
-      "pluginVersion": "8.5.2",
+      "pluginVersion": "8.5.4",
       "targets": [
         {
           "editorMode": "code",
@@ -1528,7 +1536,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": null
               },
               {
                 "color": "red",
@@ -1594,7 +1603,7 @@
         "content": "## Send to Bichard\nThis lambda transforms the XML structure to the format recognised by Bichard.\n\nThen it pushes the tranformed XML to `COURT_RESULT_INPUT_QUEUE` in Amazon MQ.\n\n### Troubleshooting\n- Check cloudwatch logs\n- Check if lambda has access to AmazonMQ (Security Groups)\n- Check AmazonMQ instance health",
         "mode": "markdown"
       },
-      "pluginVersion": "8.5.2",
+      "pluginVersion": "8.5.4",
       "type": "text"
     },
     {
@@ -1610,7 +1619,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": null
               },
               {
                 "color": "red",
@@ -1643,7 +1653,7 @@
         "text": {},
         "textMode": "value"
       },
-      "pluginVersion": "8.5.2",
+      "pluginVersion": "8.5.4",
       "targets": [
         {
           "editorMode": "code",
@@ -1738,7 +1748,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": null
               },
               {
                 "color": "red",
@@ -1804,7 +1815,7 @@
         "content": "## Record Sent to Bichard Event\nThis lambda creates an event against the audit log record in DynamoDB via Audit Log API indicating that the message has successfully been pushed to the Amazon MQ.\n\n### Troubleshooting\n- Check cloudwatch logs\n- Check if lambda has access to Audit Log API (Security Groups)",
         "mode": "markdown"
       },
-      "pluginVersion": "8.5.2",
+      "pluginVersion": "8.5.4",
       "type": "text"
     },
     {
@@ -1833,7 +1844,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": null
               },
               {
                 "color": "red",
@@ -1866,7 +1878,7 @@
         "text": {},
         "textMode": "value"
       },
-      "pluginVersion": "8.5.2",
+      "pluginVersion": "8.5.4",
       "targets": [
         {
           "editorMode": "code",
@@ -1925,7 +1937,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": null
               },
               {
                 "color": "red",
@@ -1983,10 +1996,14 @@
         "content": "## Store Event\nThis lambda function retrieves the event XML from S3 bucket and stores it in Audit Log DynamoDB table.\n\n### Troubleshooting\n- Check cloudwatch logs\n- Check if lambda has read access to audit-log-events S3 bucket (IAM Policy and Security Groups)\n- Check if lambda has access to Audit Log API (Security Groups)",
         "mode": "markdown"
       },
-      "pluginVersion": "8.5.2",
+      "pluginVersion": "8.5.4",
       "type": "text"
     },
     {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "e6c0c6c2d40d11ebb8bc0242ac130003"
+      },
       "description": "",
       "fieldConfig": {
         "defaults": {
@@ -1999,7 +2016,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": null
               },
               {
                 "color": "red",
@@ -2015,6 +2033,186 @@
         "w": 4,
         "x": 0,
         "y": 71
+      },
+      "id": 124,
+      "options": {
+        "colorMode": "background",
+        "graphMode": "none",
+        "justifyMode": "center",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "sum"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "text": {},
+        "textMode": "value"
+      },
+      "pluginVersion": "8.5.4",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "e6c0c6c2d40d11ebb8bc0242ac130003"
+          },
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "sum(logmetrics_store_event_s3_object_not_found)",
+          "format": "time_series",
+          "instant": false,
+          "interval": "",
+          "legendFormat": "{{"{{"}}function_name{{"}}"}}",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "Errors",
+      "transparent": true,
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "e6c0c6c2d40d11ebb8bc0242ac130003"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "noValue": "0",
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 1
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 4,
+        "y": 71
+      },
+      "id": 125,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "8.5.2",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "e6c0c6c2d40d11ebb8bc0242ac130003"
+          },
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "sum(logmetrics_store_event_s3_object_not_found)",
+          "format": "time_series",
+          "instant": false,
+          "interval": "",
+          "legendFormat": "{{"{{"}}function_name{{"}}"}}",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "Errors",
+      "type": "timeseries"
+    },
+    {
+      "gridPos": {
+        "h": 8,
+        "w": 8,
+        "x": 16,
+        "y": 71
+      },
+      "id": 126,
+      "options": {
+        "content": "## Store Event (S3 Object not found)\nAmazon EventBridge sometimes triggers more than once for the same event. In such cases, the event handler state machine is triggered more than once for the same S3 object. The first execution will process and delete the S3 object. Other executions end successfully as the S3 object does not exist anymore.\n\n### Troubleshooting\nNo need for troubleshooting.",
+        "mode": "markdown"
+      },
+      "pluginVersion": "8.5.4",
+      "type": "text"
+    },
+    {
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "noValue": "0",
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 1
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 4,
+        "x": 0,
+        "y": 79
       },
       "id": 25,
       "options": {
@@ -2032,7 +2230,7 @@
         "text": {},
         "textMode": "value"
       },
-      "pluginVersion": "8.5.2",
+      "pluginVersion": "8.5.4",
       "targets": [
         {
           "editorMode": "code",
@@ -2127,7 +2325,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": null
               },
               {
                 "color": "red",
@@ -2142,7 +2341,7 @@
         "h": 8,
         "w": 12,
         "x": 4,
-        "y": 71
+        "y": 79
       },
       "id": 72,
       "options": {
@@ -2186,14 +2385,14 @@
         "h": 8,
         "w": 8,
         "x": 16,
-        "y": 71
+        "y": 79
       },
       "id": 71,
       "options": {
         "content": "## Court Result Input Event Message Receiver\nReceives messages from `COURT_RESULT_INPUT_QUEUE` in Amazon MQ.\n\n### Troubleshooting\n- Check cloudwatch logs\n- Check lambda's event source mapping for failures.\n- Check if lambda has write access to audit-log-events S3 bucket.",
         "mode": "markdown"
       },
-      "pluginVersion": "8.5.2",
+      "pluginVersion": "8.5.4",
       "type": "text"
     },
     {
@@ -2209,7 +2408,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": null
               },
               {
                 "color": "red",
@@ -2224,7 +2424,7 @@
         "h": 8,
         "w": 4,
         "x": 0,
-        "y": 79
+        "y": 87
       },
       "id": 22,
       "options": {
@@ -2242,7 +2442,7 @@
         "text": {},
         "textMode": "value"
       },
-      "pluginVersion": "8.5.2",
+      "pluginVersion": "8.5.4",
       "targets": [
         {
           "editorMode": "code",
@@ -2337,7 +2537,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": null
               },
               {
                 "color": "red",
@@ -2352,7 +2553,7 @@
         "h": 8,
         "w": 12,
         "x": 4,
-        "y": 79
+        "y": 87
       },
       "id": 75,
       "options": {
@@ -2396,14 +2597,14 @@
         "h": 8,
         "w": 8,
         "x": 16,
-        "y": 79
+        "y": 87
       },
       "id": 74,
       "options": {
         "content": "## Audit Event Message Receiver\nReceives messages from `AUDIT_EVENT_QUEUE` in Amazon MQ.\n\n### Troubleshooting\n- Check cloudwatch logs\n- Check lambda's event source mapping for failures.\n- Check if lambda has write access to audit-log-events S3 bucket.",
         "mode": "markdown"
       },
-      "pluginVersion": "8.5.2",
+      "pluginVersion": "8.5.4",
       "type": "text"
     },
     {
@@ -2419,7 +2620,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": null
               },
               {
                 "color": "red",
@@ -2434,7 +2636,7 @@
         "h": 8,
         "w": 4,
         "x": 0,
-        "y": 87
+        "y": 95
       },
       "id": 28,
       "options": {
@@ -2452,7 +2654,7 @@
         "text": {},
         "textMode": "value"
       },
-      "pluginVersion": "8.5.2",
+      "pluginVersion": "8.5.4",
       "targets": [
         {
           "editorMode": "code",
@@ -2547,7 +2749,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": null
               },
               {
                 "color": "red",
@@ -2562,7 +2765,7 @@
         "h": 8,
         "w": 12,
         "x": 4,
-        "y": 87
+        "y": 95
       },
       "id": 77,
       "options": {
@@ -2606,14 +2809,14 @@
         "h": 8,
         "w": 8,
         "x": 16,
-        "y": 87
+        "y": 95
       },
       "id": 76,
       "options": {
         "content": "## General Event Message Receiver\nReceives messages from `GENERAL_EVENT_QUEUE` in Amazon MQ.\n\n### Troubleshooting\n- Check cloudwatch logs\n- Check lambda's event source mapping for failures.\n- Check if lambda has write access to audit-log-events S3 bucket.",
         "mode": "markdown"
       },
-      "pluginVersion": "8.5.2",
+      "pluginVersion": "8.5.4",
       "type": "text"
     },
     {
@@ -2629,7 +2832,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": null
               },
               {
                 "color": "red",
@@ -2644,7 +2848,7 @@
         "h": 8,
         "w": 4,
         "x": 0,
-        "y": 95
+        "y": 103
       },
       "id": 32,
       "options": {
@@ -2662,7 +2866,7 @@
         "text": {},
         "textMode": "value"
       },
-      "pluginVersion": "8.5.2",
+      "pluginVersion": "8.5.4",
       "targets": [
         {
           "editorMode": "code",
@@ -2757,7 +2961,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": null
               },
               {
                 "color": "red",
@@ -2772,7 +2977,7 @@
         "h": 8,
         "w": 12,
         "x": 4,
-        "y": 95
+        "y": 103
       },
       "id": 79,
       "options": {
@@ -2816,14 +3021,14 @@
         "h": 8,
         "w": 8,
         "x": 16,
-        "y": 95
+        "y": 103
       },
       "id": 78,
       "options": {
         "content": "## Hearing Outcome PNC Update Event\nReceives messages from `HEARING_OUTCOME_PNC_UPDATE_QUEUE` in Amazon MQ.\n\n### Troubleshooting\n- Check cloudwatch logs\n- Check lambda's event source mapping for failures.\n- Check if lambda has write access to audit-log-events S3 bucket.",
         "mode": "markdown"
       },
-      "pluginVersion": "8.5.2",
+      "pluginVersion": "8.5.4",
       "type": "text"
     },
     {
@@ -2839,7 +3044,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": null
               },
               {
                 "color": "red",
@@ -2854,7 +3060,7 @@
         "h": 8,
         "w": 4,
         "x": 0,
-        "y": 103
+        "y": 111
       },
       "id": 31,
       "options": {
@@ -2872,7 +3078,7 @@
         "text": {},
         "textMode": "value"
       },
-      "pluginVersion": "8.5.2",
+      "pluginVersion": "8.5.4",
       "targets": [
         {
           "editorMode": "code",
@@ -2967,7 +3173,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": null
               },
               {
                 "color": "red",
@@ -2982,7 +3189,7 @@
         "h": 8,
         "w": 12,
         "x": 4,
-        "y": 103
+        "y": 111
       },
       "id": 81,
       "options": {
@@ -3026,14 +3233,14 @@
         "h": 8,
         "w": 8,
         "x": 16,
-        "y": 103
+        "y": 111
       },
       "id": 80,
       "options": {
         "content": "## Hearing Outcome Input Event\nReceives messages from `HEARING_OUTCOME_INPUT_QUEUE` in Amazon MQ.\n\n### Troubleshooting\n- Check cloudwatch logs\n- Check lambda's event source mapping for failures.\n- Check if lambda has write access to audit-log-events S3 bucket.",
         "mode": "markdown"
       },
-      "pluginVersion": "8.5.2",
+      "pluginVersion": "8.5.4",
       "type": "text"
     },
     {
@@ -3049,7 +3256,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": null
               },
               {
                 "color": "red",
@@ -3064,7 +3272,7 @@
         "h": 8,
         "w": 4,
         "x": 0,
-        "y": 111
+        "y": 119
       },
       "id": 35,
       "options": {
@@ -3082,7 +3290,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "8.5.2",
+      "pluginVersion": "8.5.4",
       "targets": [
         {
           "editorMode": "code",
@@ -3177,7 +3385,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": null
               },
               {
                 "color": "red",
@@ -3192,7 +3401,7 @@
         "h": 8,
         "w": 12,
         "x": 4,
-        "y": 111
+        "y": 119
       },
       "id": 70,
       "options": {
@@ -3236,14 +3445,14 @@
         "h": 8,
         "w": 8,
         "x": 16,
-        "y": 111
+        "y": 119
       },
       "id": 73,
       "options": {
         "content": "## PNC Update Request Event Message Receiver\nReceives messages from `PNC_UPDATE_REQUEST_QUEUE` in Amazon MQ.\n\n### Troubleshooting\n- Check cloudwatch logs\n- Check lambda's event source mapping for failures.\n- Check if lambda has write access to audit-log-events S3 bucket.",
         "mode": "markdown"
       },
-      "pluginVersion": "8.5.2",
+      "pluginVersion": "8.5.4",
       "type": "text"
     },
     {
@@ -3252,7 +3461,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 119
+        "y": 127
       },
       "id": 66,
       "panels": [],
@@ -3272,7 +3481,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": null
               },
               {
                 "color": "red",
@@ -3287,7 +3497,7 @@
         "h": 8,
         "w": 4,
         "x": 0,
-        "y": 120
+        "y": 128
       },
       "id": 30,
       "options": {
@@ -3305,7 +3515,7 @@
         "text": {},
         "textMode": "value"
       },
-      "pluginVersion": "8.5.2",
+      "pluginVersion": "8.5.4",
       "targets": [
         {
           "editorMode": "code",
@@ -3364,7 +3574,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": null
               },
               {
                 "color": "red",
@@ -3379,7 +3590,7 @@
         "h": 8,
         "w": 12,
         "x": 4,
-        "y": 120
+        "y": 128
       },
       "id": 87,
       "options": {
@@ -3415,14 +3626,14 @@
         "h": 8,
         "w": 8,
         "x": 16,
-        "y": 120
+        "y": 128
       },
       "id": 82,
       "options": {
         "content": "## Get Messages\nThis lambda fetches messages from audit-log and audit-log-lookup DynamoDB tables.\n\n### Troubleshooting\n- Check cloudwatch logs\n- Check if lambda has access to audit-log and audit-log-lookup tables. (IAM Policy)\n- Check if lambda has access to DynamoDB (Security Groups)",
         "mode": "markdown"
       },
-      "pluginVersion": "8.5.2",
+      "pluginVersion": "8.5.4",
       "type": "text"
     },
     {
@@ -3438,7 +3649,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": null
               },
               {
                 "color": "red",
@@ -3453,7 +3665,7 @@
         "h": 8,
         "w": 4,
         "x": 0,
-        "y": 128
+        "y": 136
       },
       "id": 29,
       "options": {
@@ -3471,7 +3683,7 @@
         "text": {},
         "textMode": "value"
       },
-      "pluginVersion": "8.5.2",
+      "pluginVersion": "8.5.4",
       "targets": [
         {
           "editorMode": "code",
@@ -3530,7 +3742,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": null
               },
               {
                 "color": "red",
@@ -3545,7 +3758,7 @@
         "h": 8,
         "w": 12,
         "x": 4,
-        "y": 128
+        "y": 136
       },
       "id": 88,
       "options": {
@@ -3581,14 +3794,14 @@
         "h": 8,
         "w": 8,
         "x": 16,
-        "y": 128
+        "y": 136
       },
       "id": 83,
       "options": {
         "content": "## Get Events\nThis lambda fetches events of a message from audit-log and audit-log-lookup DynamoDB tables.\n\n### Troubleshooting\n- Check cloudwatch logs\n- Check if lambda has access to audit-log and audit-log-lookup tables. (IAM Policy)\n- Check if lambda has access to DynamoDB (Security Groups)",
         "mode": "markdown"
       },
-      "pluginVersion": "8.5.2",
+      "pluginVersion": "8.5.4",
       "type": "text"
     },
     {
@@ -3604,7 +3817,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": null
               },
               {
                 "color": "red",
@@ -3619,7 +3833,7 @@
         "h": 8,
         "w": 4,
         "x": 0,
-        "y": 136
+        "y": 144
       },
       "id": 26,
       "options": {
@@ -3637,7 +3851,7 @@
         "text": {},
         "textMode": "value"
       },
-      "pluginVersion": "8.5.2",
+      "pluginVersion": "8.5.4",
       "targets": [
         {
           "editorMode": "code",
@@ -3696,7 +3910,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": null
               },
               {
                 "color": "red",
@@ -3711,7 +3926,7 @@
         "h": 8,
         "w": 12,
         "x": 4,
-        "y": 136
+        "y": 144
       },
       "id": 89,
       "options": {
@@ -3747,14 +3962,14 @@
         "h": 8,
         "w": 8,
         "x": 16,
-        "y": 136
+        "y": 144
       },
       "id": 84,
       "options": {
         "content": "## Create Audit Log\nThis lambda creates an Audit Log record in audit-log DynamoDB tables.\n\n### Troubleshooting\n- Check cloudwatch logs\n- Check if lambda has access to audit-log tables. (IAM Policy)\n- Check if lambda has access to DynamoDB (Security Groups)",
         "mode": "markdown"
       },
-      "pluginVersion": "8.5.2",
+      "pluginVersion": "8.5.4",
       "type": "text"
     },
     {
@@ -3770,7 +3985,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": null
               },
               {
                 "color": "red",
@@ -3785,7 +4001,7 @@
         "h": 8,
         "w": 4,
         "x": 0,
-        "y": 144
+        "y": 152
       },
       "id": 27,
       "options": {
@@ -3803,7 +4019,7 @@
         "text": {},
         "textMode": "value"
       },
-      "pluginVersion": "8.5.2",
+      "pluginVersion": "8.5.4",
       "targets": [
         {
           "editorMode": "code",
@@ -3862,7 +4078,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": null
               },
               {
                 "color": "red",
@@ -3877,7 +4094,7 @@
         "h": 8,
         "w": 12,
         "x": 4,
-        "y": 144
+        "y": 152
       },
       "id": 90,
       "options": {
@@ -3913,14 +4130,14 @@
         "h": 8,
         "w": 8,
         "x": 16,
-        "y": 144
+        "y": 152
       },
       "id": 85,
       "options": {
         "content": "## Create Audit Log Event\nThis lambda creates an Audit Log Event against an existing Audit Log record in audit-log DynamoDB tables.\n\n### Troubleshooting\n- Check cloudwatch logs\n- Check if lambda has access to audit-log and audit-log-lookup tables. (IAM Policy)\n- Check if lambda has access to DynamoDB (Security Groups)",
         "mode": "markdown"
       },
-      "pluginVersion": "8.5.2",
+      "pluginVersion": "8.5.4",
       "type": "text"
     },
     {
@@ -3936,7 +4153,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": null
               },
               {
                 "color": "red",
@@ -3951,7 +4169,7 @@
         "h": 8,
         "w": 4,
         "x": 0,
-        "y": 152
+        "y": 160
       },
       "id": 40,
       "options": {
@@ -3969,7 +4187,7 @@
         "text": {},
         "textMode": "value"
       },
-      "pluginVersion": "8.5.2",
+      "pluginVersion": "8.5.4",
       "targets": [
         {
           "editorMode": "code",
@@ -4028,7 +4246,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": null
               },
               {
                 "color": "red",
@@ -4043,7 +4262,7 @@
         "h": 8,
         "w": 12,
         "x": 4,
-        "y": 152
+        "y": 160
       },
       "id": 92,
       "options": {
@@ -4079,14 +4298,14 @@
         "h": 8,
         "w": 8,
         "x": 16,
-        "y": 152
+        "y": 160
       },
       "id": 86,
       "options": {
         "content": "## Sanitise Message\nThis lambda removes Personally Identifiable Information from both Audit Log record in DynamoDB and PostgresDB.\n\n### Troubleshooting\n- Check cloudwatch logs\n- Check if lambda has access to audit-log and audit-log-lookup tables. (IAM Policy)\n- Check if lambda has access to DynamoDB (Security Groups)\n- Check if lambda has access to PostgresDB (Security Groups)\n- Check if environment variables for PostgresDB are correct. (Credentials, DB name, etc)\n- Check PostgresDB health.",
         "mode": "markdown"
       },
-      "pluginVersion": "8.5.2",
+      "pluginVersion": "8.5.4",
       "type": "text"
     },
     {
@@ -4102,7 +4321,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": null
               },
               {
                 "color": "red",
@@ -4117,7 +4337,7 @@
         "h": 8,
         "w": 4,
         "x": 0,
-        "y": 160
+        "y": 168
       },
       "id": 39,
       "options": {
@@ -4135,7 +4355,7 @@
         "text": {},
         "textMode": "value"
       },
-      "pluginVersion": "8.5.2",
+      "pluginVersion": "8.5.4",
       "targets": [
         {
           "editorMode": "code",
@@ -4194,7 +4414,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": null
               },
               {
                 "color": "red",
@@ -4209,7 +4430,7 @@
         "h": 8,
         "w": 12,
         "x": 4,
-        "y": 160
+        "y": 168
       },
       "id": 93,
       "options": {
@@ -4245,14 +4466,14 @@
         "h": 8,
         "w": 8,
         "x": 16,
-        "y": 160
+        "y": 168
       },
       "id": 91,
       "options": {
         "content": "## Retry Message\nThis lambda retries a failed Audit Log record. Failed Audit Logs are records that have received events from one of the Amazon MQ failure queues.\n\n### Troubleshooting\n- Check cloudwatch logs\n- Check if lambda has access to audit-log and audit-log-lookup tables. (IAM Policy)\n- Check if lambda has access to DynamoDB (Security Groups)\n- Check if lambda has access to Amazon MQ (Security Groups)",
         "mode": "markdown"
       },
-      "pluginVersion": "8.5.2",
+      "pluginVersion": "8.5.4",
       "type": "text"
     },
     {
@@ -4261,7 +4482,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 168
+        "y": 176
       },
       "id": 68,
       "panels": [],
@@ -4280,7 +4501,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": null
               },
               {
                 "color": "red",
@@ -4295,7 +4517,7 @@
         "h": 8,
         "w": 4,
         "x": 0,
-        "y": 169
+        "y": 177
       },
       "id": 24,
       "options": {
@@ -4313,7 +4535,7 @@
         "text": {},
         "textMode": "value"
       },
-      "pluginVersion": "8.5.2",
+      "pluginVersion": "8.5.4",
       "targets": [
         {
           "editorMode": "code",
@@ -4371,7 +4593,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": null
               },
               {
                 "color": "red",
@@ -4386,7 +4609,7 @@
         "h": 8,
         "w": 12,
         "x": 4,
-        "y": 169
+        "y": 177
       },
       "id": 95,
       "options": {
@@ -4422,14 +4645,14 @@
         "h": 8,
         "w": 8,
         "x": 16,
-        "y": 169
+        "y": 177
       },
       "id": 94,
       "options": {
         "content": "## Common Platform Report",
         "mode": "markdown"
       },
-      "pluginVersion": "8.5.2",
+      "pluginVersion": "8.5.4",
       "type": "text"
     },
     {
@@ -4444,7 +4667,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": null
               },
               {
                 "color": "red",
@@ -4459,7 +4683,7 @@
         "h": 8,
         "w": 4,
         "x": 0,
-        "y": 177
+        "y": 185
       },
       "id": 44,
       "options": {
@@ -4477,7 +4701,7 @@
         "text": {},
         "textMode": "value"
       },
-      "pluginVersion": "8.5.2",
+      "pluginVersion": "8.5.4",
       "targets": [
         {
           "editorMode": "code",
@@ -4535,7 +4759,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": null
               },
               {
                 "color": "red",
@@ -4550,7 +4775,7 @@
         "h": 8,
         "w": 12,
         "x": 4,
-        "y": 177
+        "y": 185
       },
       "id": 99,
       "options": {
@@ -4586,14 +4811,14 @@
         "h": 8,
         "w": 8,
         "x": 16,
-        "y": 177
+        "y": 185
       },
       "id": 96,
       "options": {
         "content": "## Top Exceptions Report",
         "mode": "markdown"
       },
-      "pluginVersion": "8.5.2",
+      "pluginVersion": "8.5.4",
       "type": "text"
     },
     {
@@ -4608,7 +4833,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": null
               },
               {
                 "color": "red",
@@ -4623,7 +4849,7 @@
         "h": 8,
         "w": 4,
         "x": 0,
-        "y": 185
+        "y": 193
       },
       "id": 23,
       "options": {
@@ -4641,7 +4867,7 @@
         "text": {},
         "textMode": "value"
       },
-      "pluginVersion": "8.5.2",
+      "pluginVersion": "8.5.4",
       "targets": [
         {
           "editorMode": "code",
@@ -4699,7 +4925,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": null
               },
               {
                 "color": "red",
@@ -4714,7 +4941,7 @@
         "h": 8,
         "w": 12,
         "x": 4,
-        "y": 185
+        "y": 193
       },
       "id": 100,
       "options": {
@@ -4750,14 +4977,14 @@
         "h": 8,
         "w": 8,
         "x": 16,
-        "y": 185
+        "y": 193
       },
       "id": 97,
       "options": {
         "content": "## Automation Report",
         "mode": "markdown"
       },
-      "pluginVersion": "8.5.2",
+      "pluginVersion": "8.5.4",
       "type": "text"
     },
     {
@@ -4772,7 +4999,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": null
               },
               {
                 "color": "red",
@@ -4787,7 +5015,7 @@
         "h": 8,
         "w": 4,
         "x": 0,
-        "y": 193
+        "y": 201
       },
       "id": 34,
       "options": {
@@ -4805,7 +5033,7 @@
         "text": {},
         "textMode": "value"
       },
-      "pluginVersion": "8.5.2",
+      "pluginVersion": "8.5.4",
       "targets": [
         {
           "editorMode": "code",
@@ -4863,7 +5091,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": null
               },
               {
                 "color": "red",
@@ -4878,7 +5107,7 @@
         "h": 8,
         "w": 12,
         "x": 4,
-        "y": 193
+        "y": 201
       },
       "id": 101,
       "options": {
@@ -4914,14 +5143,14 @@
         "h": 8,
         "w": 8,
         "x": 16,
-        "y": 193
+        "y": 201
       },
       "id": 98,
       "options": {
         "content": "## MPS Report",
         "mode": "markdown"
       },
-      "pluginVersion": "8.5.2",
+      "pluginVersion": "8.5.4",
       "type": "text"
     },
     {
@@ -4930,7 +5159,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 201
+        "y": 209
       },
       "id": 18,
       "panels": [],
@@ -4950,7 +5179,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": null
               },
               {
                 "color": "red",
@@ -4965,7 +5195,7 @@
         "h": 8,
         "w": 4,
         "x": 0,
-        "y": 202
+        "y": 210
       },
       "id": 20,
       "options": {
@@ -4983,7 +5213,7 @@
         "text": {},
         "textMode": "value"
       },
-      "pluginVersion": "8.5.2",
+      "pluginVersion": "8.5.4",
       "targets": [
         {
           "editorMode": "code",
@@ -5078,7 +5308,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": null
               },
               {
                 "color": "red",
@@ -5093,7 +5324,7 @@
         "h": 8,
         "w": 12,
         "x": 4,
-        "y": 202
+        "y": 210
       },
       "id": 103,
       "options": {
@@ -5137,14 +5368,14 @@
         "h": 8,
         "w": 8,
         "x": 16,
-        "y": 202
+        "y": 210
       },
       "id": 102,
       "options": {
         "content": "## Add Archival Events",
         "mode": "markdown"
       },
-      "pluginVersion": "8.5.2",
+      "pluginVersion": "8.5.4",
       "type": "text"
     },
     {
@@ -5159,7 +5390,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": null
               },
               {
                 "color": "red",
@@ -5174,7 +5406,7 @@
         "h": 8,
         "w": 4,
         "x": 0,
-        "y": 210
+        "y": 218
       },
       "id": 21,
       "options": {
@@ -5192,7 +5424,7 @@
         "text": {},
         "textMode": "value"
       },
-      "pluginVersion": "8.5.2",
+      "pluginVersion": "8.5.4",
       "targets": [
         {
           "editorMode": "code",
@@ -5286,7 +5518,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": null
               },
               {
                 "color": "red",
@@ -5301,7 +5534,7 @@
         "h": 8,
         "w": 12,
         "x": 4,
-        "y": 210
+        "y": 218
       },
       "id": 108,
       "options": {
@@ -5345,14 +5578,14 @@
         "h": 8,
         "w": 8,
         "x": 16,
-        "y": 210
+        "y": 218
       },
       "id": 104,
       "options": {
         "content": "## Archive User Logs",
         "mode": "markdown"
       },
-      "pluginVersion": "8.5.2",
+      "pluginVersion": "8.5.4",
       "type": "text"
     },
     {
@@ -5367,7 +5600,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": null
               },
               {
                 "color": "red",
@@ -5382,7 +5616,7 @@
         "h": 8,
         "w": 4,
         "x": 0,
-        "y": 218
+        "y": 226
       },
       "id": 38,
       "options": {
@@ -5399,7 +5633,7 @@
         },
         "textMode": "value"
       },
-      "pluginVersion": "8.5.2",
+      "pluginVersion": "8.5.4",
       "targets": [
         {
           "editorMode": "code",
@@ -5493,7 +5727,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": null
               },
               {
                 "color": "red",
@@ -5508,7 +5743,7 @@
         "h": 8,
         "w": 12,
         "x": 4,
-        "y": 218
+        "y": 226
       },
       "id": 109,
       "options": {
@@ -5552,14 +5787,14 @@
         "h": 8,
         "w": 8,
         "x": 16,
-        "y": 218
+        "y": 226
       },
       "id": 105,
       "options": {
         "content": "## Retry Failed Messages",
         "mode": "markdown"
       },
-      "pluginVersion": "8.5.2",
+      "pluginVersion": "8.5.4",
       "type": "text"
     },
     {
@@ -5574,7 +5809,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": null
               },
               {
                 "color": "red",
@@ -5589,7 +5825,7 @@
         "h": 8,
         "w": 4,
         "x": 0,
-        "y": 226
+        "y": 234
       },
       "id": 37,
       "options": {
@@ -5607,7 +5843,7 @@
         "text": {},
         "textMode": "value"
       },
-      "pluginVersion": "8.5.2",
+      "pluginVersion": "8.5.4",
       "targets": [
         {
           "editorMode": "code",
@@ -5701,7 +5937,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": null
               },
               {
                 "color": "red",
@@ -5716,7 +5953,7 @@
         "h": 8,
         "w": 12,
         "x": 4,
-        "y": 226
+        "y": 234
       },
       "id": 110,
       "options": {
@@ -5760,14 +5997,14 @@
         "h": 8,
         "w": 8,
         "x": 16,
-        "y": 226
+        "y": 234
       },
       "id": 106,
       "options": {
         "content": "## Resubmit PNC Failures",
         "mode": "markdown"
       },
-      "pluginVersion": "8.5.2",
+      "pluginVersion": "8.5.4",
       "type": "text"
     },
     {
@@ -5797,7 +6034,7 @@
         "h": 8,
         "w": 4,
         "x": 0,
-        "y": 234
+        "y": 242
       },
       "id": 33,
       "options": {
@@ -5924,7 +6161,7 @@
         "h": 8,
         "w": 12,
         "x": 4,
-        "y": 234
+        "y": 242
       },
       "id": 111,
       "options": {
@@ -5968,7 +6205,7 @@
         "h": 8,
         "w": 8,
         "x": 16,
-        "y": 234
+        "y": 242
       },
       "id": 107,
       "options": {
@@ -6005,7 +6242,7 @@
         "h": 8,
         "w": 4,
         "x": 0,
-        "y": 242
+        "y": 250
       },
       "id": 118,
       "options": {
@@ -6096,7 +6333,7 @@
         "h": 8,
         "w": 12,
         "x": 4,
-        "y": 242
+        "y": 250
       },
       "id": 119,
       "options": {
@@ -6132,7 +6369,7 @@
         "h": 8,
         "w": 8,
         "x": 16,
-        "y": 242
+        "y": 250
       },
       "id": 120,
       "options": {
@@ -6169,7 +6406,7 @@
         "h": 8,
         "w": 4,
         "x": 0,
-        "y": 250
+        "y": 258
       },
       "id": 121,
       "options": {
@@ -6260,7 +6497,7 @@
         "h": 8,
         "w": 12,
         "x": 4,
-        "y": 250
+        "y": 258
       },
       "id": 122,
       "options": {
@@ -6296,7 +6533,7 @@
         "h": 8,
         "w": 8,
         "x": 16,
-        "y": 250
+        "y": 258
       },
       "id": 123,
       "options": {
@@ -6322,6 +6559,6 @@
   "timezone": "",
   "title": "Bichard Lambdas Errors",
   "uid": "OqdK1Du7z",
-  "version": 7,
+  "version": 72,
   "weekStart": ""
 }
