@@ -1,7 +1,7 @@
+jest.setTimeout(600000)
 const { MockServer } = require("jest-mock-server");
 const https = require("https");
 const axiosClass = require("axios").default;
-const { isTypedArray } = require("util/types");
 const axios = axiosClass.create({
   httpsAgent: new https.Agent({
     rejectUnauthorized: false,
@@ -40,6 +40,7 @@ describe("Testing Nginx config", () => {
       audit: new MockServer({ port: 60003, https: true }),
       static: new MockServer({ port: 60004, https: true }),
       backend: new MockServer({ port: 60005, https: true }),
+      ui: new MockServer({ port: 60006, https: true }),
     };
     await Promise.all(Object.values(servers).map((server) => server.start()));
   });
@@ -58,6 +59,7 @@ describe("Testing Nginx config", () => {
     { path: "/help/x", route: "static", auth: false },
     { path: "/users/x", route: "user", auth: true },
     { path: "/audit-logging/x", route: "audit", auth: true },
+    { path: "/bichard/x", route: "ui", auth: true },
     { path: "/users/login", route: "user", auth: false },
     { path: "/users/images/x.png", route: "user", auth: false },
     { path: "/users/fonts/x.woff", route: "user", auth: false },
@@ -169,6 +171,7 @@ describe("Testing Nginx config", () => {
       test.each([
         { url: "/bichard-ui/x", upstream: "bichard" },
         { url: "/users/x", upstream: "user" },
+        { url: "/bichard/x", upstream: "ui" },
         { url: "/audit-logging/x", upstream: "audit" },
         { url: "/reports/x", upstream: "static" },
       ])(
@@ -196,6 +199,7 @@ describe("Testing Nginx config", () => {
         { url: "/bichard-ui/x", upstream: "bichard" },
         { url: "/users/x", upstream: "user" },
         { url: "/audit-logging/x", upstream: "audit" },
+        { url: "/bichard/x", upstream: "ui" },
         { url: "/reports/x", upstream: "static" },
       ])(
         "Should not pass when performing OPTIONS requests for $upstream",

@@ -76,7 +76,7 @@ location /bichard-ui {
 }
 
 # Proxy through to new Bichard UI
-location /ui {
+location /bichard {
     limit_except GET POST PUT DELETE { deny all; }
     auth_request /auth;
     auth_request_set $auth_cookie $upstream_http_set_cookie;
