@@ -121,7 +121,7 @@
           {
             "evaluator": {
               "params": [
-                1
+                0.4
               ],
               "type": "lt"
             },
@@ -257,7 +257,7 @@
           {
             "evaluator": {
               "params": [
-                1
+                0.4
               ],
               "type": "lt"
             },
@@ -393,7 +393,7 @@
           {
             "evaluator": {
               "params": [
-                1
+                0.4
               ],
               "type": "lt"
             },
@@ -607,7 +607,7 @@
           {
             "evaluator": {
               "params": [
-                1
+                0.4
               ],
               "type": "lt"
             },
@@ -743,7 +743,7 @@
           {
             "evaluator": {
               "params": [
-                1
+                0.4
               ],
               "type": "lt"
             },
@@ -972,7 +972,7 @@
           {
             "evaluator": {
               "params": [
-                1
+                0.4
               ],
               "type": "lt"
             },
@@ -1108,7 +1108,7 @@
           {
             "evaluator": {
               "params": [
-                1
+                0.4
               ],
               "type": "lt"
             },
