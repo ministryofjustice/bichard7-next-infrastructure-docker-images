@@ -1,4 +1,3 @@
-jest.setTimeout(600000)
 const { MockServer } = require("jest-mock-server");
 const https = require("https");
 const axiosClass = require("axios").default;
