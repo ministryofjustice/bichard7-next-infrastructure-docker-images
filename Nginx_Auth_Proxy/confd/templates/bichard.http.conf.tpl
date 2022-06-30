@@ -7,6 +7,7 @@ resolver {{ getv "/cjse/nginx/dns/resolver" "127.0.0.11" }};
 set $app "{{ getv "/cjse/nginx/app/domain" }}";
 set $bichardbackend "{{ getv "/cjse/nginx/bichardbackend/domain" }}";
 set $userservice "{{ getv "/cjse/nginx/userservice/domain" }}";
+set $ui "{{ getv "/cjse/nginx/ui/domain" }}";
 set $auditlogging "{{ getv "/cjse/nginx/auditlogging/domain" }}";
 set $staticservice "{{ getv "/cjse/nginx/staticservice/domain" }}";
 
@@ -68,6 +69,21 @@ location /bichard-ui {
     add_header Set-Cookie $auth_cookie;
 
     proxy_pass        https://$app;
+    proxy_ssl_verify  {{ getv "/cjse/nginx/proxysslverify" "on" }};
+    proxy_set_header Host $http_host;
+
+    proxy_intercept_errors on;
+}
+
+# Proxy through to new Bichard UI
+location /bichard {
+    limit_except GET POST PUT DELETE { deny all; }
+    auth_request /auth;
+    auth_request_set $auth_cookie $upstream_http_set_cookie;
+    include /etc/includes/headers.conf;
+    add_header Set-Cookie $auth_cookie;
+
+    proxy_pass        https://$ui;
     proxy_ssl_verify  {{ getv "/cjse/nginx/proxysslverify" "on" }};
     proxy_set_header Host $http_host;
 
@@ -158,7 +174,7 @@ location ~ ^/bichard-ui/(Health|Connectivity|images|css).*$ {
     proxy_cookie_flags ~ httponly samesite=strict;
 }
 
-# Allow access to bichard-backend /Connectivity without authentication 
+# Allow access to bichard-backend /Connectivity without authentication
 location /bichard-backend/Connectivity {
     include /etc/includes/headers.conf;
     proxy_pass        https://$bichardbackend/bichard-ui/Connectivity;

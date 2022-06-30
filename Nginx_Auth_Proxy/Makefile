@@ -22,6 +22,7 @@ goss:
 	else \
 		GOSS_SLEEP=15 dgoss run \
 			-e CJSE_NGINX_USERSERVICE_DOMAIN="localhost/elb-status" \
+			-e CJSE_NGINX_UI_DOMAIN="localhost/elb-status" \
 			-e CJSE_NGINX_AUDITLOGGING_DOMAIN="localhost/elb-status" \
 			-e CJSE_NGINX_APP_DOMAIN="localhost/elb-status" \
 			-e CJSE_NGINX_BICHARDBACKEND_DOMAIN="localhost/elb-status" \
@@ -35,6 +36,7 @@ run-test-nginx:
 	docker rm -f test-nginx-server || true
 	docker run -e CJSE_NGINX_APP_DOMAIN=172.17.0.1:60001 \
 		-e CJSE_NGINX_USERSERVICE_DOMAIN=172.17.0.1:60002 \
+		-e CJSE_NGINX_UI_DOMAIN=172.17.0.1:60006 \
 		-e CJSE_NGINX_AUDITLOGGING_DOMAIN=172.17.0.1:60003 \
 		-e CJSE_NGINX_STATICSERVICE_DOMAIN=172.17.0.1:60004 \
 		-e CJSE_NGINX_BICHARDBACKEND_DOMAIN=172.17.0.1:60005 \
@@ -54,4 +56,4 @@ wait-for-nginx:
 
 .PHONY: unit-test-nginx
 unit-test-nginx: build-test run-test-nginx wait-for-nginx
-	docker run --rm --name nginx-auth-test -p 60001:60001 -p 60002:60002 -p 60003:60003 -p 60004:60004 -p 60005:60005 -e TEST_HOSTS=https://172.17.0.1:6443,http://172.17.0.1:7080 nginx-auth-test
+	docker run --rm --name nginx-auth-test -p 60001:60001 -p 60002:60002 -p 60003:60003 -p 60004:60004 -p 60005:60005 -p 60006:60006 -e TEST_HOSTS=https://172.17.0.1:6443,http://172.17.0.1:7080 nginx-auth-test
