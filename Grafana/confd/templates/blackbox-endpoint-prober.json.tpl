@@ -972,7 +972,7 @@
           {
             "evaluator": {
               "params": [
-                0.4
+                0.2
               ],
               "type": "lt"
             },
