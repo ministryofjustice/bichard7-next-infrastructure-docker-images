@@ -266,6 +266,12 @@ metrics:
     aws_metric_name: UserLoginEvents
 
   - aws_namespace: LogMetrics
+    aws_metric_name: ComparisonResultPass
+
+  - aws_namespace: LogMetrics
+    aws_metric_name: ComparisonResultFail
+
+  - aws_namespace: LogMetrics
     aws_metric_name: AddArchivalEventsErrors
 
   - aws_namespace: LogMetrics
