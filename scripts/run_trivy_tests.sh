@@ -32,6 +32,6 @@ pull_trivy_db
 TRIVY_CACHE_DIR=trivy trivy image \
     --severity CRITICAL \
     --exit-code 1 \
-    --ignorefile ./scripts/.trivyignore \
-    --skip-update \ # we have the most recent db pulled locally
+    --ignorefile .trivyignore \
+    --skip-update \
   ${DOCKER_IMAGE}
