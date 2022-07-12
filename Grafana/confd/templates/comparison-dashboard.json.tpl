@@ -44,7 +44,30 @@
             }
           },
         },
-        "overrides": []
+        "overrides": [
+          {
+          "matcher": {
+            "id": "byName",
+            "options": "{__name__=\"logmetrics_comparison_result_pass_sum\", job=\"logmetrics\"}"
+          },
+          "properties": [
+            {
+              "id": "displayName",
+              "value": "passed"
+            }
+          ]
+        },
+        {
+          "matcher": {
+            "id": "byName",
+            "options": "{__name__=\"logmetrics_comparison_result_fail_sum\", job=\"logmetrics\"}"
+          },
+          "properties": [
+            {
+              "id": "displayName",
+              "value": "failed"
+            }
+        ]
       },
       "gridPos": {
         "h": 9,
@@ -62,7 +85,7 @@
             "percent"
           ]
         },
-        "pieType": "pie",
+        "pieType": "donut",
         "reduceOptions": {
           "calcs": [
             "lastNotNull"
@@ -87,6 +110,7 @@
         }
       ],
       "title": "Sum of total comparison pass / fail",
+      "transparent": true,
       "type": "piechart"
     }
   ],
