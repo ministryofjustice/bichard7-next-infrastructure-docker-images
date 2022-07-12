@@ -30,7 +30,8 @@ install_trivy
 pull_trivy_db
 
 TRIVY_CACHE_DIR=trivy trivy image \
-  --skip-update \
-  --exit-code 1 \
-  --severity "CRITICAL" \
-  ${DOCKER_IMAGE} 
+    --severity CRITICAL \
+    --exit-code 1 \
+    --ignorefile ./scripts/.trivyignore \
+    --skip-update # we have the most recent db pulled locally
+  ${DOCKER_IMAGE}
