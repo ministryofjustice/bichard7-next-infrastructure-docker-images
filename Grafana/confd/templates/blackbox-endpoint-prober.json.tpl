@@ -131,7 +131,7 @@
             "query": {
               "params": [
                 "A",
-                "8m",
+                "10m",
                 "now"
               ]
             },
@@ -143,7 +143,7 @@
           }
         ],
         "executionErrorState": "alerting",
-        "for": "5m",
+        "for": "10m",
         "frequency": "1m",
         "handler": 1,
         "message": "Endpoint probe is not responding",
