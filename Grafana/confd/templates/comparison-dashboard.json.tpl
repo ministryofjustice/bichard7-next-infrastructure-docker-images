@@ -107,6 +107,19 @@
                 }
             ],
             "title": "Sum of comparison results pass vs fail",
+            "transformations": [
+              {
+                "id": "reduce",
+                "options": {
+                  "includeTimeField": false,
+                  "labelsToFields": false,
+                  "mode": "reduceFields",
+                  "reducers": [
+                    "max"
+                  ]
+                }
+              }
+            ],
             "type": "piechart"
         }
     ],
