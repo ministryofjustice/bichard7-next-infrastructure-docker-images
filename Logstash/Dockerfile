@@ -8,7 +8,7 @@ WORKDIR /
 COPY ./files/logstash.repo /etc/yum.repos.d
 COPY scripts/credentials.sh /usr/bin/credentials
 # This must match what is deployed on AWS
-ARG LOGSTASH_VERSION="7.16.2"
+ARG LOGSTASH_VERSION="7.17.5"
 ARG CONFD_VERSION="0.16.0"
 ARG CONFD_CHECKSUM="255d2559f3824dd64df059bdc533fd6b697c070db603c76aaf8d1d5e6b0cc334"
 
