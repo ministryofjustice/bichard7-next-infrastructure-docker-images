@@ -276,4 +276,7 @@ metrics:
 
   - aws_namespace: LogMetrics
     aws_metric_name: StoreEventS3ObjectNotFound
+
+  - aws_namespace: LogMetrics
+    aws_metric_name: ComparisonTotalPassedPercentage
 ...
