@@ -19,11 +19,11 @@ RUN { echo '#/bin/sh'; echo 'echo "$JAVA_HOME"'; } > /usr/local/bin/docker-java-
 
 ENV PATH $JAVA_HOME/bin:$PATH
 ENV LANG C.UTF-8
-ENV JAVA_VERSION 11.0.10
+ENV JAVA_VERSION 11.0.16
 
 # hadolint ignore=SC2016
 RUN set -euvx && \
-	downloadUrl='https://github.com/AdoptOpenJDK/openjdk11-upstream-binaries/releases/download/jdk-11.0.10%2B9/OpenJDK11U-jre_x64_linux_11.0.10_9.tar.gz' && \
+	downloadUrl='https://github.com/AdoptOpenJDK/openjdk11-upstream-binaries/releases/download/jdk-11.0.16%2B8/OpenJDK11U-jre_x64_linux_11.0.16_8.tar.gz' && \
 	wget --progress=dot:giga -O openjdk.tgz "$downloadUrl" && \
 	wget --progress=dot:giga -O openjdk.tgz.asc "$downloadUrl.sign" && \
 	export GNUPGHOME="$(mktemp -d)" && \

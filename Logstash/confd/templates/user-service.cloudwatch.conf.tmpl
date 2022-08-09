@@ -12,6 +12,7 @@ filter {
   mutate{
       replace => [ "message", "%{message}" ]
       gsub => [ 'message','\n','']
+      gsub => [ 'message','\"\"([^,])','"\1'] # nginx logs were malformed with an extra " on the realip key
   }
 
   json {
