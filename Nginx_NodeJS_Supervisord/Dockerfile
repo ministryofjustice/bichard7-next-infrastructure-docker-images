@@ -12,7 +12,8 @@ RUN mkdir -p /certs && \
     yum install -y \
       nginx \
       supervisor \
-      httpd-tools && \
+      httpd-tools \
+      jq && \
     yum clean all && \
     rm -rf /var/cache/yum && \
     openssl req \
