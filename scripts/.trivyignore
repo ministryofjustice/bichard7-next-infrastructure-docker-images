@@ -3,3 +3,5 @@ CVE-2022-1996
 # Ruby (gemspec) vulnerabilities for logstash container
 CVE-2022-25648 # git
 CVE-2020-14001 # kramdown
+# Logstash container vulnerability xalan:xalan (OpenJDK: integer truncation issue in Xalan-J (JAXP, 8285407)) The Apache Xalan Java project is dormant and in the process of being retired. No future releases of Apache Xalan Java to address this issue are expected. Note: Java runtimes (such as OpenJDK) include repackaged copies of Xalan.
+CVE-2022-34169
