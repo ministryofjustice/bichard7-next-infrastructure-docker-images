@@ -731,12 +731,15 @@
     },
     {
       "alert": {
-        "alertRuleTags": {},
+        "alertRuleTags": {
+          "service": "Audit Log API",
+          "severity": "warning"
+        },
         "conditions": [
           {
             "evaluator": {
               "params": [
-                0
+                0.2
               ],
               "type": "gt"
             },
@@ -746,7 +749,7 @@
             "query": {
               "params": [
                 "A",
-                "5m",
+                "10m",
                 "now"
               ]
             },
@@ -758,7 +761,7 @@
           }
         ],
         "executionErrorState": "alerting",
-        "for": "5m",
+        "for": "10m",
         "frequency": "1m",
         "handler": 1,
         "message": "Error in Audit Log API lambdas",
