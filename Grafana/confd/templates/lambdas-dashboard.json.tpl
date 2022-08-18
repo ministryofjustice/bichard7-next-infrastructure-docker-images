@@ -739,7 +739,7 @@
           {
             "evaluator": {
               "params": [
-                0.2
+                0
               ],
               "type": "gt"
             },
@@ -749,7 +749,7 @@
             "query": {
               "params": [
                 "A",
-                "10m",
+                "5m",
                 "now"
               ]
             },
