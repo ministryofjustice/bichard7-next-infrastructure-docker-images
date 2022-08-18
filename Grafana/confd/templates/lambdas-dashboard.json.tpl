@@ -546,7 +546,10 @@
     },
     {
       "alert": {
-        "alertRuleTags": {},
+        "alertRuleTags": {
+          "service": "Reporting Lambdas",
+          "severity": "warning"
+        },
         "conditions": [
           {
             "evaluator": {
@@ -573,7 +576,7 @@
           }
         ],
         "executionErrorState": "alerting",
-        "for": "5m",
+        "for": "10m",
         "frequency": "1m",
         "handler": 1,
         "message": "Error in reporting lambdas",
@@ -1084,7 +1087,10 @@
     },
     {
       "alert": {
-        "alertRuleTags": {},
+        "alertRuleTags": {
+          "service": "Transfer Messages Lambda",
+          "severity": "warning"
+        },
         "conditions": [
           {
             "evaluator": {
@@ -1111,7 +1117,7 @@
           }
         ],
         "executionErrorState": "alerting",
-        "for": "5m",
+        "for": "10m",
         "frequency": "1m",
         "handler": 1,
         "message": "Error in Transfer Messages lambda",
@@ -1464,7 +1470,10 @@
     },
     {
       "alert": {
-        "alertRuleTags": {},
+        "alertRuleTags": {
+          "service": "Send to Bichard Lambda",
+          "severity": "warning"
+        },
         "conditions": [
           {
             "evaluator": {
@@ -1491,7 +1500,7 @@
           }
         ],
         "executionErrorState": "alerting",
-        "for": "5m",
+        "for": "10m",
         "frequency": "1m",
         "handler": 1,
         "message": "Error in Send to Bichard lambda",
@@ -1676,7 +1685,10 @@
     },
     {
       "alert": {
-        "alertRuleTags": {},
+        "alertRuleTags": {
+          "service": "Record Sent to Bichard Event Lambda",
+          "severity": "warning"
+        },
         "conditions": [
           {
             "evaluator": {
@@ -1703,7 +1715,7 @@
           }
         ],
         "executionErrorState": "alerting",
-        "for": "5m",
+        "for": "10m",
         "frequency": "1m",
         "handler": 1,
         "message": "Error in Record Sent to Bichard Event lambda",
@@ -2253,7 +2265,10 @@
     },
     {
       "alert": {
-        "alertRuleTags": {},
+        "alertRuleTags": {
+          "service": "Court Result Input Event Message Receiver Lambda",
+          "severity": "warning"
+        },
         "conditions": [
           {
             "evaluator": {
@@ -2280,7 +2295,7 @@
           }
         ],
         "executionErrorState": "alerting",
-        "for": "5m",
+        "for": "10m",
         "frequency": "1m",
         "handler": 1,
         "message": "Error in Court Result Input Event Message Receiver",
@@ -2465,7 +2480,10 @@
     },
     {
       "alert": {
-        "alertRuleTags": {},
+        "alertRuleTags": {
+          "service": "Audit Event Message Receiver Lambda",
+          "severity": "warning"
+        },
         "conditions": [
           {
             "evaluator": {
@@ -2492,7 +2510,7 @@
           }
         ],
         "executionErrorState": "alerting",
-        "for": "5m",
+        "for": "10m",
         "frequency": "1m",
         "handler": 1,
         "message": "Error in Audit Event Message Receiver lambda",
@@ -2677,7 +2695,10 @@
     },
     {
       "alert": {
-        "alertRuleTags": {},
+        "alertRuleTags": {
+          "service": "General Event Message Receiver Lambda",
+          "severity": "warning"
+        },
         "conditions": [
           {
             "evaluator": {
@@ -2704,7 +2725,7 @@
           }
         ],
         "executionErrorState": "alerting",
-        "for": "5m",
+        "for": "10m",
         "frequency": "1m",
         "handler": 1,
         "message": "Error in General Event Message Receiver lambda",
@@ -2889,7 +2910,10 @@
     },
     {
       "alert": {
-        "alertRuleTags": {},
+        "alertRuleTags": {
+          "service": "Send to Bichard Lambda",
+          "severity": "warning"
+        },
         "conditions": [
           {
             "evaluator": {
@@ -2916,7 +2940,7 @@
           }
         ],
         "executionErrorState": "alerting",
-        "for": "5m",
+        "for": "10m",
         "frequency": "1m",
         "handler": 1,
         "message": "Error in Hearing Outcome PNC Update Event Message Receiver lambda",
@@ -3101,7 +3125,10 @@
     },
     {
       "alert": {
-        "alertRuleTags": {},
+        "alertRuleTags": {
+          "service": "Send to Hearing Outcome Input Event Message Receiver Lambda",
+          "severity": "warning"
+        },
         "conditions": [
           {
             "evaluator": {
@@ -3128,7 +3155,7 @@
           }
         ],
         "executionErrorState": "alerting",
-        "for": "5m",
+        "for": "10m",
         "frequency": "1m",
         "handler": 1,
         "message": "Error in Hearing Outcome Input Event Message Receiver",
@@ -3313,7 +3340,10 @@
     },
     {
       "alert": {
-        "alertRuleTags": {},
+        "alertRuleTags": {
+          "service": "PNC Update Request Event Message Receiver",
+          "severity": "warning"
+        },
         "conditions": [
           {
             "evaluator": {
@@ -3340,7 +3370,7 @@
           }
         ],
         "executionErrorState": "alerting",
-        "for": "5m",
+        "for": "10m",
         "frequency": "1m",
         "handler": 1,
         "message": "Error in PNC Update Request Event Message Receiver",
@@ -5236,7 +5266,10 @@
     },
     {
       "alert": {
-        "alertRuleTags": {},
+        "alertRuleTags": {
+          "service": "Add Archival Event Lambda",
+          "severity": "warning"
+        },
         "conditions": [
           {
             "evaluator": {
@@ -5263,7 +5296,7 @@
           }
         ],
         "executionErrorState": "alerting",
-        "for": "5m",
+        "for": "10m",
         "frequency": "1m",
         "handler": 1,
         "message": "Error in Add Archival Event lambda",
@@ -5447,7 +5480,10 @@
     },
     {
       "alert": {
-        "alertRuleTags": {},
+        "alertRuleTags": {
+          "service": "Archive User Logs Lambda",
+          "severity": "warning"
+        },
         "conditions": [
           {
             "evaluator": {
@@ -5474,7 +5510,7 @@
           }
         ],
         "executionErrorState": "alerting",
-        "for": "5m",
+        "for": "10m",
         "frequency": "1m",
         "handler": 1,
         "message": "Error in Archive User Logs lambda",
@@ -5656,7 +5692,10 @@
     },
     {
       "alert": {
-        "alertRuleTags": {},
+        "alertRuleTags": {
+          "service": "Retry Failed Messages Lambda",
+          "severity": "warning"
+        },
         "conditions": [
           {
             "evaluator": {
@@ -5683,7 +5722,7 @@
           }
         ],
         "executionErrorState": "alerting",
-        "for": "5m",
+        "for": "10m",
         "frequency": "1m",
         "handler": 1,
         "message": "Error in Retry Failed Messages lambda",
@@ -5866,7 +5905,10 @@
     },
     {
       "alert": {
-        "alertRuleTags": {},
+        "alertRuleTags": {
+          "service": "Resubmit PNC failures Lambda",
+          "severity": "warning"
+        },
         "conditions": [
           {
             "evaluator": {
@@ -5893,7 +5935,7 @@
           }
         ],
         "executionErrorState": "alerting",
-        "for": "5m",
+        "for": "10m",
         "frequency": "1m",
         "handler": 1,
         "message": "Error in Resubmit PNC failures lambda",
@@ -6075,7 +6117,10 @@
     },
     {
       "alert": {
-        "alertRuleTags": {},
+        "alertRuleTags": {
+          "service": "Maintencance Page Lambda",
+          "severity": "warning"
+        },
         "conditions": [
           {
             "evaluator": {
@@ -6102,7 +6147,7 @@
           }
         ],
         "executionErrorState": "alerting",
-        "for": "5m",
+        "for": "10m",
         "frequency": "1m",
         "handler": 1,
         "message": "Error in Maintenance Page lambda",
