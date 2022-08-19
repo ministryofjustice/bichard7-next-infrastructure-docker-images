@@ -1303,6 +1303,99 @@
             ],
             "title": "Event Handler Failures",
             "type": "timeseries"
+        },
+        {
+          "id": 47,
+          "gridPos": {
+            "x": 0,
+            "y": 0,
+            "w": 12,
+            "h": 8
+          },
+          "type": "timeseries",
+          "title": "Web response time(response time from nginx auth proxy)",
+          "targets": [
+            {
+              "refId": "A",
+              "editorMode": "code",
+              "expr": "max(aws_applicationelb_target_response_time_p99_00{load_balancer=~\".*-bichard-7-nginx.*\"})",
+              "legendFormat": "",
+              "range": true,
+              "rawQuery": true,
+              "hide": false
+            },
+            {
+              "refId": "B",
+              "editorMode": "code",
+              "expr": "avg(aws_applicationelb_target_response_time_average{load_balancer=~\".*-bichard-7-nginx.*\"})",
+              "legendFormat": "",
+              "range": true,
+              "rawQuery": true,
+              "hide": false
+            }
+          ],
+          "options": {
+            "tooltip": {
+              "mode": "single",
+              "sort": "none"
+            },
+            "legend": {
+              "displayMode": "list",
+              "placement": "bottom",
+              "calcs": []
+            }
+          },
+          "fieldConfig": {
+            "defaults": {
+              "custom": {
+                "drawStyle": "line",
+                "lineInterpolation": "linear",
+                "barAlignment": 0,
+                "lineWidth": 1,
+                "fillOpacity": 0,
+                "gradientMode": "none",
+                "spanNulls": false,
+                "showPoints": "auto",
+                "pointSize": 5,
+                "stacking": {
+                  "mode": "none",
+                  "group": "A"
+                },
+                "axisPlacement": "auto",
+                "axisLabel": "",
+                "scaleDistribution": {
+                  "type": "linear"
+                },
+                "hideFrom": {
+                  "tooltip": false,
+                  "viz": false,
+                  "legend": false
+                },
+                "thresholdsStyle": {
+                  "mode": "off"
+                }
+              },
+              "color": {
+                "mode": "palette-classic"
+              },
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "value": null,
+                    "color": "green"
+                  },
+                  {
+                    "value": 80,
+                    "color": "red"
+                  }
+                ]
+              }
+            },
+            "overrides": []
+          },
+          "datasource": null
         }
     ],
     "refresh": "10s",
