@@ -1319,7 +1319,7 @@
               "refId": "A",
               "editorMode": "code",
               "expr": "max(aws_applicationelb_target_response_time_p99_00{load_balancer=~\".*-bichard-7-nginx.*\"})",
-              "legendFormat": "",
+              "legendFormat": "Max response time",
               "range": true,
               "rawQuery": true,
               "hide": false
@@ -1328,7 +1328,7 @@
               "refId": "B",
               "editorMode": "code",
               "expr": "avg(aws_applicationelb_target_response_time_average{load_balancer=~\".*-bichard-7-nginx.*\"})",
-              "legendFormat": "",
+              "legendFormat": "Average response time",
               "range": true,
               "rawQuery": true,
               "hide": false
