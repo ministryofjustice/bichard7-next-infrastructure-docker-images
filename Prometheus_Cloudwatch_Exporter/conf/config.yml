@@ -78,6 +78,8 @@ metrics:
   - aws_namespace: AWS/ApplicationELB
     aws_metric_name: TargetResponseTime
     aws_dimensions: [LoadBalancer, AvailabilityZone, TargetGroup]
+    aws_statistics: [Average]
+    aws_extended_statistics: [p99.00]
 
   - aws_namespace: AWS/NetworkELB
     aws_metric_name: HealthyHostCount
