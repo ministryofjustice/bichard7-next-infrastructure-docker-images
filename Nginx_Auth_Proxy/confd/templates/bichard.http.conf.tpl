@@ -80,7 +80,7 @@ location /bichard {
     limit_except GET POST PUT DELETE { deny all; }
     auth_request /auth;
     auth_request_set $auth_cookie $upstream_http_set_cookie;
-    include /etc/includes/headers.conf;
+    include /etc/includes/ui-headers.conf;
     add_header Set-Cookie $auth_cookie;
 
     proxy_pass        https://$ui;

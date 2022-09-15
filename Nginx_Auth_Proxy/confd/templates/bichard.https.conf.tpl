@@ -88,7 +88,7 @@ location /bichard {
     auth_request /auth;
     auth_request_set $auth_cookie $upstream_http_set_cookie;
     add_header  Strict-Transport-Security "max-age=31536000; includeSubDomains" always;
-    include /etc/includes/headers.conf;
+    include /etc/includes/ui-headers.conf;
     add_header Set-Cookie "$auth_cookie; secure";
 
     proxy_pass        https://$ui;
