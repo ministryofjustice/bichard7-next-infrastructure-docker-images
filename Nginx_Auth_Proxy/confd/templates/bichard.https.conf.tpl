@@ -94,6 +94,7 @@ location /bichard {
     proxy_pass        https://$ui;
     proxy_ssl_verify  {{ getv "/cjse/nginx/proxysslverify" "on" }};
     proxy_set_header Host $http_host;
+    proxy_pass_header Content-Security-Policy;
 
     proxy_intercept_errors on;
 }
