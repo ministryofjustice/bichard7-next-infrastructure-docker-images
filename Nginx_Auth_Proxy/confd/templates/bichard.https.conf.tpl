@@ -94,6 +94,8 @@ location /bichard {
     proxy_pass        https://$ui;
     proxy_ssl_verify  {{ getv "/cjse/nginx/proxysslverify" "on" }};
     proxy_set_header Host $http_host;
+    
+    # New Bichard UI sets it's own CSP before it reaches nginx
     proxy_pass_header Content-Security-Policy;
 
     proxy_intercept_errors on;
