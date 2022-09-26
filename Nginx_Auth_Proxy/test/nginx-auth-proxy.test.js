@@ -23,6 +23,12 @@ const TEST_HOSTS = process.env.TEST_HOSTS.split(",") || [
   "http://localhost:7080",
 ];
 
+const CONTENT_SECURITY_POLICIES = {
+  default: `default-src 'self'; frame-src 'self'; frame-ancestors 'self'; form-action 'self';`,
+  auditLogging: `default-src 'self'; frame-src 'self'; frame-ancestors 'self'; form-action 'self'; img-src 'self' data:; style-src 'self' 'unsafe-inline';`,
+  ui: `default-src 'none'; script-src-elem 'self' 'nonce-example'; style-src 'self' 'nonce-example'; img-src 'self'; frame-src 'self'; frame-ancestors 'self'; form-action 'self'; object-src 'none'`,
+};
+
 describe("Testing Nginx config", () => {
   let servers;
 
@@ -231,7 +237,15 @@ describe("Testing Nginx config", () => {
           const destPath = dest || path;
           const mock = servers[route]
             .get(destPath)
-            .mockImplementationOnce(mockStatus(200));
+            .mockImplementationOnce((ctx) => {
+              ctx.status = 200;
+              if (path === "/bichard/x") {
+                ctx.set(
+                  "content-security-policy",
+                  CONTENT_SECURITY_POLICIES.ui
+                );
+              }
+            });
           const res = await axios.get(`${testHost}${path}`, axiosConfig);
 
           const actualHeaders = Object.keys(res.headers).reduce(
@@ -246,6 +260,20 @@ describe("Testing Nginx config", () => {
               defaultHeaders[header]
             );
           });
+
+          if (path === "/bichard/x") {
+            expect(actualHeaders["content-security-policy"]).toEqual(
+              CONTENT_SECURITY_POLICIES.ui
+            );
+          } else if (path === "/audit-logging/x") {
+            expect(actualHeaders["content-security-policy"]).toEqual(
+              CONTENT_SECURITY_POLICIES.auditLogging
+            );
+          } else {
+            expect(actualHeaders["content-security-policy"]).toEqual(
+              CONTENT_SECURITY_POLICIES.default
+            );
+          }
         }
       );
 
