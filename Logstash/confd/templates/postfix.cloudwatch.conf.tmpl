@@ -1,6 +1,6 @@
 input {
   cloudwatch_logs {
-    log_group => ["/cjse-{{ getv "/cjse/environment" ""}}-bichard-7/var/log/maillog", "/cjse-{{ getv "/cjse/environment" ""}}-bichard-7-postfix-ecs-logs"]
+    log_group => ["/cjse-{{ getv "/cjse/environment" ""}}-bichard-7/var/log/maillog", "cjse-{{ getv "/cjse/environment" ""}}-bichard-7-postfix-ecs-logs"]
     start_position => "end"
     region => "eu-west-2"
     tags => ["cloudwatch_syslog", "bichard", "smtp_logs", "postfix"]
