@@ -456,8 +456,8 @@
             "gridPos": {
                 "h": 6,
                 "w": 11,
-                "x": 11,
-                "y": 10
+                "x": 0,
+                "y": 16
             },
             "id": 2,
             "options": {
@@ -480,6 +480,140 @@
                 }
             ],
             "title": "Queue Size",
+            "type": "timeseries"
+        },
+        {
+            "alert": {
+                "alertRuleTags": {},
+                "conditions": [
+                    {
+                        "evaluator": {
+                            "params": [
+                                3
+                            ],
+                            "type": "gt"
+                        },
+                        "operator": {
+                            "type": "and"
+                        },
+                        "query": {
+                            "params": [
+                                "A",
+                                "1m",
+                                "now"
+                            ]
+                        },
+                        "reducer": {
+                            "params": [],
+                            "type": "count"
+                        },
+                        "type": "query"
+                    }
+                ],
+                "executionErrorState": "alerting",
+                "for": "3m",
+                "frequency": "1m",
+                "handler": 1,
+                "message": "Messages are being sent to the failure queue",
+                "name": "Failure Queue Volume alert",
+                "noDataState": "no_data",
+                "notifications": []
+            },
+            "datasource": null,
+            "description": "The volume of messages being sent to the failure queues",
+            "fieldConfig": {
+                "defaults": {
+                    "color": {
+                        "mode": "palette-classic"
+                    },
+                    "custom": {
+                        "axisLabel": "",
+                        "axisPlacement": "auto",
+                        "barAlignment": 0,
+                        "drawStyle": "line",
+                        "fillOpacity": 0,
+                        "gradientMode": "none",
+                        "hideFrom": {
+                            "legend": false,
+                            "tooltip": false,
+                            "viz": false
+                        },
+                        "lineInterpolation": "linear",
+                        "lineWidth": 1,
+                        "pointSize": 5,
+                        "scaleDistribution": {
+                            "type": "linear"
+                        },
+                        "showPoints": "auto",
+                        "spanNulls": false,
+                        "stacking": {
+                            "group": "A",
+                            "mode": "none"
+                        },
+                        "thresholdsStyle": {
+                            "mode": "off"
+                        }
+                    },
+                    "mappings": [],
+                    "thresholds": {
+                        "mode": "absolute",
+                        "steps": [
+                            {
+                                "color": "green",
+                                "value": null
+                            },
+                            {
+                                "color": "red",
+                                "value": 80
+                            }
+                        ]
+                    }
+                },
+                "overrides": []
+            },
+            "gridPos": {
+                "h": 6,
+                "w": 11,
+                "x": 11,
+                "y": 10
+            },
+            "id": 49,
+            "options": {
+                "legend": {
+                    "calcs": [],
+                    "displayMode": "list",
+                    "placement": "bottom"
+                },
+                "tooltip": {
+                    "mode": "single",
+                    "sort": "none"
+                }
+            },
+            "targets": [
+                {
+                    "datasource": {
+                        "type": "prometheus",
+                        "uid": "e6c0c6c2d40d11ebb8bc0242ac130003"
+                    },
+                    "editorMode": "builder",
+                    "exemplar": false,
+                    "expr": "aws_amazonmq_enqueue_count_average{job=\"aws_amazonmq\", queue=~\".*\\\\.FAILURE$\"}",
+                    "instant": false,
+                    "interval": "",
+                    "legendFormat": "{{queue}}",
+                    "range": true,
+                    "refId": "A"
+                }
+            ],
+            "thresholds": [
+                {
+                    "colorMode": "critical",
+                    "op": "gt",
+                    "value": 3,
+                    "visible": true
+                }
+            ],
+            "title": "Failure Queue Volume",
             "type": "timeseries"
         },
         {
@@ -536,9 +670,9 @@
             },
             "gridPos": {
                 "h": 6,
-                "w": 11,
+                "w": 22,
                 "x": 0,
-                "y": 16
+                "y": 22
             },
             "id": 13,
             "options": {
@@ -651,7 +785,7 @@
                 "h": 1,
                 "w": 24,
                 "x": 0,
-                "y": 22
+                "y": 28
             },
             "id": 40,
             "panels": [],
@@ -731,7 +865,7 @@
                 "h": 7,
                 "w": 11,
                 "x": 0,
-                "y": 23
+                "y": 29
             },
             "id": 42,
             "options": {
@@ -763,7 +897,7 @@
                 "h": 1,
                 "w": 24,
                 "x": 0,
-                "y": 30
+                "y": 36
             },
             "id": 7,
             "panels": [],
@@ -851,7 +985,7 @@
                 "h": 6,
                 "w": 11,
                 "x": 0,
-                "y": 31
+                "y": 37
             },
             "id": 4,
             "options": {
@@ -957,7 +1091,7 @@
                 "h": 6,
                 "w": 11,
                 "x": 11,
-                "y": 31
+                "y": 37
             },
             "id": 5,
             "options": {
@@ -989,7 +1123,7 @@
                 "h": 1,
                 "w": 24,
                 "x": 0,
-                "y": 37
+                "y": 43
             },
             "id": 31,
             "panels": [],
@@ -1101,7 +1235,7 @@
                 "h": 7,
                 "w": 11,
                 "x": 0,
-                "y": 38
+                "y": 44
             },
             "id": 44,
             "options": {
@@ -1255,7 +1389,7 @@
                 "h": 7,
                 "w": 11,
                 "x": 11,
-                "y": 38
+                "y": 44
             },
             "id": 45,
             "options": {
@@ -1309,7 +1443,7 @@
           "gridPos": {
             "x": 0,
             "y": 0,
-            "w": 12,
+            "w": 22,
             "h": 8
           },
           "type": "timeseries",
