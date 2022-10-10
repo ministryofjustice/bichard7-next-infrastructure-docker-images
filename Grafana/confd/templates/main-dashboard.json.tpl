@@ -519,10 +519,7 @@
                 "noDataState": "no_data",
                 "notifications": []
             },
-            "datasource": {
-                "type": "prometheus",
-                "uid": "e6c0c6c2d40d11ebb8bc0242ac130003"
-              },
+            "datasource": null,
             "description": "The volume of messages being sent to the failure queues",
             "fieldConfig": {
                 "defaults": {
