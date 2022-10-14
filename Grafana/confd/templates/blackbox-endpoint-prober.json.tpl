@@ -629,7 +629,7 @@
           }
         ],
         "executionErrorState": "alerting",
-        "for": "5m",
+        "for": "10m",
         "frequency": "1m",
         "handler": 1,
         "message": "Bichard Backend endpoint probe is not responding",
