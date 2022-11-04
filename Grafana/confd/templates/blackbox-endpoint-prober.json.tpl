@@ -121,7 +121,7 @@
           {
             "evaluator": {
               "params": [
-                0.2
+                0.1
               ],
               "type": "lt"
             },
@@ -250,14 +250,14 @@
     {
       "alert": {
         "alertRuleTags": {
-          "service": "Alert Manager",
+          "service": "Audit Logging",
           "severity": "critical"
         },
         "conditions": [
           {
             "evaluator": {
               "params": [
-                0.2
+                0.1
               ],
               "type": "lt"
             },
@@ -267,7 +267,7 @@
             "query": {
               "params": [
                 "A",
-                "5m",
+                "10m",
                 "now"
               ]
             },
@@ -403,7 +403,7 @@
             "query": {
               "params": [
                 "A",
-                "5m",
+                "10m",
                 "now"
               ]
             },
@@ -743,7 +743,7 @@
           {
             "evaluator": {
               "params": [
-                0.4
+                0.1
               ],
               "type": "lt"
             },
@@ -753,7 +753,7 @@
             "query": {
               "params": [
                 "A",
-                "5m",
+                "10m",
                 "now"
               ]
             },
@@ -982,7 +982,7 @@
             "query": {
               "params": [
                 "A",
-                "5m",
+                "10m",
                 "now"
               ]
             },
@@ -1118,7 +1118,7 @@
             "query": {
               "params": [
                 "A",
-                "5m",
+                "10m",
                 "now"
               ]
             },
