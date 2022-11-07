@@ -9,6 +9,8 @@ input {
 }
 
 filter {
+  if [cloudwatch_logs][log_group] == "cjse-{{ getv "/cjse/environment" ""}}-bichard-7-postfix-ecs-logs" or [cloudwatch_logs][log_group] == "/cjse-{{ getv "/cjse/environment" ""}}-bichard-7/var/log/maillog" {
+
     # grok log lines by program name (listed alpabetically)
     if [program] =~ /^postfix.*\/anvil$/ {
         grok {
@@ -272,6 +274,20 @@ filter {
             "postfix_postscreen_violation_time", "float"
         ]
     }
+  }
+
+    uuid {
+      target => "[@metadata][document_id]"
+      overwrite => true
+    }
+
+    if [cloudwatch_logs] {
+      mutate {
+        replace => {
+          "[@metadata][document_id]" => "%{[cloudwatch_logs][event_id]}"
+        }
+      }
+    }
 }
 
 output {
@@ -281,6 +297,7 @@ output {
     user => "{{ getv "/cjse/logstash/es/username" ""}}"
     password => "{{ getv "/cjse/logstash/es/password" ""}}"
     ssl => true
+    document_id => "%{[@metadata][document_id]}" 
 {{ if exists "/cjse/logstash/local" }}
    ssl_certificate_verification => false
 {{ end }}

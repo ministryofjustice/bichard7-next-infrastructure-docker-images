@@ -9,13 +9,29 @@ input {
   }
 }
 
+filter {
+    uuid {
+      target => "[@metadata][document_id]"
+      overwrite => true
+    }
+
+    if [cloudwatch_logs] {
+      mutate {
+        replace => {
+          "[@metadata][document_id]" => "%{[cloudwatch_logs][event_id]}"
+        }
+      }
+    }
+  }
+
 output {
   opensearch {
     hosts => ["{{ getv "/cjse/logstash/es/domain" "http://elasticsearch:9200"}}"]
     index => "{{ getv "/cjse/environment" ""}}-logs-%{+YYYY.MM.dd}"
-        user => "{{ getv "/cjse/logstash/es/username" ""}}"
-        password => "{{ getv "/cjse/logstash/es/password" ""}}"
-        ssl => true
+    user => "{{ getv "/cjse/logstash/es/username" ""}}"
+    password => "{{ getv "/cjse/logstash/es/password" ""}}"
+    ssl => true
+    document_id => "%{[@metadata][document_id]}" 
 {{ if exists "/cjse/logstash/local" }}
    ssl_certificate_verification => false
 {{ end }}

@@ -9,16 +9,31 @@ input {
 }
 
 filter {
-  mutate{
-      replace => [ 'message', '%{message}' ]
-      gsub => [ 'message','\n','']
+  if [cloudwatch_logs][log_group] == "cjse-bichard7-{{ getv "/cjse/environment" ""}}-base-infra-bichard7" {
+    mutate{
+        replace => [ 'message', '%{message}' ]
+        gsub => [ 'message','\n','']
+    }
+
+    json {
+        source => 'message'
+        tag_on_failure => ['_jsonparsefailure']
+      }
+    }
+  
+  uuid {
+    target => "[@metadata][document_id]"
+    overwrite => true
   }
 
-  json {
-      source => 'message'
-      tag_on_failure => ['_jsonparsefailure']
+  if [cloudwatch_logs] {
+    mutate {
+      replace => {
+        "[@metadata][document_id]" => "%{[cloudwatch_logs][event_id]}"
+      }
     }
   }
+}
 
 output {
   opensearch {
@@ -27,6 +42,7 @@ output {
     user => "{{ getv "/cjse/logstash/es/username" ""}}"
     password => "{{ getv "/cjse/logstash/es/password" ""}}"
     ssl => true
+    document_id => "%{[@metadata][document_id]}" 
 {{ if exists "/cjse/logstash/local" }}
    ssl_certificate_verification => false
 {{ end }}
