@@ -9,6 +9,7 @@ input {
 }
 
 filter {
+  if [cloudwatch_logs][log_group] == "cjse-bichard7-{{ getv "/cjse/environment" ""}}-base-infra-prometheus" {
     mutate{
         replace => [ "message", "%{message}" ]
         gsub => [ 'message','\n','']
@@ -26,6 +27,20 @@ filter {
         match => { "message" => "%{LOGLEVEL:loglevel} ts=%{DATETIME_PROM:timestamp} %{GREEDYDATA:message}" }
       }
     }
+  }
+
+    uuid {
+      target => "[@metadata][document_id]"
+      overwrite => true
+    }
+
+    if [cloudwatch_logs] {
+      mutate {
+        replace => {
+          "[@metadata][document_id]" => "%{[cloudwatch_logs][event_id]}"
+        }
+      }
+    }
 }
 
 output {
@@ -35,6 +50,7 @@ output {
     user => "{{ getv "/cjse/logstash/es/username" ""}}"
     password => "{{ getv "/cjse/logstash/es/password" ""}}"
     ssl => true
+    document_id => "%{[@metadata][document_id]}" 
 {{ if exists "/cjse/logstash/local" }}
    ssl_certificate_verification => false
 {{ end }}
