@@ -1,0 +1,7 @@
+[template]
+src = "lambdas.cloudwatch.conf.tmpl"
+dest = "/etc/logstash/conf.d/lambdas-cloudwatch.conf"
+keys = [
+    "/cjse"
+]
+
