@@ -393,7 +393,7 @@
           {
             "evaluator": {
               "params": [
-                0.2
+                0.1
               ],
               "type": "lt"
             },
@@ -753,7 +753,7 @@
             "query": {
               "params": [
                 "A",
-                "10m",
+                "15m",
                 "now"
               ]
             },
@@ -972,7 +972,7 @@
           {
             "evaluator": {
               "params": [
-                0.2
+                0.1
               ],
               "type": "lt"
             },
@@ -982,7 +982,7 @@
             "query": {
               "params": [
                 "A",
-                "10m",
+                "15m",
                 "now"
               ]
             },
