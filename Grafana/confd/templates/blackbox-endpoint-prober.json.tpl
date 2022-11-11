@@ -121,7 +121,7 @@
           {
             "evaluator": {
               "params": [
-                0.1
+                0.2
               ],
               "type": "lt"
             },
@@ -131,7 +131,7 @@
             "query": {
               "params": [
                 "A",
-                "10m",
+                "5m",
                 "now"
               ]
             },
@@ -257,7 +257,7 @@
           {
             "evaluator": {
               "params": [
-                0.1
+                0.2
               ],
               "type": "lt"
             },
@@ -267,7 +267,7 @@
             "query": {
               "params": [
                 "A",
-                "10m",
+                "5m",
                 "now"
               ]
             },
@@ -279,7 +279,7 @@
           }
         ],
         "executionErrorState": "alerting",
-        "for": "5m",
+        "for": "10m",
         "frequency": "1m",
         "handler": 1,
         "message": "Audit Logging Endpoint probe is not responding",
@@ -393,7 +393,7 @@
           {
             "evaluator": {
               "params": [
-                0.1
+                0.2
               ],
               "type": "lt"
             },
@@ -403,7 +403,7 @@
             "query": {
               "params": [
                 "A",
-                "10m",
+                "5m",
                 "now"
               ]
             },
@@ -415,7 +415,7 @@
           }
         ],
         "executionErrorState": "alerting",
-        "for": "5m",
+        "for": "10m",
         "frequency": "1m",
         "handler": 1,
         "message": "Bichard Web endpoint probe is not responding",
@@ -743,7 +743,7 @@
           {
             "evaluator": {
               "params": [
-                0.1
+                0.2
               ],
               "type": "lt"
             },
@@ -753,7 +753,7 @@
             "query": {
               "params": [
                 "A",
-                "15m",
+                "5m",
                 "now"
               ]
             },
@@ -765,7 +765,7 @@
           }
         ],
         "executionErrorState": "alerting",
-        "for": "5m",
+        "for": "10m",
         "frequency": "1m",
         "handler": 1,
         "message": "Elasticsearch endpoint probe is not responding",
@@ -972,7 +972,7 @@
           {
             "evaluator": {
               "params": [
-                0.1
+                0.2
               ],
               "type": "lt"
             },
@@ -982,7 +982,7 @@
             "query": {
               "params": [
                 "A",
-                "15m",
+                "5m",
                 "now"
               ]
             },
@@ -994,7 +994,7 @@
           }
         ],
         "executionErrorState": "alerting",
-        "for": "5m",
+        "for": "10m",
         "frequency": "1m",
         "handler": 1,
         "message": "Grafana endpoint probe is not responding",
@@ -1108,7 +1108,7 @@
           {
             "evaluator": {
               "params": [
-                0.4
+                0.2
               ],
               "type": "lt"
             },
@@ -1118,7 +1118,7 @@
             "query": {
               "params": [
                 "A",
-                "10m",
+                "5m",
                 "now"
               ]
             },
@@ -1130,7 +1130,7 @@
           }
         ],
         "executionErrorState": "alerting",
-        "for": "5m",
+        "for": "10m",
         "frequency": "1m",
         "handler": 1,
         "message": "Prometheus endpoint probe is not responding",
