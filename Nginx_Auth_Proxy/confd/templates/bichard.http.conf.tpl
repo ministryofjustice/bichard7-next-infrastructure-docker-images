@@ -8,7 +8,6 @@ set $app "{{ getv "/cjse/nginx/app/domain" }}";
 set $bichardbackend "{{ getv "/cjse/nginx/bichardbackend/domain" }}";
 set $userservice "{{ getv "/cjse/nginx/userservice/domain" }}";
 set $ui "{{ getv "/cjse/nginx/ui/domain" }}";
-set $auditlogging "{{ getv "/cjse/nginx/auditlogging/domain" }}";
 set $staticservice "{{ getv "/cjse/nginx/staticservice/domain" }}";
 
 
@@ -90,23 +89,6 @@ location /bichard {
     # New Bichard UI sets it's own CSP before it reaches nginx
     proxy_pass_header Content-Security-Policy;
 
-    proxy_intercept_errors on;
-}
-
-# Proxy through to audit-logging
-location /audit-logging {
-    limit_except GET POST PUT DELETE { deny all; }
-    auth_request /auth;
-    auth_request_set $auth_cookie $upstream_http_set_cookie;
-    include /etc/includes/audit-logging-headers.conf;
-    add_header Set-Cookie $auth_cookie;
-
-    proxy_pass        https://$auditlogging;
-    proxy_ssl_verify  {{ getv "/cjse/nginx/proxysslverify" "on" }};
-    proxy_set_header Host $host;
-
-    proxy_ssl_server_name on;
-    proxy_ssl_verify_depth 2;
     proxy_intercept_errors on;
 }
 

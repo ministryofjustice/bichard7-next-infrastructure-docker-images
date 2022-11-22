@@ -25,7 +25,6 @@ const TEST_HOSTS = process.env.TEST_HOSTS.split(",") || [
 
 const CONTENT_SECURITY_POLICIES = {
   default: `default-src 'self'; frame-src 'self'; frame-ancestors 'self'; form-action 'self';`,
-  auditLogging: `default-src 'self'; frame-src 'self'; frame-ancestors 'self'; form-action 'self'; img-src 'self' data:; style-src 'self' 'unsafe-inline';`,
   ui: `default-src 'none'; script-src-elem 'self' 'nonce-example'; style-src 'self' 'nonce-example'; img-src 'self'; frame-src 'self'; frame-ancestors 'self'; form-action 'self'; object-src 'none'`,
 };
 
@@ -42,7 +41,6 @@ describe("Testing Nginx config", () => {
     servers = {
       bichard: new MockServer({ port: 60001, https: true }),
       user: new MockServer({ port: 60002, https: true }),
-      audit: new MockServer({ port: 60003, https: true }),
       static: new MockServer({ port: 60004, https: true }),
       backend: new MockServer({ port: 60005, https: true }),
       ui: new MockServer({ port: 60006, https: true }),
@@ -63,7 +61,6 @@ describe("Testing Nginx config", () => {
     { path: "/reports/x", route: "static", auth: true },
     { path: "/help/x", route: "static", auth: false },
     { path: "/users/x", route: "user", auth: true },
-    { path: "/audit-logging/x", route: "audit", auth: true },
     { path: "/bichard/x", route: "ui", auth: true },
     { path: "/users/login", route: "user", auth: false },
     { path: "/users/images/x.png", route: "user", auth: false },
@@ -177,7 +174,6 @@ describe("Testing Nginx config", () => {
         { url: "/bichard-ui/x", upstream: "bichard" },
         { url: "/users/x", upstream: "user" },
         { url: "/bichard/x", upstream: "ui" },
-        { url: "/audit-logging/x", upstream: "audit" },
         { url: "/reports/x", upstream: "static" },
       ])(
         "Should pass through the host header for $url to $upstream",
@@ -203,7 +199,6 @@ describe("Testing Nginx config", () => {
       test.each([
         { url: "/bichard-ui/x", upstream: "bichard" },
         { url: "/users/x", upstream: "user" },
-        { url: "/audit-logging/x", upstream: "audit" },
         { url: "/bichard/x", upstream: "ui" },
         { url: "/reports/x", upstream: "static" },
       ])(
@@ -264,10 +259,6 @@ describe("Testing Nginx config", () => {
           if (path === "/bichard/x") {
             expect(actualHeaders["content-security-policy"]).toEqual(
               CONTENT_SECURITY_POLICIES.ui
-            );
-          } else if (path === "/audit-logging/x") {
-            expect(actualHeaders["content-security-policy"]).toEqual(
-              CONTENT_SECURITY_POLICIES.auditLogging
             );
           } else {
             expect(actualHeaders["content-security-policy"]).toEqual(
