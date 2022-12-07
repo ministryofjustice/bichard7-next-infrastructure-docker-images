@@ -121,7 +121,7 @@
           {
             "evaluator": {
               "params": [
-                0.1
+                0.2
               ],
               "type": "lt"
             },
@@ -131,7 +131,7 @@
             "query": {
               "params": [
                 "A",
-                "10m",
+                "5m",
                 "now"
               ]
             },
@@ -250,142 +250,6 @@
     {
       "alert": {
         "alertRuleTags": {
-          "service": "Audit Logging",
-          "severity": "critical"
-        },
-        "conditions": [
-          {
-            "evaluator": {
-              "params": [
-                0.1
-              ],
-              "type": "lt"
-            },
-            "operator": {
-              "type": "and"
-            },
-            "query": {
-              "params": [
-                "A",
-                "10m",
-                "now"
-              ]
-            },
-            "reducer": {
-              "params": [],
-              "type": "avg"
-            },
-            "type": "query"
-          }
-        ],
-        "executionErrorState": "alerting",
-        "for": "5m",
-        "frequency": "1m",
-        "handler": 1,
-        "message": "Audit Logging Endpoint probe is not responding",
-        "name": "Audit Logging (Up/Down) - Historic alert",
-        "noDataState": "keep_state",
-        "notifications": []
-      },
-      "datasource": null,
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "palette-classic"
-          },
-          "custom": {
-            "axisLabel": "",
-            "axisPlacement": "hidden",
-            "barAlignment": 0,
-            "drawStyle": "line",
-            "fillOpacity": 0,
-            "gradientMode": "none",
-            "hideFrom": {
-              "legend": false,
-              "tooltip": false,
-              "viz": false
-            },
-            "lineInterpolation": "stepAfter",
-            "lineWidth": 1,
-            "pointSize": 5,
-            "scaleDistribution": {
-              "type": "linear"
-            },
-            "showPoints": "never",
-            "spanNulls": true,
-            "stacking": {
-              "group": "A",
-              "mode": "none"
-            },
-            "thresholdsStyle": {
-              "mode": "line+area"
-            }
-          },
-          "decimals": 0,
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "red",
-                "value": null
-              },
-              {
-                "color": "transparent",
-                "value": 0
-              }
-            ]
-          },
-          "unit": "short"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 4,
-        "w": 14,
-        "x": 10,
-        "y": 4
-      },
-      "id": 9,
-      "links": [],
-      "options": {
-        "legend": {
-          "calcs": [],
-          "displayMode": "table",
-          "placement": "right"
-        },
-        "tooltip": {
-          "mode": "single"
-        }
-      },
-      "pluginVersion": "8.0.5",
-      "targets": [
-        {
-          "exemplar": true,
-          "expr": "probe_success{instance=\"https://audit.{{getv "/cjse/infra/domain" "cjse.org"}}/audit-logging/api/status\"}",
-          "format": "time_series",
-          "interval": "",
-          "intervalFactor": 1,
-          "legendFormat": "{{"{{"}}instance{{"}}"}}",
-          "refId": "A"
-        }
-      ],
-      "thresholds": [
-        {
-          "colorMode": "critical",
-          "op": "lt",
-          "value": 1,
-          "visible": true
-        }
-      ],
-      "timeFrom": null,
-      "timeShift": null,
-      "title": "Audit Logging (Up/Down) - Historic",
-      "type": "timeseries"
-    },
-    {
-      "alert": {
-        "alertRuleTags": {
           "service": "Bichard Web",
           "severity": "critical"
         },
@@ -393,7 +257,7 @@
           {
             "evaluator": {
               "params": [
-                0.1
+                0.2
               ],
               "type": "lt"
             },
@@ -403,7 +267,7 @@
             "query": {
               "params": [
                 "A",
-                "10m",
+                "5m",
                 "now"
               ]
             },
@@ -415,7 +279,7 @@
           }
         ],
         "executionErrorState": "alerting",
-        "for": "5m",
+        "for": "10m",
         "frequency": "1m",
         "handler": 1,
         "message": "Bichard Web endpoint probe is not responding",
@@ -743,7 +607,7 @@
           {
             "evaluator": {
               "params": [
-                0.1
+                0.2
               ],
               "type": "lt"
             },
@@ -753,7 +617,7 @@
             "query": {
               "params": [
                 "A",
-                "15m",
+                "5m",
                 "now"
               ]
             },
@@ -765,7 +629,7 @@
           }
         ],
         "executionErrorState": "alerting",
-        "for": "5m",
+        "for": "10m",
         "frequency": "1m",
         "handler": 1,
         "message": "Elasticsearch endpoint probe is not responding",
@@ -972,7 +836,7 @@
           {
             "evaluator": {
               "params": [
-                0.1
+                0.2
               ],
               "type": "lt"
             },
@@ -982,7 +846,7 @@
             "query": {
               "params": [
                 "A",
-                "15m",
+                "5m",
                 "now"
               ]
             },
@@ -994,7 +858,7 @@
           }
         ],
         "executionErrorState": "alerting",
-        "for": "5m",
+        "for": "10m",
         "frequency": "1m",
         "handler": 1,
         "message": "Grafana endpoint probe is not responding",
@@ -1108,7 +972,7 @@
           {
             "evaluator": {
               "params": [
-                0.4
+                0.2
               ],
               "type": "lt"
             },
@@ -1118,7 +982,7 @@
             "query": {
               "params": [
                 "A",
-                "10m",
+                "5m",
                 "now"
               ]
             },
@@ -1130,7 +994,7 @@
           }
         ],
         "executionErrorState": "alerting",
-        "for": "5m",
+        "for": "10m",
         "frequency": "1m",
         "handler": 1,
         "message": "Prometheus endpoint probe is not responding",

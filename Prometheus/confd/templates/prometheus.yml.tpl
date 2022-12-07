@@ -36,7 +36,6 @@ scrape_configs:
         replacement: {{getv "/cjse/prometheus/blackbox/exporter/fqdn" "localhost"}}:9116
     static_configs:
     - targets:
-        - https://audit.{{getv "/cjse/fqdn/suffix" "cjse.org"}}/audit-logging/api/status
         - https://grafana.{{getv "/cjse/fqdn/suffix" "cjse.org"}}
         # This url will require us to set an X-ORIGIN header
         # See https://github.com/prometheus/blackbox_exporter/blob/master/example.yml#L10
