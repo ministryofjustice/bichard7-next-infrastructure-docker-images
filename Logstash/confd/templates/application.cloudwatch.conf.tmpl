@@ -19,6 +19,17 @@ filter {
         source => 'message'
         tag_on_failure => ['_jsonparsefailure']
       }
+    
+    if [message] =~ /search\sused\sby/  {
+          mutate {
+              add_field => { "search_type" => "%{[message]}" }
+            }
+            grok {
+              patterns_dir => ["/etc/logstash/patterns"]
+              match => { "search_type" => ["%{SEARCH_TYPE:search_type}"] }
+              overwrite => [ "search_type" ]
+            }
+        }
     }
   
   uuid {
