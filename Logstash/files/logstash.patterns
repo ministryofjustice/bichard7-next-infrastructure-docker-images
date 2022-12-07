@@ -9,3 +9,4 @@ CODE [A-Z0-9]{9,}
 ACCOUNT_ID ([0-9]{12})
 VPCFLOWLOG %{NUMBER:version} %{ACCOUNT_ID:account-id} %{NOTSPACE:interface-id} %{IPV4:srcaddr} %{IPV4:dstaddr} %{NUMBER:srcport} %{NUMBER:dstport} %{NUMBER:protocol} %{NUMBER:packets} %{NUMBER:bytes} %{NUMBER:start} %{NUMBER:end} %{NOTSPACE:action} %{NOTSPACE:log-status} %{NOTSPACE:vpc-id} %{NOTSPACE:subnet-id} %{NOTSPACE:tcp-flags} %{NOTSPACE:type} %{NOTSPACE:pkt-srcaddr} %{NOTSPACE:pkt-dstaddr} %{NOTSPACE:flow-direction} %{NOTSPACE:traffic-path}
 SCREENSIZE [0-9]{3,4}x[0-9]{3,4}
+SEARCH_TYPE Court|Defendant|Reason
