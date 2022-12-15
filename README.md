@@ -27,3 +27,6 @@ To scan the images for vulnerabilities we use trivy see https://aquasecurity.git
 ## Building locally
 
 You can skip the goss/dgoss requirement by setting the environment variable `SKIP_GOSS=true`
+
+### Buildkit
+Buildkit is an option in Docker Desktop. If you're getting errors building Docker images, you might need to change to `"buildkit": false` in Docker Desktop > Options > Docker Engine.
