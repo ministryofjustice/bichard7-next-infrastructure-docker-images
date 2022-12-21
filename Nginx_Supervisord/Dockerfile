@@ -2,8 +2,9 @@ ARG BUILD_IMAGE="amazon-linux2-base"
 FROM ${BUILD_IMAGE}
 
 LABEL maintainer="CJSE"
-ARG CONFD_VERSION="0.16.0"
-ARG CONFD_CHECKSUM="255d2559f3824dd64df059bdc533fd6b697c070db603c76aaf8d1d5e6b0cc334"
+ARG CONFD_VERSION="0.17.0"
+ARG CONFD_CHECKSUM="d6215d210c93bfac31d956acb171469f48038dd0f1dbac93722cea884d782aa5"
+ARG CONFD_PLATFORM="amd64"
 
 WORKDIR /
 
@@ -27,7 +28,7 @@ RUN mkdir -p /certs && \
     -config /tmp/openssl.cnf \
     -extensions 'v3_req' && \
   rm -rf /tmp/openssl.cnf && \
-  wget -O /bin/confd https://github.com/kelseyhightower/confd/releases/download/v${CONFD_VERSION}/confd-${CONFD_VERSION}-linux-amd64 -nv && \
+  wget -O /bin/confd https://github.com/iwilltry42/confd/releases/download/v${CONFD_VERSION}/confd-${CONFD_VERSION}-linux-${CONFD_PLATFORM} -nv && \
   echo "${CONFD_CHECKSUM}  /bin/confd" | sha256sum -c && \
   chmod +x /bin/confd && \
   mkdir -p /etc/confd/conf.d && \
