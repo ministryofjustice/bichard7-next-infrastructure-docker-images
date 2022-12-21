@@ -1,0 +1,10 @@
+--- ./conductor/server/build.gradle.orig	2022-12-20 12:39:39.000000000 +0000
++++ ./conductor/server/build.gradle	2022-12-20 12:40:00.000000000 +0000
+@@ -43,6 +43,7 @@
+     implementation "org.springdoc:springdoc-openapi-ui:${revOpenapi}"
+ 
+     runtimeOnly "org.glassfish.jaxb:jaxb-runtime:${revJAXB}"
++    runtimeOnly group: 'com.netflix.conductor', name: 'conductor-postgres-persistence', version: '3.13.2'
+ 
+     testImplementation project(':conductor-rest')
+     testImplementation project(':conductor-common')
