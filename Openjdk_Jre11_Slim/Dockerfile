@@ -1,5 +1,7 @@
 ARG BUILD_IMAGE="amazon-linux2-base"
+
 FROM ${BUILD_IMAGE}
+ARG JAVA_URL="https://github.com/AdoptOpenJDK/openjdk11-upstream-binaries/releases/download/jdk-11.0.16%2B8/OpenJDK11U-jre_x64_linux_11.0.16_8.tar.gz"
 
 LABEL maintainer="CJSE"
 LABEL source="https://github.com/docker-library/openjdk/blob/master/11/jre/slim-buster/Dockerfile"
@@ -23,9 +25,8 @@ ENV JAVA_VERSION 11.0.16
 
 # hadolint ignore=SC2016
 RUN set -euvx && \
-	downloadUrl='https://github.com/AdoptOpenJDK/openjdk11-upstream-binaries/releases/download/jdk-11.0.16%2B8/OpenJDK11U-jre_x64_linux_11.0.16_8.tar.gz' && \
-	wget --progress=dot:giga -O openjdk.tgz "$downloadUrl" && \
-	wget --progress=dot:giga -O openjdk.tgz.asc "$downloadUrl.sign" && \
+	wget --progress=dot:giga -O openjdk.tgz ${JAVA_URL} && \
+	wget --progress=dot:giga -O openjdk.tgz.asc "${JAVA_URL}.sign" && \
 	export GNUPGHOME="$(mktemp -d)" && \
 	gpg --batch --keyserver hkp://keyserver.ubuntu.com --recv-keys EAC843EBD3EFDB98CC772FADA5CD6035332FA671 && \
 	gpg --batch --keyserver hkp://keyserver.ubuntu.com --keyserver-options no-self-sigs-only --recv-keys CA5F11C6CE22644D42C6AC4492EF8D39DC13168F && \

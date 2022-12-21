@@ -4,7 +4,7 @@ FROM ${BUILD_IMAGE}
 
 LABEL maintainer="CJSE"
 ARG YUM_PACKAGES="python-pip gzip tar unzip openssl shadow-utils xz wget gnupg"
-ARG PIP_PACKAGES="awscli jq"
+ARG PIP_PACKAGES="awscli"
 
 RUN yum update -y && \
     amazon-linux-extras install -y epel && \
