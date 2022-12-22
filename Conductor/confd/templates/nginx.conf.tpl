@@ -53,12 +53,11 @@ http {
         root /usr/share/nginx/html;
         try_files $uri /index.html;
       }
-
-      location /api {
+      location ~ ^/(api|health)(.*)$ {
         proxy_set_header X-Real-IP $remote_addr;
         proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
         proxy_set_header X-NginX-Proxy true;
-        proxy_pass http://localhost:8080/api;
+        proxy_pass http://localhost:8080;
         proxy_ssl_session_reuse off;
         proxy_set_header Host $http_host;
         proxy_cache_bypass $http_upgrade;
