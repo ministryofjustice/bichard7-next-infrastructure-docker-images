@@ -22,7 +22,10 @@ conductor.indexing.enabled={{ . }}
 
 {{ if eq . "true" }}
 # Transport address to elasticsearch
+conductor.elasticsearch.version=6
 conductor.elasticsearch.url={{ getv "/cjse/conductor/elasticsearch/url" "http://es:9200" }}
+conductor.elasticsearch.username={{ getv "/cjse/conductor/elasticsearch/username" "bichard" }}
+conductor.elasticsearch.password={{ getv "/cjse/conductor/elasticsearch/password" "password" }}
 
 # Name of the elasticsearch cluster
 conductor.elasticsearch.indexName={{ getv "/cjse/conductor/elasticsearch/indexname" "conductor" }}
