@@ -54,4 +54,7 @@ Nginx_Auth_Proxy/test/node_modules
 logstash_conf/
 Logstash/goss.env
 ci.docker/
-Conductor/conductor*
+
+# Conductor source
+Conductor/conductor
+conductor.tar.gz
