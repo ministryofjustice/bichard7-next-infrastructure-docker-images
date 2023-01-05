@@ -55,3 +55,4 @@ logstash_conf/
 Logstash/goss.env
 ci.docker/
 Conductor/conductor*
+!Conductor/conductor_version
