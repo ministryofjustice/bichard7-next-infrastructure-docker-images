@@ -1,0 +1,63 @@
+---
+
+file:
+  /bin/confd:
+    exists: true
+    owner: root
+    group: root
+    filetype: file
+    contains: []
+  /app/config/config.properties:
+    exists: true
+    owner: root
+    group: root
+    filetype: file
+    contains: []
+  /app/libs/conductor-server-boot.jar:
+    exists: true
+    owner: root
+    group: root
+    filetype: file
+    contains: []
+  /etc/nginx/nginx.conf:
+    exists: true
+    owner: root
+    group: root
+    filetype: file
+    contains: []
+  /etc/supervisord.conf:
+    exists: true
+    owner: root
+    group: root
+    filetype: file
+    contains: []
+package:
+  nginx:
+    installed: true
+port:
+  tcp:80:
+    listening: false
+  tcp:443:
+    listening: false
+  tcp:5000:
+    listening: true
+    ip:
+      - 0.0.0.0
+  tcp:8080:
+    listening: false
+user:
+  nginx:
+    exists: true
+    uid: 999
+    gid: 999
+    groups:
+      - nginx
+    home: /var/lib/nginx
+    shell: /sbin/nologin
+process:
+  nginx:
+    running: true
+  supervisord:
+    running: true
+  java:
+    running: true
