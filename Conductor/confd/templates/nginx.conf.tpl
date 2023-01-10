@@ -41,7 +41,7 @@ http {
         '"useragent": "$http_user_agent"'
     '}';
 
-    server {  
+    server {
       listen                5000   ssl;
       ssl_certificate       /certs/server.crt;
       ssl_certificate_key   /certs/server.key;
@@ -51,11 +51,12 @@ http {
 
       auth_basic           "Administrator’s Area";
       auth_basic_user_file /.htpasswd;
-        
+
       location / {
         root /usr/share/nginx/html;
         try_files $uri /index.html;
       }
+
       location ~ ^/api(.*)$ {
         proxy_set_header X-Real-IP $remote_addr;
         proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
@@ -66,6 +67,7 @@ http {
         proxy_cache_bypass $http_upgrade;
         proxy_redirect off;
       }
+
       location ~ ^/health(.*)$ {
         proxy_set_header X-Real-IP $remote_addr;
         proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
@@ -76,6 +78,24 @@ http {
         proxy_cache_bypass $http_upgrade;
         proxy_redirect off;
         auth_basic off;
+      }
+    }
+
+    server {
+      listen                4000;
+      access_log            /dev/stdout json;
+
+      location / {
+        root /usr/share/nginx/html;
+        try_files $uri /index.html;
+      }
+
+      location ~ ^/(api|health|swagger-ui)(.*)$ {
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-NginX-Proxy true;
+        proxy_pass http://localhost:8080;
+        proxy_redirect off;
       }
     }
 }
