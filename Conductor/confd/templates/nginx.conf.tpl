@@ -48,12 +48,15 @@ http {
       ssl_protocols         TLSv1.2;
       ssl_ciphers           HIGH:!aNULL:!MD5;
       access_log            /dev/stdout json;
+
+      auth_basic           "Administrator’s Area";
+      auth_basic_user_file /.htpasswd;
         
       location / {
         root /usr/share/nginx/html;
         try_files $uri /index.html;
       }
-      location ~ ^/(api|health)(.*)$ {
+      location ~ ^/api(.*)$ {
         proxy_set_header X-Real-IP $remote_addr;
         proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
         proxy_set_header X-NginX-Proxy true;
@@ -62,6 +65,17 @@ http {
         proxy_set_header Host $http_host;
         proxy_cache_bypass $http_upgrade;
         proxy_redirect off;
+      }
+      location ~ ^/health(.*)$ {
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-NginX-Proxy true;
+        proxy_pass http://localhost:8080;
+        proxy_ssl_session_reuse off;
+        proxy_set_header Host $http_host;
+        proxy_cache_bypass $http_upgrade;
+        proxy_redirect off;
+        auth_basic off;
       }
     }
 }
