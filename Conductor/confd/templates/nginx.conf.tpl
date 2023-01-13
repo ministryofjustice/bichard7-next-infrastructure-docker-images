@@ -42,12 +42,12 @@ http {
     '}';
 
     server {
-      listen                5000   ssl;
-      ssl_certificate       /certs/server.crt;
-      ssl_certificate_key   /certs/server.key;
-      ssl_protocols         TLSv1.2;
-      ssl_ciphers           HIGH:!aNULL:!MD5;
-      access_log            /dev/stdout json;
+        listen                5000   ssl;
+        ssl_certificate       /certs/server.crt;
+        ssl_certificate_key   /certs/server.key;
+        ssl_protocols         TLSv1.2;
+        ssl_ciphers           HIGH:!aNULL:!MD5;
+        access_log            /dev/stdout json;
 
       auth_basic           "Administrator’s Area";
       auth_basic_user_file /.htpasswd;
@@ -81,21 +81,25 @@ http {
       }
     }
 
+    {{ with getv "/cjse/conductor/enable/http" "false" }}
+    {{ if eq . "true" }}
     server {
-      listen                4000;
-      access_log            /dev/stdout json;
+        listen                4000;
+        access_log            /dev/stdout json;
 
-      location / {
-        root /usr/share/nginx/html;
-        try_files $uri /index.html;
-      }
+        location / {
+            root /usr/share/nginx/html;
+            try_files $uri /index.html;
+        }
 
-      location ~ ^/(api|health|swagger-ui)(.*)$ {
-        proxy_set_header X-Real-IP $remote_addr;
-        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-        proxy_set_header X-NginX-Proxy true;
-        proxy_pass http://localhost:8080;
-        proxy_redirect off;
-      }
+        location ~ ^/(api|health|swagger-ui)(.*)$ {
+            proxy_set_header X-Real-IP $remote_addr;
+            proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+            proxy_set_header X-NginX-Proxy true;
+            proxy_pass http://localhost:8080;
+            proxy_redirect off;
+        }
     }
+    {{ end }}
+    {{ end }}
 }

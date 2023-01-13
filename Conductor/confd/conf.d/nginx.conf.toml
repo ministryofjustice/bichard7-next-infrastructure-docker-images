@@ -2,5 +2,5 @@
 src = "nginx.conf.tpl"
 dest = "/etc/nginx/nginx.conf"
 keys = [
-    "/cjse/nginx"
+    "/cjse/conductor"
 ]

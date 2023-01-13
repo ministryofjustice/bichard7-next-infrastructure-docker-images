@@ -35,10 +35,6 @@ conductor.elasticsearch.indexName={{ getv "/cjse/conductor/elasticsearch/indexna
 # Load sample kitchen sink workflow
 loadSample=false
 
-# Configure S3 for external storage
-# workflow.external.payload.storage=S3
-# workflow.external.payload.storage.s3.bucket={{ getv "/cjse/conductor/s3/bucket" "bucket" }}
-
 # Increase thresholds for external storage
 conductor.app.workflowInputPayloadSizeThreshold=512000
 conductor.app.maxWorkflowInputPayloadSizeThreshold=1024000
