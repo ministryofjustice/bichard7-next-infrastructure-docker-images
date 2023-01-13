@@ -42,6 +42,10 @@ loadSample=false
 # Decrease the time needed for system tasks to complete
 conductor.app.systemTaskWorkerCallbackDuration=1
 
+# Increase the number of execution logs that Conductor will keep for each task
+conductor.app.taskExecLogSizeLimit=10000
+conductor.elasticsearch.taskLogResultLimit=10000
+
 # Increase thresholds for external storage
 conductor.app.workflowInputPayloadSizeThreshold=512000
 conductor.app.maxWorkflowInputPayloadSizeThreshold=1024000
