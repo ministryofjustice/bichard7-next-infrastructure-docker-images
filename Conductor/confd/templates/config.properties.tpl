@@ -34,3 +34,24 @@ conductor.elasticsearch.indexName={{ getv "/cjse/conductor/elasticsearch/indexna
 
 # Load sample kitchen sink workflow
 loadSample=false
+
+# Increase thresholds for external storage
+conductor.app.workflowInputPayloadSizeThreshold=512000
+conductor.app.maxWorkflowInputPayloadSizeThreshold=1024000
+conductor.app.workflowOutputPayloadSizeThreshold=512000
+conductor.app.maxWorkflowOutputPayloadSizeThreshold=1024000
+conductor.app.taskInputPayloadSizeThreshold=307200
+conductor.app.maxTaskInputPayloadSizeThreshold=1024000
+conductor.app.taskOutputPayloadSizeThreshold=307200
+conductor.app.maxTaskOutputPayloadSizeThreshold=1024000
+conductor.app.maxWorkflowVariablesPayloadSizeThreshold=25600
+
+# Decrease the time needed for system tasks to complete
+conductor.app.systemTaskWorkerCallbackDuration=1
+
+# Increase the number of execution logs that Conductor will keep for each task
+conductor.app.taskExecLogSizeLimit=10000
+conductor.elasticsearch.taskLogResultLimit=10000
+
+# Stop requiring ownerEmails in task/workflow definitions
+conductor.app.ownerEmailMandatory=false
