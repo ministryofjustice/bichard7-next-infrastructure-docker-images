@@ -87,6 +87,9 @@ http {
         listen                4000;
         access_log            /dev/stdout json;
 
+        auth_basic           "Administrator’s Area";
+        auth_basic_user_file /.htpasswd;
+
         location / {
             root /usr/share/nginx/html;
             try_files $uri /index.html;
