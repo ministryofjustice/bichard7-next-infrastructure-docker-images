@@ -2,7 +2,7 @@
 
 set -e
 
-IMAGE="nginx-nodejs-supervisord"
+IMAGE="postfix"
 
 if [ "${PLATFORM}x" = "arm64x" ]; then
   docker build --platform linux/${PLATFORM} --build-arg ARCH=arm64 -t $IMAGE . 

@@ -12,7 +12,13 @@ COPY files/openssl.cnf /tmp/openssl.cnf
 
 RUN mkdir -p /certs && \
     mkdir -p /var/log/supervisor && \
-  yum install -y \
+    yum update && \
+    yum install -y yum-utils
+
+COPY files/nginx.repo /etc/yum.repos.d/nginx.repo
+
+RUN yum-config-manager --enable nginx-mainline && \
+    yum install -y \
     nginx \
     supervisor \
     httpd-tools && \
