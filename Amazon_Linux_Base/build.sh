@@ -5,7 +5,8 @@ set -e
 IMAGE="amazon-linux2-base"
 
 if [ "${PLATFORM}x" = "arm64x" ]; then
-  docker build --platform linux/${PLATFORM} -t $IMAGE . 
+  docker build --platform linux/${PLATFORM} -t "${IMAGE}:arm" . 
+  docker build --platform linux/amd64 -t $IMAGE . 
 else
   docker build -t $IMAGE . 
 fi

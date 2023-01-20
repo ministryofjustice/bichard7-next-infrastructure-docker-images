@@ -32,25 +32,15 @@ goss:
 
 .PHONY: run-test-nginx
 run-test-nginx:
-	docker rm -f test-nginx-server || true
-	docker run -e CJSE_NGINX_APP_DOMAIN=172.17.0.1:60001 \
-		-e CJSE_NGINX_USERSERVICE_DOMAIN=172.17.0.1:60002 \
-		-e CJSE_NGINX_UI_DOMAIN=172.17.0.1:60006 \
-		-e CJSE_NGINX_STATICSERVICE_DOMAIN=172.17.0.1:60004 \
-		-e CJSE_NGINX_BICHARDBACKEND_DOMAIN=172.17.0.1:60005 \
-		-e CJSE_NGINX_PROXYSSLVERIFY="off" \
-		-p 6443:443 -d \
-		-p 7080:80 -d \
-		--name test-nginx-server \
-		$(image)
+	./test/test-nginx-setup.sh
 
 .PHONY: build-test
 build-test:
-	docker build -t nginx-auth-test ./test
+	cd ./test && ./build.sh
 
 .PHONY: wait-for-nginx
 wait-for-nginx:
-	bash ./scripts/wait-for-nginx.sh
+	./scripts/wait-for-nginx.sh
 
 .PHONY: unit-test-nginx
 unit-test-nginx: build-test run-test-nginx wait-for-nginx
