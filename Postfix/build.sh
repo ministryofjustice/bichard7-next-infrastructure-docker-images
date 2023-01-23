@@ -2,10 +2,10 @@
 
 set -e
 
-IMAGE="nginx-nodejs-supervisord"
+IMAGE="postfix"
 
 if [ "${PLATFORM}x" = "arm64x" ]; then
-  docker build --platform linux/${PLATFORM} --build-arg BUILD_IMAGE=nodejs:arm -t $IMAGE . 
+  docker build --platform linux/${PLATFORM} --build-arg BUILD_IMAGE=amazon-linux2-base:arm -t $IMAGE . 
 else
   docker build -t $IMAGE . 
 fi

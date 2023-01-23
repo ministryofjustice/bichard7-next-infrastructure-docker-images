@@ -1,4 +1,5 @@
-FROM nodejs
+ARG BUILD_IMAGE="nodejs"
+FROM ${BUILD_IMAGE}
 
 WORKDIR /app
 
