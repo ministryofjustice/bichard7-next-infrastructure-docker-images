@@ -8,3 +8,7 @@ CVE-2022-34169
 
 # Vulnerability in confd for HashiCorp Vault which we don't use, so is not applicable
 CVE-2020-16250
+
+# Vulnerability in Conductor for Spring Framework
+# Spring Framework through 5.3.16 suffers from a potential remote code execution (RCE) issue if used for Java deserialization of untrusted data. Depending on how the library is implemented within a product, this issue may or not occur, and authentication may be required
+CVE-2016-1000027
