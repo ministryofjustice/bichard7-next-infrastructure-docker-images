@@ -34,4 +34,5 @@ TRIVY_CACHE_DIR=trivy trivy image \
     --exit-code 1 \
     --ignorefile ../scripts/.trivyignore \
     --skip-update \
+    --timeout 180m \
   ${DOCKER_IMAGE}
