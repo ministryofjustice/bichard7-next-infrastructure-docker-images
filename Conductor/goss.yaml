@@ -35,9 +35,7 @@ package:
   nginx:
     installed: true
 port:
-  tcp:80:
-    listening: false
-  tcp:443:
+  tcp:4000:
     listening: false
   tcp:5000:
     listening: true
