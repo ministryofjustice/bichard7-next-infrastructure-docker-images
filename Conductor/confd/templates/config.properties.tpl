@@ -6,6 +6,10 @@ conductor.grpc-server.enabled=false
 conductor.db.type={{ . }}
 
 {{ if eq . "postgres" }}
+conductor.archive.db.enabled=true
+conductor.archive.db.type=postgres
+conductor.archive.db.indexer.threadCount=1
+conductor.archive.db.indexer.pollingInterval=1
 spring.datasource.url={{ getv "/cjse/conductor/postgres/url" "jdbc:postgresql://postgres:5432/conductor" }}
 spring.datasource.username={{ getv "/cjse/conductor/postgres/username" "conductor" }}
 spring.datasource.password={{ getv "/cjse/conductor/postgres/password" "conductor" }}
@@ -22,7 +26,7 @@ conductor.indexing.enabled={{ . }}
 
 {{ if eq . "true" }}
 # Transport address to elasticsearch
-conductor.elasticsearch.version=6
+conductor.elasticsearch.version=7
 conductor.elasticsearch.url={{ getv "/cjse/conductor/elasticsearch/url" "http://es:9200" }}
 conductor.elasticsearch.username={{ getv "/cjse/conductor/elasticsearch/username" "bichard" }}
 conductor.elasticsearch.password={{ getv "/cjse/conductor/elasticsearch/password" "password" }}
@@ -55,3 +59,7 @@ conductor.elasticsearch.taskLogResultLimit=10000
 
 # Stop requiring ownerEmails in task/workflow definitions
 conductor.app.ownerEmailMandatory=false
+
+conductor.default-event-queue.type=sqs
+conductor.event-queues.sqs.enabled=true
+conductor.event-queues.sqs.endpoint=http://localstack:4566

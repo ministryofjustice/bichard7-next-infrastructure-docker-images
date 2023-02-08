@@ -4,7 +4,8 @@
      implementation "org.springdoc:springdoc-openapi-ui:${revOpenapi}"
  
      runtimeOnly "org.glassfish.jaxb:jaxb-runtime:${revJAXB}"
-+    runtimeOnly group: 'com.netflix.conductor', name: 'conductor-postgres-persistence', version: '3.13.2'
++    runtimeOnly group: 'com.netflix.conductor', name: 'conductor-postgres-persistence', version: '3.13.3'
++    runtimeOnly group: 'com.netflix.conductor', name: 'conductor-es7-persistence', version: '3.13.3'
  
      testImplementation project(':conductor-rest')
      testImplementation project(':conductor-common')

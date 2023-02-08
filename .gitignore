@@ -57,4 +57,5 @@ ci.docker/
 
 # Conductor source
 Conductor/conductor
+Conductor/community
 conductor.tar.gz

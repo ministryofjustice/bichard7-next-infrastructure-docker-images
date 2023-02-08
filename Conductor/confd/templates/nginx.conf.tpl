@@ -1,6 +1,7 @@
 user nginx;
 worker_processes auto;
 pid /run/nginx.pid;
+daemon off;
 include /etc/nginx/modules-enabled/*.conf;
 
 events {
