@@ -1,0 +1,26 @@
+--- conductor/awssqs-event-queue/src/main/java/com/netflix/conductor/sqs/config/SQSEventQueueProperties.java	2023-02-08 17:34:52
++++ conductor/awssqs-event-queue/src/main/java/com/netflix/conductor/sqs/config/SQSEventQueueProperties-updated.java	2023-02-08 17:34:43
+@@ -37,6 +37,9 @@
+     /** The AWS account Ids authorized to send messages to the queues */
+     private String authorizedAccounts = "";
+ 
++    /** The endpoint to use to connect to a local SQS server for testing */
++    private String endpoint = "";
++
+     public int getBatchSize() {
+         return batchSize;
+     }
+@@ -75,5 +78,13 @@
+ 
+     public void setAuthorizedAccounts(String authorizedAccounts) {
+         this.authorizedAccounts = authorizedAccounts;
++    }
++
++    public String getEndpoint() {
++        return endpoint;
++    }
++
++    public void setEndpoint(String endpoint) {
++        this.endpoint = endpoint;
+     }
+ }

@@ -14,6 +14,8 @@ then
   mkdir -p "$BUILD_DIR"
   tar -xzf "$BASE_DIR/$ARCHIVE_NAME" -C "$BUILD_DIR" --strip-components 1
   rm "$ARCHIVE_NAME"
-  patch -u "$BUILD_DIR/server/build.gradle" -i "$BASE_DIR/patches/add-postgres-support.patch"
+  patch -u "$BUILD_DIR/server/build.gradle" -i "$BASE_DIR/patches/add-dependencies.patch"
   patch -u "$BUILD_DIR/build.gradle" -i "$BASE_DIR/patches/remove-nebula-plugin.patch"
+  patch -u "$BUILD_DIR/awssqs-event-queue/src/main/java/com/netflix/conductor/sqs/config/SQSEventQueueConfiguration.java" -i "$BASE_DIR/patches/sqs-endpoint-1.patch"
+  patch -u "$BUILD_DIR/awssqs-event-queue/src/main/java/com/netflix/conductor/sqs/config/SQSEventQueueProperties.java" -i "$BASE_DIR/patches/sqs-endpoint-2.patch"
 fi
