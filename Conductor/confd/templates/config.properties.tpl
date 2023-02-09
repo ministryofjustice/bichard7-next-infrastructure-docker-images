@@ -22,7 +22,7 @@ conductor.indexing.enabled={{ . }}
 
 {{ if eq . "true" }}
 # Transport address to elasticsearch
-conductor.elasticsearch.version=6
+conductor.elasticsearch.version={{ getv "/cjse/conductor/elasticsearch/version" "6" }}
 conductor.elasticsearch.url={{ getv "/cjse/conductor/elasticsearch/url" "http://es:9200" }}
 conductor.elasticsearch.username={{ getv "/cjse/conductor/elasticsearch/username" "bichard" }}
 conductor.elasticsearch.password={{ getv "/cjse/conductor/elasticsearch/password" "password" }}
@@ -55,3 +55,17 @@ conductor.elasticsearch.taskLogResultLimit=10000
 
 # Stop requiring ownerEmails in task/workflow definitions
 conductor.app.ownerEmailMandatory=false
+
+{{ with getv "/cjse/conductor/queue/type" "" }}
+  {{ if eq . "sqs" }}
+conductor.default-event-queue.type=sqs
+conductor.event-queues.sqs.enabled=true
+  {{ end }}
+
+  {{ with getv "/cjse/conductor/queue/endpoint" "false" }}
+    {{ if ne . "false"}}
+conductor.event-queues.sqs.endpoint={{ . }}
+    {{ end }}
+  {{ end }}
+
+{{ end }}
