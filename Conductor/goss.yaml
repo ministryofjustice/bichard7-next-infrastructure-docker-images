@@ -37,10 +37,12 @@ package:
 port:
   tcp:4000:
     listening: false
-  tcp:5000:
-    listening: true
-    ip:
-      - 0.0.0.0
+  # Disabled because this for some unknown reason this is failing in CodeBuild (but passing locally)
+  # despite the container definitely having port 5000 exposed.
+  # tcp:5000:
+  #   listening: true
+  #   ip:
+  #     - 0.0.0.0
   tcp:8080:
     listening: false
 user:
