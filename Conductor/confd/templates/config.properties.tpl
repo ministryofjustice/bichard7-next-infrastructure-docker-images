@@ -26,6 +26,7 @@ conductor.elasticsearch.version={{ getv "/cjse/conductor/elasticsearch/version" 
 conductor.elasticsearch.url={{ getv "/cjse/conductor/elasticsearch/url" "http://es:9200" }}
 conductor.elasticsearch.username={{ getv "/cjse/conductor/elasticsearch/username" "bichard" }}
 conductor.elasticsearch.password={{ getv "/cjse/conductor/elasticsearch/password" "password" }}
+conductor.elasticsearch.clusterHealthColor={{ getv "/cjse/conductor/elasticsearch/healthcolor" "yellow" }}
 
 # Name of the elasticsearch cluster
 conductor.elasticsearch.indexName={{ getv "/cjse/conductor/elasticsearch/indexname" "conductor" }}
