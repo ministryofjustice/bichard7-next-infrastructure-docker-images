@@ -1,5 +1,5 @@
 --- Conductor/conductor/awssqs-event-queue/src/main/java/com/netflix/conductor/sqs/config/SQSEventQueueConfiguration.java	2023-01-26 21:44:09
-+++ Conductor/conductor/awssqs-event-queue/src/main/java/com/netflix/conductor/sqs/config/SQSEventQueueConfiguration-updated.java	2023-02-09 11:32:21
++++ Conductor/conductor/awssqs-event-queue/src/main/java/com/netflix/conductor/sqs/config/SQSEventQueueConfiguration-updated.java	2023-02-10 10:13:36
 @@ -16,6 +16,9 @@
  import java.util.Map;
  
@@ -19,7 +19,7 @@
  import com.amazonaws.services.sqs.AmazonSQS;
  import com.amazonaws.services.sqs.AmazonSQSClientBuilder;
  import rx.Scheduler;
-@@ -38,10 +43,26 @@
+@@ -38,10 +43,27 @@
  @ConditionalOnProperty(name = "conductor.event-queues.sqs.enabled", havingValue = "true")
  public class SQSEventQueueConfiguration {
  
@@ -41,7 +41,8 @@
 +        if (!sqsProperties.getEndpoint().isEmpty()) {
 +            LOGGER.info("Setting custom SQS endpoint to {}", sqsProperties.getEndpoint());
 +            builder.withEndpointConfiguration(
-+                    new AwsClientBuilder.EndpointConfiguration(sqsProperties.getEndpoint(), null));
++                    new AwsClientBuilder.EndpointConfiguration(
++                            sqsProperties.getEndpoint(), System.getenv("AWS_REGION")));
 +        }
 +        return builder.build();
      }
