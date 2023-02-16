@@ -2,8 +2,7 @@
 
 set -ex
 
-CONDUCTOR_VERSION=$(cat conductor_version)
-IMAGE="conductor:${CONDUCTOR_VERSION}"
+IMAGE="conductor"
 
 /bin/bash scripts/download_and_patch_conductor.sh
 
