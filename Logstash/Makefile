@@ -13,3 +13,16 @@ build:
 		-e CJSE_LOGSTASH_LOCAL=true \
 		$(image); \
 	fi
+
+run-logstash:
+	npx -y concurrently -c --kill-others -n Watcher,Logstash "./scripts/watch-templates.sh" "docker compose up logstash"
+
+run-elasticsearch:
+	docker compose up elasticsearch
+
+run:
+	npx -y concurrently -c --kill-others -n Watcher,Logstash/ES "./scripts/watch-templates.sh" "docker compose up"
+
+stop:
+	docker compose down
+

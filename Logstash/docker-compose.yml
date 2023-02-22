@@ -42,7 +42,7 @@ services:
     restart: "unless-stopped"
 
   logstash:
-    image: logstash:7.17.7
+    image: logstash
     container_name: logstash
     env_file:
       - goss.env

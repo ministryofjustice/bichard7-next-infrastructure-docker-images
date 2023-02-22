@@ -18,7 +18,9 @@ data from.
 
 run:
 
-`make build`
+```sh
+make build
+```
 
 ### Running against a local ES to develop/debug grok filters
 
@@ -27,11 +29,12 @@ goss.env
 
 run: 
 
-- `docker-compose up`
+```sh
+make run
+```
 
-bootstrapping the first time will take about 5 minutes. 
-You can then docker exec into the `logstash` container and modify the relevant .conf 
-file. Logstash will reload automatically if they have changed.
+Bootstrapping the first time will take about 5 minutes.
+You can now make changes to the template files. Logstash will be updated and reloaded automatically as you make changes.
 
 You can then connect to Kibana on http://localhost:5601, go to the `global` tenant if prompted,
 then click on discover and it should take you to the index patterns. If there is no data, give it a few minutes to start
@@ -52,7 +55,9 @@ Update the CJSE_ENVIRONMENT variable to point to the correct environment, then f
 
 run:
 
-- `docker-compose up logstash`
+```sh
+make run-logstash
+```
 
 #### Developing grok filters
 
