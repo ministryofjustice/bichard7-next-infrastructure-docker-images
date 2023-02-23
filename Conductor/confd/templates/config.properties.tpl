@@ -61,6 +61,7 @@ conductor.app.ownerEmailMandatory=false
   {{ if eq . "sqs" }}
 conductor.default-event-queue.type=sqs
 conductor.event-queues.sqs.enabled=true
+conductor.event-queues.sqs.listenerQueuePrefix=conductor
   {{ end }}
 
   {{ with getv "/cjse/conductor/queue/endpoint" "false" }}
