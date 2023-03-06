@@ -62,6 +62,7 @@ conductor.app.ownerEmailMandatory=false
 conductor.default-event-queue.type=sqs
 conductor.event-queues.sqs.enabled=true
 conductor.event-queues.sqs.batchSize={{ getv "/cjse/conductor/queue/batchsize" "1" }}
+conductor.event-queues.sqs.pollTimeDuration={{ getv "/cjse/conductor/queue/polltimeduration" "100ms" }}
 conductor.event-queues.sqs.listenerQueuePrefix=conductor_
   {{ end }}
 
