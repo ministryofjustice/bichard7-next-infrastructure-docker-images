@@ -4,14 +4,15 @@ set -e
 
 IMAGE="amazon-linux2-base"
 
-if [ "${PLATFORM}x" = "arm64x" ]; then
-  docker build --platform linux/${PLATFORM} -t "${IMAGE}:arm" . 
-  docker build --platform linux/amd64 -t $IMAGE . 
-else
-  docker build -t $IMAGE . 
+if [ -z "$PLATFORM" ]; then
+  PLATFORM=$(arch)
 fi
 
-if [[ "${SKIP_GOSS}x" == "truex" ]]; then
+echo "Building for $PLATFORM"
+
+docker build --platform linux/${PLATFORM} -t "${IMAGE}" . 
+
+if [ "$SKIP_GOSS" = "true" ]; then
   echo "Skipping dgoss tests"
 else
   GOSS_SLEEP=15 dgoss run $IMAGE

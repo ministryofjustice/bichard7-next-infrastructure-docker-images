@@ -4,13 +4,15 @@ set -e
 
 IMAGE="nginx-nodejs-supervisord"
 
-if [ "${PLATFORM}x" = "arm64x" ]; then
-  docker build --platform linux/${PLATFORM} --build-arg BUILD_IMAGE=nodejs:arm -t $IMAGE . 
-else
-  docker build -t $IMAGE . 
+if [ -z "$PLATFORM" ]; then
+  PLATFORM=$(arch)
 fi
 
-if [[ "${SKIP_GOSS}x" == "truex" ]]; then
+echo "Building for $PLATFORM"
+
+docker build --platform linux/${PLATFORM} -t $IMAGE .
+
+if [ "$SKIP_GOSS" = "true" ]; then
     echo "Skipping dgoss tests"
 else
   GOSS_SLEEP=15 dgoss run $IMAGE
