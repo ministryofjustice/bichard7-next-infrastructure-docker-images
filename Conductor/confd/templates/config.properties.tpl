@@ -73,3 +73,6 @@ conductor.event-queues.sqs.endpoint={{ . }}
   {{ end }}
 
 {{ end }}
+
+conductor.metrics-prometheus.enabled=true
+management.endpoints.web.exposure.include=prometheus
