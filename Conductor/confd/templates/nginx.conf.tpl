@@ -81,6 +81,7 @@ http {
         proxy_set_header Host $http_host;
         proxy_cache_bypass $http_upgrade;
         proxy_redirect off;
+        auth_basic off;
       }
 
       location ~ ^/health(.*)$ {
