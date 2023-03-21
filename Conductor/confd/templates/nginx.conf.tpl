@@ -54,7 +54,7 @@ http {
 
       resolver {{ getv "/cjse/nginx/dns/resolver" "127.0.0.11" }};
 
-      set $conductor "localhost:8080";
+      set $conductor "127.0.0.1:8080";
 
       location / {
         root /usr/share/nginx/html;
@@ -108,7 +108,7 @@ http {
 
         resolver {{ getv "/cjse/nginx/dns/resolver" "127.0.0.11" }};
 
-        set $conductor "localhost:8080";
+        set $conductor "127.0.0.1:8080";
 
         location / {
             root /usr/share/nginx/html;
