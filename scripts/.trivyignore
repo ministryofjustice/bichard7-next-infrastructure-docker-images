@@ -13,3 +13,8 @@ CVE-2020-16250
 # Spring Framework through 5.3.16 suffers from a potential remote code execution (RCE) issue if used for Java deserialization of untrusted data. Depending on how the library is implemented within a product, this issue may or not occur, and authentication may be required
 # Ignored the vulnerability because we run Conductor in a private network, and the web interface and API are protected by basic authentication via Nginx
 CVE-2016-1000027
+
+# Vulnerability in Conductor for Spring Framework
+# SnakeYaml's Constructor() class does not restrict types which can be instantiated during deserialization. Deserializing yaml content provided by an attacker can lead to remote code execution. We recommend using SnakeYaml's SafeConsturctor when parsing untrusted content to restrict deserialization.
+# Ignored as SnakeYaml is used by Spring Boot to parse trusted files in the project. Conductor also uses `*.properties` files instead of `*.yaml`.
+CVE-2022-1471
