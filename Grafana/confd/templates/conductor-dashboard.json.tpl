@@ -116,7 +116,7 @@
           "exemplar": false,
           "expr": "task_queue_depth{}",
           "instant": false,
-          "legendFormat": "{{taskType}}",
+          "legendFormat": "{{"{{"}}taskType{{"}}"}}",
           "range": true,
           "refId": "A"
         }
@@ -175,7 +175,7 @@
           "expr": "event_queue_messages_processed_total{}",
           "format": "time_series",
           "instant": false,
-          "legendFormat": "{{queueName}}",
+          "legendFormat": "{{"{{"}}queueName{{"}}"}}",
           "range": true,
           "refId": "A"
         }
@@ -234,7 +234,7 @@
           "expr": "event_queue_messages_handled_total{}",
           "format": "time_series",
           "instant": false,
-          "legendFormat": "{{queueName}}",
+          "legendFormat": "{{"{{"}}queueName{{"}}"}}",
           "range": true,
           "refId": "A"
         }
@@ -332,7 +332,7 @@
           "datasource": null,
           "editorMode": "code",
           "expr": "task_queue_wait_seconds_max{}",
-          "legendFormat": "{{taskType}}",
+          "legendFormat": "{{"{{"}}taskType{{"}}"}}",
           "range": true,
           "refId": "A"
         }
@@ -421,7 +421,7 @@
           "expr": "workflow_execution_seconds_max{}",
           "format": "time_series",
           "instant": false,
-          "legendFormat": "{{workflowName}}",
+          "legendFormat": "{{"{{"}}workflowName{{"}}"}}",
           "range": true,
           "refId": "A"
         }
@@ -506,7 +506,7 @@
           "exemplar": false,
           "expr": "task_execution_seconds_max{includeRetries=\"false\"}",
           "instant": false,
-          "legendFormat": "{{taskType}}",
+          "legendFormat": "{{"{{"}}taskType{{"}}"}}",
           "range": true,
           "rawQuery": false,
           "refId": "A"
@@ -592,7 +592,7 @@
           "exemplar": false,
           "expr": "task_execution_seconds_max{includeRetries=\"true\"}",
           "instant": false,
-          "legendFormat": "{{taskType}}",
+          "legendFormat": "{{"{{"}}taskType{{"}}"}}",
           "range": true,
           "rawQuery": true,
           "refId": "A"
@@ -676,7 +676,7 @@
           "exemplar": false,
           "expr": "workflow_running{}",
           "instant": false,
-          "legendFormat": "{{workflowName}}",
+          "legendFormat": "{{"{{"}}workflowName{{"}}"}}",
           "range": true,
           "refId": "A"
         }
