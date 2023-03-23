@@ -2,8 +2,15 @@ SHELL := /bin/bash # Use bash syntax
 image = conductor
 
 .PHONY: build
-build:
-	bash ./build.sh
+build: build-conductor-community
+
+.PHONY: build-conductor
+build-conductor:
+	bash ./build.sh conductor
+
+.PHONY: build-conductor-community
+build-conductor-community:
+	bash ./build.sh conductor-community
 
 .PHONY: clean
 clean:

@@ -1,8 +1,10 @@
 ARG BUILD_IMAGE="nginx-java-supervisord"
 
-FROM node:18.13-slim as ui-builder
+FROM node:18.13 as ui-builder
 
-COPY ./conductor/ui /conductor/ui
+ARG CONDUCTOR_VERSION
+
+RUN git clone --depth=1 -b ${CONDUCTOR_VERSION} https://github.com/Netflix/conductor.git /conductor
 
 WORKDIR /conductor/ui
 RUN yarn install && yarn build
@@ -12,12 +14,16 @@ RUN yarn install && yarn build
 # ===========================================================================================================
 FROM openjdk:11-jdk AS builder
 
-# Copy the project onto the builder image
-COPY ./conductor /conductor
+# RUN git clone --depth=1 -b ${CONDUCTOR_VERSION} https://github.com/Netflix/conductor-community /conductor
+RUN git clone --depth=1 -b tweak-postgres-indexdao https://github.com/bjpirt/conductor-community.git /conductor
 
 # Build the server
 WORKDIR /conductor
-RUN ./gradlew build -x test
+
+#This will cache the downloaded gradle so repeated runs are faster
+RUN ./gradlew --version 
+RUN ./gradlew conductor-community-server:build
+RUN ls -al /conductor/community-server/build/libs
 
 # ===========================================================================================================
 # 1. Bin stage
@@ -42,7 +48,7 @@ RUN wget -O /bin/confd https://github.com/iwilltry42/confd/releases/download/v${
 
 
 # Copy the compiled output to new image
-COPY --from=builder /conductor/server/build/libs/conductor-server-boot.jar /app/libs
+COPY --from=builder /conductor/community-server/build/libs/conductor-community-server-*-boot.jar /app/libs/conductor-server-boot.jar
 
 COPY confd /etc/confd/
 COPY conf/supervisord.conf /etc/supervisord.conf
@@ -52,11 +58,6 @@ WORKDIR /usr/share/nginx/html
 RUN rm -rf ./*
 COPY --from=ui-builder /conductor/ui/build .
 
-# Copy the files for the server into the app folders
-# RUN chmod +x /app/startup.sh
-
 EXPOSE 5000
 
 HEALTHCHECK --interval=60s --timeout=30s --retries=10 CMD curl -I -XGET http://localhost:8080/health || exit 1
-
-# CMD ["/usr/bin/supervisord", "-c", "/etc/supervisord.conf"]
