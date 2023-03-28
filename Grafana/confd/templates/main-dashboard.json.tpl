@@ -600,7 +600,7 @@
                     "expr": "aws_amazonmq_enqueue_count_average{job=\"aws_amazonmq\", queue=~\".*\\\\.FAILURE$\"}",
                     "instant": false,
                     "interval": "",
-                    "legendFormat": "{{queue}}",
+                    "legendFormat": "{{"{{"}}queue{{"}}"}}",
                     "range": true,
                     "refId": "A"
                 }
