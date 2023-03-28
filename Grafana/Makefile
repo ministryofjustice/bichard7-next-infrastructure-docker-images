@@ -13,3 +13,6 @@ build:
 		-e ALERTMANAGER_URL=localhost \
 		$(image); \
 	fi
+
+run:
+	./scripts/run_locally.sh

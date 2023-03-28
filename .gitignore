@@ -54,7 +54,7 @@ Nginx_Auth_Proxy/test/node_modules
 logstash_conf/
 Logstash/goss.env
 ci.docker/
-
+Grafana/*.env
 # Conductor source
 Conductor/conductor
 conductor.tar.gz
