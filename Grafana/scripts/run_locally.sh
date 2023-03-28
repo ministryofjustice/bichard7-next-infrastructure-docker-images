@@ -1,7 +1,7 @@
 #!/bin/bash
 
 ##
-##  This script populates the required environment variables from AWS and run Grafana
+##  This script populates the required environment variables from AWS and runs Grafana
 ##
 ##  Use the following command to run this script:
 ##
