@@ -1,7 +1,7 @@
 ARG BUILD_IMAGE="nodejs"
 FROM ${BUILD_IMAGE}
 
-ARG TERRAFORM_VERSION="1.1.3"
+ARG TERRAFORM_VERSION="1.4.4"
 
 ARG YUM_PACKAGES="python-pip python3-pip gzip tar unzip openssl shadow-utils xz wget gnupg curl jq git openvpn unzip"
 ARG TEST_PACKAGES="which chromium"
