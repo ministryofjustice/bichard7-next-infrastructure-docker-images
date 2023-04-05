@@ -12,7 +12,7 @@ COPY files/openssl.cnf /tmp/openssl.cnf
 
 RUN mkdir -p /certs && \
     mkdir -p /var/log/supervisor && \
-    yum update && \
+    yum update -y && \
     yum install -y yum-utils
 
 COPY files/nginx.repo /etc/yum.repos.d/nginx.repo
