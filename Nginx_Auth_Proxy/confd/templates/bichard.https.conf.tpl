@@ -32,10 +32,10 @@ location @error403 {
     proxy_ssl_server_name on;
     proxy_ssl_verify_depth 2;
     absolute_redirect off;
-    if ($upstream_http_x_status_text = "Invalid CSRF-token") {
+    if ($upstream_http_x_status_message = "Invalid CSRF-token") {
         return 302 $request_uri;
     }
-    if ($upstream_http_x_status_text != "Invalid CSRF-token") {
+    if ($upstream_http_x_status_message != "Invalid CSRF-token") {
         rewrite /(.*) /users/403;
     }
 }
