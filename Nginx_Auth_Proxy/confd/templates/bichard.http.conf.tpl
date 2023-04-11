@@ -22,11 +22,26 @@ location @error401 {
     return 302 /users/login?redirect=$request_uri;
 }
 
-# Display error page for 403, 404 and 500 errors
-error_page 403 =403 /403;
+# Redirect unauthorised to 403 error page and request with invalid CSRF token to the same page
+error_page 403 = @error403;
+location @error403 {
+    limit_except      GET POST PUT DELETE { deny all; }
+    include /etc/includes/headers.conf;
+    proxy_ssl_server_name on;
+    proxy_ssl_verify_depth 2;
+    absolute_redirect off;
+    if ($upstream_http_x_status_message = "Invalid CSRF-token") {
+        return 302 $request_uri;
+    }
+    if ($upstream_http_x_status_message != "Invalid CSRF-token") {
+        rewrite /(.*) /users/403;
+    }
+}
+
+# Display error page for 404 and 500 errors
 error_page 404 =404 /404;
 error_page 500 =500 /500;
-location ~ ^/(403|404|500)$ {
+location ~ ^/(404|500)$ {
     proxy_ssl_verify  {{ getv "/cjse/nginx/proxysslverify" "on" }};
     limit_except      GET POST PUT { deny all; }
     include /etc/includes/headers.conf;
@@ -139,7 +154,7 @@ location /help {
 }
 
 # Allow access to user-service login flow (and necessary assets) without authentication
-location ~ ^/users/(login|fonts|images|_next/static|403|404|500|faq)(.*)$ {
+location ~ ^/users/(login|fonts|images|_next/static|faq)(.*)$ {
     limit_except GET POST PUT { deny all; }
     include /etc/includes/headers.conf;
 
@@ -149,6 +164,21 @@ location ~ ^/users/(login|fonts|images|_next/static|403|404|500|faq)(.*)$ {
     proxy_cookie_flags ~ httponly samesite=strict;
     proxy_ssl_server_name on;
     proxy_ssl_verify_depth 2;
+    proxy_intercept_errors on;
+}
+
+# Allow access to error pages without authentication
+location ~ ^/users/(404|403|500)(.*)$ {
+    limit_except GET POST PUT { deny all; }
+    include /etc/includes/headers.conf;
+
+    proxy_pass        https://$userservice;
+    proxy_set_header X-Origin https://$host;
+    proxy_ssl_verify  {{ getv "/cjse/nginx/proxysslverify" "on" }};
+    proxy_cookie_flags ~ httponly secure samesite=strict;
+    proxy_ssl_server_name on;
+    proxy_ssl_verify_depth 2;
+    proxy_intercept_errors off;
 }
 
 # Allow access to bichard-ui health check, connectivity and static endpoints without authentication

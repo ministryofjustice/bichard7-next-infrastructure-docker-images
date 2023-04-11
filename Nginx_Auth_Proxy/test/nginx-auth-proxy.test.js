@@ -13,9 +13,12 @@ const mockStatus = (status) => (ctx) => {
   ctx.status = status;
 };
 
-const mockResponse = (status, body) => (ctx) => {
+const mockResponse = (status, body, header) => (ctx) => {
   ctx.status = status;
   ctx.body = body;
+  Object.keys(header || {}).forEach((key) => {
+    ctx.set(key, header[key]);
+  });
 };
 
 const TEST_HOSTS = process.env.TEST_HOSTS.split(",") || [
@@ -56,29 +59,25 @@ describe("Testing Nginx config", () => {
     Object.values(servers).forEach((server) => server.reset());
   });
 
+  // prettier-ignore
   const routes = [
     { path: "/bichard-ui/x", route: "bichard", auth: true },
-    { path: "/reports/x", route: "static", auth: true },
-    { path: "/help/x", route: "static", auth: false },
+    { path: "/reports/x", route: "static", auth: true, verbs: ["GET"] },
+    { path: "/help/x", route: "static", auth: false, verbs: ["GET"] },
     { path: "/users/x", route: "user", auth: true },
     { path: "/bichard/x", route: "ui", auth: true },
     { path: "/users/login", route: "user", auth: false },
     { path: "/users/images/x.png", route: "user", auth: false },
     { path: "/users/fonts/x.woff", route: "user", auth: false },
-    { path: "/users/403", route: "user", auth: false },
-    { path: "/users/404", route: "user", auth: false },
-    { path: "/users/500", route: "user", auth: false },
+    { path: "/users/403", route: "user", auth: false, errorsIntercepted: false },
+    { path: "/users/404", route: "user", auth: false, errorsIntercepted: false },
+    { path: "/users/500", route: "user", auth: false, errorsIntercepted: false },
     { path: "/users/faq", route: "user", auth: false },
-    { path: "/bichard-ui/Health", route: "bichard", auth: false },
-    { path: "/bichard-ui/Connectivity", route: "bichard", auth: false },
-    { path: "/bichard-ui/images/foo.gif", route: "bichard", auth: false },
-    { path: "/bichard-ui/css/style.css", route: "bichard", auth: false },
-    {
-      path: "/bichard-backend/Connectivity",
-      route: "backend",
-      dest: "/bichard-ui/Connectivity",
-      auth: false,
-    },
+    { path: "/bichard-ui/Health", route: "bichard", auth: false, errorsIntercepted: false },
+    { path: "/bichard-ui/Connectivity", route: "bichard", auth: false, errorsIntercepted: false },
+    { path: "/bichard-ui/images/foo.gif", route: "bichard", auth: false, errorsIntercepted: false },
+    { path: "/bichard-ui/css/style.css", route: "bichard", auth: false, errorsIntercepted: false },
+    { path: "/bichard-backend/Connectivity", route: "backend", dest: "/bichard-ui/Connectivity", auth: false, errorsIntercepted: false },
   ];
 
   const defaultHeaders = {
@@ -144,6 +143,102 @@ describe("Testing Nginx config", () => {
           } else {
             expect(res.headers["set-cookie"]).toBeUndefined();
           }
+        }
+      );
+
+      test.each(
+        routes.filter(
+          (route) =>
+            route.errorsIntercepted !== false &&
+            (!route.verbs || route.verbs.includes("POST"))
+        )
+      )(
+        "It should redirect to the same URL when the upstream returns 403 with 'Invalid CSRF-token' message",
+        async ({ path, route, auth, dest }) => {
+          if (auth) {
+            const mockedResponseFn = (ctx) => {
+              ctx.cookies.set(".AUTH", "Realistic", {
+                sameSite: true,
+                secure: false,
+              });
+              ctx.status = 200;
+            };
+            servers.user
+              .get("/users/api/auth")
+              .mockImplementationOnce(mockedResponseFn)
+              .mockImplementationOnce(mockedResponseFn);
+          }
+          const destPath = dest || path;
+
+          const redirectBody = `Redirected to ${path}`;
+          const mockGet = servers[route]
+            .get(destPath)
+            .mockImplementationOnce(mockResponse(200, redirectBody));
+
+          const mockPost = servers[route].post(destPath).mockImplementationOnce(
+            mockResponse(403, "", {
+              "X-Status-Message": "Invalid CSRF-token",
+            })
+          );
+
+          const res = await axios
+            .post(`${testHost}${path}`, {
+              ...axiosConfig,
+              maxRedirects: 0,
+            })
+            .catch((err) => err.response);
+
+          expect(mockGet).toHaveBeenCalledTimes(1);
+          expect(mockPost).toHaveBeenCalledTimes(1);
+          expect(res.status).toEqual(200);
+          expect(res.data).toBe(redirectBody);
+        }
+      );
+
+      test.each(
+        routes.filter(
+          (route) =>
+            route.errorsIntercepted !== false &&
+            (!route.verbs || route.verbs.includes("POST"))
+        )
+      )(
+        "It should returns 403 page when upstream returns 403 without 'Invalid CSRF-token' message",
+        async ({ path, route, auth, dest }) => {
+          if (auth) {
+            const mockedResponseFn = (ctx) => {
+              ctx.cookies.set(".AUTH", "Realistic", {
+                sameSite: true,
+                secure: false,
+              });
+              ctx.status = 200;
+            };
+            servers.user
+              .get("/users/api/auth")
+              .mockImplementationOnce(mockedResponseFn)
+              .mockImplementationOnce(mockedResponseFn);
+          }
+          const destPath = dest || path;
+
+          const errorPage = `403 Error for ${path}`;
+          const mockErrorPage = servers["user"]
+            .post("/users/403")
+            .mockImplementationOnce(mockResponse(200, errorPage));
+
+          const mockPost = servers[route]
+            .post(destPath)
+            .mockImplementationOnce(mockStatus(403));
+
+          const res = await axios
+            .post(`${testHost}${path}`, {
+              ...axiosConfig,
+              maxRedirects: 0
+            })
+            .catch((err) => err.response);
+
+          expect(mockErrorPage).toHaveBeenCalledTimes(1);
+          expect(mockPost).toHaveBeenCalledTimes(1);
+          expect(res.status).toEqual(200);
+          expect(res.data).toBe(errorPage);
         }
       );
 
