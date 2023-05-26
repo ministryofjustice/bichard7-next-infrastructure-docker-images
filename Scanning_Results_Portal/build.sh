@@ -4,13 +4,7 @@ set -e
 
 IMAGE="scanning-results-portal"
 
-if [ -z "$PLATFORM" ]; then
-  PLATFORM=$(arch)
-fi
-
-echo "Building for $PLATFORM"
-
-docker build --platform linux/${PLATFORM} -t $IMAGE .
+docker build -t $IMAGE .
 
 if [ "$SKIP_GOSS" = "true" ]; then
   echo "Skipping dgoss tests"
