@@ -33,3 +33,16 @@ Buildkit is an option in Docker Desktop. If you're getting errors building Docke
 
 ### Building on an ARM-based Mac
 You can build the images used to run the stack components for an ARM Mac by setting the environment variable `PLATFORM=arm64`. Note: this does not apply to the monitoring infrastructure docker images at this point since they generally don't need running locally.
+
+### Troubleshooting
+
+Make sure you have installed [wget](https://www.gnu.org/software/wget/)
+```
+brew install wget
+```
+
+If you don't have [goss](https://goss.rocks/) installed and want to use it, use the script provided.
+```
+cd bichard7-next-infrastructure-docker-images
+sh ./scripts/install_goss.sh
+```
