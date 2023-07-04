@@ -5,13 +5,16 @@ LABEL maintainer="CJSE"
 
 WORKDIR /
 
+# Load logstash versions for yum
 COPY ./files/logstash.repo /etc/yum.repos.d
 COPY scripts/credentials.sh /usr/bin/credentials
+
 # This must match what is deployed on AWS
-ARG LOGSTASH_VERSION="7.17.7"
+ARG LOGSTASH_VERSION="8.8.2-1"
 ARG CONFD_VERSION="0.16.0"
 ARG CONFD_CHECKSUM="255d2559f3824dd64df059bdc533fd6b697c070db603c76aaf8d1d5e6b0cc334"
 
+# RUN rpm --import https://artifacts.elastic.co/GPG-KEY-elasticsearch
 RUN mkdir -p /var/log/supervisor && \
   yum makecache && \
   yum install -y \
@@ -33,10 +36,10 @@ RUN mkdir -p /var/log/supervisor && \
 WORKDIR /usr/share/logstash/
 
 # Workaround for Sinatra bug
-RUN sed --in-place "s/gem.add_runtime_dependency \"sinatra\", '~> 2'/gem.add_runtime_dependency \"sinatra\", '~> 2.1.0'/g" \
-    /usr/share/logstash/logstash-core/logstash-core.gemspec && \
-    rm Gemfile.lock && \
-    /usr/share/logstash/bin/ruby -S /usr/share/logstash/vendor/bundle/jruby/2.5.0/bin/bundle install
+# RUN sed --in-place "s/gem.add_runtime_dependency \"sinatra\", '~> 2'/gem.add_runtime_dependency \"sinatra\", '~> 2.1.0'/g" \
+#     /usr/share/logstash/logstash-core/logstash-core.gemspec && \
+#     rm Gemfile.lock && \
+#     /usr/share/logstash/bin/ruby -S /usr/share/logstash/vendor/bundle/jruby/2.5.0/bin/bundle install
 
 WORKDIR /
 EXPOSE     9600
