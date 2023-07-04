@@ -29,13 +29,12 @@ RUN mkdir -p /var/log/supervisor && \
   chmod +x /usr/bin/credentials && \
   mkdir -p /etc/confd/conf.d && \
   mkdir -p /etc/confd/templates && \
-  mkdir -p /etc/logstash/patterns && \
-      /usr/share/logstash/bin/logstash-plugin install logstash-input-cloudwatch_logs logstash-output-opensearch && \
-  chown -R logstash:logstash /usr/share/logstash
-
-WORKDIR /usr/share/logstash/
+  mkdir -p /etc/logstash/patterns
+RUN /usr/share/logstash/bin/logstash-plugin install logstash-integration-aws logstash-output-opensearch
+RUN chown -R logstash:logstash /usr/share/logstash
 
 # Workaround for Sinatra bug
+# WORKDIR /usr/share/logstash/
 # RUN sed --in-place "s/gem.add_runtime_dependency \"sinatra\", '~> 2'/gem.add_runtime_dependency \"sinatra\", '~> 2.1.0'/g" \
 #     /usr/share/logstash/logstash-core/logstash-core.gemspec && \
 #     rm Gemfile.lock && \
