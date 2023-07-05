@@ -16,13 +16,10 @@ Mustache.parse(listHtml);
 
 var endpoint = argv.endpoint || process.env.S3_SERVER_ENDPOINT;
 var bucket = argv.bucket || process.env.S3_SERVER_BUCKET;
-var key = argv.key || process.env.AWS_ACCESS_KEY_ID;
-var secret = argv.secret || process.env.AWS_SECRET_ACCESS_KEY;
 var port = argv.p || argv.port || process.env.S3_SERVER_PORT || 3010;
 var securePort = argv.securePort || process.env.S3_SERVER_SECURE_PORT || 3020;
 var securePassphrase = argv.securePassphrase || process.env.S3_SERVER_SECURE_PASSPHRASE;
 var noCache = argv.noCache || process.env.NO_CACHE;
-var sessionToken = process.env.AWS_SESSION_TOKEN;
 
 var privateKey, certificate;
 if (process.env.S3_SERVER_SECURE_KEY_FILE || argv.secureKey) {
@@ -39,14 +36,6 @@ if (process.env.S3_SERVER_SECURE_KEY_FILE || argv.secureKey) {
 const prefix = argv.prefix || process.env.S3_KEY_PREFIX || "";
 
 console.log("Serving " + bucket + " on port " + port);
-
-if (key) {
-  AWS.config.update({
-    accessKeyId: key,
-    secretAccessKey: secret,
-  });
-}
-if (sessionToken) AWS.config.update({ sessionToken });
 
 var s3 = new AWS.S3({endpoint: endpoint});
 
