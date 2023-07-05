@@ -8,6 +8,7 @@ COPY scripts/credentials.sh /usr/bin/credentials
 ARG NODE_DIR="/opt/s3-server"
 ARG NODE_USER="runner"
 
+COPY s3-server ${NODE_DIR}
 RUN yum install -y \
     cronie \
     git && \
@@ -26,9 +27,7 @@ RUN npm i -g npm-check-updates
 
 USER runner
 WORKDIR ${NODE_DIR}
-RUN git clone https://github.com/signalfx/s3-server.git . && \
-    ncu -u && \
-    npm i
+RUN ncu -u && npm i
 
 # hadolint ignore=DL3002
 USER root
