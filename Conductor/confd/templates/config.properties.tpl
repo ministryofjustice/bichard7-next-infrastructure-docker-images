@@ -4,9 +4,6 @@ conductor.grpc-server.enabled=false
 # Set the database persistence type to postgres
 conductor.db.type=postgres
 conductor.queue.type=postgres
-spring.datasource.url={{ getv "/cjse/conductor/postgres/url" "jdbc:postgresql://postgres:5432/conductor" }}
-spring.datasource.username={{ getv "/cjse/conductor/postgres/username" "conductor" }}
-spring.datasource.password={{ getv "/cjse/conductor/postgres/password" "conductor" }}
 
 # Hikari pool sizes are -1 by default and prevent startup
 spring.datasource.hikari.maximum-pool-size=10
@@ -43,15 +40,9 @@ conductor.app.ownerEmailMandatory=false
 # Configure the SQS integration
 conductor.default-event-queue.type=sqs
 conductor.event-queues.sqs.enabled=true
-conductor.event-queues.sqs.batchSize={{ getv "/cjse/conductor/queue/batchsize" "1" }}
-conductor.event-queues.sqs.pollTimeDuration={{ getv "/cjse/conductor/queue/polltimeduration" "100ms" }}
 conductor.event-queues.sqs.listenerQueuePrefix=conductor_
 
-{{ with getv "/cjse/conductor/queue/endpoint" "false" }}
-  {{ if ne . "false"}}
-conductor.event-queues.sqs.endpoint={{ . }}
-  {{ end }}
-{{ end }}
+conductor.app.eventProcessorThreadCount=10
 
 conductor.metrics-prometheus.enabled=true
 management.endpoints.web.exposure.include=prometheus
