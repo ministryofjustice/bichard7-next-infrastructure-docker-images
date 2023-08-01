@@ -21,5 +21,9 @@ CVE-2022-1471
 
 # Ignored as it is only applicable if using log4j to listen for logs on a socket and we are not doing this
 CVE-2019-17571
+
 # Ignored as we are not logging to a database
 CVE-2022-23305
+
+# Ignored because this vulnerability only applies if you are running on Cloud Foundry
+CVE-2023-20873
