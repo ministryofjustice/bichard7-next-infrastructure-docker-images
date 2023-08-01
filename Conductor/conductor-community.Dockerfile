@@ -7,15 +7,17 @@ ARG CONDUCTOR_VERSION
 RUN git clone --depth=1 -b ${CONDUCTOR_VERSION} https://github.com/Netflix/conductor.git /conductor
 
 WORKDIR /conductor/ui
-RUN yarn install && yarn build
+RUN yarn install --network-timeout=240000
+RUN yarn build
 
 # ===========================================================================================================
 # 0. Builder stage
 # ===========================================================================================================
 FROM openjdk:11-jdk AS builder
 
-# RUN git clone --depth=1 -b ${CONDUCTOR_VERSION} https://github.com/Netflix/conductor-community /conductor
-RUN git clone --depth=1 -b tweak-postgres-indexdao https://github.com/bjpirt/conductor-community.git /conductor
+ARG CONDUCTOR_VERSION
+
+RUN git clone --depth=1 -b ${CONDUCTOR_VERSION} https://github.com/Netflix/conductor-community.git /conductor
 
 # Build the server
 WORKDIR /conductor
@@ -23,7 +25,6 @@ WORKDIR /conductor
 #This will cache the downloaded gradle so repeated runs are faster
 RUN ./gradlew --version 
 RUN ./gradlew conductor-community-server:build
-RUN ls -al /conductor/community-server/build/libs
 
 # ===========================================================================================================
 # 1. Bin stage
