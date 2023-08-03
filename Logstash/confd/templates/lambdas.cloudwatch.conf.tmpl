@@ -1,12 +1,11 @@
 input {
   cloudwatch_logs {
-    codec => json
+    codec => "plain"
     log_group => ["/aws/lambda/"]
     log_group_prefix => true
     start_position => "end"
     region => "eu-west-2"
     tags => ["cloudwatch_syslog","lambda_logs"]
-    codec => "plain"
   }
 }
 
@@ -46,7 +45,7 @@ output {
     user => "{{ getv "/cjse/logstash/es/username" ""}}"
     password => "{{ getv "/cjse/logstash/es/password" ""}}"
     ssl => true
-    document_id => "%{[@metadata][document_id]}" 
+    document_id => "%{[@metadata][document_id]}"
 {{ if exists "/cjse/logstash/local" }}
    ssl_certificate_verification => false
 {{ end }}
