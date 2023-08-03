@@ -1,0 +1,11 @@
+---
+
+version: 0.2
+phases:
+  build:
+    commands:
+      - set -ev
+      - cd ./Amazon_Linux_2023_Base
+      - /bin/bash ./scripts/build_docker.sh
+
+...
