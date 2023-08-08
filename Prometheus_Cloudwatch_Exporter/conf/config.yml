@@ -249,6 +249,22 @@ metrics:
     range_seconds: 172800
     period_seconds: 86400
 
+  - aws_metric_name: NumberOfMessagesDeleted
+    aws_namespace: AWS/SQS
+    aws_statistics: [Average]
+
+  - aws_metric_name: ApproximateAgeOfOldestMessage
+    aws_namespace: AWS/SQS
+    aws_statistics: [Average]
+
+  - aws_metric_name: ApproximateNumberOfMessagesDelayed
+    aws_namespace: AWS/SQS
+    aws_statistics: [Average]
+
+  - aws_metric_name: ApproximateNumberOfMessagesVisible
+    aws_namespace: AWS/SQS
+    aws_statistics: [Average]
+
   - aws_namespace: AWS/States
     aws_metric_name: ExecutionsFailed
     aws_dimensions: [StateMachineArn]
