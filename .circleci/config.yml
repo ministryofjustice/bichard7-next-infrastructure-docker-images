@@ -6,7 +6,7 @@ jobs:
   test:
     machine:
       image: ubuntu-2204:2023.07.2
-      docker_layer_caching: true
+      # docker_layer_caching: true
     steps:
       - checkout
       - run: sudo bash scripts/install_goss.sh
