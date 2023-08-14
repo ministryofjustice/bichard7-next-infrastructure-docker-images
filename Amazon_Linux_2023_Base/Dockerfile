@@ -3,10 +3,10 @@ ARG BUILD_IMAGE="amazonlinux:2023"
 FROM ${BUILD_IMAGE}
 
 LABEL maintainer="CJSE"
-ARG DNF_PACKAGES="pip gzip tar unzip openssl shadow-utils xz wget gnupg"
+ARG DNF_PACKAGES="pip gzip tar unzip openssl shadow-utils xz wget gnupg dirmngr"
 
 RUN dnf update -y &&\
-    dnf install -y ${DNF_PACKAGES}
+    dnf install -y ${DNF_PACKAGES} --allowerasing
 
 # https://github.com/aws/aws-cli/issues/8036
 RUN pip install wheel &&\
