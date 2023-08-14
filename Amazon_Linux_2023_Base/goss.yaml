@@ -10,8 +10,6 @@ file:
 package:
   deltarpm:
     installed: true
-  epel-release:
-    installed: true
   python:
     installed: true
   python2-pip:
@@ -19,8 +17,8 @@ package:
 user:
   nobody:
     exists: true
-    uid: 99
-    gid: 99
+    uid: 65534
+    gid: 65534
     groups:
     - nobody
     home: /
