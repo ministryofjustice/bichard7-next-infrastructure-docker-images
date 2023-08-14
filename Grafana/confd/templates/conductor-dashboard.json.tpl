@@ -42,10 +42,7 @@
       "type": "row"
     },
     {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "e6c0c6c2d40d11ebb8bc0242ac130003"
-      },
+      "datasource": null,
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -131,10 +128,7 @@
       "type": "timeseries"
     },
     {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "e6c0c6c2d40d11ebb8bc0242ac130003"
-      },
+      "datasource": null,
       "description": "Time spent by a task in queue",
       "fieldConfig": {
         "defaults": {
@@ -222,10 +216,7 @@
       "type": "timeseries"
     },
     {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "e6c0c6c2d40d11ebb8bc0242ac130003"
-      },
+      "datasource": null,
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -319,10 +310,7 @@
       "type": "timeseries"
     },
     {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "e6c0c6c2d40d11ebb8bc0242ac130003"
-      },
+      "datasource": null,
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -408,10 +396,7 @@
       "type": "timeseries"
     },
     {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "e6c0c6c2d40d11ebb8bc0242ac130003"
-      },
+      "datasource": null,
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -511,10 +496,7 @@
       "type": "row"
     },
     {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "e6c0c6c2d40d11ebb8bc0242ac130003"
-      },
+      "datasource": null,
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -625,10 +607,7 @@
       "type": "timeseries"
     },
     {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "e6c0c6c2d40d11ebb8bc0242ac130003"
-      },
+      "datasource": null,
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -738,10 +717,7 @@
       "type": "timeseries"
     },
     {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "e6c0c6c2d40d11ebb8bc0242ac130003"
-      },
+      "datasource": null,
       "description": "",
       "fieldConfig": {
         "defaults": {
@@ -853,10 +829,7 @@
       "type": "timeseries"
     },
     {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "e6c0c6c2d40d11ebb8bc0242ac130003"
-      },
+      "datasource": null,
       "description": "",
       "fieldConfig": {
         "defaults": {
