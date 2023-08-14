@@ -3,7 +3,7 @@ ARG BUILD_IMAGE="amazonlinux:2023"
 FROM ${BUILD_IMAGE}
 
 LABEL maintainer="CJSE"
-ARG DNF_PACKAGES="python-pip gzip tar unzip openssl shadow-utils xz wget gnupg"
+ARG DNF_PACKAGES="python python2-pip gzip tar unzip openssl shadow-utils xz wget gnupg"
 ARG PIP_PACKAGES="awscli"
 
 RUN dnf update -y && \
