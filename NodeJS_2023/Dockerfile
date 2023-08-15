@@ -1,4 +1,4 @@
-ARG BUILD_IMAGE="amazon-linux2-base"
+ARG BUILD_IMAGE="amazon-linux2023-base"
 FROM ${BUILD_IMAGE}
 
 LABEL maintainer="CJSE"
