@@ -2,25 +2,16 @@ file:
   /etc/passwd:
     exists: true
     mode: "0644"
-    size: 552
+    size: 878
     owner: root
     group: root
     filetype: file
     contains: []
-package:
-  deltarpm:
-    installed: true
-  epel-release:
-    installed: true
-  python:
-    installed: true
-  python2-pip:
-    installed: true
 user:
   nobody:
     exists: true
-    uid: 99
-    gid: 99
+    uid: 65534
+    gid: 65534
     groups:
       - nobody
     home: /
