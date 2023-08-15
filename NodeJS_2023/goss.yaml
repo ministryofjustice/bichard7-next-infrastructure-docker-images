@@ -1,0 +1,48 @@
+file:
+  /etc/passwd:
+    exists: true
+    mode: "0644"
+    size: 552
+    owner: root
+    group: root
+    filetype: file
+    contains: []
+package:
+  deltarpm:
+    installed: true
+  epel-release:
+    installed: true
+  python:
+    installed: true
+  python2-pip:
+    installed: true
+user:
+  nobody:
+    exists: true
+    uid: 99
+    gid: 99
+    groups:
+      - nobody
+    home: /
+    shell: /sbin/nologin
+  node:
+    exists: true
+    uid: 1000
+    gid: 1000
+    groups:
+      - node
+    home: /home/node
+    shell: /bin/bash
+command:
+  node --version:
+    exit-status: 0
+    stdout:
+      - v16.18.1
+    stderr: []
+    timeout: 10000
+  yarn --version:
+    exit-status: 0
+    stdout:
+      - 1.22.15
+    stderr: []
+    timeout: 10000
