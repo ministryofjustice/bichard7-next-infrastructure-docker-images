@@ -5,7 +5,7 @@ version: 2.1
 jobs:
   test:
     machine:
-      image: ubuntu-2004:202104-01
+      image: ubuntu-2204:2023.07.2
       docker_layer_caching: true
     steps:
       - checkout

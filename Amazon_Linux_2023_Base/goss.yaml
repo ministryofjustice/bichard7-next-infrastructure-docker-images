@@ -1,0 +1,18 @@
+file:
+  /etc/passwd:
+    exists: true
+    mode: "0644"
+    size: 839
+    owner: root
+    group: root
+    filetype: file
+    contains: []
+user:
+  nobody:
+    exists: true
+    uid: 65534
+    gid: 65534
+    groups:
+    - nobody
+    home: /
+    shell: /sbin/nologin

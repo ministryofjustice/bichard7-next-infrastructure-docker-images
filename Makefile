@@ -1,4 +1,4 @@
-BASE_CONTAINERS:= Amazon_Linux_Base Openjdk_Jre11_Slim NodeJS Postfix Codebuild_Base
+BASE_CONTAINERS:= Amazon_Linux_Base Openjdk_Jre11_Slim NodeJS Postfix Codebuild_Base Amazon_Linux_2023_Base
 NGINX_CONTAINERS:= Nginx_NodeJS_Supervisord Nginx_Supervisord Nginx_Auth_Proxy Nginx_Java_Supervisord S3_Web_Proxy Scanning_Results_Portal Conductor
 MONITORING_CONTAINERS:= Grafana Grafana_Codebuild Prometheus Prometheus_Cloudwatch_Exporter Logstash Prometheus_BlackBox_Exporter
 
