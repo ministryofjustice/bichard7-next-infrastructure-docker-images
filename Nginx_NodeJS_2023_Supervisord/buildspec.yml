@@ -1,0 +1,10 @@
+---
+
+version: 0.2
+phases:
+  build:
+    commands:
+      - set -ev
+      - cd Nginx_NodeJS_2023_Supervisord
+      - /bin/bash ./scripts/build_docker.sh
+...

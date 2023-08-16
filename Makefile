@@ -1,5 +1,5 @@
 BASE_CONTAINERS:= Amazon_Linux_Base Openjdk_Jre11_Slim NodeJS Postfix Codebuild_Base Amazon_Linux_2023_Base NodeJS_2023
-NGINX_CONTAINERS:= Nginx_NodeJS_Supervisord Nginx_Supervisord Nginx_Auth_Proxy Nginx_Java_Supervisord S3_Web_Proxy Scanning_Results_Portal Conductor
+NGINX_CONTAINERS:= Nginx_NodeJS_Supervisord Nginx_Supervisord Nginx_Auth_Proxy Nginx_Java_Supervisord S3_Web_Proxy Scanning_Results_Portal Conductor Nginx_NodeJS_2023_Supervisord
 MONITORING_CONTAINERS:= Grafana Grafana_Codebuild Prometheus Prometheus_Cloudwatch_Exporter Logstash Prometheus_BlackBox_Exporter
 
 .PHONY: $(BASE_CONTAINERS) $(NGINX_CONTAINERS) $(MONITORING_CONTAINERS)
