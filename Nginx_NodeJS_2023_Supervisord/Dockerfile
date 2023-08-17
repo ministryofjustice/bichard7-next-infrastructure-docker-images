@@ -9,10 +9,10 @@ COPY files/openssl.cnf /tmp/openssl.cnf
 
 RUN mkdir -p /certs && \
     mkdir -p /var/log/supervisor && \
-    yum install -y \
+    dnf install -y \
       nginx \
       httpd-tools && \
-    yum clean all && \
+    dnf clean all && \
     rm -rf /var/cache/yum && \
     openssl req \
       -x509 \
