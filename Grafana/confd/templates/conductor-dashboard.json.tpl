@@ -113,10 +113,7 @@
       },
       "targets": [
         {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "e6c0c6c2d40d11ebb8bc0242ac130003"
-          },
+          "datasource": null,
           "editorMode": "code",
           "expr": "task_queue_depth",
           "legendFormat": "{{taskType}}",
@@ -201,10 +198,7 @@
       },
       "targets": [
         {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "e6c0c6c2d40d11ebb8bc0242ac130003"
-          },
+          "datasource": null,
           "editorMode": "code",
           "expr": "task_queue_wait_seconds_max",
           "legendFormat": "{{taskType}}",
@@ -287,10 +281,7 @@
       },
       "targets": [
         {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "e6c0c6c2d40d11ebb8bc0242ac130003"
-          },
+          "datasource": null,
           "editorMode": "code",
           "expr": "workflow_running{}",
           "legendFormat": "{{workflowName}}",
@@ -298,10 +289,7 @@
           "refId": "A"
         },
         {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "e6c0c6c2d40d11ebb8bc0242ac130003"
-          },
+          "datasource": null,
           "hide": false,
           "refId": "B"
         }
@@ -381,10 +369,7 @@
       },
       "targets": [
         {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "e6c0c6c2d40d11ebb8bc0242ac130003"
-          },
+          "datasource": null,
           "editorMode": "code",
           "expr": "workflow_failure_total",
           "legendFormat": "{{workflowName}}",
@@ -468,10 +453,7 @@
       },
       "targets": [
         {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "e6c0c6c2d40d11ebb8bc0242ac130003"
-          },
+          "datasource": null,
           "editorMode": "code",
           "expr": "workflow_execution_seconds_max",
           "legendFormat": "{{workflowName}}",
@@ -567,10 +549,7 @@
       },
       "targets": [
         {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "e6c0c6c2d40d11ebb8bc0242ac130003"
-          },
+          "datasource": null,
           "editorMode": "code",
           "expr": "aws_ecs_cpuutilization_maximum{service_name=\"cjse-production-bichard-7-conductor-core-worker\"}",
           "hide": false,
@@ -579,10 +558,7 @@
           "refId": "B"
         },
         {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "e6c0c6c2d40d11ebb8bc0242ac130003"
-          },
+          "datasource": null,
           "editorMode": "code",
           "expr": "aws_ecs_cpuutilization_average{service_name=\"cjse-production-bichard-7-conductor-core-worker\"}",
           "interval": "",
@@ -591,10 +567,7 @@
           "refId": "A"
         },
         {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "e6c0c6c2d40d11ebb8bc0242ac130003"
-          },
+          "datasource": null,
           "editorMode": "code",
           "expr": "aws_ecs_cpuutilization_minimum{service_name=\"cjse-production-bichard-7-conductor-core-worker\"}",
           "hide": false,
@@ -678,10 +651,7 @@
       },
       "targets": [
         {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "e6c0c6c2d40d11ebb8bc0242ac130003"
-          },
+          "datasource": null,
           "editorMode": "code",
           "expr": "aws_ecs_memory_utilization_average{service_name=\"cjse-production-bichard-7-conductor-core-worker\"}",
           "legendFormat": "{{service_name}} (Average)",
@@ -689,10 +659,7 @@
           "refId": "A"
         },
         {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "e6c0c6c2d40d11ebb8bc0242ac130003"
-          },
+          "datasource": null,
           "editorMode": "code",
           "expr": "aws_ecs_memory_utilization_maximum{service_name=\"cjse-production-bichard-7-conductor-core-worker\"}",
           "hide": false,
@@ -701,10 +668,7 @@
           "refId": "B"
         },
         {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "e6c0c6c2d40d11ebb8bc0242ac130003"
-          },
+          "datasource": null,
           "editorMode": "code",
           "expr": "aws_ecs_memory_utilization_minimum{service_name=\"cjse-production-bichard-7-conductor-core-worker\"}",
           "hide": false,
@@ -789,10 +753,7 @@
       },
       "targets": [
         {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "e6c0c6c2d40d11ebb8bc0242ac130003"
-          },
+          "datasource": null,
           "editorMode": "code",
           "expr": "aws_ecs_cpuutilization_average{service_name=\"cjse-production-bichard-7-conductor\"}",
           "hide": false,
@@ -801,10 +762,7 @@
           "refId": "B"
         },
         {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "e6c0c6c2d40d11ebb8bc0242ac130003"
-          },
+          "datasource": null,
           "editorMode": "code",
           "expr": "aws_ecs_cpuutilization_maximum{service_name=\"cjse-production-bichard-7-conductor\"}",
           "hide": false,
@@ -813,10 +771,7 @@
           "refId": "A"
         },
         {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "e6c0c6c2d40d11ebb8bc0242ac130003"
-          },
+          "datasource": null,
           "editorMode": "code",
           "expr": "aws_ecs_cpuutilization_minimum{service_name=\"cjse-production-bichard-7-conductor\"}",
           "hide": false,
@@ -901,10 +856,7 @@
       },
       "targets": [
         {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "e6c0c6c2d40d11ebb8bc0242ac130003"
-          },
+          "datasource": null,
           "editorMode": "code",
           "expr": "aws_ecs_memory_utilization_average{service_name=\"cjse-production-bichard-7-conductor\"}",
           "hide": false,
@@ -913,10 +865,7 @@
           "refId": "A"
         },
         {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "e6c0c6c2d40d11ebb8bc0242ac130003"
-          },
+          "datasource": null,
           "editorMode": "code",
           "expr": "aws_ecs_memory_utilization_maximum{service_name=\"cjse-production-bichard-7-conductor\"}",
           "hide": false,
@@ -925,10 +874,7 @@
           "refId": "B"
         },
         {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "e6c0c6c2d40d11ebb8bc0242ac130003"
-          },
+          "datasource": null,
           "editorMode": "code",
           "expr": "aws_ecs_memory_utilization_minimum{service_name=\"cjse-production-bichard-7-conductor\"}",
           "hide": false,
