@@ -56,8 +56,8 @@ RUN groupadd --gid ${NODE_GUID} ${NODE_USER} && \
     rm yarn-v$YARN_VERSION.tar.gz.asc yarn-v$YARN_VERSION.tar.gz && \
     yarn --version && \
     rm -rf * && \
-    yum clean all && \
-    rm -rf /var/cache/yum && \
+    dnf clean all && \
+    rm -rf /var/cache/dnf && \
     chmod +x /usr/local/bin/docker-entrypoint.sh
 
 WORKDIR /
