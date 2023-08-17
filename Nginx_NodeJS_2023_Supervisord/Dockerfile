@@ -25,7 +25,7 @@ RUN mkdir -p /certs && \
       -extensions 'v3_req' && \
     rm -rf /tmp/openssl.cnf
 
-# TODO: build supervisor from source
+RUN pip install supervisor
 
 EXPOSE     80
 EXPOSE     443
