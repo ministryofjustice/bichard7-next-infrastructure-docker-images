@@ -25,8 +25,6 @@ RUN mkdir -p /certs && \
       -extensions 'v3_req' && \
     rm -rf /tmp/openssl.cnf
 
-RUN pip install supervisor
-
 EXPOSE     80
 EXPOSE     443
 WORKDIR /etc/nginx
@@ -34,4 +32,4 @@ WORKDIR /etc/nginx
 COPY conf/supervisord.conf /etc/supervisord.conf
 COPY conf/nginx.conf /etc/nginx/nginx.conf
 
-CMD ["supervisorctl", "-c", "/etc/supervisord.conf"]
+CMD ["/usr/bin/supervisord", "-c", "/etc/supervisord.conf"]
