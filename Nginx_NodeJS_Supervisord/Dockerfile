@@ -33,4 +33,4 @@ WORKDIR /etc/nginx
 COPY conf/supervisord.conf /etc/supervisord.conf
 COPY conf/nginx.conf /etc/nginx/nginx.conf
 
-CMD ["supervisord", "-c", "/etc/supervisord.conf"]
+CMD ["/usr/bin/supervisord", "-c", "/etc/supervisord.conf"]
