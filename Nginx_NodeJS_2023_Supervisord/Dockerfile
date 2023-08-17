@@ -11,7 +11,6 @@ RUN mkdir -p /certs && \
     mkdir -p /var/log/supervisor && \
     yum install -y \
       nginx \
-      supervisor \
       httpd-tools && \
     yum clean all && \
     rm -rf /var/cache/yum && \
@@ -25,6 +24,8 @@ RUN mkdir -p /certs && \
       -config /tmp/openssl.cnf \
       -extensions 'v3_req' && \
     rm -rf /tmp/openssl.cnf
+
+# TODO: build supervisor from source
 
 EXPOSE     80
 EXPOSE     443
