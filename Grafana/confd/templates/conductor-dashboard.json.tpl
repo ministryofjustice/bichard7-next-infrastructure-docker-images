@@ -42,7 +42,10 @@
       "type": "row"
     },
     {
-      "datasource": null,
+      "datasource": {
+        "type": "prometheus",
+        "uid": "e6c0c6c2d40d11ebb8bc0242ac130003"
+      },
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -128,7 +131,10 @@
       "type": "timeseries"
     },
     {
-      "datasource": null,
+      "datasource": {
+        "type": "prometheus",
+        "uid": "e6c0c6c2d40d11ebb8bc0242ac130003"
+      },
       "description": "Time spent by a task in queue",
       "fieldConfig": {
         "defaults": {
@@ -216,7 +222,10 @@
       "type": "timeseries"
     },
     {
-      "datasource": null,
+      "datasource": {
+        "type": "prometheus",
+        "uid": "e6c0c6c2d40d11ebb8bc0242ac130003"
+      },
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -310,7 +319,10 @@
       "type": "timeseries"
     },
     {
-      "datasource": null,
+      "datasource": {
+        "type": "prometheus",
+        "uid": "e6c0c6c2d40d11ebb8bc0242ac130003"
+      },
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -396,7 +408,10 @@
       "type": "timeseries"
     },
     {
-      "datasource": null,
+      "datasource": {
+        "type": "prometheus",
+        "uid": "e6c0c6c2d40d11ebb8bc0242ac130003"
+      },
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -496,7 +511,10 @@
       "type": "row"
     },
     {
-      "datasource": null,
+      "datasource": {
+        "type": "prometheus",
+        "uid": "e6c0c6c2d40d11ebb8bc0242ac130003"
+      },
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -607,7 +625,10 @@
       "type": "timeseries"
     },
     {
-      "datasource": null,
+      "datasource": {
+        "type": "prometheus",
+        "uid": "e6c0c6c2d40d11ebb8bc0242ac130003"
+      },
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -717,7 +738,10 @@
       "type": "timeseries"
     },
     {
-      "datasource": null,
+      "datasource": {
+        "type": "prometheus",
+        "uid": "e6c0c6c2d40d11ebb8bc0242ac130003"
+      },
       "description": "",
       "fieldConfig": {
         "defaults": {
@@ -829,7 +853,10 @@
       "type": "timeseries"
     },
     {
-      "datasource": null,
+      "datasource": {
+        "type": "prometheus",
+        "uid": "e6c0c6c2d40d11ebb8bc0242ac130003"
+      },
       "description": "",
       "fieldConfig": {
         "defaults": {
@@ -941,7 +968,7 @@
       "type": "timeseries"
     }
   ],
-  "refresh": false,
+  "refresh": "",
   "schemaVersion": 36,
   "style": "dark",
   "tags": [],
@@ -949,13 +976,13 @@
     "list": []
   },
   "time": {
-    "from": "now-1h",
-    "to": "now"
+    "from": "2023-07-13T11:25:13.447Z",
+    "to": "2023-07-13T11:37:09.371Z"
   },
   "timepicker": {},
   "timezone": "",
-  "title": "Conductor",
+  "title": "Donny Temp- To build on terraform (8/8/23)",
   "uid": "X8ztTteVk",
-  "version": 8,
+  "version": 9,
   "weekStart": ""
 }
