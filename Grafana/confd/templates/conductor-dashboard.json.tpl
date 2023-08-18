@@ -116,7 +116,7 @@
           "datasource": null,
           "editorMode": "code",
           "expr": "task_queue_depth",
-          "legendFormat": "{{taskType}}",
+          "legendFormat": "{{"{{"}}taskType{{"}}"}}",
           "range": true,
           "refId": "A"
         }
@@ -201,7 +201,7 @@
           "datasource": null,
           "editorMode": "code",
           "expr": "task_queue_wait_seconds_max",
-          "legendFormat": "{{taskType}}",
+          "legendFormat": "{{"{{"}}taskType{{"}}"}}",
           "range": true,
           "refId": "A"
         }
@@ -284,7 +284,7 @@
           "datasource": null,
           "editorMode": "code",
           "expr": "workflow_running{}",
-          "legendFormat": "{{workflowName}}",
+          "legendFormat": "{{"{{"}}workflowName{{"}}"}}",
           "range": true,
           "refId": "A"
         },
@@ -372,7 +372,7 @@
           "datasource": null,
           "editorMode": "code",
           "expr": "workflow_failure_total",
-          "legendFormat": "{{workflowName}}",
+          "legendFormat": "{{"{{"}}workflowName{{"}}"}}",
           "range": true,
           "refId": "A"
         }
@@ -456,7 +456,7 @@
           "datasource": null,
           "editorMode": "code",
           "expr": "workflow_execution_seconds_max",
-          "legendFormat": "{{workflowName}}",
+          "legendFormat": "{{"{{"}}workflowName{{"}}"}}",
           "range": true,
           "refId": "A"
         }
@@ -553,7 +553,7 @@
           "editorMode": "code",
           "expr": "aws_ecs_cpuutilization_maximum{service_name=\"cjse-production-bichard-7-conductor-core-worker\"}",
           "hide": false,
-          "legendFormat": "{{service_name}} (Max)",
+          "legendFormat": "{{"{{"}}serviceName{{"}}"}} (Max)",
           "range": true,
           "refId": "B"
         },
@@ -562,7 +562,7 @@
           "editorMode": "code",
           "expr": "aws_ecs_cpuutilization_average{service_name=\"cjse-production-bichard-7-conductor-core-worker\"}",
           "interval": "",
-          "legendFormat": "{{service_name}} (Average)",
+          "legendFormat": "{{"{{"}}serviceName{{"}}"}} (Average)",
           "range": true,
           "refId": "A"
         },
@@ -571,7 +571,7 @@
           "editorMode": "code",
           "expr": "aws_ecs_cpuutilization_minimum{service_name=\"cjse-production-bichard-7-conductor-core-worker\"}",
           "hide": false,
-          "legendFormat": "{{service_name}} (Min)",
+          "legendFormat": "{{"{{"}}serviceName{{"}}"}} (Min)",
           "range": true,
           "refId": "C"
         }
@@ -654,7 +654,7 @@
           "datasource": null,
           "editorMode": "code",
           "expr": "aws_ecs_memory_utilization_average{service_name=\"cjse-production-bichard-7-conductor-core-worker\"}",
-          "legendFormat": "{{service_name}} (Average)",
+          "legendFormat": "{{"{{"}}serviceName{{"}}"}} (Average)",
           "range": true,
           "refId": "A"
         },
@@ -663,7 +663,7 @@
           "editorMode": "code",
           "expr": "aws_ecs_memory_utilization_maximum{service_name=\"cjse-production-bichard-7-conductor-core-worker\"}",
           "hide": false,
-          "legendFormat": "{{service_name}} (Max)",
+          "legendFormat": "{{"{{"}}serviceName{{"}}"}} (Max)",
           "range": true,
           "refId": "B"
         },
@@ -672,7 +672,7 @@
           "editorMode": "code",
           "expr": "aws_ecs_memory_utilization_minimum{service_name=\"cjse-production-bichard-7-conductor-core-worker\"}",
           "hide": false,
-          "legendFormat": "{{service_name}} (Min)",
+          "legendFormat": "{{"{{"}}serviceName{{"}}"}} (Min)",
           "range": true,
           "refId": "C"
         }
@@ -757,7 +757,7 @@
           "editorMode": "code",
           "expr": "aws_ecs_cpuutilization_average{service_name=\"cjse-production-bichard-7-conductor\"}",
           "hide": false,
-          "legendFormat": "{{service_name}} (Average)",
+          "legendFormat": "{{"{{"}}serviceName{{"}}"}} (Average)",
           "range": true,
           "refId": "B"
         },
@@ -766,7 +766,7 @@
           "editorMode": "code",
           "expr": "aws_ecs_cpuutilization_maximum{service_name=\"cjse-production-bichard-7-conductor\"}",
           "hide": false,
-          "legendFormat": "{{service_name}} (Max)",
+          "legendFormat": "{{"{{"}}serviceName{{"}}"}} (Max)",
           "range": true,
           "refId": "A"
         },
@@ -775,7 +775,7 @@
           "editorMode": "code",
           "expr": "aws_ecs_cpuutilization_minimum{service_name=\"cjse-production-bichard-7-conductor\"}",
           "hide": false,
-          "legendFormat": "{{service_name}} (Min)",
+          "legendFormat": "{{"{{"}}serviceName{{"}}"}} (Min)",
           "range": true,
           "refId": "C"
         }
@@ -860,7 +860,7 @@
           "editorMode": "code",
           "expr": "aws_ecs_memory_utilization_average{service_name=\"cjse-production-bichard-7-conductor\"}",
           "hide": false,
-          "legendFormat": "{{service_name}} (Average)",
+          "legendFormat": "{{"{{"}}serviceName{{"}}"}} (Average)",
           "range": true,
           "refId": "A"
         },
@@ -869,7 +869,7 @@
           "editorMode": "code",
           "expr": "aws_ecs_memory_utilization_maximum{service_name=\"cjse-production-bichard-7-conductor\"}",
           "hide": false,
-          "legendFormat": "{{service_name}} (Max)",
+          "legendFormat": "{{"{{"}}serviceName{{"}}"}} (Max)",
           "range": true,
           "refId": "B"
         },
@@ -878,7 +878,7 @@
           "editorMode": "code",
           "expr": "aws_ecs_memory_utilization_minimum{service_name=\"cjse-production-bichard-7-conductor\"}",
           "hide": false,
-          "legendFormat": "{{service_name}} (Min)",
+          "legendFormat": "{{"{{"}}serviceName{{"}}"}} (Min)",
           "range": true,
           "refId": "C"
         }
