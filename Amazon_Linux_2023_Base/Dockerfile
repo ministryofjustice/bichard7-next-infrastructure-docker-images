@@ -8,6 +8,8 @@ ARG DNF_PACKAGES="pip gzip tar unzip openssl shadow-utils xz wget gnupg dirmngr"
 RUN dnf update -y &&\
     dnf install -y ${DNF_PACKAGES} --allowerasing
 
+RUN dnf update -y ca-certificates --releasever 2023.1.20230823
+
 RUN rm -rf /var/log/* &&\
     dnf clean all &&\
     rm -rf /var/cache/dnf
