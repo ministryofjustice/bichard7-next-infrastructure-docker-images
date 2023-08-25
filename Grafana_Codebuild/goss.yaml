@@ -44,10 +44,12 @@ file:
 package:
   jq:
     installed: true
-  cronie:
-    installed: true
-    versions:
-      - 1.4.11
+command:
+  'yum info cronie | grep Version':
+    exit-status: 0
+    timeout: 20000
+    stdout:
+    - "Version     : 1.4.11"
 user:
   grafana:
     exists: true
