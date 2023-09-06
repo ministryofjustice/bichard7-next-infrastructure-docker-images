@@ -8,7 +8,6 @@ CVE-2022-34169
 # Vulnerability in confd for HashiCorp Vault which we don't use, so is not applicable
 CVE-2020-16250
 
-
 # Ignored as it is only applicable if using log4j to listen for logs on a socket and we are not doing this
 CVE-2019-17571
 
