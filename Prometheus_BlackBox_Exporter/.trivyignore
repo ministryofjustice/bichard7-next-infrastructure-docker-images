@@ -4,8 +4,5 @@ CVE-2022-1996
 # Vulnerability in confd for HashiCorp Vault which we don't use, so is not applicable
 CVE-2020-16250
 
-# Ignored as we are not logging to a database
-CVE-2022-23305
-
 # Ignored because this vulnerability only applies if you are running on Cloud Foundry
 CVE-2023-20873
