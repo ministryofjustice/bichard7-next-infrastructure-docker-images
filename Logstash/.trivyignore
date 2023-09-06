@@ -14,8 +14,5 @@ CVE-2019-17571
 # Ignored as we are not logging to a database
 CVE-2022-23305
 
-# Ignored because this vulnerability only applies if you are running on Cloud Foundry
-CVE-2023-20873
-
 # Ignored because this vulnerability only applies if we are using Maven to build logstash source code. We are installing the compiled version therefore this does not apply.  
 CVE-2021-26291

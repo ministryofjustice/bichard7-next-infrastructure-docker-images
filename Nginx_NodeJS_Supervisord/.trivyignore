@@ -2,6 +2,3 @@
 
 # Vulnerability in confd for HashiCorp Vault which we don't use, so is not applicable
 CVE-2020-16250
-
-# Ignored because this vulnerability only applies if you are running on Cloud Foundry
-CVE-2023-20873
