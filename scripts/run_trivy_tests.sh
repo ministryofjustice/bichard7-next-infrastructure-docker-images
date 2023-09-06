@@ -32,7 +32,7 @@ pull_trivy_db
 TRIVY_CACHE_DIR=trivy trivy image \
     --severity CRITICAL \
     --exit-code 1 \
-    --ignorefile ../scripts/.trivyignore \
+    --ignorefile ./.trivyignore \
     --skip-update \
     --timeout 180m \
   ${DOCKER_IMAGE}
