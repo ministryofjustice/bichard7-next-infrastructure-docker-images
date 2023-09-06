@@ -1,5 +1,3 @@
-# Waiting for upstream prometheus/ promtool to patch the vulnerability for "go-restful"
-CVE-2022-1996
 
 # Ruby (gemspec) vulnerabilities for logstash container
 CVE-2022-25648 # git
