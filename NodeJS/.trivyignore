@@ -1,7 +1,6 @@
 # Vulnerability in confd for HashiCorp Vault which we don't use, so is not applicable
 CVE-2020-16250
 
-
 # Ignored as it is only applicable if using log4j to listen for logs on a socket and we are not doing this
 CVE-2019-17571
 
@@ -10,6 +9,3 @@ CVE-2022-23305
 
 # Ignored because this vulnerability only applies if you are running on Cloud Foundry
 CVE-2023-20873
-
-# Ignored because this vulnerability only applies if we are using Maven to build logstash source code. We are installing the compiled version therefore this does not apply.  
-CVE-2021-26291
