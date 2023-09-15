@@ -6,7 +6,7 @@ source $(dirname $0)/node_version_v20.sh
 export readonly REPOSITORY_NAME="nodejs-20-2023"
 export readonly SOURCE_REPOSITORY_NAME="amazon-linux2023-base"
 export readonly GOSS_FILE="goss-v20.yaml"
-export BUILD_ARGS="--build-arg NODE_VERSION=${LATEST_TERRAFORM_CLI_VERSION}"
+export BUILD_ARGS="--build-arg NODE_VERSION=${NODE_VERSION}"
 
 /bin/bash ../scripts/build_and_push_image.sh
 
