@@ -1,0 +1,1 @@
+export NODE_VERSION="20.6.1"

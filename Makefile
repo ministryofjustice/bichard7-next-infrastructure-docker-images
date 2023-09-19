@@ -35,6 +35,8 @@ Nginx_Java_Supervisord: Openjdk_Jre11_Slim
 Nginx_NodeJS_Supervisord: NodeJS
 Nginx_Auth_Proxy: Nginx_Supervisord NodeJS
 Conductor: Nginx_Java_Supervisord
+NodeJS: Amazon_Linux_Base
+NodeJS_2023: Amazon_Linux_2023_Base
 
 #
 # Monitoring containers

@@ -9,7 +9,7 @@ install_trivy() {
     .
 
   echo "Installing trivy binary"
-  rpm -ivh trivy_latest_Linux-64bit.rpm
+  yum localinstall -y trivy_latest_Linux-64bit.rpm
 }
 
 pull_trivy_db() {
@@ -20,7 +20,6 @@ pull_trivy_db() {
 
   echo "Extracting trivy db to `pwd`/trivy/db/"
   tar -xvf trivy/db/trivy-offline.db.tgz -C trivy/db/
-
 }
 
 uname -a
