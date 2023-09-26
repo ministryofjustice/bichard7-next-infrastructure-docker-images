@@ -1,34 +1,3 @@
-# Waiting for upstream prometheus/ promtool to patch the vulnerability for "go-restful"
-CVE-2022-1996
-
-# Ruby (gemspec) vulnerabilities for logstash container
-CVE-2022-25648 # git
-CVE-2020-14001 # kramdown
-
-# Logstash container vulnerability xalan:xalan (OpenJDK: integer truncation issue in Xalan-J (JAXP, 8285407)) The Apache Xalan Java project is dormant and in the process of being retired. No future releases of Apache Xalan Java to address this issue are expected. Note: Java runtimes (such as OpenJDK) include repackaged copies of Xalan.
-CVE-2022-34169
-
 # Vulnerability in confd for HashiCorp Vault which we don't use, so is not applicable
 CVE-2020-16250
 
-# Vulnerability in Conductor for Spring Framework
-# Spring Framework through 5.3.16 suffers from a potential remote code execution (RCE) issue if used for Java deserialization of untrusted data. Depending on how the library is implemented within a product, this issue may or not occur, and authentication may be required
-# Ignored the vulnerability because we run Conductor in a private network, and the web interface and API are protected by basic authentication via Nginx
-CVE-2016-1000027
-
-# Vulnerability in Conductor for Spring Framework
-# SnakeYaml's Constructor() class does not restrict types which can be instantiated during deserialization. Deserializing yaml content provided by an attacker can lead to remote code execution. We recommend using SnakeYaml's SafeConsturctor when parsing untrusted content to restrict deserialization.
-# Ignored as SnakeYaml is used by Spring Boot to parse trusted files in the project. Conductor also uses `*.properties` files instead of `*.yaml`.
-CVE-2022-1471
-
-# Ignored as it is only applicable if using log4j to listen for logs on a socket and we are not doing this
-CVE-2019-17571
-
-# Ignored as we are not logging to a database
-CVE-2022-23305
-
-# Ignored because this vulnerability only applies if you are running on Cloud Foundry
-CVE-2023-20873
-
-# Ignored because this vulnerability only applies if we are using Maven to build logstash source code. We are installing the compiled version therefore this does not apply.  
-CVE-2021-26291
