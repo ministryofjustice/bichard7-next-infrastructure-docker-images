@@ -1,6 +1,5 @@
 #!/bin/bash
-
-command='wget --no-check-certificate -q https://localhost:6443/elb-status -O /dev/null';
+command='curl --insecure --silent --fail https://localhost:6443/elb-status';
 server_started_status_code=0;
 status=-1;
 
