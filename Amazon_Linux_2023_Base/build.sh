@@ -9,5 +9,5 @@ docker build -t "${IMAGE}" .
 if [ "$SKIP_GOSS" = "true" ]; then
   echo "Skipping dgoss tests"
 else
-  GOSS_SLEEP=15 dgoss run $IMAGE
+  dgoss run $IMAGE
 fi
