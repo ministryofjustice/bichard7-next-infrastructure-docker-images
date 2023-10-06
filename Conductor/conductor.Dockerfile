@@ -1,4 +1,4 @@
-ARG BUILD_IMAGE="nginx-java-supervisord"
+ARG BUILD_IMAGE="amzn2023-java17-nginx-supervisord"
 
 FROM node:18.13-slim as ui-builder
 
@@ -10,7 +10,7 @@ RUN yarn install && yarn build
 # ===========================================================================================================
 # 0. Builder stage
 # ===========================================================================================================
-FROM openjdk:11-jdk AS builder
+FROM amazoncorretto:17-alpine AS builder
 
 # Copy the project onto the builder image
 COPY ./conductor /conductor
@@ -52,6 +52,7 @@ WORKDIR /usr/share/nginx/html
 RUN rm -rf ./*
 COPY --from=ui-builder /conductor/ui/build .
 
+EXPOSE 4000
 EXPOSE 5000
 
 HEALTHCHECK --interval=60s --timeout=30s --retries=10 CMD curl -I -XGET http://localhost:8080/health || exit 1

@@ -1,5 +1,4 @@
 ---
-
 file:
   /bin/confd:
     exists: true
@@ -31,29 +30,13 @@ file:
     group: root
     filetype: file
     contains: []
-package:
-  nginx:
-    installed: true
 port:
   tcp:4000:
-    listening: false
-  # Disabled because this for some unknown reason this is failing in CodeBuild (but passing locally)
-  # despite the container definitely having port 5000 exposed.
-  # tcp:5000:
-  #   listening: true
-  #   ip:
-  #     - 0.0.0.0
+    listening: true
+  tcp:5000:
+    listening: true
   tcp:8080:
-    listening: false
-user:
-  nginx:
-    exists: true
-    uid: 999
-    gid: 999
-    groups:
-      - nginx
-    home: /var/lib/nginx
-    shell: /sbin/nologin
+    listening: true
 process:
   nginx:
     running: true
@@ -61,3 +44,9 @@ process:
     running: true
   java:
     running: true
+http:
+  http://localhost:8080/health:
+    status: 200
+http:
+  http://bichard:password@localhost:4000/health:
+    status: 200
