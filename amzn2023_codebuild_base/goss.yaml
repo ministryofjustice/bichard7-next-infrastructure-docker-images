@@ -1,0 +1,95 @@
+---
+
+file:
+  /etc/passwd:
+    exists: true
+    mode: "0644"
+    owner: root
+    group: root
+    filetype: file
+package:
+  chromium:
+    installed: true
+  deltarpm:
+    installed: true
+  epel-release:
+    installed: true
+  jq:
+    installed: true
+  openssl:
+    installed: true
+  openvpn:
+    installed: true
+  python:
+    installed: true
+  python2-pip:
+    installed: true
+  python3-pip:
+    installed: true
+  python3:
+    installed: true
+  unzip:
+    installed: true
+user:
+  nobody:
+    exists: true
+    uid: 99
+    gid: 99
+    groups:
+      - nobody
+    home: /
+    shell: /sbin/nologin
+  node:
+    exists: true
+    uid: 1000
+    gid: 1000
+    groups:
+      - node
+    home: /home/node
+    shell: /bin/bash
+command:
+  node --version:
+    exit-status: 0
+    stdout:
+      - v16.18.1
+  pip3 list:
+    exit-status: 0
+    stdout:
+      - Package            Version
+      - '------------------ -------'
+      - /awscli\W+\d{1,}.\d{1,}.\d{1,}/
+      - /boto3\W+\d{1,}.\d{1,}.\d{1,}/
+      - /botocore\W+\d{1,}.\d{1,}.\d{1,}/
+      - /click\W+\d{1,}.\d{1,}.\d{1,}/
+      - /colorama\W+\d{1,}.\d{1,}.\d{1,}/
+      - /docutils\W+\d{1,}.\d{1,}(?:.\d{1,})?/
+      - /importlib-metadata\W+\d{1,}.\d{1,}.\d{1,}/
+      - /install\W+\d{1,}.\d{1,}.\d{1,}/
+      - /jmespath\W+\d{1,}.\d{1,}.\d{1,}/
+      - /pip\W+\d{1,}.\d{1,}(?:.\d{1,})?/
+      - /pyasn1\W+\d{1,}.\d{1,}.\d{1,}/
+      - /python-dateutil\W+\d{1,}.\d{1,}.\d{1,}/
+      - /PyYAML\W+\d{1,}.\d{1,}.\d{1,}/
+      - /rsa\W+\d{1,}.\d{1,}.\d{1,}/
+      - /requests\W+\d{1,}.\d{1,}.\d{1,}/
+      - /s3transfer\W+\d{1,}.\d{1,}.\d{1,}/
+      - /setuptools\W+\d{1,}.\d{1,}.\d{1,}/
+      - /six\W+\d{1,}.\d{1,}.\d{1,}/
+      - /typing_extensions\W+\d{1,}.\d{1,}.\d{1,}/
+      - /urllib3\W+\d{1,}.\d{1,}.\d{1,}/
+      - /zipp\W+\d{1,}.\d{1,}.\d{1,}/
+  python --version:
+    exit-status: 0
+    stderr:
+      - /Python 2.7.\d{2,}/
+  python3 --version:
+    exit-status: 0
+    stdout:
+      - /Python 3.7.\d{2,}/
+    timeout: 10000
+  yarn --version:
+    exit-status: 0
+    stdout:
+      - /1.\d{2,}.\d{1,}/
+    timeout: 10000
+...

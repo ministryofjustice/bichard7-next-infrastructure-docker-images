@@ -1,0 +1,11 @@
+---
+
+version: 0.2
+phases:
+  build:
+    commands:
+      - set -ev
+      - cd ./amzn2023-codebuild-base
+      - /bin/bash ./scripts/build_docker.sh
+
+...
