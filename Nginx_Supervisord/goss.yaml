@@ -18,10 +18,11 @@ file:
     owner: root
     group: root
     filetype: file
+    contains: []
     size:
-      lt: 3300
-    size:
-      gt: 3267
+      and:
+        - lt: 3300
+        - gt: 3267
     contains: []
   /etc/nginx/nginx.conf:
     exists: true
