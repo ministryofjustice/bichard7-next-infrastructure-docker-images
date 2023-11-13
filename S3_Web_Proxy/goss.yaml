@@ -11,7 +11,7 @@ file:
     exists: true
     owner: root
     group: root
-    size: 2321
+    size: 2338
     filetype: file
     contains: []
   /certs/server.key:
