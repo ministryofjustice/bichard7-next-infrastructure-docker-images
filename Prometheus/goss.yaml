@@ -27,7 +27,7 @@ file:
     exists: true
     owner: root
     group: root
-    size: 2338
+    size: 2321
     filetype: file
     contains: []
   /certs/server.key:
@@ -35,9 +35,7 @@ file:
     owner: root
     group: root
     filetype: file
-    size:
-      lt: 3300
-      gt: 3267
+    size: 3272
     contains: []
   /etc/alertmanager/alertmanager.yml:
     exists: true
