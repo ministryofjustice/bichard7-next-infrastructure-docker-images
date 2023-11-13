@@ -9,9 +9,9 @@ port:
 process:
   java:
     running: true
-http:
-  http://localhost:8080/health:
-    status: 200
-http:
-  http://bichard:password@localhost:4000/health:
-    status: 200
+# http:
+#   http://localhost:8080/health:
+#     status: 200
+# http:
+#   http://bichard:password@localhost:4000/health:
+#     status: 200
