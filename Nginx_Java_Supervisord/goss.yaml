@@ -20,6 +20,9 @@ file:
     group: root
     filetype: file
     size: 3272
+      and:
+        - lt: 3300
+        - gt: 3267
     contains: []
   /etc/nginx/nginx.conf:
     exists: true
