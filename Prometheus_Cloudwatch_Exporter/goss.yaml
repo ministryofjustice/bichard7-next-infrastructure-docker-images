@@ -21,7 +21,6 @@ file:
     filetype: file
     size:
       lt: 3300
-    size:
       gt: 3267
     contains: []
   /config/config.yml:
