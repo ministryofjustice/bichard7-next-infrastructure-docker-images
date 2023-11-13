@@ -7,7 +7,7 @@ pull_goss_binary() {
   aws s3 cp \
     s3://"${ARTIFACT_BUCKET}"/goss/goss \
     /usr/local/bin/goss
-
+  echo $(goss -v)
   chmod +rx /usr/local/bin/goss
 }
 
