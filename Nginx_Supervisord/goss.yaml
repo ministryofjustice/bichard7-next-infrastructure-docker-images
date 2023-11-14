@@ -18,7 +18,7 @@ file:
     owner: root
     group: root
     filetype: file
-    size: 
+    size:
       and:
         - lt: 3300
         - gt: 3267
@@ -96,5 +96,3 @@ user:
 process:
   supervisord:
     running: true
-
-...
