@@ -1,5 +1,4 @@
 ---
-
 file:
   /certs:
     exists: true
@@ -20,7 +19,7 @@ file:
     group: root
     filetype: file
     size:
-      and: 
+      and:
         - lt: 3300
         - gt: 3267
     contains: []
