@@ -9,6 +9,7 @@ RUN dnf update -y &&\
     dnf install -y ${DNF_PACKAGES} --allowerasing
 
 RUN dnf update -y ca-certificates --releasever 2023.1.20230823
+RUN dnf update -y zlib --releasever 2023.2.20231030 
 
 RUN rm -rf /var/log/* &&\
     dnf clean all &&\
