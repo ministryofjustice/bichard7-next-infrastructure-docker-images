@@ -1,9 +1,10 @@
 ARG BUILD_IMAGE="amzn2023-java17-nginx-supervisord"
 
-FROM node:18.13 as ui-builder
+FROM node:20-alpine as ui-builder
 
 ARG CONDUCTOR_VERSION
 
+RUN apk add git
 RUN git clone --depth=1 -b ${CONDUCTOR_VERSION} https://github.com/Netflix/conductor.git /conductor
 
 WORKDIR /conductor/ui
@@ -24,7 +25,7 @@ RUN apk add git && \
 WORKDIR /conductor
 
 #This will cache the downloaded gradle so repeated runs are faster
-RUN ./gradlew --version 
+RUN ./gradlew --version
 RUN ./gradlew conductor-community-server:build
 
 # ===========================================================================================================
