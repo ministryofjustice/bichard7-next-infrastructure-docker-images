@@ -11,7 +11,7 @@ file:
     exists: true
     owner: root
     group: root
-    size: 2338
+    size: 2321
     filetype: file
     contains: []
   /certs/server.key:
@@ -20,9 +20,9 @@ file:
     group: root
     filetype: file
     size:
-      lt: 3300
-    size:
-      gt: 3267
+      and:
+        - lt: 3300
+        - gt: 3267
     contains: []
   /etc/nginx/nginx.conf:
     exists: true
