@@ -7,8 +7,9 @@ ARG CONDUCTOR_VERSION
 RUN apk add git
 # We need to set this back once there is an official Conductor release
 # RUN git clone --depth=1 -b ${CONDUCTOR_VERSION} https://github.com/conductor-oss/conductor.git /conductor
-RUN git clone https://github.com/conductor-oss/conductor.git /conductor
-RUN git checkout ${CONDUCTOR_VERSION}
+RUN git clone https://github.com/conductor-oss/conductor.git /conductor && \
+  cd /conductor && \
+  git checkout ${CONDUCTOR_VERSION}
 
 WORKDIR /conductor/ui
 RUN yarn install --network-timeout=240000
@@ -23,8 +24,9 @@ ARG CONDUCTOR_VERSION
 
 # We need to set this back once there is an official Conductor release
 # RUN git clone --depth=1 -b ${CONDUCTOR_VERSION} https://github.com/conductor-oss/conductor.git /conductor
-RUN git clone https://github.com/conductor-oss/conductor.git /conductor
-RUN git checkout ${CONDUCTOR_VERSION}
+RUN git clone https://github.com/conductor-oss/conductor.git /conductor && \
+  cd /conductor && \
+  git checkout ${CONDUCTOR_VERSION}
 
 # Build the server
 WORKDIR /conductor
