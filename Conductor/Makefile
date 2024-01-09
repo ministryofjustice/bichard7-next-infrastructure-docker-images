@@ -3,15 +3,11 @@ image = conductor
 skip_goss = ${SKIP_GOSS}
 
 .PHONY: build
-build: build-conductor-community goss
+build: build-conductor goss
 
 .PHONY: build-conductor
 build-conductor:
 	bash ./build.sh conductor
-
-.PHONY: build-conductor-community
-build-conductor-community:
-	bash ./build.sh conductor-community
 
 .PHONY: clean
 clean:

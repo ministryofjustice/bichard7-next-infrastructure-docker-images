@@ -1,22 +1,36 @@
 ARG BUILD_IMAGE="amzn2023-java17-nginx-supervisord"
 
-FROM node:18.13-slim as ui-builder
+FROM node:20-alpine as ui-builder
 
-COPY ./conductor/ui /conductor/ui
+ARG CONDUCTOR_VERSION
+
+RUN apk add git
+# We need to set this back once there is an official Conductor release
+# RUN git clone --depth=1 -b ${CONDUCTOR_VERSION} https://github.com/conductor-oss/conductor.git /conductor
+RUN git clone https://github.com/conductor-oss/conductor.git /conductor
+RUN git checkout ${CONDUCTOR_VERSION}
 
 WORKDIR /conductor/ui
-RUN yarn install && yarn build
+RUN yarn install --network-timeout=240000
+RUN yarn build
 
 # ===========================================================================================================
 # 0. Builder stage
 # ===========================================================================================================
-FROM amazoncorretto:17-alpine AS builder
+FROM openjdk:17-bullseye AS builder
 
-# Copy the project onto the builder image
-COPY ./conductor /conductor
+ARG CONDUCTOR_VERSION
+
+# We need to set this back once there is an official Conductor release
+# RUN git clone --depth=1 -b ${CONDUCTOR_VERSION} https://github.com/conductor-oss/conductor.git /conductor
+RUN git clone https://github.com/conductor-oss/conductor.git /conductor
+RUN git checkout ${CONDUCTOR_VERSION}
 
 # Build the server
 WORKDIR /conductor
+
+#This will cache the downloaded gradle so repeated runs are faster
+RUN ./gradlew --version
 RUN ./gradlew build -x test
 
 # ===========================================================================================================
@@ -42,7 +56,7 @@ RUN wget -O /bin/confd https://github.com/iwilltry42/confd/releases/download/v${
 
 
 # Copy the compiled output to new image
-COPY --from=builder /conductor/server/build/libs/conductor-server-boot.jar /app/libs
+COPY --from=builder /conductor/server/build/libs/*boot*.jar /app/libs/conductor-server.jar
 
 COPY confd /etc/confd/
 COPY conf/supervisord.conf /etc/supervisord.conf
