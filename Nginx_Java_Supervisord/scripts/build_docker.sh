@@ -5,7 +5,7 @@ set -e
 export readonly REPOSITORY_NAME="nginx-java-supervisord"
 export readonly SOURCE_REPOSITORY_NAME="openjdk-jre11-slim"
 
-/bin/bash ../scripts/build_and_push_image.sh
+../scripts/build_image.sh && ../scripts/test_image.sh && ../scripts/push_image.sh
 
 aws codebuild start-build --project-name "build-prometheus-cloudwatch-exporter-docker" \
   --environment-variables-override name=DOCKER_IMAGE_HASH,value="${DOCKER_IMAGE_PREFIX}@${SHA_HASH}",type=PLAINTEXT

@@ -6,4 +6,4 @@ export readonly REPOSITORY_NAME="postfix"
 export readonly SOURCE_REPOSITORY_NAME="amazon-linux2-base"
 
 export GOSS_ENV=""
-/bin/bash ../scripts/build_and_push_image.sh
+../scripts/build_image.sh && ../scripts/test_image.sh && ../scripts/push_image.sh

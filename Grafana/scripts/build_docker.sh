@@ -8,4 +8,4 @@ export GOSS_ENV="-e ALERTMANAGER_URL=localhost"
 LATEST_CONFD_VERSION=$(curl --silent -L https://github.com/kelseyhightower/confd/releases/latest -w %\{url_effective\} | tail -1 | sed 's/^.*[^0-9]\([0-9]*\.[0-9]*\.[0-9]*\).*$/\1/')
 export BUILD_ARGS="--build-arg CONFD_VERSION=${LATEST_CONFD_VERSION}"
 
-/bin/bash ../scripts/build_and_push_image.sh
+../scripts/build_image.sh && ../scripts/test_image.sh && ../scripts/push_image.sh
