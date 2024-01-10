@@ -13,4 +13,5 @@ bash ../scripts/install_goss.sh
 export GOSS_PATH="/usr/local/bin/goss"
 
 make -C ../ Conductor
+../scripts/test_image.sh
 ../scripts/push_image.sh
