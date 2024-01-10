@@ -26,11 +26,11 @@ Docker image builds for the Bichard 7 project
             -   [Conductor](./Conductor/Dockerfile) - The Conductor image
     -   [NodeJS 2023](./NodeJS_2023/) - Node 16 on Amazon Linux 2023
         -   [Nginx NodeJS 2023 Supervisord](./Nginx_NodeJS_2023_Supervisord/) - The above with Nginx and Supoervisord installed
-        -   Used by: [Core Conductor Worker](https://github.com/ministryofjustice/bichard7-next-core/blob/main/packages/conductor/Dockerfile)
     -   [NodeJS 20 2023](./NodeJS_2023/) - Node 20 on Amazon Linux 2023
         -   [Nginx NodeJS 20 2023 Supervisord](./Nginx_NodeJS_20_2023_Supervisord/) - The above with Nginx and Supervisord installed
             -   Used by: [Bichard User Service](https://github.com/ministryofjustice/bichard7-next-user-service)
             -   Used by: [Bichard UI](https://github.com/ministryofjustice/bichard7-next-ui)
+        -   Used by: [Core Conductor Worker](https://github.com/ministryofjustice/bichard7-next-core/blob/main/packages/conductor/Dockerfile)
         -   Used by: [Audit Log API](https://github.com/ministryofjustice/bichard7-next-audit-logging/blob/main/src/audit-log-api/Dockerfile) - for testing only
         -   Used by: [Event Handler](https://github.com/ministryofjustice/bichard7-next-audit-logging/blob/main/src/event-handler/Dockerfile) - for testing only
         -   Used by: [Message Forwarder](https://github.com/ministryofjustice/bichard7-next-core/blob/main/packages/message-forwarder/Dockerfile)
