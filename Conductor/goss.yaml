@@ -12,7 +12,7 @@ file:
     group: root
     filetype: file
     contains: []
-  /app/libs/conductor-server-boot.jar:
+  /app/libs/conductor-server.jar:
     exists: true
     owner: root
     group: root
