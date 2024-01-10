@@ -25,8 +25,6 @@ build-local: Nginx_Auth_Proxy Conductor Nginx_NodeJS_20_2023_Supervisord
 $(BASE_CONTAINERS):
 	$(MAKE) -C $@
 
-Codebuild_Base Openjdk_Jre11_Slim NodeJS Postfix: Amazon_Linux_Base
-
 #
 # Nginx containers
 #
@@ -34,14 +32,15 @@ Codebuild_Base Openjdk_Jre11_Slim NodeJS Postfix: Amazon_Linux_Base
 $(NGINX_CONTAINERS):
 	$(MAKE) -C $@
 
-Scanning_Results_Portal: Nginx_NodeJS_Supervisord
-Nginx_Supervisord: Amazon_Linux_Base
+Grafana Logstash Nginx_Supervisord NodeJS Openjdk_Jre11_Slim Postfix: Amazon_Linux_Base
+Prometheus Prometheus_Cloudwatch_Exporter Prometheus_BlackBox_Exporter: Nginx_Java_Supervisord
+Codebuild_Base: NodeJS
+Scanning_Results_Portal S3_Web_Proxy: Nginx_NodeJS_Supervisord
 Nginx_Java_Supervisord: Openjdk_Jre11_Slim
 Nginx_NodeJS_Supervisord: NodeJS
 Nginx_Auth_Proxy: Nginx_Supervisord NodeJS
-NodeJS: Amazon_Linux_Base
-NodeJS_2023: Amazon_Linux_2023_Base
-amzn2023-java17: Amazon_Linux_2023_Base
+amzn2023-java17 NodeJS_2023: Amazon_Linux_2023_Base
+Nginx_NodeJS_2023_Supervisord: NodeJS_2023
 amzn2023-java17-nginx-supervisord: amzn2023-java17
 Conductor: amzn2023-java17-nginx-supervisord
 
@@ -51,6 +50,3 @@ Conductor: amzn2023-java17-nginx-supervisord
 
 $(MONITORING_CONTAINERS):
 	$(MAKE) -C $@
-
-Grafana Logstash: Amazon_Linux_Base
-Prometheus Prometheus_Cloudwatch_Exporter Prometheus_BlackBox_Exporter: Nginx_Java_Supervisord

@@ -34,7 +34,6 @@ Docker image builds for the Bichard 7 project
         -   Used by: [Audit Log API](https://github.com/ministryofjustice/bichard7-next-audit-logging/blob/main/src/audit-log-api/Dockerfile) - for testing only
         -   Used by: [Event Handler](https://github.com/ministryofjustice/bichard7-next-audit-logging/blob/main/src/event-handler/Dockerfile) - for testing only
         -   Used by: [Message Forwarder](https://github.com/ministryofjustice/bichard7-next-core/blob/main/packages/message-forwarder/Dockerfile)
-    -   [NodeJS 2023](./NodeJS_2023/Dockerfile) - Node 16 running on Amazon Linux 2023
 
 ## Testing
 
