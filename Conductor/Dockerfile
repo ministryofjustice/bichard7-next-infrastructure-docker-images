@@ -80,4 +80,6 @@ COPY --from=ui-builder /conductor/ui/build .
 EXPOSE 4000
 EXPOSE 5000
 
+CMD ["supervisord", "-c", "/etc/supervisord.conf"]
+
 HEALTHCHECK --interval=60s --timeout=30s --retries=10 CMD curl -I -XGET http://localhost:8080/health || exit 1

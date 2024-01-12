@@ -48,6 +48,6 @@ if [ "${IS_CD}" = "true" ]; then
     "image-hash": "${IMAGE_SHA_HASH}"
   }
 EOF
-  aws s3 cp /tmp/${REPOSITORY_NAME}.json s3://${ARTIFACT_BUCKET}/semaphores/${REPOSITORY_NAME}.json
+  aws s3 cp --quiet /tmp/${REPOSITORY_NAME}.json s3://${ARTIFACT_BUCKET}/semaphores/${REPOSITORY_NAME}.json
   export "$(echo "${REPOSITORY_NAME}" | tr [:lower:] [:upper:] | tr '-' '_')_HASH"="${IMAGE_SHA_HASH}"
 fi
