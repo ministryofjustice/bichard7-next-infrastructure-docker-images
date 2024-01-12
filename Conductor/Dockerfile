@@ -1,4 +1,4 @@
-ARG BUILD_IMAGE="amzn2023-java17-nginx-supervisord"
+ARG BUILD_IMAGE="amazon-linux2023-base"
 
 FROM node:20-alpine as ui-builder
 
@@ -39,8 +39,25 @@ ARG CONFD_PLATFORM="amd64"
 
 LABEL maintainer="CJSE"
 
+COPY files/openssl.cnf /tmp/openssl.cnf
+
+RUN mkdir -p /certs /var/log/supervisor && \
+  yum install -y nginx httpd-tools && \
+  yum clean all && \
+  rm -rf /var/cache/yum && \
+  pip install supervisor && \
+  openssl req -x509 -nodes -days 730 -newkey rsa:4096 \
+  -out /certs/server.crt -keyout /certs/server.key \
+  -config /tmp/openssl.cnf -extensions 'v3_req' && \
+  rm -rf /tmp/openssl.cnf
+
 # Make app folders
 RUN mkdir -p /app/config /app/logs /app/libs
+
+# Install Java
+RUN dnf update && \
+  dnf install -y java-17-amazon-corretto && \
+  dnf clean all
 
 RUN wget -O /bin/confd https://github.com/iwilltry42/confd/releases/download/v${CONFD_VERSION}/confd-${CONFD_VERSION}-linux-${CONFD_PLATFORM} -nv && \
   echo "${CONFD_CHECKSUM}  /bin/confd" | sha256sum -c && \
