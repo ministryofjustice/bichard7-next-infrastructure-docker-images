@@ -21,9 +21,7 @@ Docker image builds for the Bichard 7 project
             -   [Prometheus Cloudwatch Exporter](./Prometheus_Cloudwatch_Exporter/Dockerfile) - Prometheus Cloudwatch Exporter with HTTPS via Nginx
     -   [Postfix](./Postfix/Dockerfile) - Postfix Mail Server
 -   [Amazon Linux 2023 Base](./Amazon_Linux_2023_Base/Dockerfile) - Amazonlinux 2 with patches and some base sofware installed
-    -   [amzn2023-java17](./amzn2023-java17/Dockerfile) - Amazon Linux 2023 with Java 17 installed
-        -   [amzn2023-java17-nginx-supervisord](./amzn2023-java17-nginx-supervisord/Dockerfile) - Amazon Linux 2023 with Java 17, Nginx and Supervisord installed
-        -   [Conductor](./Conductor/Dockerfile) - The Conductor image
+    -   [Conductor](./Conductor/Dockerfile) - The Conductor image
     -   [NodeJS 2023](./NodeJS_2023/) - Node 16 on Amazon Linux 2023
         -   [Nginx NodeJS 2023 Supervisord](./Nginx_NodeJS_2023_Supervisord/) - The above with Nginx and Supoervisord installed
     -   [NodeJS 20 2023](./NodeJS_2023/) - Node 20 on Amazon Linux 2023

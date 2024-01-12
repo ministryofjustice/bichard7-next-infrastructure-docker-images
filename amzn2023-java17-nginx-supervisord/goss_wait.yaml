@@ -1,9 +1,0 @@
----
-port:
-  tcp:80:
-    listening: true
-  tcp:443:
-    listening: true
-process:
-  nginx:
-    running: true

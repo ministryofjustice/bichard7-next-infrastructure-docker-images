@@ -3,7 +3,7 @@
 set -e
 
 export readonly REPOSITORY_NAME="conductor"
-export readonly SOURCE_REPOSITORY_NAME="nginx-java-supervisord"
+export readonly SOURCE_REPOSITORY_NAME="amazon-linux2023-base"
 
 export readonly GOSS_ENV="-e CJSE_CONDUCTOR_UI_USERNAME='conductor' -e CJSE_CONDUCTOR_UI_PASSWORD='password'"
 export readonly BUILD_ARGS="--build-arg CONDUCTOR_VERSION=$(cat conductor_version)"
