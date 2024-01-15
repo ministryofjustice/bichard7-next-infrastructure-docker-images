@@ -4,7 +4,7 @@ set -e
 
 install_trivy() {
   echo "Pulling trivy binary from s3"
-  aws s3 cp \
+  aws s3 cp --quiet \
     s3://"${ARTIFACT_BUCKET}"/trivy/binary/trivy_latest_Linux-64bit.rpm \
     .
 
@@ -14,7 +14,7 @@ install_trivy() {
 
 pull_trivy_db() {
   echo "Pulling trivy db from s3..."
-  aws s3 cp \
+  aws s3 cp --quiet \
     s3://"${ARTIFACT_BUCKET}"/trivy/db/trivy-offline.db.tgz \
     trivy/db/
 

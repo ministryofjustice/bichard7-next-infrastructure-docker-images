@@ -4,7 +4,7 @@ set -e
 
 pull_goss_binary() {
   echo "Pulling goss binary"
-  aws s3 cp \
+  aws s3 cp --quiet \
     s3://"${ARTIFACT_BUCKET}"/goss/goss \
     /usr/local/bin/goss
   chmod +rx /usr/local/bin/goss
@@ -12,7 +12,7 @@ pull_goss_binary() {
 
 pull_dgoss_binary() {
   echo "Pulling dgoss binary"
-  aws s3 cp \
+  aws s3 cp --quiet \
     s3://"${ARTIFACT_BUCKET}"/dgoss/dgoss \
     /usr/local/bin/dgoss
 
