@@ -1,6 +1,0 @@
-[template]
-src = "auth-proxy.cloudwatch.conf.tmpl"
-dest = "/etc/logstash/conf.d/auth-proxy-cloudwatch.conf"
-keys = [
-    "/cjse"
-]
