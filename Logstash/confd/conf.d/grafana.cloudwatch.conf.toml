@@ -1,6 +1,0 @@
-[template]
-src = "grafana.cloudwatch.conf.tmpl"
-dest = "/etc/logstash/conf.d/grafana-cloudwatch.conf"
-keys = [
-    "/cjse"
-]

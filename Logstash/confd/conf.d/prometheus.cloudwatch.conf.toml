@@ -1,6 +1,0 @@
-[template]
-src = "prometheus.cloudwatch.conf.tmpl"
-dest = "/etc/logstash/conf.d/prometheus-cloudwatch.conf"
-keys = [
-    "/cjse"
-]

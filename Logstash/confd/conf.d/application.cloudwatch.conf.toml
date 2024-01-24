@@ -1,6 +1,0 @@
-[template]
-src = "application.cloudwatch.conf.tmpl"
-dest = "/etc/logstash/conf.d/application-cloudwatch.conf"
-keys = [
-    "/cjse"
-]
