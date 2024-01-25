@@ -545,45 +545,6 @@
       "type": "stat"
     },
     {
-      "alert": {
-        "alertRuleTags": {
-          "service": "Reporting Lambdas",
-          "severity": "warning"
-        },
-        "conditions": [
-          {
-            "evaluator": {
-              "params": [
-                0
-              ],
-              "type": "gt"
-            },
-            "operator": {
-              "type": "and"
-            },
-            "query": {
-              "params": [
-                "A",
-                "5m",
-                "now"
-              ]
-            },
-            "reducer": {
-              "params": [],
-              "type": "count"
-            },
-            "type": "query"
-          }
-        ],
-        "executionErrorState": "alerting",
-        "for": "10m",
-        "frequency": "1m",
-        "handler": 1,
-        "message": "Error in reporting lambdas",
-        "name": "Reporting lambdas alert",
-        "noDataState": "no_data",
-        "notifications": []
-      },
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -733,45 +694,6 @@
       "type": "stat"
     },
     {
-      "alert": {
-        "alertRuleTags": {
-          "service": "Audit Log API",
-          "severity": "warning"
-        },
-        "conditions": [
-          {
-            "evaluator": {
-              "params": [
-                0
-              ],
-              "type": "gt"
-            },
-            "operator": {
-              "type": "and"
-            },
-            "query": {
-              "params": [
-                "A",
-                "5m",
-                "now"
-              ]
-            },
-            "reducer": {
-              "params": [],
-              "type": "count"
-            },
-            "type": "query"
-          }
-        ],
-        "executionErrorState": "alerting",
-        "for": "10m",
-        "frequency": "1m",
-        "handler": 1,
-        "message": "Error in Audit Log API lambdas",
-        "name": "Audit Log API lambdas alert",
-        "noDataState": "no_data",
-        "notifications": []
-      },
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -1086,45 +1008,6 @@
       "type": "stat"
     },
     {
-      "alert": {
-        "alertRuleTags": {
-          "service": "Transfer Messages Lambda",
-          "severity": "warning"
-        },
-        "conditions": [
-          {
-            "evaluator": {
-              "params": [
-                0
-              ],
-              "type": "gt"
-            },
-            "operator": {
-              "type": "and"
-            },
-            "query": {
-              "params": [
-                "A",
-                "5m",
-                "now"
-              ]
-            },
-            "reducer": {
-              "params": [],
-              "type": "count"
-            },
-            "type": "query"
-          }
-        ],
-        "executionErrorState": "alerting",
-        "for": "10m",
-        "frequency": "1m",
-        "handler": 1,
-        "message": "Error in Transfer Messages lambda",
-        "name": "Transfer Messages lambda alert",
-        "noDataState": "no_data",
-        "notifications": []
-      },
       "description": "",
       "fieldConfig": {
         "defaults": {
@@ -1469,45 +1352,6 @@
       "type": "stat"
     },
     {
-      "alert": {
-        "alertRuleTags": {
-          "service": "Send to Bichard Lambda",
-          "severity": "warning"
-        },
-        "conditions": [
-          {
-            "evaluator": {
-              "params": [
-                0
-              ],
-              "type": "gt"
-            },
-            "operator": {
-              "type": "and"
-            },
-            "query": {
-              "params": [
-                "A",
-                "5m",
-                "now"
-              ]
-            },
-            "reducer": {
-              "params": [],
-              "type": "count"
-            },
-            "type": "query"
-          }
-        ],
-        "executionErrorState": "alerting",
-        "for": "10m",
-        "frequency": "1m",
-        "handler": 1,
-        "message": "Error in Send to Bichard lambda",
-        "name": "Send to Bichard lambda alert",
-        "noDataState": "no_data",
-        "notifications": []
-      },
       "description": "",
       "fieldConfig": {
         "defaults": {
@@ -1684,45 +1528,6 @@
       "type": "stat"
     },
     {
-      "alert": {
-        "alertRuleTags": {
-          "service": "Record Sent to Bichard Event Lambda",
-          "severity": "warning"
-        },
-        "conditions": [
-          {
-            "evaluator": {
-              "params": [
-                0
-              ],
-              "type": "gt"
-            },
-            "operator": {
-              "type": "and"
-            },
-            "query": {
-              "params": [
-                "A",
-                "5m",
-                "now"
-              ]
-            },
-            "reducer": {
-              "params": [],
-              "type": "count"
-            },
-            "type": "query"
-          }
-        ],
-        "executionErrorState": "alerting",
-        "for": "10m",
-        "frequency": "1m",
-        "handler": 1,
-        "message": "Error in Record Sent to Bichard Event lambda",
-        "name": "Record Sent to Bichard Event lambda alert",
-        "noDataState": "no_data",
-        "notifications": []
-      },
       "description": "",
       "fieldConfig": {
         "defaults": {
@@ -2264,45 +2069,6 @@
       "type": "stat"
     },
     {
-      "alert": {
-        "alertRuleTags": {
-          "service": "Court Result Input Event Message Receiver Lambda",
-          "severity": "warning"
-        },
-        "conditions": [
-          {
-            "evaluator": {
-              "params": [
-                0
-              ],
-              "type": "gt"
-            },
-            "operator": {
-              "type": "and"
-            },
-            "query": {
-              "params": [
-                "A",
-                "5m",
-                "now"
-              ]
-            },
-            "reducer": {
-              "params": [],
-              "type": "count"
-            },
-            "type": "query"
-          }
-        ],
-        "executionErrorState": "alerting",
-        "for": "10m",
-        "frequency": "1m",
-        "handler": 1,
-        "message": "Error in Court Result Input Event Message Receiver",
-        "name": "Court Result Input Event Message Receiver lambda alert",
-        "noDataState": "no_data",
-        "notifications": []
-      },
       "description": "",
       "fieldConfig": {
         "defaults": {
@@ -2479,45 +2245,6 @@
       "type": "stat"
     },
     {
-      "alert": {
-        "alertRuleTags": {
-          "service": "Audit Event Message Receiver Lambda",
-          "severity": "warning"
-        },
-        "conditions": [
-          {
-            "evaluator": {
-              "params": [
-                0
-              ],
-              "type": "gt"
-            },
-            "operator": {
-              "type": "and"
-            },
-            "query": {
-              "params": [
-                "A",
-                "5m",
-                "now"
-              ]
-            },
-            "reducer": {
-              "params": [],
-              "type": "count"
-            },
-            "type": "query"
-          }
-        ],
-        "executionErrorState": "alerting",
-        "for": "10m",
-        "frequency": "1m",
-        "handler": 1,
-        "message": "Error in Audit Event Message Receiver lambda",
-        "name": "Audit Event Message Receiver lambda alert",
-        "noDataState": "no_data",
-        "notifications": []
-      },
       "description": "",
       "fieldConfig": {
         "defaults": {
@@ -2694,45 +2421,6 @@
       "type": "stat"
     },
     {
-      "alert": {
-        "alertRuleTags": {
-          "service": "General Event Message Receiver Lambda",
-          "severity": "warning"
-        },
-        "conditions": [
-          {
-            "evaluator": {
-              "params": [
-                0
-              ],
-              "type": "gt"
-            },
-            "operator": {
-              "type": "and"
-            },
-            "query": {
-              "params": [
-                "A",
-                "5m",
-                "now"
-              ]
-            },
-            "reducer": {
-              "params": [],
-              "type": "count"
-            },
-            "type": "query"
-          }
-        ],
-        "executionErrorState": "alerting",
-        "for": "10m",
-        "frequency": "1m",
-        "handler": 1,
-        "message": "Error in General Event Message Receiver lambda",
-        "name": "General Event Message Receiver lambda alert",
-        "noDataState": "no_data",
-        "notifications": []
-      },
       "description": "",
       "fieldConfig": {
         "defaults": {
@@ -2909,45 +2597,6 @@
       "type": "stat"
     },
     {
-      "alert": {
-        "alertRuleTags": {
-          "service": "Send to Bichard Lambda",
-          "severity": "warning"
-        },
-        "conditions": [
-          {
-            "evaluator": {
-              "params": [
-                0
-              ],
-              "type": "gt"
-            },
-            "operator": {
-              "type": "and"
-            },
-            "query": {
-              "params": [
-                "A",
-                "5m",
-                "now"
-              ]
-            },
-            "reducer": {
-              "params": [],
-              "type": "count"
-            },
-            "type": "query"
-          }
-        ],
-        "executionErrorState": "alerting",
-        "for": "10m",
-        "frequency": "1m",
-        "handler": 1,
-        "message": "Error in Hearing Outcome PNC Update Event Message Receiver lambda",
-        "name": "Hearing Outcome PNC Update Event Message Receiver lambda alert",
-        "noDataState": "no_data",
-        "notifications": []
-      },
       "description": "",
       "fieldConfig": {
         "defaults": {
@@ -3339,45 +2988,6 @@
       "type": "stat"
     },
     {
-      "alert": {
-        "alertRuleTags": {
-          "service": "PNC Update Request Event Message Receiver",
-          "severity": "warning"
-        },
-        "conditions": [
-          {
-            "evaluator": {
-              "params": [
-                0
-              ],
-              "type": "gt"
-            },
-            "operator": {
-              "type": "and"
-            },
-            "query": {
-              "params": [
-                "A",
-                "5m",
-                "now"
-              ]
-            },
-            "reducer": {
-              "params": [],
-              "type": "count"
-            },
-            "type": "query"
-          }
-        ],
-        "executionErrorState": "alerting",
-        "for": "10m",
-        "frequency": "1m",
-        "handler": 1,
-        "message": "Error in PNC Update Request Event Message Receiver",
-        "name": "PNC Update Request Event Message Receiver lambda alert",
-        "noDataState": "no_data",
-        "notifications": []
-      },
       "description": "",
       "fieldConfig": {
         "defaults": {
@@ -5265,45 +4875,6 @@
       "type": "stat"
     },
     {
-      "alert": {
-        "alertRuleTags": {
-          "service": "Add Archival Event Lambda",
-          "severity": "warning"
-        },
-        "conditions": [
-          {
-            "evaluator": {
-              "params": [
-                0
-              ],
-              "type": "gt"
-            },
-            "operator": {
-              "type": "and"
-            },
-            "query": {
-              "params": [
-                "A",
-                "5m",
-                "now"
-              ]
-            },
-            "reducer": {
-              "params": [],
-              "type": "count"
-            },
-            "type": "query"
-          }
-        ],
-        "executionErrorState": "alerting",
-        "for": "10m",
-        "frequency": "1m",
-        "handler": 1,
-        "message": "Error in Add Archival Event lambda",
-        "name": "Add Archival Event lambda alert",
-        "noDataState": "no_data",
-        "notifications": []
-      },
       "description": "",
       "fieldConfig": {
         "defaults": {
@@ -5479,45 +5050,6 @@
       "type": "stat"
     },
     {
-      "alert": {
-        "alertRuleTags": {
-          "service": "Archive User Logs Lambda",
-          "severity": "warning"
-        },
-        "conditions": [
-          {
-            "evaluator": {
-              "params": [
-                0
-              ],
-              "type": "gt"
-            },
-            "operator": {
-              "type": "and"
-            },
-            "query": {
-              "params": [
-                "A",
-                "5m",
-                "now"
-              ]
-            },
-            "reducer": {
-              "params": [],
-              "type": "count"
-            },
-            "type": "query"
-          }
-        ],
-        "executionErrorState": "alerting",
-        "for": "10m",
-        "frequency": "1m",
-        "handler": 1,
-        "message": "Error in Archive User Logs lambda",
-        "name": "Archive User Logs lambda alert",
-        "noDataState": "no_data",
-        "notifications": []
-      },
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -5691,45 +5223,6 @@
       "type": "stat"
     },
     {
-      "alert": {
-        "alertRuleTags": {
-          "service": "Retry Failed Messages Lambda",
-          "severity": "warning"
-        },
-        "conditions": [
-          {
-            "evaluator": {
-              "params": [
-                0
-              ],
-              "type": "gt"
-            },
-            "operator": {
-              "type": "and"
-            },
-            "query": {
-              "params": [
-                "A",
-                "5m",
-                "now"
-              ]
-            },
-            "reducer": {
-              "params": [],
-              "type": "count"
-            },
-            "type": "query"
-          }
-        ],
-        "executionErrorState": "alerting",
-        "for": "10m",
-        "frequency": "1m",
-        "handler": 1,
-        "message": "Error in Retry Failed Messages lambda",
-        "name": "Retry Failed Messages lambda alert",
-        "noDataState": "no_data",
-        "notifications": []
-      },
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -5904,45 +5397,6 @@
       "type": "stat"
     },
     {
-      "alert": {
-        "alertRuleTags": {
-          "service": "Resubmit PNC failures Lambda",
-          "severity": "warning"
-        },
-        "conditions": [
-          {
-            "evaluator": {
-              "params": [
-                0
-              ],
-              "type": "gt"
-            },
-            "operator": {
-              "type": "and"
-            },
-            "query": {
-              "params": [
-                "A",
-                "5m",
-                "now"
-              ]
-            },
-            "reducer": {
-              "params": [],
-              "type": "count"
-            },
-            "type": "query"
-          }
-        ],
-        "executionErrorState": "alerting",
-        "for": "10m",
-        "frequency": "1m",
-        "handler": 1,
-        "message": "Error in Resubmit PNC failures lambda",
-        "name": "Resubmit PNC failures lambda alert",
-        "noDataState": "no_data",
-        "notifications": []
-      },
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -6116,45 +5570,6 @@
       "type": "stat"
     },
     {
-      "alert": {
-        "alertRuleTags": {
-          "service": "Maintencance Page Lambda",
-          "severity": "warning"
-        },
-        "conditions": [
-          {
-            "evaluator": {
-              "params": [
-                0
-              ],
-              "type": "gt"
-            },
-            "operator": {
-              "type": "and"
-            },
-            "query": {
-              "params": [
-                "A",
-                "5m",
-                "now"
-              ]
-            },
-            "reducer": {
-              "params": [],
-              "type": "count"
-            },
-            "type": "query"
-          }
-        ],
-        "executionErrorState": "alerting",
-        "for": "10m",
-        "frequency": "1m",
-        "handler": 1,
-        "message": "Error in Maintenance Page lambda",
-        "name": "Maintenance Page lambda alert",
-        "noDataState": "no_data",
-        "notifications": []
-      },
       "fieldConfig": {
         "defaults": {
           "color": {
