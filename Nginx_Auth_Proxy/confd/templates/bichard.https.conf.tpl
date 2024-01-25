@@ -170,7 +170,7 @@ location /help {
 location ~ ^/users/(login|fonts|images|_next/static|faq)(.*)$ {
     limit_except GET POST PUT { deny all; }
     add_header  Strict-Transport-Security "max-age=31536000; includeSubDomains" always;
-    include /etc/includes/headers.conf;
+    include /etc/includes/user-service-headers.conf;
 
     proxy_pass        https://$userservice;
     proxy_set_header X-Origin https://$host;
@@ -179,13 +179,16 @@ location ~ ^/users/(login|fonts|images|_next/static|faq)(.*)$ {
     proxy_ssl_server_name on;
     proxy_ssl_verify_depth 2;
     proxy_intercept_errors on;
+
+    # New Bichard User Service sets it's own CSP before it reaches nginx
+    proxy_pass_header Content-Security-Policy;
 }
 
 # Allow access to error pages without authentication
 location ~ ^/users/(404|403|500)(.*)$ {
     limit_except GET POST PUT { deny all; }
     add_header  Strict-Transport-Security "max-age=31536000; includeSubDomains" always;
-    include /etc/includes/headers.conf;
+    include /etc/includes/user-service-headers.conf;
 
     proxy_pass        https://$userservice;
     proxy_set_header X-Origin https://$host;
@@ -194,6 +197,9 @@ location ~ ^/users/(404|403|500)(.*)$ {
     proxy_ssl_server_name on;
     proxy_ssl_verify_depth 2;
     proxy_intercept_errors off;
+
+    # New Bichard User Service sets it's own CSP before it reaches nginx
+    proxy_pass_header Content-Security-Policy;
 }
 
 # Allow access to bichard-ui health check, connectivity and static endpoints without authentication
