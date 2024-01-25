@@ -336,7 +336,7 @@ describe("Testing Nginx config", () => {
                   "content-security-policy",
                   CONTENT_SECURITY_POLICIES.ui
                 );
-              } else if (path === "/users/x") {
+              } else if (/\/users\/*/.test(path)) {
                 ctx.set(
                   "content-security-policy",
                   CONTENT_SECURITY_POLICIES.userService
@@ -362,7 +362,7 @@ describe("Testing Nginx config", () => {
             expect(actualHeaders["content-security-policy"]).toEqual(
               CONTENT_SECURITY_POLICIES.ui
             );
-          } else if (path === "/users/x") {
+          } else if (/\/users\/*/.test(path)) {
             expect(actualHeaders["content-security-policy"]).toEqual(
               CONTENT_SECURITY_POLICIES.userService
             );
