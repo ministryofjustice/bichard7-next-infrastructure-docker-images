@@ -81,7 +81,6 @@ scrape_configs:
     static_configs:
     - targets:
         - https://alerts.{{getv "/cjse/fqdn/suffix" "cjse.org"}}
-        - https://elasticsearch.{{getv "/cjse/fqdn/suffix" "cjse.org"}}
         - https://prometheus.{{getv "/cjse/fqdn/suffix" "cjse.org"}}
   - job_name: 'conductor'
     scheme: 'https'
