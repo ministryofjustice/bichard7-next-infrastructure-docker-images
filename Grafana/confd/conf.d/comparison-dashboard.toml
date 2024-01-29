@@ -1,8 +1,0 @@
-[template]
-src = "comparison-dashboard.json.tpl"
-dest = "/opt/grafana/dashboards/comparison-dashboard.json"
-keys = [
-    "/cjse"
-]
-gid = 998
-uid = 999

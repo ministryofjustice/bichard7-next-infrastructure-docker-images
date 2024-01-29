@@ -1,3 +1,0 @@
-tls_server_config:
-  cert_file: /certs/server.crt
-  key_file: /certs/server.key

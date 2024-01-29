@@ -1,8 +1,0 @@
-[template]
-src = "conductor-dashboard.json.tpl"
-dest = "/opt/grafana/dashboards/conductor-dashboard.json"
-keys = [
-    "/cjse"
-]
-gid = 998
-uid = 999
