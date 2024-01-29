@@ -4,7 +4,6 @@ Docker image builds for the Bichard 7 project
 
 -   [Amazon Linux Base](./Amazon_Linux_Base/Dockerfile) - Amazon Linux 2 with patches and some base sofware installed
     -   [Grafana](./Grafana/Dockerfile) - Our build of Grafana
-    -   [Logstash](./Logstash/Dockerfile) - Logstash log parser
     -   [Nginx Supervisord](./Nginx_Supervisord/Dockerfile) - Amazon Linux 2 with Nginx and Supervisord
         -   [Nginx Auth Proxy](./Nginx_Auth_Proxy/Dockerfile) - The front end proxy for Bichard
     -   [NodeJS 16](./NodeJS/Dockerfile) - NodeJS 16 installed on AmazonLinux

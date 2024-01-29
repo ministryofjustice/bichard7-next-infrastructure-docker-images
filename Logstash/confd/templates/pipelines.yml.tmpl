@@ -1,7 +1,0 @@
-{{ if exists "/cjse/logstash/pipeline" -}}
-- pipeline.id: {{ getv "/cjse/logstash/pipeline/name" }}
-  path.config: {{ getv "/cjse/logstash/pipeline/cfgpath" }}
-{{ else -}}
-- pipeline.id: main
-  path.config: "/etc/logstash/conf.d/*.conf"
-{{ end }}
