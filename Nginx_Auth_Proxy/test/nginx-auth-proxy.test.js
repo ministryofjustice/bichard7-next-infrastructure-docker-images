@@ -29,6 +29,7 @@ const TEST_HOSTS = process.env.TEST_HOSTS.split(",") || [
 const CONTENT_SECURITY_POLICIES = {
   default: `default-src 'self'; frame-src 'self'; frame-ancestors 'self'; form-action 'self';`,
   ui: `default-src 'none'; script-src-elem 'self' 'nonce-example'; style-src 'self' 'nonce-example'; img-src 'self'; frame-src 'self'; frame-ancestors 'self'; form-action 'self'; object-src 'none'`,
+  userService: `default-src 'none'; script-src-elem 'self' 'nonce-example'; style-src 'self' 'nonce-example'; img-src 'self'; frame-src 'self'; frame-ancestors 'self'; form-action 'self'; object-src 'none'`,
 };
 
 describe("Testing Nginx config", () => {
@@ -232,7 +233,7 @@ describe("Testing Nginx config", () => {
           const res = await axios
             .post(`${testHost}${path}`, {
               ...axiosConfig,
-              maxRedirects: 0
+              maxRedirects: 0,
             })
             .catch((err) => err.response);
 
@@ -335,6 +336,11 @@ describe("Testing Nginx config", () => {
                   "content-security-policy",
                   CONTENT_SECURITY_POLICIES.ui
                 );
+              } else if (/\/users\/*/.test(path)) {
+                ctx.set(
+                  "content-security-policy",
+                  CONTENT_SECURITY_POLICIES.userService
+                );
               }
             });
           const res = await axios.get(`${testHost}${path}`, axiosConfig);
@@ -355,6 +361,10 @@ describe("Testing Nginx config", () => {
           if (path === "/bichard/x") {
             expect(actualHeaders["content-security-policy"]).toEqual(
               CONTENT_SECURITY_POLICIES.ui
+            );
+          } else if (/\/users\/*/.test(path)) {
+            expect(actualHeaders["content-security-policy"]).toEqual(
+              CONTENT_SECURITY_POLICIES.userService
             );
           } else {
             expect(actualHeaders["content-security-policy"]).toEqual(

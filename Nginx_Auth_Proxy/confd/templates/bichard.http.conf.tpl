@@ -112,7 +112,7 @@ location /users {
     limit_except GET POST PUT DELETE { deny all; }
     auth_request /auth;
     auth_request_set $auth_cookie $upstream_http_set_cookie;
-    include /etc/includes/headers.conf;
+    include /etc/includes/user-service-headers.conf;
     add_header Set-Cookie $auth_cookie;
 
     proxy_pass        https://$userservice;
@@ -123,6 +123,9 @@ location /users {
     proxy_ssl_server_name on;
     proxy_ssl_verify_depth 2;
     proxy_intercept_errors on;
+
+    # New Bichard User Service sets it's own CSP before it reaches nginx
+    proxy_pass_header Content-Security-Policy;
 }
 
 # Proxy through to report downloads
@@ -156,7 +159,7 @@ location /help {
 # Allow access to user-service login flow (and necessary assets) without authentication
 location ~ ^/users/(login|fonts|images|_next/static|faq)(.*)$ {
     limit_except GET POST PUT { deny all; }
-    include /etc/includes/headers.conf;
+    include /etc/includes/user-service-headers.conf;
 
     proxy_pass        https://$userservice;
     proxy_set_header X-Origin http://$host;
@@ -165,12 +168,15 @@ location ~ ^/users/(login|fonts|images|_next/static|faq)(.*)$ {
     proxy_ssl_server_name on;
     proxy_ssl_verify_depth 2;
     proxy_intercept_errors on;
+
+    # New Bichard User Service sets it's own CSP before it reaches nginx
+    proxy_pass_header Content-Security-Policy;
 }
 
 # Allow access to error pages without authentication
 location ~ ^/users/(404|403|500)(.*)$ {
     limit_except GET POST PUT { deny all; }
-    include /etc/includes/headers.conf;
+    include /etc/includes/user-service-headers.conf;
 
     proxy_pass        https://$userservice;
     proxy_set_header X-Origin https://$host;
@@ -179,6 +185,9 @@ location ~ ^/users/(404|403|500)(.*)$ {
     proxy_ssl_server_name on;
     proxy_ssl_verify_depth 2;
     proxy_intercept_errors off;
+
+    # New Bichard User Service sets it's own CSP before it reaches nginx
+    proxy_pass_header Content-Security-Policy;
 }
 
 # Allow access to bichard-ui health check, connectivity and static endpoints without authentication
