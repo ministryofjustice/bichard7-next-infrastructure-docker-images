@@ -1,8 +1,0 @@
-[template]
-src = "lambdas-dashboard.json.tpl"
-dest = "/opt/grafana/dashboards/lambdas-dashboard.json"
-keys = [
-    "/cjse"
-]
-gid = 998
-uid = 999
