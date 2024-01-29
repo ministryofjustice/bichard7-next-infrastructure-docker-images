@@ -8,7 +8,7 @@ export readonly SOURCE_REPOSITORY_NAME="amazon-linux2023-base"
 export readonly GOSS_FILE="goss-v20.yaml"
 export BUILD_ARGS="--build-arg NODE_VERSION=${NODE_VERSION}"
 
-/bin/bash ../scripts/build_and_push_image.sh
+../scripts/build_image.sh && ../scripts/test_image.sh && ../scripts/push_image.sh
 
 # aws codebuild start-build --project-name "build-nginx-nodejs-2023-supervisord-docker" \
 #   --environment-variables-override name=DOCKER_IMAGE_HASH,value="${DOCKER_IMAGE_PREFIX}@${SHA_HASH}",type=PLAINTEXT

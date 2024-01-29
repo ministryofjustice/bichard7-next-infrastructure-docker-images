@@ -3,7 +3,6 @@
 Docker image builds for the Bichard 7 project
 
 -   [Amazon Linux Base](./Amazon_Linux_Base/Dockerfile) - Amazon Linux 2 with patches and some base sofware installed
-    -   [Grafana](./Grafana/Dockerfile) - Our build of Grafana
     -   [Nginx Supervisord](./Nginx_Supervisord/Dockerfile) - Amazon Linux 2 with Nginx and Supervisord
         -   [Nginx Auth Proxy](./Nginx_Auth_Proxy/Dockerfile) - The front end proxy for Bichard
     -   [NodeJS 16](./NodeJS/Dockerfile) - NodeJS 16 installed on AmazonLinux
@@ -13,11 +12,6 @@ Docker image builds for the Bichard 7 project
             -   [Scanning Results Portal](./Scanning_Results_Portal) - Used for exposing our scanning results bucket built from nginx nodejs image
         -   Used by: [PNC Emulator](https://github.com/ministryofjustice/bichard7-next-pnc-emulator/blob/main/docker/Dockerfile) - for testing only
     -   Used by: [Beanconnect](https://github.com/ministryofjustice/bichard7-next-beanconnect/blob/main/Dockerfile)
-    -   [OpenJDK JRE 11 Slim](./Openjdk_Jre11_Slim/Dockerfile) - OpenJDK JRE 11 Installed on Amazon Linux
-        -   [Nginx_Java_Supervisord](./Nginx_Java_Supervisord/Dockerfile) - Nginx with self signed certs running on our OpenJDK base
-            -   [Prometheus](./Prometheus/Dockerfile) - Prometheus and Prometheus Alert Manager with HTTP Authentication Via NGINX
-            -   [Prometheus Blackbox Exporter](./Prometheus_BlackBox_Exporter/Dockerfile) - Prometheus Black Box Exporter with HTTPS via Nginx
-            -   [Prometheus Cloudwatch Exporter](./Prometheus_Cloudwatch_Exporter/Dockerfile) - Prometheus Cloudwatch Exporter with HTTPS via Nginx
     -   [Postfix](./Postfix/Dockerfile) - Postfix Mail Server
 -   [Amazon Linux 2023 Base](./Amazon_Linux_2023_Base/Dockerfile) - Amazonlinux 2 with patches and some base sofware installed
     -   [Conductor](./Conductor/Dockerfile) - The Conductor image
