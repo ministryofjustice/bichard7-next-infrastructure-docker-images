@@ -190,9 +190,9 @@ location ~ ^/bichard-ui/(Health|Connectivity|images|css).*$ {
 }
 
 # Allow access to bichard-backend /Connectivity without authentication
-location /bichard-backend/Connectivity {
+location ~ /bichard-backend/(Health|Connectivity) {
     include /etc/includes/headers.conf;
-    proxy_pass        https://$bichardbackend/bichard-ui/Connectivity;
+    proxy_pass        https://$bichardbackend/bichard-ui/$1;
 
     proxy_ssl_verify  {{ getv "/cjse/nginx/proxysslverify" "on" }};
     proxy_cookie_flags ~ httponly secure samesite=strict;
