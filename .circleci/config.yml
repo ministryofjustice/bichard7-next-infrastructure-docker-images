@@ -5,7 +5,7 @@ version: 2.1
 jobs:
   build_amazon_linux_2_images:
     machine:
-      image: ubuntu-2204:2023.07.2
+      image: ubuntu-2204:current
       docker_layer_caching: true
     resource_class: xlarge
     steps:
@@ -14,7 +14,7 @@ jobs:
       - run: make build-al2
   build_amazon_linux_2023_images:
     machine:
-      image: ubuntu-2204:2023.07.2
+      image: ubuntu-2204:current
       docker_layer_caching: true
     resource_class: xlarge
     steps:
@@ -23,7 +23,7 @@ jobs:
       - run: make build-al2023
   test_conductor:
     machine:
-      image: ubuntu-2204:2023.07.2
+      image: ubuntu-2204:current
       docker_layer_caching: true
     resource_class: xlarge
     environment:

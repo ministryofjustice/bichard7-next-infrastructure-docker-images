@@ -1,8 +1,0 @@
-[template]
-src = "prometheus-alert-manager.yml.tpl"
-dest = "/etc/alertmanager/alertmanager.yml"
-keys = [
-    "/cjse/prometheus"
-]
-gid = 99
-uid = 99
