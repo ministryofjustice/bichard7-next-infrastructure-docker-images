@@ -1,25 +1,6 @@
 ---
 version: 2.1
 
-commands:
-  node_install:
-    steps:
-      - restore_cache:
-          working_directory: ~/bichard7-next-core
-          name: Restore nvm cache
-          keys:
-            # Invalidate the cache based on architecture, the version of Node defined in `nvmrc`
-            - v1-nvm-cache-{{ arch }}-{{ checksum ".nvmrc" }}
-      - run:
-          working_directory: ~/bichard7-next-core
-          command: nvm install
-      - save_cache:
-          working_directory: ~/bichard7-next-core
-          name: Save nvm cache
-          key: v1-nvm-cache-{{ arch }}-{{ checksum ".nvmrc" }}
-          paths:
-            - /opt/circleci/.nvm/.cache
-
 # Define the jobs we want to run for this project
 jobs:
   build_amazon_linux_2_images:
@@ -65,7 +46,9 @@ jobs:
       - run:
           name: Checkout the Core repo
           command: git clone --depth 1 https://github.com/ministryofjustice/bichard7-next-core.git ~/bichard7-next-core
-      - node_install
+      - run:
+          working_directory: ~/bichard7-next-core
+          command: nvm install
       - run:
           name: npm install
           working_directory: ~/bichard7-next-core
