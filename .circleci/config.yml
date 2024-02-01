@@ -5,12 +5,16 @@ commands:
   node_install:
     steps:
       - restore_cache:
+          working_directory: ~/bichard7-next-core
           name: Restore nvm cache
           keys:
             # Invalidate the cache based on architecture, the version of Node defined in `nvmrc`
             - v1-nvm-cache-{{ arch }}-{{ checksum ".nvmrc" }}
-      - run: nvm install
+      - run:
+          working_directory: ~/bichard7-next-core
+          command: nvm install
       - save_cache:
+          working_directory: ~/bichard7-next-core
           name: Save nvm cache
           key: v1-nvm-cache-{{ arch }}-{{ checksum ".nvmrc" }}
           paths:
@@ -61,9 +65,7 @@ jobs:
       - run:
           name: Checkout the Core repo
           command: git clone --depth 1 https://github.com/ministryofjustice/bichard7-next-core.git ~/bichard7-next-core
-      - run:
-          working_directory: ~/bichard7-next-core
-          node_install
+      - node_install
       - run:
           name: npm install
           working_directory: ~/bichard7-next-core
