@@ -12,6 +12,7 @@ spring.datasource.hikari.minimum-idle=2
 # Configure indexing in postgres
 conductor.indexing.enabled=true
 conductor.indexing.type=postgres
+conductor.postgres.onlyIndexOnStatusChange=true
 conductor.elasticsearch.version=postgres
 
 # Load sample kitchen sink workflow

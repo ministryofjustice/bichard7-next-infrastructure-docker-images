@@ -5,7 +5,9 @@ FROM node:20-alpine as ui-builder
 ARG CONDUCTOR_VERSION
 
 RUN apk add git
-RUN git clone --depth=1 -b ${CONDUCTOR_VERSION} https://github.com/conductor-oss/conductor.git /conductor
+# Pull in from temporary source until our changes are merged
+RUN git clone --depth=1 -b bichard https://github.com/bjpirt/conductor.git /conductor
+# RUN git clone --depth=1 -b ${CONDUCTOR_VERSION} https://github.com/conductor-oss/conductor.git /conductor
 
 WORKDIR /conductor/ui
 RUN yarn install --network-timeout=240000
@@ -18,7 +20,9 @@ FROM openjdk:17-bullseye AS builder
 
 ARG CONDUCTOR_VERSION
 
-RUN git clone --depth=1 -b ${CONDUCTOR_VERSION} https://github.com/conductor-oss/conductor.git /conductor
+# Pull in from temporary source until our changes are merged
+RUN git clone --depth=1 -b bichard https://github.com/bjpirt/conductor.git /conductor
+# RUN git clone --depth=1 -b ${CONDUCTOR_VERSION} https://github.com/conductor-oss/conductor.git /conductor
 
 # Build the server
 WORKDIR /conductor
