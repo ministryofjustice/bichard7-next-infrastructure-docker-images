@@ -27,6 +27,8 @@ RUN git clone --depth=1 -b bichard https://github.com/bjpirt/conductor.git /cond
 # Build the server
 WORKDIR /conductor
 
+RUN git rev-parse HEAD
+
 #This will cache the downloaded gradle so repeated runs are faster
 RUN ./gradlew --version
 RUN ./gradlew build -x test
