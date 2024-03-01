@@ -22,3 +22,6 @@ CVE-2023-20873
 
 # Ignored because this vulnerability applies to zookeeper which we are not using
 CVE-2023-44981
+
+# Ignored because we don't set Postgres PreferQueryMode=SIMPLE which is what triggers this vul
+CVE-2024-1597
