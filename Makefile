@@ -36,4 +36,4 @@ Scanning_Results_Portal S3_Web_Proxy: Nginx_NodeJS_Supervisord
 Nginx_NodeJS_Supervisord: NodeJS
 Nginx_Auth_Proxy: Nginx_Supervisord NodeJS
 NodeJS_2023 Conductor: Amazon_Linux_2023_Base
-Nginx_NodeJS_2023_Supervisord: NodeJS_2023
+Nginx_NodeJS_2023_Supervisord Nginx_NodeJS_20_2023_Supervisord: NodeJS_2023
