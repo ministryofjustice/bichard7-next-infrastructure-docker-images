@@ -5,9 +5,7 @@ FROM node:20-alpine as ui-builder
 ARG CONDUCTOR_VERSION
 
 RUN apk add git
-# Pull in from temporary source until our changes are merged
-RUN git clone --depth=1 -b bichard https://github.com/bjpirt/conductor.git /conductor
-# RUN git clone --depth=1 -b ${CONDUCTOR_VERSION} https://github.com/conductor-oss/conductor.git /conductor
+RUN git clone --depth=1 -b ${CONDUCTOR_VERSION} https://github.com/conductor-oss/conductor.git /conductor
 
 WORKDIR /conductor/ui
 RUN yarn install --network-timeout=240000
@@ -20,9 +18,7 @@ FROM openjdk:17-bullseye AS builder
 
 ARG CONDUCTOR_VERSION
 
-# Pull in from temporary source until our changes are merged
-RUN git clone --depth=1 -b bichard https://github.com/bjpirt/conductor.git /conductor
-# RUN git clone --depth=1 -b ${CONDUCTOR_VERSION} https://github.com/conductor-oss/conductor.git /conductor
+RUN git clone --depth=1 -b ${CONDUCTOR_VERSION} https://github.com/conductor-oss/conductor.git /conductor
 
 # Build the server
 WORKDIR /conductor
@@ -40,8 +36,10 @@ FROM ${BUILD_IMAGE}
 ARG CONFD_VERSION="0.17.0"
 ARG CONFD_CHECKSUM="d6215d210c93bfac31d956acb171469f48038dd0f1dbac93722cea884d782aa5"
 ARG CONFD_PLATFORM="amd64"
+ARG CONDUCTOR_VERSION
 
 LABEL maintainer="CJSE"
+LABEL conductor_version=$CONDUCTOR_VERSION
 
 COPY files/openssl.cnf /tmp/openssl.cnf
 
