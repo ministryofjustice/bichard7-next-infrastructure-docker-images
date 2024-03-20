@@ -9,7 +9,7 @@ echo "Building Node version: ${NODE_VERSION}"
 docker build $BUILD_ARGS --build-arg NODE_VERSION=$NODE_VERSION -t $IMAGE .
 
 if [ "$SKIP_GOSS" = "true" ]; then
-    echo "Skipping dgoss tests"
+  echo "Skipping dgoss tests"
 else
-  GOSS_SLEEP=15 dgoss run $IMAGE
+  dgoss run $IMAGE
 fi
