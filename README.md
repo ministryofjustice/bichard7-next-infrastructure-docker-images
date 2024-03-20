@@ -7,7 +7,6 @@ Docker image builds for the Bichard 7 project
         -   [Nginx Auth Proxy](./Nginx_Auth_Proxy/Dockerfile) - The front end proxy for Bichard
     -   [NodeJS 16](./NodeJS/Dockerfile) - NodeJS 16 installed on AmazonLinux
         -   [Codebuild Base](./Codebuild_Base/Dockerfile) - The image used for Codebuild
-        -   [Nginx_NodeJS_Supervisord](./Nginx_NodeJS_Supervisord/Dockerfile) - Nginx with self signed certs running on NodeJS 16
         -   Used by: [PNC Emulator](https://github.com/ministryofjustice/bichard7-next-pnc-emulator/blob/main/docker/Dockerfile) - for testing only
     -   Used by: [Beanconnect](https://github.com/ministryofjustice/bichard7-next-beanconnect/blob/main/Dockerfile)
     -   [Postfix](./Postfix/Dockerfile) - Postfix Mail Server
