@@ -10,7 +10,7 @@ file:
     exists: true
     owner: root
     group: root
-    size: 2338
+    size: 2378
     filetype: file
     contains: []
   /certs/server.key:
@@ -42,29 +42,14 @@ file:
   /tmp/openssl.cnf:
     exists: false
 package:
-  deltarpm:
-    installed: true
-  epel-release:
-    installed: true
   git:
     installed: true
   nginx:
     installed: true
-  python:
-    installed: true
-  python2-pip:
+  python3:
     installed: true
   shadow-utils:
     installed: true
-port:
-  tcp:80:
-    listening: true
-    ip:
-      - 0.0.0.0
-  tcp:443:
-    listening: true
-    ip:
-      - 0.0.0.0
 user:
   dbus:
     exists: true
@@ -76,16 +61,16 @@ user:
     shell: /sbin/nologin
   nginx:
     exists: true
-    uid: 999
-    gid: 999
+    uid: 997
+    gid: 997
     groups:
       - nginx
     home: /var/lib/nginx
     shell: /sbin/nologin
   nobody:
     exists: true
-    uid: 99
-    gid: 99
+    uid: 65534
+    gid: 65534
     groups:
       - nobody
     home: /
@@ -100,7 +85,7 @@ user:
     shell: /bin/bash
   runner:
     exists: true
-    uid: 998
+    uid: 996
     gid: 100
     groups:
       - users
@@ -113,15 +98,7 @@ user:
     groups:
       - systemd-network
     home: /
-    shell: /sbin/nologin
-command:
-  supervisorctl status:
-    exit-status: 0
-    stdout:
-      - /nginx\W+RUNNING\W+pid\W\d{1,},\Wuptime\W\S+/
-      - /s3\-server\W+RUNNING\W+pid\W\d{1,},\Wuptime\W\S+/
-    stderr: []
-    timeout: 10000
+    shell: /usr/sbin/nologin
 process:
   bash:
     running: true
