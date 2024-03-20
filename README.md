@@ -7,18 +7,14 @@ Docker image builds for the Bichard 7 project
         -   [Nginx Auth Proxy](./Nginx_Auth_Proxy/Dockerfile) - The front end proxy for Bichard
     -   [NodeJS 16](./NodeJS/Dockerfile) - NodeJS 16 installed on AmazonLinux
         -   [Codebuild Base](./Codebuild_Base/Dockerfile) - The image used for Codebuild
-        -   [Nginx_NodeJS_Supervisord](./Nginx_NodeJS_Supervisord/Dockerfile) - Nginx with self signed certs running on NodeJS 16
-            -   [S3 Web Proxy](./S3_Web_Proxy/Dockerfile) - Used to serve files from S3
-            -   [Scanning Results Portal](./Scanning_Results_Portal) - Used for exposing our scanning results bucket built from nginx nodejs image
         -   Used by: [PNC Emulator](https://github.com/ministryofjustice/bichard7-next-pnc-emulator/blob/main/docker/Dockerfile) - for testing only
     -   Used by: [Beanconnect](https://github.com/ministryofjustice/bichard7-next-beanconnect/blob/main/Dockerfile)
     -   [Postfix](./Postfix/Dockerfile) - Postfix Mail Server
--   [Amazon Linux 2023 Base](./Amazon_Linux_2023_Base/Dockerfile) - Amazonlinux 2 with patches and some base sofware installed
+-   [Amazon Linux 2023 Base](./Amazon_Linux_2023_Base/Dockerfile) - Amazonlinux 2023 with patches and some base sofware installed
     -   [Conductor](./Conductor/Dockerfile) - The Conductor image
-    -   [NodeJS 2023](./NodeJS_2023/) - Node 16 on Amazon Linux 2023
-        -   [Nginx NodeJS 2023 Supervisord](./Nginx_NodeJS_2023_Supervisord/) - The above with Nginx and Supervisord installed
-    -   [NodeJS 20 2023](./NodeJS_2023/) - Node 20 on Amazon Linux 2023
+    -   [NodeJS 20 2023](./NodeJS_20_2023/) - Node 20 on Amazon Linux 2023
         -   [Nginx NodeJS 20 2023 Supervisord](./Nginx_NodeJS_20_2023_Supervisord/) - The above with Nginx and Supervisord installed
+            -   [S3 Web Proxy](./S3_Web_Proxy/Dockerfile) - Used to serve files from S3
             -   Used by: [Bichard User Service](https://github.com/ministryofjustice/bichard7-next-user-service)
             -   Used by: [Bichard UI](https://github.com/ministryofjustice/bichard7-next-ui)
         -   Used by: [Core API](https://github.com/ministryofjustice/bichard7-next-core/blob/main/packages/api/Dockerfile)

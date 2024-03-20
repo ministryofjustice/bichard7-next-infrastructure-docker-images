@@ -1,8 +1,8 @@
-BASE_CONTAINERS:= Amazon_Linux_Base NodeJS Postfix Codebuild_Base Amazon_Linux_2023_Base NodeJS_2023
-NGINX_CONTAINERS:= Nginx_NodeJS_Supervisord Nginx_Supervisord Nginx_Auth_Proxy Nginx_Java_Supervisord S3_Web_Proxy Scanning_Results_Portal Conductor Nginx_NodeJS_2023_Supervisord Nginx_NodeJS_20_2023_Supervisord
+BASE_CONTAINERS:= Amazon_Linux_Base NodeJS Postfix Codebuild_Base Amazon_Linux_2023_Base NodeJS_20_2023
+NGINX_CONTAINERS:= Nginx_Supervisord Nginx_Auth_Proxy Nginx_Java_Supervisord S3_Web_Proxy Conductor Nginx_NodeJS_20_2023_Supervisord
 
-AL2_IMAGES:= Nginx_Auth_Proxy Codebuild_Base S3_Web_Proxy Scanning_Results_Portal
-AL2023_IMAGES:= Nginx_NodeJS_2023_Supervisord Nginx_NodeJS_20_2023_Supervisord NodeJS_2023
+AL2_IMAGES:= Nginx_Auth_Proxy Codebuild_Base
+AL2023_IMAGES:= Nginx_NodeJS_20_2023_Supervisord NodeJS_20_2023 S3_Web_Proxy
 
 .PHONY: $(BASE_CONTAINERS) $(NGINX_CONTAINERS)
 
@@ -32,8 +32,7 @@ $(NGINX_CONTAINERS):
 
 Nginx_Supervisord NodeJS Postfix: Amazon_Linux_Base
 Codebuild_Base: NodeJS
-Scanning_Results_Portal S3_Web_Proxy: Nginx_NodeJS_Supervisord
-Nginx_NodeJS_Supervisord: NodeJS
+S3_Web_Proxy: Nginx_NodeJS_20_2023_Supervisord
 Nginx_Auth_Proxy: Nginx_Supervisord NodeJS
-NodeJS_2023 Conductor: Amazon_Linux_2023_Base
-Nginx_NodeJS_2023_Supervisord Nginx_NodeJS_20_2023_Supervisord: NodeJS_2023
+NodeJS_20_2023 Conductor: Amazon_Linux_2023_Base
+Nginx_NodeJS_20_2023_Supervisord: NodeJS_20_2023

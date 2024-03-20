@@ -1,0 +1,18 @@
+---
+port:
+  tcp:80:
+    listening: true
+    ip:
+      - 0.0.0.0
+  tcp:443:
+    listening: true
+    ip:
+      - 0.0.0.0
+command:
+  supervisorctl status:
+    exit-status: 0
+    stdout:
+      - /nginx\W+RUNNING\W+pid\W\d{1,},\Wuptime\W\S+/
+      - /s3\-server\W+RUNNING\W+pid\W\d{1,},\Wuptime\W\S+/
+    stderr: []
+    timeout: 10000

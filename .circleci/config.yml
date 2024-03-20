@@ -35,7 +35,7 @@ jobs:
           command: make Conductor
       - run:
           name: Build Nodejs image
-          command: make NodeJS_2023
+          command: make NodeJS_20_2023
       - run:
           name: Checkout the audit logging repo
           command: git clone --depth 1 https://github.com/ministryofjustice/bichard7-next-audit-logging.git ~/bichard7-next-audit-logging
