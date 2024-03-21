@@ -23,4 +23,4 @@ pull_dgoss_binary() {
 pull_goss_binary
 export GOSS_PATH="/usr/local/bin/goss"
 pull_dgoss_binary
-GOSS_SLEEP=${GOSS_SLEEP:-15} dgoss run ${GOSS_ENV} ${DOCKER_IMAGE}
+bash -c "dgoss run ${GOSS_ENV} ${DOCKER_IMAGE}"
