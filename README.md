@@ -2,16 +2,15 @@
 
 Docker image builds for the Bichard 7 project
 
--   [Amazon Linux Base](./Amazon_Linux_Base/Dockerfile) - Amazon Linux 2 with patches and some base sofware installed
-    -   [Nginx Supervisord](./Nginx_Supervisord/Dockerfile) - Amazon Linux 2 with Nginx and Supervisord
-        -   [Nginx Auth Proxy](./Nginx_Auth_Proxy/Dockerfile) - The front end proxy for Bichard
+-   [Amazon Linux Base](./Amazon_Linux_Base/Dockerfile) - Amazon Linux 2 with patches and some base software installed
     -   [NodeJS 16](./NodeJS/Dockerfile) - NodeJS 16 installed on AmazonLinux
         -   [Codebuild Base](./Codebuild_Base/Dockerfile) - The image used for Codebuild
         -   Used by: [PNC Emulator](https://github.com/ministryofjustice/bichard7-next-pnc-emulator/blob/main/docker/Dockerfile) - for testing only
     -   Used by: [Beanconnect](https://github.com/ministryofjustice/bichard7-next-beanconnect/blob/main/Dockerfile)
     -   [Postfix](./Postfix/Dockerfile) - Postfix Mail Server
--   [Amazon Linux 2023 Base](./Amazon_Linux_2023_Base/Dockerfile) - Amazonlinux 2023 with patches and some base sofware installed
+-   [Amazon Linux 2023 Base](./Amazon_Linux_2023_Base/Dockerfile) - Amazon Linux 2023 with patches and some base software installed
     -   [Conductor](./Conductor/Dockerfile) - The Conductor image
+    -   [Nginx Auth Proxy](./Nginx_Auth_Proxy/Dockerfile) - The front end proxy for Bichard
     -   [NodeJS 20 2023](./NodeJS_20_2023/) - Node 20 on Amazon Linux 2023
         -   [Nginx NodeJS 20 2023 Supervisord](./Nginx_NodeJS_20_2023_Supervisord/) - The above with Nginx and Supervisord installed
             -   [S3 Web Proxy](./S3_Web_Proxy/Dockerfile) - Used to serve files from S3
