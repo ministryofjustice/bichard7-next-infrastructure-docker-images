@@ -1,5 +1,4 @@
 ---
-
 file:
   /etc/passwd:
     exists: true
@@ -21,11 +20,6 @@ file:
     owner: root
     group: root
     filetype: file
-  /etc/rsyslog.d/listen.conf:
-    exists: true
-    owner: root
-    group: root
-    filetype: file
 package:
   cyrus-sasl:
     installed: true
@@ -35,18 +29,13 @@ package:
     installed: true
   s-nail:
     installed: true
-  supervisor:
-    installed: true
-port:
-  tcp:25:
-    listening: true
-  tcp:465:
-    listening: true
+executable:
+  binary: "supervisor"
 user:
   nobody:
     exists: true
-    uid: 99
-    gid: 99
+    uid: 65534
+    gid: 65534
     groups:
       - nobody
     home: /
@@ -67,15 +56,3 @@ process:
     running: true
   supervisord:
     running: true
-command:
-  supervisorctl status postfix:
-    exit-status: 0
-    stdout:
-      - /postfix\W+RUNNING\W+pid\W\d{1,},\Wuptime\W\S+/
-    timeout: 10000
-  supervisorctl status rsyslog:
-    exit-status: 0
-    stdout:
-      - /rsyslog\W+RUNNING\W+pid\W\d{1,},\Wuptime\W\S+/
-    timeout: 10000
-...

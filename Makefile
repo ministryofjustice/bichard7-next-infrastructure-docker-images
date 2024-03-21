@@ -30,8 +30,8 @@ $(BASE_CONTAINERS):
 $(NGINX_CONTAINERS):
 	$(MAKE) -C $@
 
-Nginx_Supervisord NodeJS Postfix: Amazon_Linux_Base
+NodeJS: Amazon_Linux_Base
 Codebuild_Base: NodeJS
 S3_Web_Proxy: Nginx_NodeJS_20_2023_Supervisord
-NodeJS_20_2023 Conductor Nginx_Auth_Proxy: Amazon_Linux_2023_Base
+NodeJS_20_2023 Conductor Nginx_Auth_Proxy Postfix: Amazon_Linux_2023_Base
 Nginx_NodeJS_20_2023_Supervisord: NodeJS_20_2023
