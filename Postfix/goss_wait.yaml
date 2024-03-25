@@ -1,0 +1,17 @@
+---
+command:
+  supervisorctl status postfix:
+    exit-status: 0
+    stdout:
+      - /postfix\W+RUNNING\W+pid\W\d{1,},\Wuptime\W\S+/
+    timeout: 10000
+  supervisorctl status rsyslog:
+    exit-status: 0
+    stdout:
+      - /rsyslog\W+RUNNING\W+pid\W\d{1,},\Wuptime\W\S+/
+    timeout: 10000
+port:
+  tcp:25:
+    listening: true
+  tcp:465:
+    listening: true
