@@ -4,10 +4,10 @@ set -e
 
 IMAGE="codebuild-base"
 
-docker build -t "${IMAGE}" . 
+docker build --platform=linux/amd64 -t "${IMAGE}" . 
 
 if [ "$SKIP_GOSS" = "true" ]; then
   echo "Skipping dgoss tests"
 else
-  GOSS_SLEEP=15 dgoss run $IMAGE
+  dgoss run $IMAGE
 fi

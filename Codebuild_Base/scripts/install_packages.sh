@@ -2,7 +2,6 @@
 
 set -ex
 
-
 yum update -y
 yum install -y deltarpm
 yum groupinstall -y "Development tools"
