@@ -11,7 +11,7 @@ build-nginx: $(NGINX_CONTAINERS)
 build-al2: $(AL2_IMAGES)
 build-al2023: $(AL2023_IMAGES)
 
-build-all: build-base build-nginx build-monitoring
+build-all: build-base build-nginx
 
 # Only build the containers normally used to run the Bichard stack locally
 build-local: Nginx_Auth_Proxy Conductor Nginx_NodeJS_20_2023_Supervisord
@@ -32,5 +32,6 @@ $(NGINX_CONTAINERS):
 
 NodeJS: Amazon_Linux_Base
 S3_Web_Proxy: Nginx_NodeJS_20_2023_Supervisord
-NodeJS_20_2023 Conductor Nginx_Auth_Proxy Postfix: Amazon_Linux_2023_Base
+NodeJS_20_2023 Conductor Postfix: Amazon_Linux_2023_Base
+Nginx_Auth_Proxy: Amazon_Linux_2023_Base NodeJS_20_2023
 Nginx_NodeJS_20_2023_Supervisord: NodeJS_20_2023
