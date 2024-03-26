@@ -56,7 +56,7 @@ jobs:
       - run:
           name: Run the infrastructure
           working_directory: ~/bichard7-next-core
-          command: SKIP_IMAGES=conductor npm run all-no-worker
+          command: bash .circleci/scripts/run-infrastructure.sh conductor all-no-worker
       - run:
           name: Build core
           working_directory: ~/bichard7-next-core
