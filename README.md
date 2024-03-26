@@ -2,9 +2,7 @@
 
 Docker image builds for the Bichard 7 project
 
--   [Amazon Linux Base](./Amazon_Linux_Base/Dockerfile) - Amazon Linux 2 with patches and some base software installed
-    -   [NodeJS 16](./NodeJS/Dockerfile) - NodeJS 16 installed on AmazonLinux
-        -   [Codebuild Base](./Codebuild_Base/Dockerfile) - The image used for Codebuild
+-   [Codebuild Base](./Codebuild_Base/Dockerfile) - The image used for Codebuild (based on Amazon Linux 2 as it supports OpenVPN)
 -   [Amazon Linux 2023 Base](./Amazon_Linux_2023_Base/Dockerfile) - Amazon Linux 2023 with patches and some base software installed
     -   [Conductor](./Conductor/Dockerfile) - The Conductor image
     -   [Nginx Auth Proxy](./Nginx_Auth_Proxy/Dockerfile) - The front end proxy for Bichard
@@ -19,6 +17,8 @@ Docker image builds for the Bichard 7 project
         -   Used by: [Audit Log API](https://github.com/ministryofjustice/bichard7-next-audit-logging/blob/main/src/audit-log-api/Dockerfile) - for testing only
         -   Used by: [Event Handler](https://github.com/ministryofjustice/bichard7-next-audit-logging/blob/main/src/event-handler/Dockerfile) - for testing only
         -   Used by: [Message Forwarder](https://github.com/ministryofjustice/bichard7-next-core/blob/main/packages/message-forwarder/Dockerfile)
+
+**Note:** Beanconnect and the PNC Emulator both use Amazon Linux 2 images directly and do not rely on images from this repository
 
 ## Testing
 
