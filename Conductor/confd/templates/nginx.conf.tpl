@@ -13,6 +13,7 @@ http {
     tcp_nodelay               on;
     keepalive_timeout         500;
     types_hash_max_size       2048;
+    client_max_body_size      100m;
     include                   /etc/nginx/mime.types;
     default_type              application/octet-stream;
     ssl_protocols             TLSv1.2; # Dropping SSLv3, ref: POODLE
