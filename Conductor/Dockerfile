@@ -33,9 +33,6 @@ RUN ./gradlew build -x test
 
 FROM ${BUILD_IMAGE}
 
-ARG CONFD_VERSION="0.17.0"
-ARG CONFD_CHECKSUM="d6215d210c93bfac31d956acb171469f48038dd0f1dbac93722cea884d782aa5"
-ARG CONFD_PLATFORM="amd64"
 ARG CONDUCTOR_VERSION
 
 LABEL maintainer="CJSE"
@@ -44,7 +41,7 @@ LABEL conductor_version=$CONDUCTOR_VERSION
 COPY files/openssl.cnf /tmp/openssl.cnf
 
 RUN mkdir -p /certs /var/log/supervisor && \
-  yum install -y nginx httpd-tools && \
+  yum install -y nginx httpd-tools gettext && \
   yum clean all && \
   rm -rf /var/cache/yum && \
   pip install supervisor && \
@@ -61,18 +58,15 @@ RUN dnf update && \
   dnf install -y java-17-amazon-corretto && \
   dnf clean all
 
-RUN wget -O /bin/confd https://github.com/iwilltry42/confd/releases/download/v${CONFD_VERSION}/confd-${CONFD_VERSION}-linux-${CONFD_PLATFORM} -nv && \
-  echo "${CONFD_CHECKSUM}  /bin/confd" | sha256sum -c && \
-  chmod +x /bin/confd && \
-  mkdir -p /etc/confd/conf.d && \
-  mkdir -p /etc/confd/templates
-
-
 # Copy the compiled output to new image
 COPY --from=builder /conductor/server/build/libs/*boot*.jar /app/libs/conductor-server.jar
 
-COPY confd /etc/confd/
-COPY conf/supervisord.conf /etc/supervisord.conf
+# Copy the config files
+COPY files/config.properties /app/config/config.properties
+COPY files/templates /etc/templates/
+COPY files/supervisord.conf /etc/supervisord.conf
+COPY files/process_templates.sh /bin/process_templates.sh
+RUN chmod 755 /bin/process_templates.sh
 
 # Copy compiled UI assets to nginx www directory
 WORKDIR /usr/share/nginx/html
