@@ -1,6 +1,0 @@
-[template]
-src = "config.properties.tpl"
-dest = "/app/config/config.properties"
-keys = [
-    "/cjse/conductor"
-]
