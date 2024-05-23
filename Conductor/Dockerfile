@@ -62,6 +62,7 @@ RUN dnf update && \
 COPY --from=builder /conductor/server/build/libs/*boot*.jar /app/libs/conductor-server.jar
 
 # Copy the config files
+COPY files/nginx.conf /etc/nginx/nginx.conf
 COPY files/config.properties /app/config/config.properties
 COPY files/templates /etc/templates/
 COPY files/supervisord.conf /etc/supervisord.conf
