@@ -2,9 +2,6 @@ ARG BUILD_IMAGE="amazon-linux2023-base"
 FROM ${BUILD_IMAGE}
 
 LABEL maintainer="CJSE"
-ARG CONFD_VERSION="0.17.0"
-ARG CONFD_CHECKSUM="d6215d210c93bfac31d956acb171469f48038dd0f1dbac93722cea884d782aa5"
-ARG CONFD_PLATFORM="amd64"
 
 WORKDIR /
 
@@ -24,16 +21,15 @@ RUN yum-config-manager --enable nginx-mainline && \
   rm -rf /var/cache/yum && \
   openssl req -x509 -nodes -days 730 -newkey rsa:4096 -out /certs/server.crt \
   -keyout /certs/server.key -config /tmp/openssl.cnf -extensions 'v3_req' && \
-  rm -rf /tmp/openssl.cnf && \
-  wget -O /bin/confd https://github.com/iwilltry42/confd/releases/download/v${CONFD_VERSION}/confd-${CONFD_VERSION}-linux-${CONFD_PLATFORM} -nv && \
-  echo "${CONFD_CHECKSUM}  /bin/confd" | sha256sum -c && \
-  chmod +x /bin/confd && \
-  mkdir -p /etc/confd/conf.d && \
-  mkdir -p /etc/confd/templates
+  rm -rf /tmp/openssl.cnf
 
-COPY confd /etc/confd/
-COPY conf/supervisord.conf /etc/supervisord.conf
-COPY includes /etc/includes/
+RUN yum install -y gettext
+
+COPY files/templates /etc/templates/
+COPY files/supervisord.conf /etc/supervisord.conf
+COPY files/includes /etc/nginx/includes/
+COPY files/process_templates.sh /bin/process_templates.sh
+RUN chmod 755 /bin/process_templates.sh
 
 EXPOSE     80
 EXPOSE     443
