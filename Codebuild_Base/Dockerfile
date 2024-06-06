@@ -1,7 +1,7 @@
 ARG BUILD_IMAGE="public.ecr.aws/amazonlinux/amazonlinux:2"
 FROM ${BUILD_IMAGE}
 
-ARG TERRAFORM_VERSION="1.8.2"
+ARG TERRAFORM_VERSION="1.8.4"
 ARG YUM_PACKAGES="python-pip python3-pip gzip tar unzip openssl shadow-utils xz wget gnupg curl jq git openvpn unzip"
 ARG TEST_PACKAGES="which chromium"
 ARG PIP_PACKAGES="install awscli boto3 click botocore requests"
