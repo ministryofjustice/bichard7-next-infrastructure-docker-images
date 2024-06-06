@@ -6,18 +6,18 @@ access_log                      /dev/stdout json;
 proxy_hide_header               Content-Security-Policy;
 proxy_ssl_trusted_certificate   /etc/ssl/certs/ca-bundle.crt;
 
-resolver {{ getv "/cjse/nginx/dns/resolver" "127.0.0.11" }};
-set $app "{{ getv "/cjse/nginx/app/domain" }}";
-set $bichardbackend "{{ getv "/cjse/nginx/bichardbackend/domain" }}";
-set $userservice "{{ getv "/cjse/nginx/userservice/domain" }}";
-set $ui "{{ getv "/cjse/nginx/ui/domain" }}";
-set $staticservice "{{ getv "/cjse/nginx/staticservice/domain" }}";
+resolver $CJSE_NGINX_DNS_RESOLVER;
+set $app "$CJSE_NGINX_APP_DOMAIN";
+set $bichardbackend "$CJSE_NGINX_BICHARDBACKEND_DOMAIN";
+set $userservice "$CJSE_NGINX_USERSERVICE_DOMAIN";
+set $ui "$CJSE_NGINX_UI_DOMAIN";
+set $staticservice "$CJSE_NGINX_STATICSERVICE_DOMAIN";
 
 # Redirect any unauthenticated users to the login page
 error_page 401 = @error401;
 location @error401 {
     limit_except      GET POST PUT { deny all; }
-    include /etc/includes/headers.conf;
+    include /etc/nginx/includes/headers.conf;
     proxy_ssl_server_name on;
     proxy_ssl_verify_depth 2;
     absolute_redirect off;
@@ -28,7 +28,7 @@ location @error401 {
 error_page 403 = @error403;
 location @error403 {
     limit_except      GET POST PUT DELETE { deny all; }
-    include /etc/includes/headers.conf;
+    include /etc/nginx/includes/headers.conf;
     proxy_ssl_server_name on;
     proxy_ssl_verify_depth 2;
     absolute_redirect off;
@@ -44,10 +44,10 @@ location @error403 {
 error_page 404 =404 /404;
 error_page 500 =500 /500;
 location ~ ^/(404|500)$ {
-    proxy_ssl_verify  {{ getv "/cjse/nginx/proxysslverify" "on" }};
+    proxy_ssl_verify  $CJSE_NGINX_PROXYSSLVERIFY;
     limit_except      GET POST PUT { deny all; }
     add_header  Strict-Transport-Security "max-age=31536000; includeSubDomains" always;
-    include /etc/includes/headers.conf;
+    include /etc/nginx/includes/headers.conf;
     proxy_ssl_server_name on;
     proxy_ssl_verify_depth 2;
     rewrite /(.*) /users/$1;
@@ -57,10 +57,10 @@ location ~ ^/(404|500)$ {
 location /auth {
     limit_except      GET POST PUT { deny all; }
     add_header  Strict-Transport-Security "max-age=31536000; includeSubDomains" always;
-    include /etc/includes/headers.conf;
+    include /etc/nginx/includes/headers.conf;
 
     proxy_pass        https://$userservice/users/api/auth;
-    proxy_ssl_verify  {{ getv "/cjse/nginx/proxysslverify" "on" }};
+    proxy_ssl_verify  $CJSE_NGINX_PROXYSSLVERIFY;
 
     proxy_pass_request_body  off;
     proxy_set_header  Content-Length '0';
@@ -74,7 +74,7 @@ location /auth {
 location = / {
     limit_except GET POST PUT DELETE { deny all; }
     add_header  Strict-Transport-Security "max-age=31536000; includeSubDomains" always;
-    include /etc/includes/headers.conf;
+    include /etc/nginx/includes/headers.conf;
     absolute_redirect off;
     return 302 /users;
 }
@@ -85,11 +85,11 @@ location /bichard-ui {
     auth_request /auth;
     auth_request_set $auth_cookie $upstream_http_set_cookie;
     add_header  Strict-Transport-Security "max-age=31536000; includeSubDomains" always;
-    include /etc/includes/headers.conf;
+    include /etc/nginx/includes/headers.conf;
     add_header Set-Cookie "$auth_cookie; secure";
 
     proxy_pass        https://$app;
-    proxy_ssl_verify  {{ getv "/cjse/nginx/proxysslverify" "on" }};
+    proxy_ssl_verify  $CJSE_NGINX_PROXYSSLVERIFY;
     proxy_set_header Host $http_host;
 
     proxy_intercept_errors on;
@@ -101,11 +101,11 @@ location /bichard {
     auth_request /auth;
     auth_request_set $auth_cookie $upstream_http_set_cookie;
     add_header  Strict-Transport-Security "max-age=31536000; includeSubDomains" always;
-    include /etc/includes/ui-headers.conf;
+    include /etc/nginx/includes/ui-headers.conf;
     add_header Set-Cookie "$auth_cookie; secure";
 
     proxy_pass        https://$ui;
-    proxy_ssl_verify  {{ getv "/cjse/nginx/proxysslverify" "on" }};
+    proxy_ssl_verify  $CJSE_NGINX_PROXYSSLVERIFY;
     proxy_set_header Host $http_host;
 
     # New Bichard UI sets it's own CSP before it reaches nginx
@@ -120,11 +120,11 @@ location /users {
     auth_request /auth;
     auth_request_set $auth_cookie $upstream_http_set_cookie;
     add_header  Strict-Transport-Security "max-age=31536000; includeSubDomains" always;
-    include /etc/includes/user-service-headers.conf;
+    include /etc/nginx/includes/user-service-headers.conf;
     add_header Set-Cookie "$auth_cookie; secure";
 
     proxy_pass        https://$userservice;
-    proxy_ssl_verify  {{ getv "/cjse/nginx/proxysslverify" "on" }};
+    proxy_ssl_verify  $CJSE_NGINX_PROXYSSLVERIFY;
     proxy_set_header Host $host;
     proxy_set_header X-Origin https://$host;
 
@@ -142,11 +142,11 @@ location /reports {
     auth_request /auth;
     auth_request_set $auth_cookie $upstream_http_set_cookie;
     add_header  Strict-Transport-Security "max-age=31536000; includeSubDomains" always;
-    include /etc/includes/headers.conf;
+    include /etc/nginx/includes/headers.conf;
     add_header Set-Cookie "$auth_cookie; secure";
 
     proxy_pass        https://$staticservice;
-    proxy_ssl_verify  {{ getv "/cjse/nginx/proxysslverify" "on" }};
+    proxy_ssl_verify  $CJSE_NGINX_PROXYSSLVERIFY;
     proxy_set_header Host $host;
 
     proxy_intercept_errors on;
@@ -156,10 +156,10 @@ location /reports {
 location /help {
     limit_except GET { deny all; }
     add_header  Strict-Transport-Security "max-age=31536000; includeSubDomains" always;
-    include /etc/includes/headers.conf;
+    include /etc/nginx/includes/headers.conf;
 
     proxy_pass        https://$staticservice;
-    proxy_ssl_verify  {{ getv "/cjse/nginx/proxysslverify" "on" }};
+    proxy_ssl_verify  $CJSE_NGINX_PROXYSSLVERIFY;
     proxy_set_header Host $host;
 
     proxy_cookie_flags ~ httponly secure samesite=strict;
@@ -170,11 +170,11 @@ location /help {
 location ~ ^/users/(login|fonts|images|_next/static|faq)(.*)$ {
     limit_except GET POST PUT { deny all; }
     add_header  Strict-Transport-Security "max-age=31536000; includeSubDomains" always;
-    include /etc/includes/user-service-headers.conf;
+    include /etc/nginx/includes/user-service-headers.conf;
 
     proxy_pass        https://$userservice;
     proxy_set_header X-Origin https://$host;
-    proxy_ssl_verify  {{ getv "/cjse/nginx/proxysslverify" "on" }};
+    proxy_ssl_verify  $CJSE_NGINX_PROXYSSLVERIFY;
     proxy_cookie_flags ~ httponly secure samesite=strict;
     proxy_ssl_server_name on;
     proxy_ssl_verify_depth 2;
@@ -188,11 +188,11 @@ location ~ ^/users/(login|fonts|images|_next/static|faq)(.*)$ {
 location ~ ^/users/(404|403|500)(.*)$ {
     limit_except GET POST PUT { deny all; }
     add_header  Strict-Transport-Security "max-age=31536000; includeSubDomains" always;
-    include /etc/includes/user-service-headers.conf;
+    include /etc/nginx/includes/user-service-headers.conf;
 
     proxy_pass        https://$userservice;
     proxy_set_header X-Origin https://$host;
-    proxy_ssl_verify  {{ getv "/cjse/nginx/proxysslverify" "on" }};
+    proxy_ssl_verify  $CJSE_NGINX_PROXYSSLVERIFY;
     proxy_cookie_flags ~ httponly secure samesite=strict;
     proxy_ssl_server_name on;
     proxy_ssl_verify_depth 2;
@@ -205,9 +205,9 @@ location ~ ^/users/(404|403|500)(.*)$ {
 # Allow access to bichard-ui health check, connectivity and static endpoints without authentication
 location ~ ^/bichard-ui/(Health|Connectivity|images|css).*$ {
     add_header  Strict-Transport-Security "max-age=31536000; includeSubDomains" always;
-    include /etc/includes/headers.conf;
+    include /etc/nginx/includes/headers.conf;
     proxy_pass        https://$app;
-    proxy_ssl_verify  {{ getv "/cjse/nginx/proxysslverify" "on" }};
+    proxy_ssl_verify  $CJSE_NGINX_PROXYSSLVERIFY;
     proxy_cookie_flags ~ httponly secure samesite=strict;
 }
 
@@ -219,10 +219,10 @@ location /bichard-ui/login.jsp {
 # Allow access to bichard-backend /Connectivity without authentication
 location ~ /bichard-backend/(Health|Connectivity) {
     add_header  Strict-Transport-Security "max-age=31536000; includeSubDomains" always;
-    include /etc/includes/headers.conf;
+    include /etc/nginx/includes/headers.conf;
     proxy_pass        https://$bichardbackend/bichard-ui/$1;
 
-    proxy_ssl_verify  {{ getv "/cjse/nginx/proxysslverify" "on" }};
+    proxy_ssl_verify  $CJSE_NGINX_PROXYSSLVERIFY;
     proxy_cookie_flags ~ httponly secure samesite=strict;
 }
 
@@ -230,7 +230,7 @@ location ~ /bichard-backend/(Health|Connectivity) {
 location /elb-status {
     limit_except GET POST { deny all; }
     add_header  Strict-Transport-Security "max-age=31536000; includeSubDomains" always;
-    include /etc/includes/headers.conf;
+    include /etc/nginx/includes/headers.conf;
     access_log   off;
     return       200;
     add_header   Content-Type text/plain;

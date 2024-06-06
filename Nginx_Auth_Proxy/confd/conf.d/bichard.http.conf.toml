@@ -1,7 +1,0 @@
-[template]
-src = "bichard.http.conf.tpl"
-dest = "/etc/includes/bichard.http.conf"
-keys = [
-    "/cjse/nginx"
-]
-

@@ -29,6 +29,24 @@ file:
     group: root
     filetype: file
     contains: []
+  /etc/nginx/includes/bichard.http.conf:
+    exists: true
+    owner: root
+    group: root
+    filetype: file
+    contains:
+      - "resolver 127.0.0.11;"
+      - 'set $app "localhost/elb-status";'
+      - 'set $bichardbackend "localhost/elb-status";'
+      - 'set $userservice "localhost/elb-status";'
+      - 'set $ui "localhost/elb-status";'
+      - 'set $staticservice "localhost/elb-status";'
+  /etc/nginx/includes/bichard.https.conf:
+    exists: true
+    owner: root
+    group: root
+    filetype: file
+    contains: []
   /etc/passwd:
     exists: true
     mode: "0644"
@@ -39,7 +57,7 @@ file:
     contains: []
   /etc/supervisord.conf:
     exists: true
-    size: 804
+    size: 801
     owner: root
     group: root
     filetype: file

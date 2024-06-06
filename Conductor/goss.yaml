@@ -1,11 +1,5 @@
 ---
 file:
-  /bin/confd:
-    exists: true
-    owner: root
-    group: root
-    filetype: file
-    contains: []
   /app/config/config.properties:
     exists: true
     owner: root
@@ -19,6 +13,18 @@ file:
     filetype: file
     contains: []
   /etc/nginx/nginx.conf:
+    exists: true
+    owner: root
+    group: root
+    filetype: file
+    contains: []
+  /etc/nginx/conf.d/conductor.https.conf:
+    exists: true
+    owner: root
+    group: root
+    filetype: file
+    contains: []
+  /etc/nginx/conf.d/conductor.http.conf:
     exists: true
     owner: root
     group: root
