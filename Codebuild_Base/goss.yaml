@@ -63,7 +63,6 @@ command:
       - /colorama\W+\d{1,}.\d{1,}.\d{1,}/
       - /docutils\W+\d{1,}.\d{1,}(?:.\d{1,})?/
       - /importlib-metadata\W+\d{1,}.\d{1,}.\d{1,}/
-      - /install\W+\d{1,}.\d{1,}.\d{1,}/
       - /jmespath\W+\d{1,}.\d{1,}.\d{1,}/
       - /pip\W+\d{1,}.\d{1,}(?:.\d{1,})?/
       - /pyasn1\W+\d{1,}.\d{1,}.\d{1,}/
