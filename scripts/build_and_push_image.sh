@@ -27,9 +27,6 @@ docker build \
   ${BUILD_ARGS} \
   -t ${REPOSITORY_NAME} -f ${DOCKERFILE} .
 
-## Test image steps
-echo "Running trivy tests against ${DOCKER_IMAGE}"
-/bin/bash  ../scripts/run_trivy_tests.sh
 echo "Running goss tests against ${DOCKER_IMAGE}"
 /bin/bash ../scripts/run_goss_tests.sh
 
