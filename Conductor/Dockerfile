@@ -1,6 +1,6 @@
 ARG BUILD_IMAGE="amazon-linux2023-base"
 
-FROM node:20-alpine as ui-builder
+FROM node:20-alpine AS ui-builder
 
 ARG CONDUCTOR_VERSION
 
