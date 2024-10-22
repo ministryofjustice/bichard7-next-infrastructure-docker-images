@@ -1,1 +1,1 @@
-export NODE_VERSION="20.6.1"
+export NODE_VERSION="20.18.0"
