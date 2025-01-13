@@ -60,7 +60,7 @@ jobs:
       - run:
           name: Build core
           working_directory: ~/bichard7-next-core
-          command: npm run build
+          command: npm run build:core
       - run:
           name: Run the worker
           working_directory: ~/bichard7-next-core
