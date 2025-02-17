@@ -1,0 +1,79 @@
+---
+file:
+  /etc/passwd:
+    exists: true
+    mode: "0644"
+    owner: root
+    group: root
+    filetype: file
+package:
+  jq:
+    installed: true
+  openssl:
+    installed: true
+  python3-pip:
+    installed: true
+  python3:
+    installed: true
+  unzip:
+    installed: true
+user:
+  nobody:
+    exists: true
+    uid: 65534
+    gid: 65534
+    groups:
+      - nobody
+    home: /
+    shell: /sbin/nologin
+  node:
+    exists: true
+    uid: 1000
+    gid: 1000
+    groups:
+      - node
+    home: /home/node
+    shell: /bin/bash
+command:
+  node --version:
+    exit-status: 0
+    stdout:
+      - v20.18.0
+  pip3 list --format json | jq -r ".[].name":
+    exit-status: 0
+    stdout:
+      - awscli
+      - boto3
+      - botocore
+      - certifi
+      - charset-normalizer
+      - click
+      - colorama
+      - docutils
+      - gpg
+      - idna
+      - jmespath
+      - libcomps
+      - pip
+      - pyasn1
+      - python-dateutil
+      - PyYAML
+      - requests
+      - rpm
+      - rsa
+      - s3transfer
+      - six
+      - urllib3
+  python --version:
+    exit-status: 0
+    stdout:
+      - /Python 3.9.\d{2,}/
+  python3 --version:
+    exit-status: 0
+    stdout:
+      - /Python 3.9.\d{2,}/
+    timeout: 10000
+  /usr/bin/google-chrome-stable --version:
+    exit-status: 0
+    stdout:
+      - /Google Chrome [\d.]+/
