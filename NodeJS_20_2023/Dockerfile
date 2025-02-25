@@ -6,7 +6,7 @@ LABEL maintainer="CJSE"
 ARG NODE_USER="node"
 ARG NODE_GUID=1000
 ARG ARCH="x64"
-ARG NODE_VERSION="16.18.1"
+ARG NODE_VERSION="20.18.0"
 
 COPY scripts/docker-entrypoint.sh /usr/local/bin/
 

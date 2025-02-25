@@ -1,8 +1,8 @@
-BASE_CONTAINERS:= Amazon_Linux_Base NodeJS Postfix Codebuild_Base Amazon_Linux_2023_Base NodeJS_20_2023
+BASE_CONTAINERS:= Amazon_Linux_Base NodeJS Postfix Codebuild_Base Codebuild_2023_Base Amazon_Linux_2023_Base NodeJS_20_2023
 NGINX_CONTAINERS:= Nginx_Supervisord Nginx_Auth_Proxy Nginx_Java_Supervisord S3_Web_Proxy Conductor Nginx_NodeJS_20_2023_Supervisord
 
 AL2_IMAGES:= Codebuild_Base
-AL2023_IMAGES:= Nginx_NodeJS_20_2023_Supervisord NodeJS_20_2023 S3_Web_Proxy Nginx_Auth_Proxy
+AL2023_IMAGES:= Codebuild_2023_Base Nginx_NodeJS_20_2023_Supervisord NodeJS_20_2023 S3_Web_Proxy Nginx_Auth_Proxy
 
 .PHONY: $(BASE_CONTAINERS) $(NGINX_CONTAINERS)
 
@@ -35,3 +35,6 @@ S3_Web_Proxy: Nginx_NodeJS_20_2023_Supervisord
 NodeJS_20_2023 Conductor Postfix: Amazon_Linux_2023_Base
 Nginx_Auth_Proxy: Amazon_Linux_2023_Base NodeJS_20_2023
 Nginx_NodeJS_20_2023_Supervisord: NodeJS_20_2023
+Codebuild_2023_Base:
+	- PLATFORM=linux/amd64 $(MAKE) -C Amazon_Linux_2023_Base
+	- $(MAKE) -C Codebuild_2023_Base
