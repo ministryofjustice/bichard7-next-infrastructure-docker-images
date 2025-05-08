@@ -8,8 +8,8 @@ RUN apk add git
 RUN git clone --depth=1 -b ${CONDUCTOR_VERSION} https://github.com/conductor-oss/conductor.git /conductor
 
 WORKDIR /conductor/ui
-RUN yarn install --network-timeout=240000
-RUN yarn build
+RUN npm install --legacy-peer-deps
+RUN npm run build
 
 # ===========================================================================================================
 # 0. Builder stage
