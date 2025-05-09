@@ -25,6 +25,7 @@ WORKDIR /conductor
 
 #This will cache the downloaded gradle so repeated runs are faster
 RUN ./gradlew --version
+RUN sed -i "s|org.apache.tomcat.embed:tomcat-embed-core|org.apache.tomcat.embed:tomcat-embed-core:10.1.35|" build.gradle
 RUN ./gradlew build -x test
 
 # ===========================================================================================================
