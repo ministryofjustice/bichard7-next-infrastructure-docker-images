@@ -24,16 +24,7 @@ RUN git clone --depth=1 -b ${CONDUCTOR_VERSION} https://github.com/conductor-oss
 
 WORKDIR /conductor
 
-RUN sed -i \
-  -e "s|classpath 'org.springframework.boot:spring-boot-gradle-plugin:3.3.5'|classpath 'org.springframework.boot:spring-boot-gradle-plugin:3.4.5'|" \
-  -e "s|id 'org.springframework.boot' version '3.3.5'|id 'org.springframework.boot' version '3.4.5'|" \
-  build.gradle
-
-
-RUN sed -i '/^dependencies }/ \
-    implementation("org.spring-boot-starter-oauth2-resource-servergframework.boot:spring-boot-starter-security")\
-    implementation("org.springframework.boot:spring-boot-starter-oauth2-client")\
-    implementation("org.springframework.boot:spring-boot-starter-oauth2-resource-server")' build.gradle
+RUN sed -i 's/^subprojects {$/ext["tomcat.version"] = "10.1.41"\n\n&/' build.gradle
 
 RUN sed -i "s/revRedisson = '3\.13\.3'/revRedisson = '3.22.0'/" dependencies.gradle
 
