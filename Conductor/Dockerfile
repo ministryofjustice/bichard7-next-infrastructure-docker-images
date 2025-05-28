@@ -21,7 +21,12 @@ ARG CONDUCTOR_VERSION
 RUN git clone --depth=1 -b ${CONDUCTOR_VERSION} https://github.com/conductor-oss/conductor.git /conductor
 
 # Build the server
+
 WORKDIR /conductor
+
+RUN sed -i 's/^subprojects {$/ext["tomcat.version"] = "10.1.41"\n\n&/' build.gradle
+
+RUN sed -i "s/revRedisson = '3\.13\.3'/revRedisson = '3.22.0'/" dependencies.gradle
 
 #This will cache the downloaded gradle so repeated runs are faster
 RUN ./gradlew --version
