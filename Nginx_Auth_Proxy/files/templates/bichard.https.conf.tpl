@@ -184,6 +184,24 @@ location ~ ^/users/(login|fonts|images|_next/static|faq)(.*)$ {
     proxy_pass_header Content-Security-Policy;
 }
 
+# Allow access to new UI assets without authentication
+location ~ ^/bichard/(assets|govuk_assets|_next/static)(.*)$ {
+    limit_except GET POST PUT { deny all; }
+    add_header  Strict-Transport-Security "max-age=31536000; includeSubDomains" always;
+    include /etc/nginx/includes/ui-headers.conf;
+
+    proxy_pass        https://$ui;
+    proxy_set_header X-Origin http://$host;
+    proxy_ssl_verify  $CJSE_NGINX_PROXYSSLVERIFY;
+    proxy_cookie_flags ~ httponly secure samesite=strict;
+    proxy_ssl_server_name on;
+    proxy_ssl_verify_depth 2;
+    proxy_intercept_errors on;
+
+    # New Bichard User Service sets it's own CSP before it reaches nginx
+    proxy_pass_header Content-Security-Policy;
+}
+
 # Allow access to error pages without authentication
 location ~ ^/users/(404|403|500)(.*)$ {
     limit_except GET POST PUT { deny all; }
