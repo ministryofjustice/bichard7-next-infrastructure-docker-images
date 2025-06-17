@@ -185,7 +185,7 @@ location ~ ^/users/(login|fonts|images|_next/static|faq)(.*)$ {
 }
 
 # Allow access to new UI assets without authentication
-location ~ ^/bichard/(assets|govuk_assets|_next/static)(.*)$ {
+location ~ ^/bichard/(assets|govuk_assets|moj_assets|_next/static)(.*)$ {
     limit_except GET POST PUT { deny all; }
     add_header  Strict-Transport-Security "max-age=31536000; includeSubDomains" always;
     include /etc/nginx/includes/ui-headers.conf;
