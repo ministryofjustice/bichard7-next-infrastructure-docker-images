@@ -68,6 +68,7 @@ describe("Testing Nginx config", () => {
     { path: "/users/x", route: "user", auth: true },
     { path: "/bichard/x", route: "ui", auth: true },
     { path: "/users/login", route: "user", auth: false },
+    { path: "/users/feedback", route: "user", auth: false },
     { path: "/users/images/x.png", route: "user", auth: false },
     { path: "/users/fonts/x.woff", route: "user", auth: false },
     { path: "/users/403", route: "user", auth: false, errorsIntercepted: false },
