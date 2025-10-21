@@ -157,7 +157,7 @@ location /help {
 }
 
 # Allow access to user-service login flow (and necessary assets) without authentication
-location ~ ^/users/(login|fonts|images|_next/static|faq)(.*)$ {
+location ~ ^/users/(login|fonts|images|_next/static|faq|feedback)(.*)$ {
     limit_except GET POST PUT { deny all; }
     include /etc/nginx/includes/user-service-headers.conf;
 
