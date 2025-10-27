@@ -10,8 +10,5 @@ export readonly SOURCE_REPOSITORY_NAME="nodejs-20-2023"
 aws codebuild start-build --project-name "build-s3-web-proxy" \
   --environment-variables-override name=DOCKER_IMAGE_HASH,value="${DOCKER_IMAGE_PREFIX}@${SHA_HASH}",type=PLAINTEXT
 
-aws codebuild start-build --project-name "build-user-service-docker" \
-  --environment-variables-override name=DOCKER_IMAGE_HASH,value="${DOCKER_IMAGE_PREFIX}@${SHA_HASH}",type=PLAINTEXT
-
 aws codebuild start-build --project-name "build-core-repo-artifacts" \
   --environment-variables-override name=DOCKER_IMAGE_HASH,value="${DOCKER_IMAGE_PREFIX}@${SHA_HASH}",type=PLAINTEXT
