@@ -14,7 +14,7 @@ RUN npm run build
 # ===========================================================================================================
 # 0. Builder stage
 # ===========================================================================================================
-FROM openjdk:17-bullseye AS builder
+FROM eclipse-temurin:17-jdk-jammy AS builder
 
 ARG CONDUCTOR_VERSION
 
