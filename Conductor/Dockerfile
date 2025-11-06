@@ -14,9 +14,12 @@ RUN npm run build
 # ===========================================================================================================
 # 0. Builder stage
 # ===========================================================================================================
-FROM openjdk:17-bullseye AS builder
+FROM eclipse-temurin:17-jdk-jammy AS builder
 
 ARG CONDUCTOR_VERSION
+
+RUN apt-get update && apt-get install -y git && \
+    rm -rf /var/lib/apt/lists/*
 
 RUN git clone --depth=1 -b ${CONDUCTOR_VERSION} https://github.com/conductor-oss/conductor.git /conductor
 
@@ -25,7 +28,6 @@ RUN git clone --depth=1 -b ${CONDUCTOR_VERSION} https://github.com/conductor-oss
 WORKDIR /conductor
 
 RUN sed -i 's/^subprojects {$/ext["tomcat.version"] = "10.1.41"\n\n&/' build.gradle
-
 RUN sed -i "s/revRedisson = '3\.13\.3'/revRedisson = '3.22.0'/" dependencies.gradle
 
 #This will cache the downloaded gradle so repeated runs are faster
