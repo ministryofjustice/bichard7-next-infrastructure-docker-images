@@ -38,7 +38,7 @@ command:
   node --version:
     exit-status: 0
     stdout:
-      - v20.18.0
+      - v24.11.1
   pip3 list --format json | jq -r ".[].name":
     exit-status: 0
     stdout:
