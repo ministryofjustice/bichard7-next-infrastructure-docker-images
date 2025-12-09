@@ -2,7 +2,7 @@
 
 set -e
 
-IMAGE="nodejs-20-2023"
+IMAGE="nodejs-24-2025"
 source $(dirname $0)/scripts/node_version.sh
 ARCH=$(arch)
 
