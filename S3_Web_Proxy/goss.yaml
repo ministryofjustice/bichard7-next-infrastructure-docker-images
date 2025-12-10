@@ -99,14 +99,4 @@ user:
       - systemd-network
     home: /
     shell: /usr/sbin/nologin
-process:
-  bash:
-    running: true
-  nginx:
-    running: true
-  node:
-    running: true
-  python:
-    running: false
-  supervisord:
-    running: true
+

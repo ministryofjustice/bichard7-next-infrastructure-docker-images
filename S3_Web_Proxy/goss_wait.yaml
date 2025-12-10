@@ -16,3 +16,15 @@ command:
       - /s3\-server\W+RUNNING\W+pid\W\d{1,},\Wuptime\W\S+/
     stderr: []
     timeout: 10000
+process:
+  bash:
+    running: true
+  nginx:
+    running: true
+  node:
+    running: true
+  python:
+    running: false
+  supervisord:
+    running: true
+
