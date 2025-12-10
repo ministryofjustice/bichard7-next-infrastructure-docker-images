@@ -2,21 +2,21 @@
 
 Docker image builds for the Bichard 7 project
 
--   [Codebuild Base](./Codebuild_Base/Dockerfile) - The image used for Codebuild (based on Amazon Linux 2 as it supports OpenVPN)
--   [Amazon Linux 2023 Base](./Amazon_Linux_2023_Base/Dockerfile) - Amazon Linux 2023 with patches and some base software installed
-    -   [Conductor](./Conductor/Dockerfile) - The Conductor image
-    -   [Nginx Auth Proxy](./Nginx_Auth_Proxy/Dockerfile) - The front end proxy for Bichard
-    -   [Postfix](./Postfix/Dockerfile) - Postfix Mail Server
-    -   [NodeJS 20 2023](./NodeJS_20_2023/) - Node 20 on Amazon Linux 2023
-        -   [Nginx NodeJS 20 2023 Supervisord](./Nginx_NodeJS_20_2023_Supervisord/) - The above with Nginx and Supervisord installed
-            -   [S3 Web Proxy](./S3_Web_Proxy/Dockerfile) - Used to serve files from S3
-            -   Used by: [Bichard User Service](https://github.com/ministryofjustice/bichard7-next-user-service)
-            -   Used by: [Bichard UI](https://github.com/ministryofjustice/bichard7-next-ui)
-        -   Used by: [Core API](https://github.com/ministryofjustice/bichard7-next-core/blob/main/packages/api/Dockerfile)
-        -   Used by: [Core Conductor Worker](https://github.com/ministryofjustice/bichard7-next-core/blob/main/packages/conductor/Dockerfile)
-        -   Used by: [Audit Log API](https://github.com/ministryofjustice/bichard7-next-audit-logging/blob/main/src/audit-log-api/Dockerfile) - for testing only
-        -   Used by: [Event Handler](https://github.com/ministryofjustice/bichard7-next-audit-logging/blob/main/src/event-handler/Dockerfile) - for testing only
-        -   Used by: [Message Forwarder](https://github.com/ministryofjustice/bichard7-next-core/blob/main/packages/message-forwarder/Dockerfile)
+- [Codebuild Base](./Codebuild_Base/Dockerfile) - The image used for Codebuild (based on Amazon Linux 2 as it supports OpenVPN)
+- [Amazon Linux 2023 Base](./Amazon_Linux_2023_Base/Dockerfile) - Amazon Linux 2023 with patches and some base software installed
+    - [Conductor](./Conductor/Dockerfile) - The Conductor image
+    - [Nginx Auth Proxy](./Nginx_Auth_Proxy/Dockerfile) - The front end proxy for Bichard
+    - [Postfix](./Postfix/Dockerfile) - Postfix Mail Server
+    - [NodeJS 20 2023](./NodeJS_20_2023/) - Node 20 on Amazon Linux 2023
+        - [Nginx NodeJS 20 2023 Supervisord](./Nginx_NodeJS_20_2023_Supervisord/) - The above with Nginx and Supervisord installed
+            - [S3 Web Proxy](./S3_Web_Proxy/Dockerfile) - Used to serve files from S3
+            - Used by: [Bichard User Service](https://github.com/ministryofjustice/bichard7-next-user-service)
+            - Used by: [Bichard UI](https://github.com/ministryofjustice/bichard7-next-ui)
+        - Used by: [Core API](https://github.com/ministryofjustice/bichard7-next-core/blob/main/packages/api/Dockerfile)
+        - Used by: [Core Conductor Worker](https://github.com/ministryofjustice/bichard7-next-core/blob/main/packages/conductor/Dockerfile)
+        - Used by: [Audit Log API](https://github.com/ministryofjustice/bichard7-next-audit-logging/blob/main/src/audit-log-api/Dockerfile) - for testing only
+        - Used by: [Event Handler](https://github.com/ministryofjustice/bichard7-next-audit-logging/blob/main/src/event-handler/Dockerfile) - for testing only
+        - Used by: [Message Forwarder](https://github.com/ministryofjustice/bichard7-next-core/blob/main/packages/message-forwarder/Dockerfile)
 
 **Note:** Beanconnect and the PNC Emulator both use Amazon Linux 2 images directly and do not rely on images from this repository
 
@@ -55,9 +55,14 @@ sh ./scripts/install_goss.sh
 ## Update Node
 
 - Go to https://github.com/nodejs/release-keys/ get the "Primary GPG keys for Node.js Releasers (some Releasers sign with subkeys):"
-- In `NodeJS_XX_20XX` folder
-  - Update the Keys in the loop
-  - Set the `NODE_VERSION` to what you it to be
-  - Update `NODE_VERSION` in the `scripts/node_version.sh`
+- For example, in `NodeJS_XX_20XX` folder
+    - Update the PGP Keys in the loop
+    - Set the `NODE_VERSION` to what you it to be
+    - Update `NODE_VERSION` in the `scripts/node_version.sh`
 
-**TBC**
+Once you have done the above, go to these folders and make the changes to reflect the correct node version:
+
+- Codebuild_Base
+- Codebuild_2023_Base
+- Nginx_NodeJS_24_2023_Supervisord
+- NodeJS_24_2023
