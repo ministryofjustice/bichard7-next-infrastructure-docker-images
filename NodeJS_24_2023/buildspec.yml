@@ -4,5 +4,5 @@ phases:
   build:
     commands:
       - set -ev
-      - cd ./NodeJS_20_2023
+      - cd ./NodeJS_24_2023
       - /bin/bash ./scripts/build_docker.sh
