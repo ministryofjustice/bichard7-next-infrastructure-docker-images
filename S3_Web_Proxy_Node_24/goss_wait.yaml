@@ -21,10 +21,7 @@ process:
     running: true
   nginx:
     running: true
-  node:
-    running: true
   python:
     running: false
   supervisord:
     running: true
-
