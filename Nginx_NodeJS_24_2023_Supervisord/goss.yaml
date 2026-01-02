@@ -28,28 +28,39 @@ file:
     owner: root
     group: root
     filetype: file
+    contains: []
   /etc/passwd:
     exists: true
     mode: "0644"
+    size: 940
     owner: root
     group: root
     filetype: file
+    contains: []
   /etc/supervisord.conf:
     exists: true
+    size: 446
     owner: root
     group: root
     filetype: file
+    contains: []
   /tmp/openssl.cnf:
     exists: false
+    contains: []
 package:
-  git:
-    installed: true
   nginx:
-    installed: true
-  python3:
     installed: true
   shadow-utils:
     installed: true
+port:
+  tcp:80:
+    listening: true
+    ip:
+      - 0.0.0.0
+  tcp:443:
+    listening: true
+    ip:
+      - 0.0.0.0
 user:
   dbus:
     exists: true
@@ -83,14 +94,6 @@ user:
       - node
     home: /home/node
     shell: /bin/bash
-  runner:
-    exists: true
-    uid: 997
-    gid: 100
-    groups:
-      - users
-    home: /opt/s3-server
-    shell: /bin/false
   systemd-network:
     exists: true
     uid: 192
@@ -99,4 +102,8 @@ user:
       - systemd-network
     home: /
     shell: /usr/sbin/nologin
-
+process:
+  nginx:
+    running: true
+  supervisord:
+    running: true

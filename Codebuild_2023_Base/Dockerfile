@@ -2,7 +2,7 @@ ARG BUILD_IMAGE="amazon-linux2023-base"
 FROM ${BUILD_IMAGE}
 
 ARG TERRAFORM_VERSION="1.12.1"
-ARG NODE_VERSION="20.18.0"
+ARG NODE_VERSION="24.11.1"
 ARG DNF_PACKAGES="python python-pip python3-pip jq git ruby ruby-devel"
 ARG TEST_PACKAGES="which"
 ARG PIP_PACKAGES="awscli boto3 click botocore requests"
