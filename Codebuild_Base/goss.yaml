@@ -50,7 +50,7 @@ command:
   node --version:
     exit-status: 0
     stdout:
-      - v24.11.1
+      - v16.18.1
   pip3 list:
     exit-status: 0
     stdout:

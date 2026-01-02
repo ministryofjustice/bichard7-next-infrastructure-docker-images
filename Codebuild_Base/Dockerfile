@@ -8,7 +8,7 @@ ARG PIP_PACKAGES="awscli boto3 click botocore requests"
 ARG ARCH="x64"
 ARG NODE_USER="node"
 ARG NODE_GUID=1000
-ARG NODE_VERSION="24.11.1"
+ARG NODE_VERSION="16.18.1"
 
 COPY ./scripts /tmp
 
