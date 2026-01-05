@@ -50,6 +50,11 @@ package:
     installed: true
   shadow-utils:
     installed: true
+command:
+  node --version:
+    exit-status: 0
+    stdout:
+      - v24.11.1
 user:
   dbus:
     exists: true
@@ -99,4 +104,3 @@ user:
       - systemd-network
     home: /
     shell: /usr/sbin/nologin
-
