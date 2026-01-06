@@ -8,7 +8,10 @@ COPY scripts/credentials.sh /usr/bin/credentials
 ARG NODE_DIR="/opt/s3-server"
 ARG NODE_USER="runner"
 
+USER root
+
 COPY s3-server ${NODE_DIR}
+
 RUN yum install -y \
     cronie \
     git && \
@@ -22,15 +25,11 @@ RUN yum install -y \
     mkdir -p ${NODE_DIR} && \
     chown -R ${NODE_USER} ${NODE_DIR}
 
-USER root
-RUN npm i -g npm-check-updates
-
-USER runner
 WORKDIR ${NODE_DIR}
-RUN ncu -u && npm i
+RUN npm i -g npm-check-updates && \
+    ncu -u && npm i
 
 # hadolint ignore=DL3002
-USER root
 RUN npm link
 
 WORKDIR /
@@ -42,3 +41,5 @@ COPY conf/nginx.conf /etc/nginx/nginx.conf
 COPY conf/supervisord.conf /etc/supervisord.conf
 
 STOPSIGNAL SIGQUIT
+
+USER ${NODE_USER}
