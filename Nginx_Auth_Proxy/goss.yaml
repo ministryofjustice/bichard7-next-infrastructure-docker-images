@@ -25,14 +25,14 @@ file:
     contains: []
   /etc/nginx/nginx.conf:
     exists: true
-    owner: root
-    group: root
+    owner: userapp
+    group: userapp
     filetype: file
     contains: []
   /etc/nginx/includes/bichard.http.conf:
     exists: true
-    owner: root
-    group: root
+    owner: userapp
+    group: userapp
     filetype: file
     contains:
       - "resolver 127.0.0.11;"
@@ -43,8 +43,8 @@ file:
       - 'set $staticservice "localhost/elb-status";'
   /etc/nginx/includes/bichard.https.conf:
     exists: true
-    owner: root
-    group: root
+    owner: userapp
+    group: userapp
     filetype: file
     contains: []
   /etc/passwd:
@@ -86,8 +86,6 @@ user:
     shell: /sbin/nologin
   nginx:
     exists: true
-    uid: 998
-    gid: 998
     groups:
       - nginx
     home: /var/lib/nginx
