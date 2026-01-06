@@ -15,7 +15,7 @@ file:
   /certs/server.key:
     exists: true
     owner: node
-    group: mpde
+    group: node
     filetype: file
     size:
       and:
@@ -24,8 +24,8 @@ file:
     contains: []
   /etc/nginx/nginx.conf:
     exists: true
-    owner: node
-    group: node
+    owner: root
+    group: root
     filetype: file
     contains: []
   /etc/passwd:
