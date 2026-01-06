@@ -41,8 +41,8 @@ USER ${NODE_USER}
 
 WORKDIR /
 
-EXPOSE 80
-EXPOSE 443
+EXPOSE 8080
+EXPOSE 8443
 
 COPY conf/nginx.conf /etc/nginx/nginx.conf
 COPY conf/supervisord.conf /etc/supervisord.conf
