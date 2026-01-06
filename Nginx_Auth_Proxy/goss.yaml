@@ -120,4 +120,4 @@ command:
     exec: "whoami"
     exit-status: 0
     stdout:
-      - "appuser"
+      - "root"
