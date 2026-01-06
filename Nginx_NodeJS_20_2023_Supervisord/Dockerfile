@@ -34,7 +34,7 @@ RUN chown -R node:node \
     /var/log/supervisor \
     /var/log/nginx \
     /var/lib/nginx \
-    /etc/nginx \
+    /etc/nginx
 
 EXPOSE 8080
 EXPOSE 8443
