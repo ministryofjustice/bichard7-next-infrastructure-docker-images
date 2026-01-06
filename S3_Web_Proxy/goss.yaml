@@ -2,21 +2,21 @@
 file:
   /certs:
     exists: true
-    owner: root
-    group: root
+    owner: node
+    group: node
     filetype: directory
     contains: []
   /certs/server.crt:
     exists: true
-    owner: root
-    group: root
+    owner: node
+    group: node
     size: 2378
     filetype: file
     contains: []
   /certs/server.key:
     exists: true
-    owner: root
-    group: root
+    owner: node
+    group: node
     filetype: file
     size:
       and:
@@ -28,17 +28,35 @@ file:
     owner: root
     group: root
     filetype: file
+  /var/log/nginx:
+    exists: true
+    filetype: directory
+    owner: node
+    group: node
+  /var/lib/nginx:
+    exists: true
+    filetype: directory
+    owner: node
+    group: node
+  /etc/supervisord.conf:
+    exists: true
+    owner: root
+    group: root
+    filetype: file
+  /var/log/supervisor:
+    exists: true
+    filetype: directory
+    owner: node
+    group: node
   /etc/passwd:
     exists: true
     mode: "0644"
     owner: root
     group: root
     filetype: file
-  /etc/supervisord.conf:
+  /tmp:
     exists: true
-    owner: root
-    group: root
-    filetype: file
+    filetype: directory
   /tmp/openssl.cnf:
     exists: false
 package:
