@@ -28,19 +28,37 @@ file:
     group: root
     filetype: file
     contains: []
-  /etc/passwd:
+  /var/log/nginx:
     exists: true
-    mode: "0644"
-    owner: root
-    group: root
-    filetype: file
-    contains: []
+    filetype: directory
+    owner: node
+    group: node
+  /var/lib/nginx:
+    exists: true
+    filetype: directory
+    owner: node
+    group: node
   /etc/supervisord.conf:
     exists: true
     owner: root
     group: root
     filetype: file
     contains: []
+  /var/log/supervisor:
+    exists: true
+    filetype: directory
+    owner: node
+    group: node
+  /etc/passwd:
+    exists: true
+    mode: "0644"
+    owner: root
+    group: root
+    filetype: file
+    contains: [ ]
+  /tmp:
+    exists: true
+    filetype: directory
   /tmp/openssl.cnf:
     exists: false
     contains: []
