@@ -25,7 +25,7 @@ jobs:
     machine:
       image: ubuntu-2204:current
       docker_layer_caching: true
-    resource_class: xlarge
+    resource_class: large
     environment:
       SKIP_GOSS: true
     steps:
@@ -52,24 +52,18 @@ jobs:
       - run:
           name: npm install
           working_directory: ~/bichard7-next-core
-          command: npm i
-      - run:
-          name: Run the infrastructure
-          working_directory: ~/bichard7-next-core
-          command: bash .circleci/scripts/run-infrastructure.sh conductor all-no-worker
+          command: npm ci
       - run:
           name: Build core
           working_directory: ~/bichard7-next-core
           command: npm run build:core
       - run:
-          name: Run the worker
+          name: Run the infrastructure
           working_directory: ~/bichard7-next-core
           environment:
             PHASE_2_QUEUE_NAME: TEST_PHASE2_QUEUE
             PHASE_3_QUEUE_NAME: TEST_PHASE3_QUEUE
-
-          command: nvm use && npm run -w packages/conductor worker
-          background: true
+          command: bash .circleci/scripts/run-infrastructure.sh conductor all-build-worker
       - run:
           name: Test the workflows
           working_directory: ~/bichard7-next-core
