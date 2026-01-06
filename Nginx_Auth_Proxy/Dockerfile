@@ -42,11 +42,16 @@ RUN chmod 755 /bin/process_templates.sh && \
     /var/lib/nginx \
     /etc/nginx
 
+EXPOSE 8080
+EXPOSE 8443
+
+# Old ports - will remove later to avoid downtime
 EXPOSE 80
 EXPOSE 443
 
 WORKDIR /etc/nginx
 
-USER appuser
+# Use root for now so we can run both sets of ports - will go back to root when we remove 80/443
+# USER appuser
 
 CMD ["supervisord", "-c", "/etc/supervisord.conf"]
