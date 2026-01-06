@@ -2,21 +2,20 @@
 file:
   /certs:
     exists: true
-    owner: root
-    group: root
+    owner: node
+    group: node
     filetype: directory
     contains: []
   /certs/server.crt:
     exists: true
-    owner: root
-    group: root
-    size: 2378
+    owner: node
+    group: node
     filetype: file
     contains: []
   /certs/server.key:
     exists: true
-    owner: root
-    group: root
+    owner: node
+    group: mpde
     filetype: file
     size:
       and:
@@ -25,23 +24,21 @@ file:
     contains: []
   /etc/nginx/nginx.conf:
     exists: true
-    owner: root
-    group: root
+    owner: node
+    group: node
     filetype: file
     contains: []
   /etc/passwd:
     exists: true
     mode: "0644"
-    size: 940
-    owner: root
-    group: root
+    owner: node
+    group: node
     filetype: file
     contains: []
   /etc/supervisord.conf:
     exists: true
-    size: 446
-    owner: root
-    group: root
+    owner: node
+    group: node
     filetype: file
     contains: []
   /tmp/openssl.cnf:
@@ -53,11 +50,11 @@ package:
   shadow-utils:
     installed: true
 port:
-  tcp:80:
+  tcp:8080:
     listening: true
     ip:
       - 0.0.0.0
-  tcp:443:
+  tcp:8443:
     listening: true
     ip:
       - 0.0.0.0
@@ -107,3 +104,9 @@ process:
     running: true
   supervisord:
     running: true
+command:
+  check_running_user:
+    exec: "whoami"
+    exit-status: 0
+    stdout:
+      - "node"
