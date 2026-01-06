@@ -32,7 +32,12 @@ USER ${NODE_USER}
 WORKDIR ${NODE_DIR}
 
 # hadolint ignore=DL3002
-RUN ncu -u && npm i && npm link
+RUN ncu -u && npm i
+
+USER root
+RUN npm link
+
+USER ${NODE_USER}
 
 WORKDIR /
 
