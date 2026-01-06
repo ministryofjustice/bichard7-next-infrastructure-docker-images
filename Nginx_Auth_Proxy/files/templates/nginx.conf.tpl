@@ -1,6 +1,5 @@
-user nginx;
 worker_processes auto;
-pid /run/nginx.pid;
+pid /tmp/nginx.pid;
 include /etc/nginx/modules-enabled/*.conf;
 
 events {
@@ -55,5 +54,5 @@ http {
 
         include /etc/nginx/includes/bichard.http.conf;
     }
-    
+
 }
