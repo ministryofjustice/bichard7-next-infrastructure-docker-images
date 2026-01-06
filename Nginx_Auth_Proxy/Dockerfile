@@ -32,9 +32,10 @@ COPY files/supervisord.conf /etc/supervisord.conf
 COPY files/includes /etc/nginx/includes/
 COPY files/process_templates.sh /bin/process_templates.sh
 
-RUN chown -R appuser:appuser \
-    /bin/process_templates.sh \
+RUN chmod 755 /bin/process_templates.sh && \
+    chown -R appuser:appuser \
     /etc/templates \
+    /etc/nginx \
     /certs \
     /var/log/supervisor \
     /var/log/nginx \
