@@ -45,5 +45,5 @@ package:
     installed: true
   wget:
     installed: true
-  gnupg:
+  gnupg2:
     installed: true
