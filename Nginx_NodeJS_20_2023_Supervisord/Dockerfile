@@ -7,6 +7,8 @@ WORKDIR /
 
 COPY files/openssl.cnf /tmp/openssl.cnf
 
+USER root
+
 RUN mkdir -p /certs && \
     mkdir -p /var/log/supervisor && \
     dnf install -y \
@@ -27,11 +29,21 @@ RUN mkdir -p /certs && \
 
 RUN pip install supervisor
 
-EXPOSE     80
-EXPOSE     443
+RUN chown -R node:node \
+    /certs \
+    /var/log/supervisor \
+    /var/log/nginx \
+    /var/lib/nginx \
+    /etc/nginx \
+
+EXPOSE 8080
+EXPOSE 8443
+
 WORKDIR /etc/nginx
 
 COPY conf/supervisord.conf /etc/supervisord.conf
 COPY conf/nginx.conf /etc/nginx/nginx.conf
+
+USER node
 
 CMD ["supervisord", "-c", "/etc/supervisord.conf"]
