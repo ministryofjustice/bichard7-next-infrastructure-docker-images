@@ -118,8 +118,9 @@ process:
     running: false
   supervisord:
     running: true
-check_running_user:
-  exec: "whoami"
-  exit-status: 0
-  stdout:
-    - "runner"
+command:
+  check_running_user:
+    exec: "whoami"
+    exit-status: 0
+    stdout:
+      - "root"
