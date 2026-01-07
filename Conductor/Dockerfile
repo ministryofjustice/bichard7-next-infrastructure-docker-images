@@ -67,8 +67,17 @@ RUN dnf update && \
     dnf install -y java-17-amazon-corretto && \
     dnf clean all
 
+RUN chown -R appuser:appuser \
+    /app \
+    /certs \
+    /var/lib/nginx \
+    /var/log/nginx \
+    /var/log/supervisor \
+    /etc/nginx \
+    /usr/share/nginx/html
+
 # Copy the compiled output to new image
-COPY --from=builder /conductor/server/build/libs/*boot*.jar /app/libs/conductor-server.jar
+COPY --from=builder --chown=appuser:appuser /conductor/server/build/libs/*boot*.jar /app/libs/conductor-server.jar
 
 # Copy the config files
 COPY files/nginx.conf /etc/nginx/nginx.conf
@@ -81,10 +90,12 @@ RUN chmod 755 /bin/process_templates.sh
 # Copy compiled UI assets to nginx www directory
 WORKDIR /usr/share/nginx/html
 RUN rm -rf ./*
-COPY --from=ui-builder /conductor/ui/build .
+COPY --from=ui-builder --chown=appuser:appuser /conductor/ui/build .
 
 EXPOSE 4000
 EXPOSE 5000
+
+USER appuser
 
 CMD ["supervisord", "-c", "/etc/supervisord.conf"]
 

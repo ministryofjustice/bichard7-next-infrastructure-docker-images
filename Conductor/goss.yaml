@@ -90,6 +90,11 @@ http:
   http://bichard:password@localhost:4000/health:
     status: 200
 command:
+  check_running_user:
+    exec: "whoami"
+    exit-status: 0
+    stdout:
+      - "appuser"
   java --version:
     exit-status: 0
     stdout:
@@ -133,3 +138,9 @@ user:
       - systemd-network
     home: /
     shell: /usr/sbin/nologin
+  appuser:
+    exists: true
+    groups:
+      - appuser
+    shell: /bin/bash
+    home: /home/appuser
