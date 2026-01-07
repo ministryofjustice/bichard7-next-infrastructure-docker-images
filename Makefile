@@ -2,7 +2,7 @@ BASE_CONTAINERS:= Amazon_Linux_Base NodeJS Postfix Codebuild_Base Codebuild_2023
 NGINX_CONTAINERS:= Nginx_Supervisord Nginx_Auth_Proxy Nginx_Java_Supervisord S3_Web_Proxy Conductor Nginx_NodeJS_20_2023_Supervisord
 
 AL2_IMAGES:= Codebuild_Base
-AL2023_IMAGES:= Codebuild_2023_Base Nginx_NodeJS_20_2023_Supervisord NodeJS_20_2023 S3_Web_Proxy Nginx_Auth_Proxy
+AL2023_IMAGES:= Codebuild_2023_Base Nginx_NodeJS_20_2023_Supervisord NodeJS_20_2023 S3_Web_Proxy Nginx_Auth_Proxy Postfix
 
 .PHONY: $(BASE_CONTAINERS) $(NGINX_CONTAINERS)
 
