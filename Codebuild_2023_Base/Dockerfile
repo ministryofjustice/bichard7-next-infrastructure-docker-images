@@ -15,10 +15,10 @@ USER root
 
 COPY ./scripts /tmp
 
-RUN bash /tmp/install_packages.sh
-RUN bash /tmp/install_terraform.sh
-RUN bash /tmp/install_nodejs.sh
-RUN rm -rf /var/log/* && \
+RUN bash /tmp/install_packages.sh && \
+    bash /tmp/install_terraform.sh && \
+    bash /tmp/install_nodejs.sh && \
+    rm -rf /var/log/* && \
     dnf clean all && \
     rm -rf /var/cache/dnf && \
     rm -rf /tmp/*.zip && \
