@@ -21,6 +21,15 @@ jobs:
       - checkout
       - run: sudo bash scripts/install_goss.sh
       - run: make build-al2023
+  build_conductor_image:
+    machine:
+      image: ubuntu-2204:current
+      docker_layer_caching: true
+    resource_class: xlarge
+    steps:
+      - checkout
+      - run: sudo bash scripts/install_goss.sh
+      - run: make Conductor
   test_conductor:
     machine:
       image: ubuntu-2204:current
