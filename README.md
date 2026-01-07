@@ -4,7 +4,7 @@ Docker image builds for the Bichard7 project
 
 -   [Codebuild Base](./Codebuild_Base/Dockerfile) - The image used for Codebuild (based on Amazon Linux 2 as it supports OpenVPN)
 -   [Amazon Linux 2023 Base](./Amazon_Linux_2023_Base/Dockerfile) - Amazon Linux 2023 with patches and some base software installed
-    -   [Codebuild Base 2023](./Codebuild_2023_Base/Dockerfile) - The image (not currently due to OpenVPN issues) used for Codebuild
+    -   [Codebuild Base 2023](./Codebuild_2023_Base/Dockerfile)
     -   [Conductor](./Conductor/Dockerfile) - The Conductor image
     -   [Nginx Auth Proxy](./Nginx_Auth_Proxy/Dockerfile) - The front end proxy for Bichard
     -   [Postfix](./Postfix/Dockerfile) - Postfix Mail Server
