@@ -41,6 +41,7 @@ else
 		-e AWS_REGION=eu-west-2 \
 		-e AWS_SECRET_ACCESS_KEY=FAKE \
     	-e CONDUCTOR_EVENTQUEUES_SQS_ENDPOINT=http://goss-localstack:4566 \
+    	-e GOSS_FMT=documentation \
 		$(image)
 	docker rm -f goss-localstack || true
 	docker rm -f goss-postgres || true
