@@ -233,7 +233,7 @@ location /bichard-ui/login.jsp {
 location /elb-status {
     limit_except GET POST { deny all; }
     include /etc/nginx/includes/headers.conf;
-    access_log   off;
+    access_log   /dev/null;
     return       200;
     add_header   Content-Type text/plain;
     proxy_cookie_flags ~ httponly samesite=strict;
