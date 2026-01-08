@@ -21,15 +21,6 @@ jobs:
       - checkout
       - run: sudo bash scripts/install_goss.sh
       - run: make build-al2023
-  build_conductor_image:
-    machine:
-      image: ubuntu-2204:current
-      docker_layer_caching: true
-    resource_class: xlarge
-    steps:
-      - checkout
-      - run: sudo bash scripts/install_goss.sh
-      - run: make Conductor
   test_conductor:
     machine:
       image: ubuntu-2204:current
@@ -74,6 +65,12 @@ jobs:
             PHASE_3_QUEUE_NAME: TEST_PHASE3_QUEUE
           command: bash .circleci/scripts/run-infrastructure.sh conductor all-build-worker
       - run:
+          name: Run Conductor goss tests
+          working_directory: ~/Conductor
+          environment:
+            SKIP_GOSS: false
+          command: make goss
+      - run:
           name: Test the workflows
           working_directory: ~/bichard7-next-core
           command: nvm use && npm run -w packages/conductor test
@@ -84,5 +81,4 @@ workflows:
     jobs:
       - build_amazon_linux_2_images
       - build_amazon_linux_2023_images
-      - build_conductor_image
       - test_conductor
