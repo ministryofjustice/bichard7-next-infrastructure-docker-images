@@ -4,6 +4,8 @@ port:
     listening: true
   tcp:5000:
     listening: true
+  tcp6:8080:
+    listening: true
 process:
   java:
     running: true
