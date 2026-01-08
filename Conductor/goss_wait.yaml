@@ -9,6 +9,3 @@ port:
 process:
   java:
     running: true
-http:
-  http://localhost:8080/health:
-    status: 200
