@@ -12,5 +12,3 @@ process:
 http:
   http://localhost:8080/health:
     status: 200
-  http://bichard:password@localhost:4000/health:
-    status: 200
