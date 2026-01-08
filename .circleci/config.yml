@@ -31,8 +31,17 @@ jobs:
     steps:
       - checkout
       - run:
+          name: Install goss
+          command: sudo bash scripts/install_goss.sh
+      - run:
           name: Build Conductor image
           command: make Conductor
+      - run:
+          name: Run Conductor goss tests
+          working_directory: ~/Conductor
+          environment:
+            SKIP_GOSS: false
+          command: make goss
       - run:
           name: Build Nodejs Nginx Supervisord images
           command: make Nginx_NodeJS_20_2023_Supervisord
@@ -64,13 +73,6 @@ jobs:
             PHASE_2_QUEUE_NAME: TEST_PHASE2_QUEUE
             PHASE_3_QUEUE_NAME: TEST_PHASE3_QUEUE
           command: bash .circleci/scripts/run-infrastructure.sh conductor all-build-worker
-      - run: sudo bash scripts/install_goss.sh
-      - run:
-          name: Run Conductor goss tests
-          working_directory: ~/Conductor
-          environment:
-            SKIP_GOSS: false
-          command: make goss
       - run:
           name: Test the workflows
           working_directory: ~/bichard7-next-core
