@@ -35,13 +35,9 @@ jobs:
           command: sudo bash scripts/install_goss.sh
       - run:
           name: Build Conductor image
-          command: make Conductor
-      - run:
-          name: Run Conductor goss tests
-          working_directory: ~/Conductor
           environment:
             SKIP_GOSS: false
-          command: make goss
+          command: make Conductor
       - run:
           name: Build Nodejs Nginx Supervisord images
           command: make Nginx_NodeJS_20_2023_Supervisord
