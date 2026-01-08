@@ -25,7 +25,7 @@ else
 	docker run --net goss-net --name goss-localstack \
 		-e SERVICES=s3,sqs,dynamodb \
 		-e AWS_DEFAULT_REGION=eu-west-2 \
-		-e HOSTNAME_EXTERNAL=goss-localstack \
+		-e LOCALSTACK_HOST=goss-localstack \
 		-e SQS_ENDPOINT_STRATEGY=path \
 		-d localstack/localstack
 	docker run --net goss-net --name goss-postgres -e POSTGRES_PASSWORD=password -d postgres
