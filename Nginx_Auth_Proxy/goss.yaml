@@ -2,21 +2,21 @@
 file:
   /certs:
     exists: true
-    owner: root
-    group: root
+    owner: appuser
+    group: appuser
     filetype: directory
     contains: []
   /certs/server.crt:
     exists: true
-    owner: root
-    group: root
+    owner: appuser
+    group: appuser
     size: 2378
     filetype: file
     contains: []
   /certs/server.key:
     exists: true
-    owner: root
-    group: root
+    owner: appuser
+    group: appuser
     filetype: file
     size:
       and:
@@ -25,8 +25,8 @@ file:
     contains: []
   /etc/nginx/nginx.conf:
     exists: true
-    owner: root
-    group: root
+    owner: appuser
+    group: appuser
     filetype: file
     contains: []
   /etc/nginx/includes/bichard.http.conf:
@@ -50,18 +50,19 @@ file:
   /etc/passwd:
     exists: true
     mode: "0644"
-    size: 901
     owner: root
     group: root
     filetype: file
     contains: []
   /etc/supervisord.conf:
     exists: true
-    size: 801
     owner: root
     group: root
     filetype: file
     contains: []
+  /tmp:
+    exists: true
+    filetype: directory
   /tmp/openssl.cnf:
     exists: false
     contains: []
@@ -85,8 +86,6 @@ user:
     shell: /sbin/nologin
   nginx:
     exists: true
-    uid: 998
-    gid: 998
     groups:
       - nginx
     home: /var/lib/nginx
@@ -107,6 +106,18 @@ user:
       - systemd-network
     home: /
     shell: /usr/sbin/nologin
+  appuser:
+    exists: true
+    groups:
+      - appuser
+    shell: /bin/bash
+    home: /home/appuser
 process:
   supervisord:
     running: true
+command:
+  check_running_user:
+    exec: "whoami"
+    exit-status: 0
+    stdout:
+      - "root"

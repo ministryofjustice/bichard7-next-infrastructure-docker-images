@@ -6,7 +6,7 @@ server {
     ssl_ciphers           HIGH:!aNULL:!MD5;
 
     auth_basic           "Administrator’s Area";
-    auth_basic_user_file /.htpasswd;
+    auth_basic_user_file /etc/nginx/.htpasswd;
 
     resolver $CJSE_NGINX_DNS_RESOLVER;
 

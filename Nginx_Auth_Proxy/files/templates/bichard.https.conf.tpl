@@ -249,7 +249,7 @@ location /elb-status {
     limit_except GET POST { deny all; }
     add_header  Strict-Transport-Security "max-age=31536000; includeSubDomains" always;
     include /etc/nginx/includes/headers.conf;
-    access_log   off;
+    access_log   /dev/null;
     return       200;
     add_header   Content-Type text/plain;
     proxy_cookie_flags ~ httponly secure samesite=strict;

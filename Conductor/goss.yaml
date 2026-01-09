@@ -2,57 +2,72 @@
 file:
   /app/config/config.properties:
     exists: true
-    owner: root
-    group: root
+    owner: appuser
+    group: appuser
     filetype: file
     contains: []
   /app/libs/conductor-server.jar:
     exists: true
-    owner: root
-    group: root
+    owner: appuser
+    group: appuser
     filetype: file
     contains: []
   /etc/nginx/nginx.conf:
     exists: true
-    owner: root
-    group: root
+    owner: appuser
+    group: appuser
     filetype: file
     contains: []
   /etc/nginx/conf.d/conductor.https.conf:
     exists: true
-    owner: root
-    group: root
+    owner: appuser
+    group: appuser
     filetype: file
     contains: []
   /etc/nginx/conf.d/conductor.http.conf:
     exists: true
-    owner: root
-    group: root
+    owner: appuser
+    group: appuser
     filetype: file
     contains: []
+  /var/log/nginx:
+    exists: true
+    filetype: directory
+    owner: appuser
+    group: appuser
+  /var/lib/nginx:
+    exists: true
+    filetype: directory
+    owner: appuser
+    group: appuser
   /etc/supervisord.conf:
     exists: true
     owner: root
     group: root
     filetype: file
     contains: []
+  /var/log/supervisor:
+    exists: true
+    filetype: directory
+    owner: appuser
+    group: appuser
   /certs:
     exists: true
-    owner: root
-    group: root
+    owner: appuser
+    group: appuser
     filetype: directory
     contains: []
   /certs/server.crt:
     exists: true
-    owner: root
-    group: root
+    owner: appuser
+    group: appuser
     size: 2394
     filetype: file
     contains: []
   /certs/server.key:
     exists: true
-    owner: root
-    group: root
+    owner: appuser
+    group: appuser
     filetype: file
     size:
       and:
@@ -62,11 +77,13 @@ file:
   /etc/passwd:
     exists: true
     mode: "0644"
-    size: 901
     owner: root
     group: root
     filetype: file
     contains: []
+  /tmp:
+    exists: true
+    filetype: directory
   /tmp/openssl.cnf:
     exists: false
     contains: []
@@ -75,7 +92,7 @@ port:
     listening: true
   tcp:5000:
     listening: true
-  tcp:8080:
+  tcp6:8080:
     listening: true
 process:
   nginx:
@@ -85,11 +102,16 @@ process:
   java:
     running: true
 http:
-  http://localhost:8080/health:
+  http://127.0.0.1:8080/health:
     status: 200
-  http://bichard:password@localhost:4000/health:
+  http://bichard:password@127.0.0.1:4000/health:
     status: 200
 command:
+  check_running_user:
+    exec: "whoami"
+    exit-status: 0
+    stdout:
+      - "appuser"
   java --version:
     exit-status: 0
     stdout:
@@ -111,8 +133,6 @@ user:
     shell: /sbin/nologin
   nginx:
     exists: true
-    uid: 998
-    gid: 998
     groups:
       - nginx
     home: /var/lib/nginx
@@ -133,3 +153,9 @@ user:
       - systemd-network
     home: /
     shell: /usr/sbin/nologin
+  appuser:
+    exists: true
+    groups:
+      - appuser
+    shell: /bin/bash
+    home: /home/appuser

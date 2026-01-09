@@ -56,3 +56,9 @@ process:
     running: true
   supervisord:
     running: true
+command:
+  check_running_user:
+    exec: "whoami"
+    exit-status: 0
+    stdout:
+      - "root"

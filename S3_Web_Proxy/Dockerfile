@@ -1,14 +1,18 @@
 ARG BUILD_IMAGE="nginx-nodejs-20-2023-supervisord"
 FROM ${BUILD_IMAGE}
+
 LABEL maintainer="CJSE"
 
 COPY scripts/run_nginx.sh /bin/run_nginx
 COPY scripts/credentials.sh /usr/bin/credentials
 
 ARG NODE_DIR="/opt/s3-server"
-ARG NODE_USER="runner"
+ARG NODE_USER="node"
+
+USER root
 
 COPY s3-server ${NODE_DIR}
+
 RUN yum install -y \
     cronie \
     git && \
@@ -18,25 +22,32 @@ RUN yum install -y \
     chmod +x /bin/credentials && \
     yum clean all && \
     rm -rf /var/cache/yum && \
-    useradd -d ${NODE_DIR} -N -r -s /bin/false ${NODE_USER} && \
     mkdir -p ${NODE_DIR} && \
     chown -R ${NODE_USER} ${NODE_DIR}
 
-USER root
 RUN npm i -g npm-check-updates
 
-USER runner
+USER ${NODE_USER}
+
 WORKDIR ${NODE_DIR}
-RUN ncu -u && npm i
 
 # hadolint ignore=DL3002
+RUN ncu -u && npm i
+
 USER root
 RUN npm link
 
+# Use root for now so we can run both sets of ports - will go back to root when we remove 80/443
+#USER ${NODE_USER}
+
 WORKDIR /
 
-EXPOSE     80
-EXPOSE     443
+# Old ports - will remove later to avoid downtime
+EXPOSE 80
+EXPOSE 443
+
+EXPOSE 8080
+EXPOSE 8443
 
 COPY conf/nginx.conf /etc/nginx/nginx.conf
 COPY conf/supervisord.conf /etc/supervisord.conf

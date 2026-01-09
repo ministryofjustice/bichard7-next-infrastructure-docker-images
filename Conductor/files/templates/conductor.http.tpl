@@ -2,7 +2,7 @@ server {
     listen                4000;
 
     auth_basic           "Administrator’s Area";
-    auth_basic_user_file /.htpasswd;
+    auth_basic_user_file /etc/nginx/.htpasswd;
 
     resolver $CJSE_NGINX_DNS_RESOLVER;
 
@@ -21,4 +21,3 @@ server {
         proxy_redirect off;
     }
 }
-   

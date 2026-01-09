@@ -2,7 +2,6 @@ file:
   /etc/passwd:
     exists: true
     mode: "0644"
-    size: 839
     owner: root
     group: root
     filetype: file
@@ -16,3 +15,35 @@ user:
     - nobody
     home: /
     shell: /sbin/nologin
+  appuser:
+    exists: true
+    groups:
+      - appuser
+    shell: /bin/bash
+    home: /home/appuser
+command:
+  check_running_user:
+    exec: "whoami"
+    exit-status: 0
+    stdout:
+      - "appuser"
+  check_pip_version:
+    exec: "pip --version"
+    exit-status: 0
+package:
+  gzip:
+    installed: true
+  tar:
+    installed: true
+  unzip:
+    installed: true
+  openssl:
+    installed: true
+  shadow-utils:
+    installed: true
+  xz:
+    installed: true
+  wget:
+    installed: true
+  gnupg2:
+    installed: true

@@ -45,28 +45,30 @@ ARG CONDUCTOR_VERSION
 LABEL maintainer="CJSE"
 LABEL conductor_version=$CONDUCTOR_VERSION
 
+USER root
+
 COPY files/openssl.cnf /tmp/openssl.cnf
 
 RUN mkdir -p /certs /var/log/supervisor && \
-  yum install -y nginx httpd-tools gettext && \
-  yum clean all && \
-  rm -rf /var/cache/yum && \
-  pip install supervisor && \
-  openssl req -x509 -nodes -days 730 -newkey rsa:4096 \
-  -out /certs/server.crt -keyout /certs/server.key \
-  -config /tmp/openssl.cnf -extensions 'v3_req' && \
-  rm -rf /tmp/openssl.cnf
+    yum install -y nginx httpd-tools gettext && \
+    yum clean all && \
+    rm -rf /var/cache/yum && \
+    pip install supervisor && \
+    openssl req -x509 -nodes -days 730 -newkey rsa:4096 \
+    -out /certs/server.crt -keyout /certs/server.key \
+    -config /tmp/openssl.cnf -extensions 'v3_req' && \
+    rm -rf /tmp/openssl.cnf
 
 # Make app folders
 RUN mkdir -p /app/config /app/logs /app/libs
 
 # Install Java
 RUN dnf update && \
-  dnf install -y java-17-amazon-corretto && \
-  dnf clean all
+    dnf install -y java-17-amazon-corretto && \
+    dnf clean all
 
 # Copy the compiled output to new image
-COPY --from=builder /conductor/server/build/libs/*boot*.jar /app/libs/conductor-server.jar
+COPY --from=builder --chown=appuser:appuser /conductor/server/build/libs/*boot*.jar /app/libs/conductor-server.jar
 
 # Copy the config files
 COPY files/nginx.conf /etc/nginx/nginx.conf
@@ -74,15 +76,28 @@ COPY files/config.properties /app/config/config.properties
 COPY files/templates /etc/templates/
 COPY files/supervisord.conf /etc/supervisord.conf
 COPY files/process_templates.sh /bin/process_templates.sh
-RUN chmod 755 /bin/process_templates.sh
 
 # Copy compiled UI assets to nginx www directory
 WORKDIR /usr/share/nginx/html
 RUN rm -rf ./*
-COPY --from=ui-builder /conductor/ui/build .
+COPY --from=ui-builder --chown=appuser:appuser /conductor/ui/build .
+
+# Permissions
+RUN chmod 755 /bin/process_templates.sh && \
+    chown -R appuser:appuser \
+    /app \
+    /certs \
+    /var/lib/nginx \
+    /var/log/nginx \
+    /var/log/supervisor \
+    /etc/nginx \
+    /etc/templates \
+    /usr/share/nginx/html
 
 EXPOSE 4000
 EXPOSE 5000
+
+USER appuser
 
 CMD ["supervisord", "-c", "/etc/supervisord.conf"]
 

@@ -4,6 +4,10 @@ port:
     listening: true
   tcp:443:
     listening: true
+  tcp:8080:
+    listening: true
+  tcp:8443:
+    listening: true
 process:
   nginx:
     running: true
