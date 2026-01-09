@@ -49,8 +49,8 @@ file:
   /var/log/supervisor:
     exists: true
     filetype: directory
-    owner: node
-    group: node
+    owner: appuser
+    group: appuser
   /certs:
     exists: true
     owner: appuser
