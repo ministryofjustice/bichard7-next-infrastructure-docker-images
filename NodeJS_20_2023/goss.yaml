@@ -2,7 +2,6 @@ file:
   /etc/passwd:
     exists: true
     mode: "0644"
-    size: 878
     owner: root
     group: root
     filetype: file
@@ -25,6 +24,11 @@ user:
     home: /home/node
     shell: /bin/bash
 command:
+  check_running_user:
+    exec: "whoami"
+    exit-status: 0
+    stdout:
+      - "node"
   node --version:
     exit-status: 0
     stdout:

@@ -35,6 +35,11 @@ user:
     home: /home/node
     shell: /bin/bash
 command:
+  check_running_user:
+    exec: "whoami"
+    exit-status: 0
+    stdout:
+      - "root"
   node --version:
     exit-status: 0
     stdout:

@@ -1,8 +1,8 @@
 ---
 port:
-  tcp:80:
+  tcp:8080:
     listening: true
-  tcp:443:
+  tcp:8443:
     listening: true
 process:
   nginx:
