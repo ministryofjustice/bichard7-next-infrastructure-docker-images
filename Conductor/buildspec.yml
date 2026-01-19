@@ -2,8 +2,6 @@
 version: 0.2
 
 env:
-  variables:
-    GOSS_RETRY_TIMEOUT: "120s"
   exported-variables:
     - CONDUCTOR_IMAGE_HASH
 
