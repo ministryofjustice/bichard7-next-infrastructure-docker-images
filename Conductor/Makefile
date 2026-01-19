@@ -29,7 +29,7 @@ else
 		-e SQS_ENDPOINT_STRATEGY=path \
 		-d localstack/localstack
 	docker run --net goss-net --name goss-postgres -e POSTGRES_PASSWORD=password -d postgres
-	dgoss run \
+	GOSS_WAIT_OPTS="-r 120s -s 1s" dgoss run \
 		--net goss-net \
 		-e CJSE_CONDUCTOR_UI_USERNAME=bichard \
 		-e CJSE_CONDUCTOR_UI_PASSWORD=password \
