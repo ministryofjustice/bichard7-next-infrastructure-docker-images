@@ -2,21 +2,20 @@
 file:
   /certs:
     exists: true
-    owner: root
-    group: root
+    owner: node
+    group: node
     filetype: directory
     contains: []
   /certs/server.crt:
     exists: true
-    owner: root
-    group: root
-    size: 2378
+    owner: node
+    group: node
     filetype: file
     contains: []
   /certs/server.key:
     exists: true
-    owner: root
-    group: root
+    owner: node
+    group: node
     filetype: file
     size:
       and:
@@ -29,21 +28,37 @@ file:
     group: root
     filetype: file
     contains: []
+  /var/log/nginx:
+    exists: true
+    filetype: directory
+    owner: node
+    group: node
+  /var/lib/nginx:
+    exists: true
+    filetype: directory
+    owner: node
+    group: node
+  /etc/supervisord.conf:
+    exists: true
+    owner: root
+    group: root
+    filetype: file
+    contains: []
+  /var/log/supervisor:
+    exists: true
+    filetype: directory
+    owner: node
+    group: node
   /etc/passwd:
     exists: true
     mode: "0644"
-    size: 940
     owner: root
     group: root
     filetype: file
-    contains: []
-  /etc/supervisord.conf:
+    contains: [ ]
+  /tmp:
     exists: true
-    size: 446
-    owner: root
-    group: root
-    filetype: file
-    contains: []
+    filetype: directory
   /tmp/openssl.cnf:
     exists: false
     contains: []
@@ -53,11 +68,11 @@ package:
   shadow-utils:
     installed: true
 port:
-  tcp:80:
+  tcp:8080:
     listening: true
     ip:
       - 0.0.0.0
-  tcp:443:
+  tcp:8443:
     listening: true
     ip:
       - 0.0.0.0
@@ -72,8 +87,6 @@ user:
     shell: /sbin/nologin
   nginx:
     exists: true
-    uid: 998
-    gid: 998
     groups:
       - nginx
     home: /var/lib/nginx
@@ -107,3 +120,9 @@ process:
     running: true
   supervisord:
     running: true
+command:
+  check_running_user:
+    exec: "whoami"
+    exit-status: 0
+    stdout:
+      - "node"

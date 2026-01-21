@@ -12,6 +12,8 @@ COPY scripts/docker-entrypoint.sh /usr/local/bin/
 
 WORKDIR /tmp
 
+USER root
+
 RUN groupadd --gid ${NODE_GUID} ${NODE_USER} && \
     useradd --uid ${NODE_GUID} --gid ${NODE_USER} --shell /bin/bash --create-home ${NODE_USER} && \
     for key in \
@@ -48,3 +50,5 @@ RUN groupadd --gid ${NODE_GUID} ${NODE_USER} && \
     chmod +x /usr/local/bin/docker-entrypoint.sh
 
 WORKDIR /
+
+USER ${NODE_USER}

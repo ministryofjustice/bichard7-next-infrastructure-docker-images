@@ -2,21 +2,21 @@
 file:
   /certs:
     exists: true
-    owner: root
-    group: root
+    owner: node
+    group: node
     filetype: directory
     contains: []
   /certs/server.crt:
     exists: true
-    owner: root
-    group: root
+    owner: node
+    group: node
     size: 2378
     filetype: file
     contains: []
   /certs/server.key:
     exists: true
-    owner: root
-    group: root
+    owner: node
+    group: node
     filetype: file
     size:
       and:
@@ -28,17 +28,35 @@ file:
     owner: root
     group: root
     filetype: file
+  /var/log/nginx:
+    exists: true
+    filetype: directory
+    owner: node
+    group: node
+  /var/lib/nginx:
+    exists: true
+    filetype: directory
+    owner: node
+    group: node
+  /etc/supervisord.conf:
+    exists: true
+    owner: root
+    group: root
+    filetype: file
+  /var/log/supervisor:
+    exists: true
+    filetype: directory
+    owner: node
+    group: node
   /etc/passwd:
     exists: true
     mode: "0644"
     owner: root
     group: root
     filetype: file
-  /etc/supervisord.conf:
+  /tmp:
     exists: true
-    owner: root
-    group: root
-    filetype: file
+    filetype: directory
   /tmp/openssl.cnf:
     exists: false
 package:
@@ -61,8 +79,6 @@ user:
     shell: /sbin/nologin
   nginx:
     exists: true
-    uid: 998
-    gid: 998
     groups:
       - nginx
     home: /var/lib/nginx
@@ -83,14 +99,6 @@ user:
       - node
     home: /home/node
     shell: /bin/bash
-  runner:
-    exists: true
-    uid: 997
-    gid: 100
-    groups:
-      - users
-    home: /opt/s3-server
-    shell: /bin/false
   systemd-network:
     exists: true
     uid: 192
@@ -99,4 +107,20 @@ user:
       - systemd-network
     home: /
     shell: /usr/sbin/nologin
-
+process:
+  bash:
+    running: true
+  nginx:
+    running: true
+  node:
+    running: true
+  python:
+    running: false
+  supervisord:
+    running: true
+command:
+  check_running_user:
+    exec: "whoami"
+    exit-status: 0
+    stdout:
+      - "root"

@@ -10,7 +10,7 @@ process:
   java:
     running: true
 http:
-  http://localhost:8080/health:
+  http://127.0.0.1:8080/health:
     status: 200
-  http://bichard:password@localhost:4000/health:
+  http://bichard:password@127.0.0.1:4000/health:
     status: 200

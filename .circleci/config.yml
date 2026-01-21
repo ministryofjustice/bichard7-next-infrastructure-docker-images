@@ -31,7 +31,12 @@ jobs:
     steps:
       - checkout
       - run:
+          name: Install goss
+          command: sudo bash scripts/install_goss.sh
+      - run:
           name: Build Conductor image
+          environment:
+            SKIP_GOSS: false
           command: make Conductor
       - run:
           name: Build Nodejs Nginx Supervisord images

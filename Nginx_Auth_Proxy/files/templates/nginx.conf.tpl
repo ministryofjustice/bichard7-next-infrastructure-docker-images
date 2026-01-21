@@ -1,6 +1,5 @@
-user nginx;
 worker_processes auto;
-pid /run/nginx.pid;
+pid /tmp/nginx.pid;
 include /etc/nginx/modules-enabled/*.conf;
 
 events {
@@ -50,10 +49,24 @@ http {
     }
 
     server {
+        listen                          $CJSE_NGINX_PORT_HTTPS_OLD ssl;
+        ssl_certificate                 /certs/server.crt;
+        ssl_certificate_key             /certs/server.key;
+
+        include /etc/nginx/includes/bichard.https.conf;
+    }
+
+    server {
         listen        $CJSE_NGINX_PORT_HTTP default_server;
         server_name   _;
 
         include /etc/nginx/includes/bichard.http.conf;
     }
-    
+
+    server {
+        listen        $CJSE_NGINX_PORT_HTTP_OLD default_server;
+        server_name   _;
+
+        include /etc/nginx/includes/bichard.http.conf;
+    }
 }
