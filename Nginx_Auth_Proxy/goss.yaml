@@ -31,8 +31,8 @@ file:
     contains: []
   /etc/nginx/includes/bichard.http.conf:
     exists: true
-    owner: root
-    group: root
+    owner: appuser
+    group: appuser
     filetype: file
     contains:
       - "resolver 127.0.0.11;"
@@ -43,8 +43,8 @@ file:
       - 'set $staticservice "localhost/elb-status";'
   /etc/nginx/includes/bichard.https.conf:
     exists: true
-    owner: root
-    group: root
+    owner: appuser
+    group: appuser
     filetype: file
     contains: []
   /etc/passwd:
@@ -120,4 +120,4 @@ command:
     exec: "whoami"
     exit-status: 0
     stdout:
-      - "root"
+      - "appuser"

@@ -123,4 +123,4 @@ command:
     exec: "whoami"
     exit-status: 0
     stdout:
-      - "root"
+      - "node"
