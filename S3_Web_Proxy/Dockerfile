@@ -37,7 +37,6 @@ RUN ncu -u && npm i
 USER root
 RUN npm link
 
-# Use root for now so we can run both sets of ports - will go back to root when we remove 80/443
 USER ${NODE_USER}
 
 WORKDIR /
