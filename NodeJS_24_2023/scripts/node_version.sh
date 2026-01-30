@@ -1,0 +1,1 @@
+export NODE_VERSION="24.11.1"

@@ -52,3 +52,18 @@ If you don't have [goss](https://goss.rocks/) installed and want to use it, use 
 cd bichard7-next-infrastructure-docker-images
 sh ./scripts/install_goss.sh
 ```
+
+## Update Node
+
+- Go to https://github.com/nodejs/release-keys/ get the "Primary GPG keys for Node.js Releasers (some Releasers sign with subkeys):"
+- For example, in `NodeJS_XX_20XX` folder
+    - Update the PGP Keys in the loop
+    - Set the `NODE_VERSION` to what you it to be
+    - Update `NODE_VERSION` in the `scripts/node_version.sh`
+
+Once you have done the above, go to these folders and make the changes to reflect the correct node version:
+
+- Codebuild_Base
+- Codebuild_2023_Base
+- Nginx_NodeJS_24_2023_Supervisord
+- NodeJS_24_2023

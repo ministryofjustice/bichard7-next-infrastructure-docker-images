@@ -1,10 +1,10 @@
 ---
 port:
-  tcp:8080:
+  tcp:80:
     listening: true
     ip:
       - 0.0.0.0
-  tcp:8443:
+  tcp:443:
     listening: true
     ip:
       - 0.0.0.0
@@ -21,10 +21,7 @@ process:
     running: true
   nginx:
     running: true
-  node:
-    running: true
   python:
     running: false
   supervisord:
     running: true
-
