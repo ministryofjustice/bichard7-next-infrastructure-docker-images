@@ -4,7 +4,7 @@ NGINX_CONTAINERS:= Nginx_Supervisord Nginx_Auth_Proxy Nginx_Java_Supervisord S3_
 AL2_IMAGES:= Codebuild_Base
 AL2023_IMAGES:= Codebuild_2023_Base Nginx_NodeJS_20_2023_Supervisord NodeJS_20_2023 S3_Web_Proxy Nginx_Auth_Proxy Postfix
 
-.PHONY: $(BASE_CONTAINERS) $(NGINX_CONTAINERS)
+.PHONY: $(BASE_CONTAINERS) $(NGINX_CONTAINERS) Liquibase
 
 build-base: $(BASE_CONTAINERS)
 build-nginx: $(NGINX_CONTAINERS)
@@ -38,3 +38,6 @@ Nginx_NodeJS_20_2023_Supervisord: NodeJS_20_2023
 Codebuild_2023_Base:
 	PLATFORM=linux/amd64 $(MAKE) -C Amazon_Linux_2023_Base
 	$(MAKE) -C Codebuild_2023_Base
+
+Liquibase:
+	$(MAKE) -C Liquibase

@@ -1,0 +1,6 @@
+---
+command:
+  # Check that the liquibase image has the expected postgresql driver in place
+  # the regular file check doesn't work for wildcards, and adding the specific version will be brittle
+  'test -f /liquibase/lib/postgresql-*.jar':
+    exit-status: 0

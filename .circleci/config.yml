@@ -73,6 +73,15 @@ jobs:
           name: Test the workflows
           working_directory: ~/bichard7-next-core
           command: nvm use && npm run -w packages/conductor test
+  test_liquibase:
+    machine:
+      image: ubuntu-2204:current
+      docker_layer_caching: true
+    resource_class: large
+    steps:
+      - checkout
+      - run: sudo bash scripts/install_goss.sh
+      - run: make Liquibase
 
 # Orchestrate our job run sequence
 workflows:
@@ -81,3 +90,4 @@ workflows:
       - build_amazon_linux_2_images
       - build_amazon_linux_2023_images
       - test_conductor
+      - test_liquibase
