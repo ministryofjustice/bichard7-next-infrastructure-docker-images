@@ -1,0 +1,11 @@
+---
+
+version: 0.2
+
+phases:
+  build:
+    commands:
+      - set -ev
+      - cd Liquibase
+      - /bin/bash ./scripts/build.sh
+...
