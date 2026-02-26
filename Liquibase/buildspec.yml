@@ -7,5 +7,5 @@ phases:
     commands:
       - set -ev
       - cd Liquibase
-      - /bin/bash ./scripts/build.sh
+      - /bin/bash ./scripts/build_docker.sh
 ...
