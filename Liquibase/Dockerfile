@@ -4,3 +4,7 @@ FROM ${BUILD_IMAGE}
 LABEL maintainer="CJSE"
 
 RUN lpm add postgresql --global
+
+USER root
+RUN rm -rf /liquibase/bin/lpm 
+USER liquibase
