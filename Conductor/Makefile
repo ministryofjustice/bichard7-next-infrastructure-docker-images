@@ -27,7 +27,7 @@ else
 		-e AWS_DEFAULT_REGION=eu-west-2 \
 		-e LOCALSTACK_HOST=goss-localstack \
 		-e SQS_ENDPOINT_STRATEGY=path \
-		-d localstack/localstack
+		-d localstack/localstack:4.7.0
 	docker run --net goss-net --name goss-postgres -e POSTGRES_PASSWORD=password -d postgres
 	GOSS_WAIT_OPTS="-r 120s -s 3s" dgoss run \
 		--net goss-net \
