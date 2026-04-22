@@ -62,3 +62,8 @@ command:
     exit-status: 0
     stdout:
       - "root"
+  check_timezone:
+    exec: "date +%Z"
+    exit-status: 0
+    stdout:
+      - /^(BST|GMT)$/

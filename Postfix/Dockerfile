@@ -7,6 +7,10 @@ ARG CONFD_CHECKSUM="255d2559f3824dd64df059bdc533fd6b697c070db603c76aaf8d1d5e6b0c
 # We need to run as root for Postfix to work
 USER root
 
+RUN yum install -y tzdata
+
+ENV TZ=Europe/London
+
 RUN yum install -y postfix cyrus-sasl rsyslog s-nail && \
     pip install supervisor && \
     mkdir -p /var/log/supervisor && \
