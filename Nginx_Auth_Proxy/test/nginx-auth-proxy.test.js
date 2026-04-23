@@ -64,7 +64,7 @@ describe("Testing Nginx config", () => {
   const routes = [
     { path: "/bichard-ui/x", route: "bichard", auth: true },
     { path: "/reports/x", route: "static", auth: true, verbs: ["GET"] },
-    { path: "/help/x", route: "static", auth: false, verbs: ["GET"] },
+    { path: "/help/x", route: "static", auth: false, x: ["GET"] },
     { path: "/users/x", route: "user", auth: true },
     { path: "/bichard/x", route: "ui", auth: true },
     { path: "/users/login", route: "user", auth: false },
@@ -333,7 +333,7 @@ describe("Testing Nginx config", () => {
             .get(destPath)
             .mockImplementationOnce((ctx) => {
               ctx.status = 200;
-              if (path === "/bichard/x") {
+              if (/\/bichard\/*/.test(path)) {
                 ctx.set(
                   "content-security-policy",
                   CONTENT_SECURITY_POLICIES.ui
@@ -360,7 +360,7 @@ describe("Testing Nginx config", () => {
             );
           });
 
-          if (path === "/bichard/x") {
+          if (/\/bichard\/*/.test(path)) {
             expect(actualHeaders["content-security-policy"]).toEqual(
               CONTENT_SECURITY_POLICIES.ui
             );
