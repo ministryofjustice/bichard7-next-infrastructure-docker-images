@@ -64,7 +64,7 @@ describe("Testing Nginx config", () => {
   const routes = [
     { path: "/bichard-ui/x", route: "bichard", auth: true },
     { path: "/reports/x", route: "static", auth: true, verbs: ["GET"] },
-    { path: "/help/x", route: "static", auth: false, x: ["GET"] },
+    { path: "/help/x", route: "static", auth: false, verbs: ["GET"] },
     { path: "/users/x", route: "user", auth: true },
     { path: "/bichard/x", route: "ui", auth: true },
     { path: "/users/login", route: "user", auth: false },
@@ -81,7 +81,7 @@ describe("Testing Nginx config", () => {
     { path: "/bichard-ui/css/style.css", route: "bichard", auth: false, errorsIntercepted: false },
     { path: "/bichard-backend/Health", route: "backend", dest: "/bichard-ui/Health", auth: false, errorsIntercepted: false },
     { path: "/bichard-backend/Connectivity", route: "backend", dest: "/bichard-ui/Connectivity", auth: false, errorsIntercepted: false },
-    { path: "/bichard/connectivity", route: "ui", auth: false },
+    { path: "/bichard/connectivity", route: "ui", auth: false, verbs: ["GET"] },
   ];
 
   const defaultHeaders = {
