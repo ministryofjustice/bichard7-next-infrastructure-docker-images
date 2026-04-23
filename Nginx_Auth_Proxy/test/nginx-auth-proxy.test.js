@@ -81,7 +81,7 @@ describe("Testing Nginx config", () => {
     { path: "/bichard-ui/css/style.css", route: "bichard", auth: false, errorsIntercepted: false },
     { path: "/bichard-backend/Health", route: "backend", dest: "/bichard-ui/Health", auth: false, errorsIntercepted: false },
     { path: "/bichard-backend/Connectivity", route: "backend", dest: "/bichard-ui/Connectivity", auth: false, errorsIntercepted: false },
-    { path: "/bichard/connectivity", route: "ui", auth: false, errorsIntercepted: false },
+    { path: "/bichard/connectivity", route: "ui", auth: false },
   ];
 
   const defaultHeaders = {
@@ -206,7 +206,7 @@ describe("Testing Nginx config", () => {
             (!route.verbs || route.verbs.includes("POST"))
         )
       )(
-        "It should returns 403 page when upstream returns 403 without 'Invalid CSRF-token' message",
+        "It should returns 403 page when upstream returns 403 without 'Invalid CSRF-token' message: $path",
         async ({ path, route, auth, dest }) => {
           if (auth) {
             const mockedResponseFn = (ctx) => {
