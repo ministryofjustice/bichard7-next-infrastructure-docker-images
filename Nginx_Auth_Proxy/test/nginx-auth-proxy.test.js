@@ -333,7 +333,7 @@ describe("Testing Nginx config", () => {
             .get(destPath)
             .mockImplementationOnce((ctx) => {
               ctx.status = 200;
-              if (/\/bichard\/*/.test(path)) {
+              if (/^\/bichard\/.*/.test(path)) {
                 ctx.set(
                   "content-security-policy",
                   CONTENT_SECURITY_POLICIES.ui
@@ -360,7 +360,7 @@ describe("Testing Nginx config", () => {
             );
           });
 
-          if (/\/bichard\/*/.test(path)) {
+          if (/^\/bichard\/.*/.test(path)) {
             expect(actualHeaders["content-security-policy"]).toEqual(
               CONTENT_SECURITY_POLICIES.ui
             );
