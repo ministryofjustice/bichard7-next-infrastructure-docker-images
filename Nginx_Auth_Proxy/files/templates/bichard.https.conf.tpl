@@ -214,7 +214,7 @@ location /bichard/api/connectivity {
     proxy_cookie_flags ~ httponly secure samesite=strict;
     proxy_ssl_server_name on;
     proxy_ssl_verify_depth 2;
-    proxy_intercept_errors on;
+    proxy_intercept_errors off;
 
     # New Bichard User Service sets it's own CSP before it reaches nginx
     proxy_pass_header Content-Security-Policy;
