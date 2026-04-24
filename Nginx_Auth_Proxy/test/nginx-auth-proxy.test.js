@@ -81,7 +81,7 @@ describe("Testing Nginx config", () => {
     { path: "/bichard-ui/css/style.css", route: "bichard", auth: false, errorsIntercepted: false },
     { path: "/bichard-backend/Health", route: "backend", dest: "/bichard-ui/Health", auth: false, errorsIntercepted: false },
     { path: "/bichard-backend/Connectivity", route: "backend", dest: "/bichard-ui/Connectivity", auth: false, errorsIntercepted: false },
-    { path: "/bichard/connectivity", route: "ui", auth: false, verbs: ["GET"] },
+    { path: "/bichard/api/connectivity", route: "ui", auth: false, verbs: ["GET"] },
   ];
 
   const defaultHeaders = {

@@ -203,7 +203,7 @@ location ~ ^/bichard/(assets|govuk_assets|moj_assets|_next/static)(.*)$ {
 }
 
 # Allow access to UI connectivity endpoint without authentication
-location /bichard/connectivity {
+location /bichard/api/connectivity {
     limit_except GET { deny all; }
     add_header  Strict-Transport-Security "max-age=31536000; includeSubDomains" always;
     include /etc/nginx/includes/ui-headers.conf;

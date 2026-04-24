@@ -191,7 +191,7 @@ location ~ ^/bichard/(assets|govuk_assets|moj_assets|_next/static)(.*)$ {
 }
 
 # Allow access to UI connectivity endpoint without authentication
-location /bichard/connectivity {
+location /bichard/api/connectivity {
     limit_except GET { deny all; }
     include /etc/nginx/includes/ui-headers.conf;
 
