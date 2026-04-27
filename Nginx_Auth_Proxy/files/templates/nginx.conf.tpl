@@ -40,6 +40,12 @@ http {
         '"useragent": "$http_user_agent"'
     '}';
 
+    map $request_method $auth_content_length {
+        default  '0';
+        GET      '';
+        HEAD     '';
+    }
+
     server {
         listen                          $CJSE_NGINX_PORT_HTTPS ssl;
         ssl_certificate                 /certs/server.crt;
