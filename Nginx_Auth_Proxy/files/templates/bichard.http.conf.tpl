@@ -190,6 +190,23 @@ location ~ ^/bichard/(assets|govuk_assets|moj_assets|_next/static)(.*)$ {
     proxy_pass_header Content-Security-Policy;
 }
 
+# Allow access to UI connectivity endpoint without authentication
+location /bichard/api/connectivity {
+    limit_except GET { deny all; }
+    include /etc/nginx/includes/ui-headers.conf;
+
+    proxy_pass        https://$ui;
+    proxy_set_header X-Origin http://$host;
+    proxy_ssl_verify  $CJSE_NGINX_PROXYSSLVERIFY;
+    proxy_cookie_flags ~ httponly samesite=strict;
+    proxy_ssl_server_name on;
+    proxy_ssl_verify_depth 2;
+    proxy_intercept_errors off;
+
+    # New Bichard User Service sets it's own CSP before it reaches nginx
+    proxy_pass_header Content-Security-Policy;
+}
+
 # Allow access to error pages without authentication
 location ~ ^/users/(404|403|500)(.*)$ {
     limit_except GET POST PUT { deny all; }
