@@ -63,7 +63,8 @@ location /auth {
     proxy_ssl_verify  $CJSE_NGINX_PROXYSSLVERIFY;
 
     proxy_pass_request_body  off;
-    proxy_set_header  Content-Length '0';
+    proxy_set_header  Content-Length $auth_content_length;
+    proxy_set_header  Transfer-Encoding '';
     proxy_set_header  Referer $request_uri;
     proxy_cookie_flags ~ httponly secure samesite=strict;
     proxy_ssl_server_name on;
