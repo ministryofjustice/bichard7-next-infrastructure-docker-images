@@ -20,6 +20,19 @@ file:
     owner: root
     group: root
     filetype: file
+  /etc/localtime:
+    exists: true
+    owner: root
+    group: root
+    filetype: symlink
+    linked-to: /usr/share/zoneinfo/Europe/London
+  /etc/timezone:
+    exists: true
+    owner: root
+    group: root
+    filetype: file
+    contains:
+      - "Europe/London"
 package:
   cyrus-sasl:
     installed: true
