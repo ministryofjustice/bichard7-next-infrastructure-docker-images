@@ -1,7 +1,7 @@
 ARG BUILD_IMAGE="nginx-nodejs-20-2023-supervisord"
 FROM ${BUILD_IMAGE}
 
-LABEL maintainer="CJSE"
+LABEL org.opencontainers.image.authors="CJSE"
 
 COPY scripts/run_nginx.sh /bin/run_nginx
 COPY scripts/credentials.sh /usr/bin/credentials

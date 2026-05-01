@@ -42,7 +42,7 @@ FROM ${BUILD_IMAGE}
 
 ARG CONDUCTOR_VERSION
 
-LABEL maintainer="CJSE"
+LABEL org.opencontainers.image.authors="CJSE"
 LABEL conductor_version=$CONDUCTOR_VERSION
 
 USER root

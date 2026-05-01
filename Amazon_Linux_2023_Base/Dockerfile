@@ -2,7 +2,7 @@ ARG BUILD_IMAGE="amazonlinux:2023"
 
 FROM ${BUILD_IMAGE}
 
-LABEL maintainer="CJSE"
+LABEL org.opencontainers.image.authors="CJSE"
 ARG DNF_PACKAGES="pip gzip tar unzip openssl shadow-utils xz wget gnupg"
 
 # Install required packages

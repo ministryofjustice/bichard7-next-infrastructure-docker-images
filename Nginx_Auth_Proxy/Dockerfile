@@ -1,7 +1,7 @@
 ARG BUILD_IMAGE="amazon-linux2023-base"
 FROM ${BUILD_IMAGE}
 
-LABEL maintainer="CJSE"
+LABEL org.opencontainers.image.authors="CJSE"
 
 WORKDIR /
 
