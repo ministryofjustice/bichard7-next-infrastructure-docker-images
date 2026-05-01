@@ -1,4 +1,4 @@
-ARG BUILD_IMAGE="public.ecr.aws/amazonlinux/amazonlinux:2"
+ARG BUILD_IMAGE="public.ecr.aws/amazonlinux/amazonlinux:2@sha256:21764b96807ceffc3d99abcc293bdc9cc3cafbfa2334a3f526d8b1a563dffa3f"
 FROM ${BUILD_IMAGE}
 
 ARG TERRAFORM_VERSION="1.8.4"
