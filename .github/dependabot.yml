@@ -1,13 +1,10 @@
-# Basic dependabot.yml file with
-# minimum configuration for two package managers
-
 version: 2
 updates:
-  # Enable version updates for Docker
   - package-ecosystem: "docker"
-    # Look for a `Dockerfile` in the `root` directory
-    directory: "/Amazon_Linux_Base/"
-    # Check for updates once a week
+    directory: "/Amazon_Linux_2023_Base/"
     schedule:
       interval: "daily"
-
+  - package-ecosystem: "docker"
+    directory: "/Liquibase/"
+    schedule:
+      interval: "daily"
