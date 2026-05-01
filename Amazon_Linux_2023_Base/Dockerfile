@@ -1,6 +1,6 @@
-ARG BUILD_IMAGE="amazonlinux:2023"
+ARG BUILD_IMAGE="amazonlinux:2023.11.20260413.0@sha256:ceeab7e010ed03ea155cfbbfd7140672eba5a49e1110b8b4ed35342312c3f21a"
 
-FROM ${BUILD_IMAGE}
+FROM "${BUILD_IMAGE}"
 
 LABEL maintainer="CJSE"
 ARG DNF_PACKAGES="pip gzip tar unzip openssl shadow-utils xz wget gnupg"
