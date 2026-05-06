@@ -1,7 +1,7 @@
 ARG BUILD_IMAGE="nodejs-20-2023"
 FROM ${BUILD_IMAGE}
 
-LABEL maintainer="CJSE"
+LABEL org.opencontainers.image.authors="CJSE"
 
 WORKDIR /
 
