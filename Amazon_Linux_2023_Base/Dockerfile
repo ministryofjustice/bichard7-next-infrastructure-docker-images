@@ -1,6 +1,4 @@
-ARG BUILD_IMAGE="amazonlinux:2023@sha256:ceeab7e010ed03ea155cfbbfd7140672eba5a49e1110b8b4ed35342312c3f21a"
-
-FROM "${BUILD_IMAGE}"
+FROM amazonlinux:2023@sha256:ceeab7e010ed03ea155cfbbfd7140672eba5a49e1110b8b4ed35342312c3f21a
 
 LABEL org.opencontainers.image.authors="CJSE"
 ARG DNF_PACKAGES="pip gzip tar unzip openssl shadow-utils xz wget gnupg"
