@@ -27,6 +27,7 @@ RUN yum-config-manager --enable nginx-mainline && \
 
 RUN yum install -y gettext
 
+RUN rm /etc/nginx/conf.d/default.conf
 COPY files/templates /etc/templates/
 COPY files/supervisord.conf /etc/supervisord.conf
 COPY files/includes /etc/nginx/includes/
