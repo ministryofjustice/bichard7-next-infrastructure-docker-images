@@ -17,3 +17,11 @@ updates:
       interval: "daily"
     cooldown:
       default-days: 3
+    ignore:
+      - dependency-name: "amazonlinux"
+        # only consider digest updates for pinned images
+        update-types:
+          - "version-update:semver-major"
+          - "version-update:semver-minor"
+          - "version-update:semver-patch"
+
