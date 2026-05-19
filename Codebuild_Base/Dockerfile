@@ -1,4 +1,4 @@
-FROM public.ecr.aws/amazonlinux/amazonlinux:2@sha256:18de48aa36400d9665d9aaca271c40dcf0923e0f0bfab21d7afaf41c0ba62245
+FROM public.ecr.aws/amazonlinux/amazonlinux:2@sha256:53c36e786bbe63f21fac81b005149233df0abd1eb0bb13a49308dd03b3e3b1a2
 
 ARG TERRAFORM_VERSION="1.8.4"
 ARG YUM_PACKAGES="python-pip python3-pip gzip tar unzip openssl shadow-utils xz wget gnupg curl jq git openvpn unzip"
