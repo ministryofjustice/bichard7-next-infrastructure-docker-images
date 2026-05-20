@@ -37,13 +37,14 @@ RUN chown -R node:node \
     /var/cache/nginx \
     /etc/nginx
 
+RUN rm /etc/nginx/conf.d/default.conf
+COPY conf/supervisord.conf /etc/supervisord.conf
+COPY conf/nginx.conf /etc/nginx/nginx.conf
+
 EXPOSE 8080
 EXPOSE 8443
 
 WORKDIR /etc/nginx
-
-COPY conf/supervisord.conf /etc/supervisord.conf
-COPY conf/nginx.conf /etc/nginx/nginx.conf
 
 USER node
 
