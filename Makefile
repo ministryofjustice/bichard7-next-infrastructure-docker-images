@@ -1,4 +1,4 @@
-BASE_CONTAINERS:= Amazon_Linux_Base NodeJS Postfix Codebuild_Base Codebuild_2023_Base Amazon_Linux_2023_Base NodeJS_20_2023
+BASE_CONTAINERS:= Amazon_Linux_Base NodeJS Postfix Codebuild_Base Codebuild_2023_Base Amazon_Linux_2023_Base NodeJS_20_2023 NodeJS_24_2023
 NGINX_CONTAINERS:= Nginx_Supervisord Nginx_Auth_Proxy Nginx_Java_Supervisord S3_Web_Proxy Conductor Nginx_NodeJS_20_2023_Supervisord Nginx_NodeJS_24_2023_Supervisord
 
 AL2_IMAGES:= Codebuild_Base
