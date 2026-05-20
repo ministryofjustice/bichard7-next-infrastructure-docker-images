@@ -28,6 +28,8 @@ file:
     group: root
     filetype: file
     contains: []
+  /etc/nginx/conf.d/default.conf:
+    exists: false
   /var/log/nginx:
     exists: true
     filetype: directory
