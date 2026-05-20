@@ -28,12 +28,14 @@ file:
     owner: root
     group: root
     filetype: file
+  /etc/nginx/conf.d/default.conf:
+    exists: false
   /var/log/nginx:
     exists: true
     filetype: directory
     owner: node
     group: node
-  /var/lib/nginx:
+  /var/cache/nginx:
     exists: true
     filetype: directory
     owner: node
@@ -81,7 +83,7 @@ user:
     exists: true
     groups:
       - nginx
-    home: /var/lib/nginx
+    home: /var/cache/nginx
     shell: /sbin/nologin
   nobody:
     exists: true
