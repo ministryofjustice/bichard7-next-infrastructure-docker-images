@@ -9,7 +9,7 @@ Docker image builds for the Bichard7 project
     -   [Nginx Auth Proxy](./Nginx_Auth_Proxy/Dockerfile) - The front end proxy for Bichard
     -   [Postfix](./Postfix/Dockerfile) - Postfix Mail Server
     -   [NodeJS 20 2023](./NodeJS_20_2023/) - Node 20 on Amazon Linux 2023
-        -   [Nginx NodeJS 20 2023 Supervisord](./Nginx_NodeJS_20_2023_Supervisord/) - The above with Nginx and Supervisord installed
+        -   [Nginx Node.js 20 2023 Supervisord](./Nginx_NodeJS_20_2023_Supervisord/) - The above with Nginx and Supervisord installed
             -   [S3 Web Proxy](./S3_Web_Proxy/Dockerfile) - Used to serve files from S3
             -   Used by: [Bichard UI](https://github.com/ministryofjustice/bichard7-next-core/blob/main/packages/ui/Dockerfile)
             -   Used by: [Bichard User Service](https://github.com/ministryofjustice/bichard7-next-core/blob/main/packages/user-service/Dockerfile)
@@ -18,6 +18,9 @@ Docker image builds for the Bichard7 project
         -   Used by: [Audit Log API](https://github.com/ministryofjustice/bichard7-next-audit-logging/blob/main/src/audit-log-api/Dockerfile) - for testing only
         -   Used by: [Event Handler](https://github.com/ministryofjustice/bichard7-next-audit-logging/blob/main/src/event-handler/Dockerfile) - for testing only
         -   Used by: [Message Forwarder](https://github.com/ministryofjustice/bichard7-next-core/blob/main/packages/message-forwarder/Dockerfile)
+    -   [Node.js 24 2023](./NodeJS_24_2023/) - Node 24 on Amazon Linux 2023 (currently testing)
+        -   [Nginx Node.js 24 2023 Supervisord](./Nginx_NodeJS_24_2023_Supervisord/) - The above with Nginx and Supervisord installed
+
 
 **Note:** Beanconnect and the PNC Emulator both use Amazon Linux 2 images directly and do not rely on images from this repository
 
