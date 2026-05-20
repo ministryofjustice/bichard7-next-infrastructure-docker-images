@@ -6,6 +6,7 @@ LABEL org.opencontainers.image.authors="CJSE"
 WORKDIR /
 
 COPY files/openssl.cnf /tmp/openssl.cnf
+COPY files/nginx.repo /etc/yum.repos.d/nginx.repo
 
 USER root
 
