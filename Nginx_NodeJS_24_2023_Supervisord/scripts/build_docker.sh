@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+
+set -e
+
+export readonly REPOSITORY_NAME="nginx-nodejs-24-2023-supervisord"
+export readonly SOURCE_REPOSITORY_NAME="nodejs-24-2023"
+
+/bin/bash ../scripts/build_and_push_image.sh
+
+# Re-instate when S3 Web Proxy is using the new base image
+#aws codebuild start-build --project-name "build-s3-web-proxy" \
+#  --environment-variables-override name=DOCKER_IMAGE_HASH,value="${DOCKER_IMAGE_PREFIX}@${SHA_HASH}",type=PLAINTEXT
+
+# Re-instate when Core images are using the new base image
+#aws codebuild start-build --project-name "build-core-repo-artifacts" \
+#  --environment-variables-override name=DOCKER_IMAGE_HASH,value="${DOCKER_IMAGE_PREFIX}@${SHA_HASH}",type=PLAINTEXT
