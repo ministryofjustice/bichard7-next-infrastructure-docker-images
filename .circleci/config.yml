@@ -70,7 +70,7 @@ commands:
     steps:
       - run:
           name: Load Amazon Linux 2023 image
-          command: docker image load < "images/nodejs-24-2023.tar.gz"
+          command: docker image load < "images/amazon-linux2023-base.tar.gz"
 
   load_node_image:
     steps:
