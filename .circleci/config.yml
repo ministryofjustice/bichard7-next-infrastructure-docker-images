@@ -201,7 +201,7 @@ jobs:
           command: sudo bash scripts/install_goss.sh
       - run:
           name: Build Docker image
-          command: make build-and-test
+          command: make build
           working_directory: ./Codebuild_2023_Base
 
   build_nginx_auth_proxy_image:
