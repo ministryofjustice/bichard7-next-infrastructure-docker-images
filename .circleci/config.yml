@@ -78,6 +78,12 @@ commands:
           paths:
             - /tmp/buildx-cache-<< parameters.image_name >>
 
+  load_conductor_image:
+    steps:
+      - run:
+          name: Load postgres image
+          command: docker image load < "images/conductor.tar.gz"
+
   load_audit_logging_images:
     steps:
       - run:
@@ -143,6 +149,29 @@ jobs:
       - checkout
       - run: sudo bash scripts/install_goss.sh
       - run: make build-al2023
+
+  build_conductor_image:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: medium
+    steps:
+      - checkout
+      - run: sudo apt-get update && sudo apt-get install -y pigz
+      - run:
+          name: Install goss
+          command: sudo bash scripts/install_goss.sh
+      - run:
+          name: Build Conductor image
+          command: make Conductor
+      - run:
+          name: Save Docker image
+          command: |
+            mkdir -p images
+            docker image save "conductor:latest" | pigz > "images/conductor.tar.gz"
+      - persist_to_workspace:
+          root: .
+          paths:
+            - images
 
   build_audit_logging_images:
     machine:
@@ -357,16 +386,9 @@ jobs:
     steps:
       - checkout
       - set_docker_tag
-      - run:
-          name: Install goss
-          command: sudo bash scripts/install_goss.sh
-      - run:
-          name: Build Conductor image
-          environment:
-            SKIP_GOSS: false
-          command: make Conductor
       - attach_workspace:
           at: .
+      - load_conductor_image
       - load_audit_logging_images
       - load_postgres_image
       - load_message_forwarder_image
@@ -413,6 +435,8 @@ workflows:
     jobs:
       - build_amazon_linux_2_images
       - build_amazon_linux_2023_images
+      - build_conductor_image
+
       - build_audit_logging_images
       - build_postgres_image
       - build_message_forwarder_image
@@ -425,6 +449,7 @@ workflows:
 
       - test_conductor:
           requires:
+            - build_conductor_image
             - build_audit_logging_images
             - build_postgres_image
             - build_message_forwarder_image
