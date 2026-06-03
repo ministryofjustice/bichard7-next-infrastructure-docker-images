@@ -223,6 +223,7 @@ jobs:
           dockerfile: ~/bichard7-next-core/packages/message-forwarder/Dockerfile
           cache_key: buildkit-message-forwarder
           image_tag: latest
+          lockfile: ~/bichard7-next-core/package-lock.json
       - run:
           name: Save Docker image
           command: |
@@ -249,6 +250,7 @@ jobs:
           image_name: bichard-worker
           dockerfile: ~/bichard7-next-core/packages/conductor/Dockerfile
           cache_key: buildkit-worker
+          lockfile: ~/bichard7-next-core/package-lock.json
       - run:
           name: Save Docker image
           command: |
@@ -275,6 +277,7 @@ jobs:
           image_name: ui
           dockerfile: ~/bichard7-next-core/packages/ui/Dockerfile
           cache_key: buildkit-ui
+          lockfile: ~/bichard7-next-core/package-lock.json
       - run:
           name: Save Docker image
           command: |
@@ -301,6 +304,7 @@ jobs:
           image_name: api
           dockerfile: ~/bichard7-next-core/packages/api/Dockerfile
           cache_key: buildkit-api
+          lockfile: ~/bichard7-next-core/package-lock.json
       - run:
           name: Save Docker image
           command: |
@@ -327,6 +331,7 @@ jobs:
           image_name: user-service
           dockerfile: ~/bichard7-next-core/packages/user-service/Dockerfile
           cache_key: buildkit-user-service
+          lockfile: ~/bichard7-next-core/package-lock.json
       - run:
           name: Save Docker image
           command: |
