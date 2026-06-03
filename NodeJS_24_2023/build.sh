@@ -10,9 +10,9 @@ ARCH=$(arch)
 echo "Building Node version: ${NODE_VERSION} and for $ARCH"
 
 if [ "$ARCH" = "arm64" ]; then
-  docker build $BUILD_ARGS --build-arg NODE_VERSION=$NODE_VERSION --build-arg ARCH=arm64 -t $IMAGE .
+  docker build $BUILD_ARGS --build-arg NODE_VERSION=$NODE_VERSION --build-arg ARCH=arm64 --build-arg BUILD_IMAGE="${BUILD_IMAGE}" -t $IMAGE .
 else
-  docker build $BUILD_ARGS --build-arg NODE_VERSION=$NODE_VERSION --build-arg ARCH=x64 -t $IMAGE .
+  docker build $BUILD_ARGS --build-arg NODE_VERSION=$NODE_VERSION --build-arg ARCH=x64 --build-arg BUILD_IMAGE="${BUILD_IMAGE}" -t $IMAGE .
 fi
 
 if [ "$SKIP_GOSS" = "true" ]; then

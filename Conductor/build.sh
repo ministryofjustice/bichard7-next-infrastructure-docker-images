@@ -9,4 +9,4 @@ if [ -z "$PLATFORM" ]; then
   PLATFORM=$(arch)
 fi
 
-docker build --build-arg CONDUCTOR_VERSION=$(cat conductor_version) -t $IMAGE .
+docker build --build-arg CONDUCTOR_VERSION=$(cat conductor_version) --build-arg BUILD_IMAGE="${BUILD_IMAGE}" -t $IMAGE .
