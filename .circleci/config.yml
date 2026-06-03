@@ -2,6 +2,12 @@
 version: 2.1
 
 commands:
+  checkout_core:
+    steps:
+      - run:
+          name: Checkout the Core repo
+          command: git clone --depth 1 https://github.com/ministryofjustice/bichard7-next-core.git ~/bichard7-next-core
+
   build_and_cache_image:
     parameters:
       image_name:
@@ -52,6 +58,20 @@ commands:
           paths:
             - /tmp/buildx-cache-<< parameters.image_name >>
 
+  load_audit_logging_images:
+    steps:
+      - run:
+          name: Load audit log api image
+          command: docker image load < "images/audit-log-api.tar.gz"
+      - run:
+          name: Load event handler image
+          command: docker image load < "images/event-handler.tar.gz"
+
+  load_postgres_image:
+    steps:
+      - run:
+          name: Load postgres image
+          command: docker image load < "images/postgres.tar.gz"
 jobs:
   build_amazon_linux_2_images:
     machine:
@@ -109,15 +129,29 @@ jobs:
           root: .
           paths:
             - images
-            -
-  load_audit_logging_images:
+
+  build_postgres_image:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: medium
     steps:
+      - checkout_core
+      - run: sudo apt-get update && sudo apt-get install -y pigz
+      - build_and_cache_image:
+          image_name: bichard-postgres
+          dockerfile: ~/bichard7-next-core/environment/postgres/Dockerfile
+          cache_key: buildkit-postgres
+          image_tag: latest
+          context: ~/bichard7-next-core/environment/postgres
       - run:
-          name: Load audit log api image
-          command: docker image load < "images/audit-log-api.tar.gz"
-      - run:
-          name: Load event handler image
-          command: docker image load < "images/event-handler.tar.gz"
+          name: Save Docker image
+          command: |
+            mkdir -p images
+            docker image save "bichard-postgres:latest" | pigz > "images/postgres.tar.gz"
+      - persist_to_workspace:
+          root: .
+          paths:
+            - images
 
   test_conductor:
     machine:
@@ -140,9 +174,8 @@ jobs:
           name: Build Nodejs Nginx Supervisord images
           command: make Nginx_NodeJS_20_2023_Supervisord
       - load_audit_logging_images
-      - run:
-          name: Checkout the Core repo
-          command: git clone --depth 1 https://github.com/ministryofjustice/bichard7-next-core.git ~/bichard7-next-core
+      - load_postgres_image
+      - checkout_core
       - run:
           working_directory: ~/bichard7-next-core
           command: nvm install
@@ -188,3 +221,9 @@ workflows:
       - test_conductor:
           requires:
             - build_audit_logging_images
+            - build_postgres_image
+#            - build_message_forwarder_image
+#            - build_worker_image
+#            - build_ui_image
+#            - build_user_service_image
+#            - build_api_image
