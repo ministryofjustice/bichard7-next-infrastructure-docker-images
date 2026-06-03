@@ -214,6 +214,51 @@ jobs:
           paths:
             - images
 
+    build_postfix:
+      machine:
+        image: ubuntu-2204:current
+        docker_layer_caching: true
+      resource_class: xlarge
+      steps:
+        - checkout
+        - attach_workspace:
+            at: .
+        - load_amazon_linux_2023_image
+        - run:
+            name: Install goss
+            command: sudo bash scripts/install_goss.sh
+        - run:
+            name: Build Docker image
+            command: make build
+            working_directory: ./Postfix
+
+  build_conductor_image:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: medium
+    steps:
+      - checkout
+      - run: sudo apt-get update && sudo apt-get install -y pigz
+      - attach_workspace:
+          at: .
+      - load_amazon_linux_2023_image
+      - run:
+          name: Install goss
+          command: sudo bash scripts/install_goss.sh
+      - run:
+          name: Build Docker image
+          command: make build
+          working_directory: ./Conductor
+      - run:
+          name: Save Docker image
+          command: |
+            mkdir -p images
+            docker image save "conductor:latest" | pigz > "images/conductor.tar.gz"
+      - persist_to_workspace:
+          root: .
+          paths:
+            - images
+
   build_node_image:
     machine:
       image: ubuntu-2204:current
@@ -270,32 +315,23 @@ jobs:
           paths:
             - images
 
-  build_conductor_image:
+  build_s3_web_proxy_image:
     machine:
       image: ubuntu-2204:current
-    resource_class: medium
+      docker_layer_caching: true
+    resource_class: xlarge
     steps:
       - checkout
-      - run: sudo apt-get update && sudo apt-get install -y pigz
       - attach_workspace:
           at: .
-      - load_amazon_linux_2023_image
+      - load_node_nginx_supervisord_image
       - run:
           name: Install goss
           command: sudo bash scripts/install_goss.sh
       - run:
           name: Build Docker image
           command: make build
-          working_directory: ./Conductor
-      - run:
-          name: Save Docker image
-          command: |
-            mkdir -p images
-            docker image save "conductor:latest" | pigz > "images/conductor.tar.gz"
-      - persist_to_workspace:
-          root: .
-          paths:
-            - images
+          working_directory: ./S3_Web_Proxy
 
   build_audit_logging_images:
     machine:
@@ -578,6 +614,9 @@ workflows:
       - build_nginx_auth_proxy_image:
           requires:
             - build_amazon_linux_2023_image
+      - build_postfix:
+          requires:
+            - build_amazon_linux_2023_image
       - build_conductor_image:
           requires:
             - build_amazon_linux_2023_image
@@ -587,6 +626,9 @@ workflows:
       - build_node_nginx_supervisord_image:
           requires:
             - build_node_image
+      - build_s3_web_proxy_image:
+          requires:
+            - build_node_nginx_supervisord_image
 
       - build_audit_logging_images:
           requires:
