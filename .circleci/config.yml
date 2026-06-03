@@ -169,6 +169,7 @@ jobs:
     resource_class: xlarge
     steps:
       - checkout
+      - set_docker_tag
       - run:
           name: Install goss
           command: sudo bash scripts/install_goss.sh
@@ -180,7 +181,7 @@ jobs:
           name: Save Docker image
           command: |
             mkdir -p images
-            docker image save "amazon-linux2023-base:latest" | pigz > "images/amazon-linux2023-base.tar.gz"
+            docker image save "amazon-linux2023-base:${DOCKER_TAG}" | pigz > "images/amazon-linux2023-base.tar.gz"
       - persist_to_workspace:
           root: .
           paths:
