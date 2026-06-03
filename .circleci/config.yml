@@ -2,6 +2,14 @@
 version: 2.1
 
 commands:
+  set_docker_tag:
+    steps:
+      - run:
+          name: Export dynamic DOCKER_TAG
+          command: |
+            SANITIZED_BRANCH=$(echo "$CIRCLE_BRANCH" | sed 's/[^a-zA-Z0-9_.-]/-/g')
+            echo "export DOCKER_TAG=${SANITIZED_BRANCH:-latest}" >> $BASH_ENV
+
   checkout_core:
     steps:
       - run:
