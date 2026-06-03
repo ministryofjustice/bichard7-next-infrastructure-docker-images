@@ -2,7 +2,7 @@
 
 set -e
 
-IMAGE="amazon-linux2023-base${DOCKER_TAG:-latest}"
+IMAGE="amazon-linux2023-base:${DOCKER_TAG:-latest}"
 
 if [ -n "$PLATFORM" ]; then
   docker build --platform "${PLATFORM}" -t "${IMAGE}" .
