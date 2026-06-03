@@ -166,7 +166,7 @@ jobs:
       - run:
           name: Build Docker image
           command: make build
-          working_directory: ~/Amazon_Linux_2023_Base
+          working_directory: ./Amazon_Linux_2023_Base
       - run:
           name: Save Docker image
           command: |
@@ -188,7 +188,7 @@ jobs:
       - run:
           name: Build Docker image
           command: make build
-          working_directory: ~/NodeJS_24_2023
+          working_directory: ./NodeJS_24_2023
       - run:
           name: Save Docker image
           command: |
@@ -210,7 +210,7 @@ jobs:
       - run:
           name: Build Docker image
           command: make build
-          working_directory: ~/Nginx_NodeJS_24_2023_Supervisord
+          working_directory: ./Nginx_NodeJS_24_2023_Supervisord
       - run:
           name: Save Docker image
           command: |
