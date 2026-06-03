@@ -218,6 +218,7 @@ jobs:
       - attach_workspace:
           at: .
       - load_amazon_linux_2023_image
+      - load_node_image
       - run:
           name: Install goss
           command: sudo bash scripts/install_goss.sh
@@ -638,9 +639,6 @@ workflows:
       - build_codebuild_image:
           requires:
             - build_amazon_linux_2023_image
-      - build_nginx_auth_proxy_image:
-          requires:
-            - build_amazon_linux_2023_image
       - build_postfix:
           requires:
             - build_amazon_linux_2023_image
@@ -650,6 +648,10 @@ workflows:
       - build_node_image:
           requires:
             - build_amazon_linux_2023_image
+      - build_nginx_auth_proxy_image:
+          requires:
+            - build_amazon_linux_2023_image
+            - build_node_image
       - build_node_nginx_supervisord_image:
           requires:
             - build_node_image
