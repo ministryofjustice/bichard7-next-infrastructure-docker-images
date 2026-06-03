@@ -187,6 +187,7 @@ jobs:
     resource_class: xlarge
     steps:
       - checkout
+      - run: sudo apt-get update && sudo apt-get install -y pigz
       - load_amazon_linux_2023_image
       - run:
           name: Install goss
@@ -212,6 +213,7 @@ jobs:
     resource_class: xlarge
     steps:
       - checkout
+      - run: sudo apt-get update && sudo apt-get install -y pigz
       - load_node_image
       - run:
           name: Install goss
@@ -237,12 +239,13 @@ jobs:
     steps:
       - checkout
       - run: sudo apt-get update && sudo apt-get install -y pigz
+      - load_amazon_linux_2023_image
       - run:
           name: Install goss
           command: sudo bash scripts/install_goss.sh
       - run:
-          name: Build Conductor image
-          command: make Conductor
+          name: Build Docker image
+          working_directory: ./Conductor
       - run:
           name: Save Docker image
           command: |
@@ -515,10 +518,12 @@ workflows:
     jobs:
       - build_amazon_linux_2_images
       - build_amazon_linux_2023_images
-      - build_conductor_image
       - build_liquibase
 
       - build_amazon_linux_2023_image
+      - build_conductor_image:
+          requires:
+            - build_amazon_linux_2023_image
       - build_node_image:
           requires:
             - build_amazon_linux_2023_image
