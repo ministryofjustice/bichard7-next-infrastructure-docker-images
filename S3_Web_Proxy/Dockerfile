@@ -1,4 +1,4 @@
-ARG BUILD_IMAGE="nginx-nodejs-20-2023-supervisord"
+ARG BUILD_IMAGE="nginx-nodejs-24-2023-supervisord"
 FROM ${BUILD_IMAGE}
 
 LABEL org.opencontainers.image.authors="CJSE"
