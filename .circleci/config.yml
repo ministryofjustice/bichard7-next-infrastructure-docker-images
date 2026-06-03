@@ -21,16 +21,12 @@ commands:
       - run:
           name: Build Nodejs image
           command: make NodeJS_24_2023
-          environment:
-            SKIP_GOSS: true
 
   build_node_nginx_supervisord_image:
     steps:
       - run:
           name: Build Nodejs Nginx Supervisord image
           command: make Nginx_NodeJS_24_2023_Supervisord
-          environment:
-            SKIP_GOSS: true
 
   build_and_cache_image:
     parameters:
@@ -152,6 +148,8 @@ jobs:
     machine:
       image: ubuntu-2204:current
     resource_class: medium
+    environment:
+      SKIP_GOSS: true
     steps:
       - checkout
       - run: sudo apt-get update && sudo apt-get install -y pigz
@@ -188,6 +186,8 @@ jobs:
     machine:
       image: ubuntu-2204:current
     resource_class: medium
+    environment:
+      SKIP_GOSS: true
     steps:
       - checkout_core
       - run: sudo apt-get update && sudo apt-get install -y pigz
@@ -211,6 +211,8 @@ jobs:
     machine:
       image: ubuntu-2204:current
     resource_class: medium
+    environment:
+      SKIP_GOSS: true
     steps:
       - checkout
       - run: sudo apt-get update && sudo apt-get install -y pigz
@@ -235,6 +237,8 @@ jobs:
     machine:
       image: ubuntu-2204:current
     resource_class: medium
+    environment:
+      SKIP_GOSS: true
     steps:
       - checkout
       - set_docker_tag
@@ -259,6 +263,8 @@ jobs:
     machine:
       image: ubuntu-2204:current
     resource_class: medium
+    environment:
+      SKIP_GOSS: true
     steps:
       - checkout
       - set_docker_tag
@@ -283,6 +289,8 @@ jobs:
     machine:
       image: ubuntu-2204:current
     resource_class: medium
+    environment:
+      SKIP_GOSS: true
     steps:
       - checkout
       - set_docker_tag
@@ -307,6 +315,8 @@ jobs:
     machine:
       image: ubuntu-2204:current
     resource_class: medium
+    environment:
+      SKIP_GOSS: true
     steps:
       - checkout
       - set_docker_tag
