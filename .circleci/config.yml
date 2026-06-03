@@ -16,12 +16,6 @@ commands:
           name: Checkout the Core repo
           command: git clone --depth 1 https://github.com/ministryofjustice/bichard7-next-core.git ~/bichard7-next-core
 
-  build_node_image:
-    steps:
-      - run:
-          name: Build Nodejs image
-          command: make NodeJS_24_2023
-
   build_and_cache_image:
     parameters:
       image_name:
@@ -83,6 +77,12 @@ commands:
       - run:
           name: Load Node.js image
           command: docker image load < "images/nodejs-24-2023.tar.gz"
+
+  load_node_nginx_supervisord_image:
+    steps:
+      - run:
+          name: Load Node.js image
+          command: docker image load < "images/nginx-nodejs-24-2023-supervisord.tar.gz"
 
   load_conductor_image:
     steps:
@@ -253,7 +253,7 @@ jobs:
     steps:
       - checkout
       - run: sudo apt-get update && sudo apt-get install -y pigz
-      - build_node_nginx_supervisord_image
+      - load_node_nginx_supervisord_image
       - run:
           name: Clone bichard7-next-audit-logging
           command: git clone --depth 1 https://github.com/ministryofjustice/bichard7-next-audit-logging.git /home/circleci/bichard7-next-audit-logging
@@ -316,7 +316,7 @@ jobs:
     steps:
       - checkout
       - run: sudo apt-get update && sudo apt-get install -y pigz
-      - build_node_nginx_supervisord_image
+      - load_node_nginx_supervisord_image
       - checkout_core
       - build_and_cache_image:
           image_name: message-forwarder
@@ -345,7 +345,7 @@ jobs:
       - checkout
       - set_docker_tag
       - run: sudo apt-get update && sudo apt-get install -y pigz
-      - build_node_image
+      - load_node_image
       - checkout_core
       - build_and_cache_image:
           image_name: bichard-worker
@@ -374,7 +374,7 @@ jobs:
       - set_docker_tag
       - run: sudo apt-get update && sudo apt-get install -y pigz
       - checkout_core
-      - build_node_nginx_supervisord_image
+      - load_node_nginx_supervisord_image
       - build_and_cache_image:
           image_name: ui
           dockerfile: ~/bichard7-next-core/packages/ui/Dockerfile
@@ -401,7 +401,7 @@ jobs:
       - checkout
       - set_docker_tag
       - run: sudo apt-get update && sudo apt-get install -y pigz
-      - build_node_nginx_supervisord_image
+      - load_node_nginx_supervisord_image
       - checkout_core
       - build_and_cache_image:
           image_name: api
@@ -429,7 +429,7 @@ jobs:
       - checkout
       - set_docker_tag
       - run: sudo apt-get update && sudo apt-get install -y pigz
-      - build_node_nginx_supervisord_image
+      - load_node_nginx_supervisord_image
       - checkout_core
       - build_and_cache_image:
           image_name: user-service
@@ -516,13 +516,25 @@ workflows:
           requires:
             - build_node_image
 
-      - build_audit_logging_images
+      - build_audit_logging_images:
+        requires:
+          - build_node_nginx_supervisord_image
       - build_postgres_image
-      - build_message_forwarder_image
-      - build_worker_image
-      - build_ui_image
-      - build_api_image
-      - build_user_service_image
+      - build_message_forwarder_image:
+          requires:
+            - build_node_nginx_supervisord_image
+      - build_worker_image:
+          requires:
+            - build_node_image
+      - build_ui_image:
+          requires:
+            - build_node_nginx_supervisord_image
+      - build_api_image:
+          requires:
+            - build_node_nginx_supervisord_image
+      - build_user_service_image:
+          requires:
+            - build_node_nginx_supervisord_image
 
       - test_liquibase
 
