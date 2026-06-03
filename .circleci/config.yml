@@ -274,7 +274,7 @@ jobs:
       - run: sudo apt-get update && sudo apt-get install -y pigz
       - attach_workspace:
           at: .
-      - load_node_nginx_supervisord_image
+      - load_node_image
       - run:
           name: Clone bichard7-next-audit-logging
           command: git clone --depth 1 https://github.com/ministryofjustice/bichard7-next-audit-logging.git /home/circleci/bichard7-next-audit-logging
@@ -339,7 +339,7 @@ jobs:
       - run: sudo apt-get update && sudo apt-get install -y pigz
       - attach_workspace:
           at: .
-      - load_node_nginx_supervisord_image
+      - load_node_image
       - checkout_core
       - build_and_cache_image:
           image_name: message-forwarder
@@ -552,11 +552,11 @@ workflows:
 
       - build_audit_logging_images:
           requires:
-            - build_node_nginx_supervisord_image
+            - build_node_image
       - build_postgres_image
       - build_message_forwarder_image:
           requires:
-            - build_node_nginx_supervisord_image
+            - build_node_image
       - build_worker_image:
           requires:
             - build_node_image
