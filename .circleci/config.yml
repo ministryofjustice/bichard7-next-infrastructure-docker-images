@@ -202,7 +202,7 @@ jobs:
           command: sudo bash scripts/install_goss.sh
       - run:
           name: Build Docker image
-          command: make build
+          command: make build-and-test
           working_directory: ./Nginx_Auth_Proxy
       - run:
           name: Save Docker image
