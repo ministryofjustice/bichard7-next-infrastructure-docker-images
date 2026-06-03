@@ -245,6 +245,7 @@ jobs:
           command: sudo bash scripts/install_goss.sh
       - run:
           name: Build Docker image
+          command: make build
           working_directory: ./Conductor
       - run:
           name: Save Docker image
