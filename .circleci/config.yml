@@ -188,6 +188,8 @@ jobs:
     steps:
       - checkout
       - run: sudo apt-get update && sudo apt-get install -y pigz
+      - attach_workspace:
+          at: .
       - load_amazon_linux_2023_image
       - run:
           name: Install goss
@@ -214,6 +216,8 @@ jobs:
     steps:
       - checkout
       - run: sudo apt-get update && sudo apt-get install -y pigz
+      - attach_workspace:
+          at: .
       - load_node_image
       - run:
           name: Install goss
@@ -239,6 +243,8 @@ jobs:
     steps:
       - checkout
       - run: sudo apt-get update && sudo apt-get install -y pigz
+      - attach_workspace:
+          at: .
       - load_amazon_linux_2023_image
       - run:
           name: Install goss
@@ -266,6 +272,8 @@ jobs:
     steps:
       - checkout
       - run: sudo apt-get update && sudo apt-get install -y pigz
+      - attach_workspace:
+          at: .
       - load_node_nginx_supervisord_image
       - run:
           name: Clone bichard7-next-audit-logging
@@ -329,6 +337,8 @@ jobs:
     steps:
       - checkout
       - run: sudo apt-get update && sudo apt-get install -y pigz
+      - attach_workspace:
+          at: .
       - load_node_nginx_supervisord_image
       - checkout_core
       - build_and_cache_image:
@@ -358,6 +368,8 @@ jobs:
       - checkout
       - set_docker_tag
       - run: sudo apt-get update && sudo apt-get install -y pigz
+      - attach_workspace:
+          at: .
       - load_node_image
       - checkout_core
       - build_and_cache_image:
@@ -387,6 +399,8 @@ jobs:
       - set_docker_tag
       - run: sudo apt-get update && sudo apt-get install -y pigz
       - checkout_core
+      - attach_workspace:
+          at: .
       - load_node_nginx_supervisord_image
       - build_and_cache_image:
           image_name: ui
@@ -414,6 +428,8 @@ jobs:
       - checkout
       - set_docker_tag
       - run: sudo apt-get update && sudo apt-get install -y pigz
+      - attach_workspace:
+          at: .
       - load_node_nginx_supervisord_image
       - checkout_core
       - build_and_cache_image:
@@ -442,6 +458,8 @@ jobs:
       - checkout
       - set_docker_tag
       - run: sudo apt-get update && sudo apt-get install -y pigz
+      - attach_workspace:
+          at: .
       - load_node_nginx_supervisord_image
       - checkout_core
       - build_and_cache_image:
