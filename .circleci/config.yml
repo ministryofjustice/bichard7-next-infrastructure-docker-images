@@ -1,6 +1,57 @@
 ---
 version: 2.1
 
+commands:
+  build_and_cache_image:
+    parameters:
+      image_name:
+        type: string
+      dockerfile:
+        type: string
+      cache_key:
+        type: string
+      image_tag:
+        type: string
+        default: ""
+      context:
+        type: string
+        default: "."
+      lockfile:
+        type: string
+        default: "package-lock.json"
+    steps:
+      - restore_cache:
+          name: Restore BuildKit cache for << parameters.image_name >>
+          keys:
+            - << parameters.cache_key >>-{{ checksum "<< parameters.dockerfile >>" }}-{{ checksum "<< parameters.lockfile >>" }}
+            - << parameters.cache_key >>-{{ checksum "<< parameters.dockerfile >>" }}-
+            - << parameters.cache_key >>-
+      - run:
+          name: Build << parameters.image_name >> Docker image
+          command: |
+            IMAGE_TAG="<< parameters.image_tag >>"
+            if [ -z "$IMAGE_TAG" ]; then
+              IMAGE_TAG="${DOCKER_TAG}"
+            fi
+            docker buildx build \
+              --cache-from type=local,src=/tmp/buildx-cache-<< parameters.image_name >> \
+              --cache-to type=local,dest=/tmp/buildx-cache-<< parameters.image_name >>-new,mode=max \
+              -f << parameters.dockerfile >> \
+              -t "<< parameters.image_name >>:${IMAGE_TAG}" \
+              --load \
+              << parameters.context >>
+      - run:
+          name: Rotate cache for << parameters.image_name >>
+          when: always
+          command: |
+            rm -rf /tmp/buildx-cache-<< parameters.image_name >>
+            mv /tmp/buildx-cache-<< parameters.image_name >>-new /tmp/buildx-cache-<< parameters.image_name >>
+      - save_cache:
+          name: Save BuildKit cache for << parameters.image_name >>
+          key: << parameters.cache_key >>-{{ checksum "<< parameters.dockerfile >>" }}-{{ checksum "<< parameters.lockfile >>" }}
+          paths:
+            - /tmp/buildx-cache-<< parameters.image_name >>
+
 jobs:
   build_amazon_linux_2_images:
     machine:
@@ -22,6 +73,52 @@ jobs:
       - run: sudo bash scripts/install_goss.sh
       - run: make build-al2023
 
+  build_audit_logging_images:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: medium
+    steps:
+      - run: sudo apt-get update && sudo apt-get install -y pigz
+      - run:
+          name: Build Nodejs Nginx Supervisord images
+          command: make Nginx_NodeJS_20_2023_Supervisord
+      - run:
+          name: Clone bichard7-next-audit-logging
+          command: git clone --depth 1 https://github.com/ministryofjustice/bichard7-next-audit-logging.git /home/circleci/bichard7-next-audit-logging
+      - build_and_cache_image:
+          image_name: "audit-log-api"
+          dockerfile: "/home/circleci/bichard7-next-audit-logging/src/audit-log-api/Dockerfile"
+          context: "/home/circleci/bichard7-next-audit-logging"
+          cache_key: "audit-log-api-cache-v1"
+          image_tag: "latest"
+          lockfile: "/home/circleci/bichard7-next-audit-logging/package-lock.json"
+      - build_and_cache_image:
+          image_name: "event-handler"
+          dockerfile: "/home/circleci/bichard7-next-audit-logging/src/event-handler/Dockerfile"
+          context: "/home/circleci/bichard7-next-audit-logging"
+          cache_key: "event-handler-cache-v1"
+          image_tag: "latest"
+          lockfile: "/home/circleci/bichard7-next-audit-logging/package-lock.json"
+      - run:
+          name: Save Docker images
+          command: |
+            mkdir -p images
+            docker image save "audit-log-api:latest" | pigz > "images/audit-log-api.tar.gz"
+            docker image save "event-handler:latest" | pigz > "images/event-handler.tar.gz"
+      - persist_to_workspace:
+          root: .
+          paths:
+            - images
+            -
+  load_audit_logging_images:
+    steps:
+      - run:
+          name: Load audit log api image
+          command: docker image load < "images/audit-log-api.tar.gz"
+      - run:
+          name: Load event handler image
+          command: docker image load < "images/event-handler.tar.gz"
+
   test_conductor:
     machine:
       image: ubuntu-2204:current
@@ -42,13 +139,7 @@ jobs:
       - run:
           name: Build Nodejs Nginx Supervisord images
           command: make Nginx_NodeJS_20_2023_Supervisord
-      - run:
-          name: Checkout the audit logging repo
-          command: git clone --depth 1 https://github.com/ministryofjustice/bichard7-next-audit-logging.git ~/bichard7-next-audit-logging
-      - run:
-          name: Build the audit logging images
-          working_directory: ~/bichard7-next-audit-logging
-          command: make build-api-server build-event-handler-server
+      - load_audit_logging_images
       - run:
           name: Checkout the Core repo
           command: git clone --depth 1 https://github.com/ministryofjustice/bichard7-next-core.git ~/bichard7-next-core
@@ -90,5 +181,10 @@ workflows:
     jobs:
       - build_amazon_linux_2_images
       - build_amazon_linux_2023_images
-      - test_conductor
+      - build_audit_logging_images
+
       - test_liquibase
+
+      - test_conductor:
+          requires:
+            - build_audit_logging_images
