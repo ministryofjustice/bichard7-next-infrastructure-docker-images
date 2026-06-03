@@ -40,7 +40,7 @@ jobs:
           command: make Conductor
       - run:
           name: Build Nodejs Nginx Supervisord images
-          command: make Nginx_NodeJS_20_2023_Supervisord
+          command: make Nginx_NodeJS_24_2023_Supervisord
       - run:
           name: Checkout the audit logging repo
           command: git clone --depth 1 https://github.com/ministryofjustice/bichard7-next-audit-logging.git ~/bichard7-next-audit-logging
