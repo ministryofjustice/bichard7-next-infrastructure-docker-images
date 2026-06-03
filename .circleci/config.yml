@@ -1,7 +1,6 @@
 ---
 version: 2.1
 
-# Define the jobs we want to run for this project
 jobs:
   build_amazon_linux_2_images:
     machine:
@@ -12,6 +11,7 @@ jobs:
       - checkout
       - run: sudo bash scripts/install_goss.sh
       - run: make build-al2
+
   build_amazon_linux_2023_images:
     machine:
       image: ubuntu-2204:current
@@ -21,6 +21,7 @@ jobs:
       - checkout
       - run: sudo bash scripts/install_goss.sh
       - run: make build-al2023
+
   test_conductor:
     machine:
       image: ubuntu-2204:current
@@ -73,6 +74,7 @@ jobs:
           name: Test the workflows
           working_directory: ~/bichard7-next-core
           command: nvm use && npm run -w packages/conductor test
+
   test_liquibase:
     machine:
       image: ubuntu-2204:current
@@ -83,7 +85,6 @@ jobs:
       - run: sudo bash scripts/install_goss.sh
       - run: make Liquibase
 
-# Orchestrate our job run sequence
 workflows:
   build_and_test:
     jobs:
