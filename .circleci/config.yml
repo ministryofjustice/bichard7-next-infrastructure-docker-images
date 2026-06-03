@@ -81,7 +81,7 @@ commands:
   load_conductor_image:
     steps:
       - run:
-          name: Load postgres image
+          name: Load conductor image
           command: docker image load < "images/conductor.tar.gz"
 
   load_audit_logging_images:
