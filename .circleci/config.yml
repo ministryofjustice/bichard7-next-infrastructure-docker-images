@@ -165,7 +165,7 @@ jobs:
   build_amazon_linux_2023_image:
     machine:
       image: ubuntu-2204:current
-      docker_layer_caching: true
+      docker_layer_caching: false
     resource_class: xlarge
     steps:
       - checkout
