@@ -2,6 +2,7 @@
 
 set -e
 
+BUILD_IMAGE="amazon-linux2023-base:${DOCKER_TAG:-latest}"
 IMAGE="nodejs-24-2023"
 source $(dirname $0)/scripts/node_version.sh
 ARCH=$(arch)

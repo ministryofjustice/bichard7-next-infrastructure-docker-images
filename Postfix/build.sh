@@ -2,6 +2,7 @@
 
 set -e
 
+BUILD_IMAGE="amazon-linux2023-base:${DOCKER_TAG:-latest}"
 IMAGE="postfix"
 
 docker build -t $IMAGE .

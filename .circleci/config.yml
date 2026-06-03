@@ -194,6 +194,7 @@ jobs:
     resource_class: xlarge
     steps:
       - checkout
+      - set_docker_tag
       - attach_workspace:
           at: .
       - load_amazon_linux_2023_image
@@ -212,6 +213,7 @@ jobs:
     resource_class: xlarge
     steps:
       - checkout
+      - set_docker_tag
       - run: sudo apt-get update && sudo apt-get install -y pigz
       - attach_workspace:
           at: .
@@ -240,6 +242,7 @@ jobs:
     resource_class: xlarge
     steps:
       - checkout
+      - set_docker_tag
       - attach_workspace:
           at: .
       - load_amazon_linux_2023_image
@@ -285,6 +288,7 @@ jobs:
     resource_class: xlarge
     steps:
       - checkout
+      - set_docker_tag
       - run: sudo apt-get update && sudo apt-get install -y pigz
       - attach_workspace:
           at: .

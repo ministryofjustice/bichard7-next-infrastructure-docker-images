@@ -2,6 +2,7 @@
 
 set -ex
 
+BUILD_IMAGE="amazon-linux2023-base:${DOCKER_TAG:-latest}"
 IMAGE="conductor"
 
 if [ -z "$PLATFORM" ]; then
