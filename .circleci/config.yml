@@ -260,6 +260,7 @@ jobs:
     resource_class: medium
     steps:
       - checkout
+      - set_docker_tag
       - run: sudo apt-get update && sudo apt-get install -y pigz
       - attach_workspace:
           at: .
