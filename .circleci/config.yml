@@ -97,6 +97,8 @@ jobs:
     machine:
       image: ubuntu-2204:current
     resource_class: medium
+    environment:
+      SKIP_GOSS: true
     steps:
       - checkout
       - run: sudo apt-get update && sudo apt-get install -y pigz
