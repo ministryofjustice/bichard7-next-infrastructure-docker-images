@@ -186,7 +186,7 @@ jobs:
           paths:
             - images
 
-  build_nginx_auth-proxy_image:
+  build_nginx_auth_proxy_image:
     machine:
       image: ubuntu-2204:current
       docker_layer_caching: true
