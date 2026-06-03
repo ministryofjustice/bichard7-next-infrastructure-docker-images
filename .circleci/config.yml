@@ -224,6 +224,7 @@ jobs:
           cache_key: buildkit-message-forwarder
           image_tag: latest
           lockfile: ~/bichard7-next-core/package-lock.json
+          context: ~/bichard7-next-core
       - run:
           name: Save Docker image
           command: |
