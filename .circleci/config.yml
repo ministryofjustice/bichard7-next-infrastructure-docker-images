@@ -22,12 +22,6 @@ commands:
           name: Build Nodejs image
           command: make NodeJS_24_2023
 
-  build_node_nginx_supervisord_image:
-    steps:
-      - run:
-          name: Build Nodejs Nginx Supervisord image
-          command: make Nginx_NodeJS_24_2023_Supervisord
-
   build_and_cache_image:
     parameters:
       image_name:
@@ -77,6 +71,18 @@ commands:
           key: << parameters.cache_key >>-{{ checksum "<< parameters.dockerfile >>" }}-{{ checksum "<< parameters.lockfile >>" }}
           paths:
             - /tmp/buildx-cache-<< parameters.image_name >>
+
+  load_amazon_linux_2023_image:
+    steps:
+      - run:
+          name: Load Amazon Linux 2023 image
+          command: docker image load < "images/nodejs-24-2023.tar.gz"
+
+  load_node_image:
+    steps:
+      - run:
+          name: Load Node.js image
+          command: docker image load < "images/nodejs-24-2023.tar.gz"
 
   load_conductor_image:
     steps:
@@ -149,6 +155,71 @@ jobs:
       - checkout
       - run: sudo bash scripts/install_goss.sh
       - run: make build-al2023
+
+  build_amazon_linux_2023_image:
+    machine:
+      image: ubuntu-2204:current
+      docker_layer_caching: true
+    resource_class: xlarge
+    steps:
+      - checkout
+      - run:
+          name: Build Docker image
+          command: make build
+          working_directory: ~/Amazon_Linux_2023_Base
+      - run:
+          name: Save Docker image
+          command: |
+            mkdir -p images
+            docker image save "amazon-linux2023-base:latest" | pigz > "images/amazon-linux2023-base.tar.gz"
+      - persist_to_workspace:
+          root: .
+          paths:
+            - images
+
+  build_node_image:
+    machine:
+      image: ubuntu-2204:current
+      docker_layer_caching: true
+    resource_class: xlarge
+    steps:
+      - checkout
+      - load_amazon_linux_2023_image
+      - run:
+          name: Build Docker image
+          command: make build
+          working_directory: ~/NodeJS_24_2023
+      - run:
+          name: Save Docker image
+          command: |
+            mkdir -p images
+            docker image save "nodejs-24-2023:latest" | pigz > "images/nodejs-24-2023.tar.gz"
+      - persist_to_workspace:
+          root: .
+          paths:
+            - images
+
+  build_node_nginx_supervisord_image:
+    machine:
+      image: ubuntu-2204:current
+      docker_layer_caching: true
+    resource_class: xlarge
+    steps:
+      - checkout
+      - load_node_image
+      - run:
+          name: Build Docker image
+          command: make build
+          working_directory: ~/Nginx_NodeJS_24_2023_Supervisord
+      - run:
+          name: Save Docker image
+          command: |
+            mkdir -p images
+            docker image save "nginx-nodejs-24-2023-supervisord:latest" | pigz > "images/nginx-nodejs-24-2023-supervisord.tar.gz"
+      - persist_to_workspace:
+          root: .
+          paths:
+            - images
 
   build_conductor_image:
     machine:
@@ -436,6 +507,14 @@ workflows:
       - build_amazon_linux_2_images
       - build_amazon_linux_2023_images
       - build_conductor_image
+
+      - build_amazon_linux_2023_image
+      - build_node_image:
+          requires:
+            - build_amazon_linux_2023_image
+      - build_node_nginx_supervisord_image:
+          requires:
+            - build_node_image
 
       - build_audit_logging_images
       - build_postgres_image
