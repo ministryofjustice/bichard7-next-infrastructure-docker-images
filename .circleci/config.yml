@@ -185,7 +185,7 @@ jobs:
       - persist_to_workspace:
           root: .
           paths:
-            - images
+            - images/amazon-linux2023-base.tar.gz
 
   build_codebuild_image:
     machine:
@@ -234,7 +234,7 @@ jobs:
       - persist_to_workspace:
           root: .
           paths:
-            - images
+            - images/nginx-auth-proxy.tar.gz
 
   build_postfix:
     machine:
@@ -281,7 +281,7 @@ jobs:
       - persist_to_workspace:
           root: .
           paths:
-            - images
+            - images/conductor.tar.gz
 
   build_node_image:
     machine:
@@ -310,7 +310,7 @@ jobs:
       - persist_to_workspace:
           root: .
           paths:
-            - images
+            - images/nodejs-24-2023.tar.gz
 
   build_node_nginx_supervisord_image:
     machine:
@@ -338,7 +338,7 @@ jobs:
       - persist_to_workspace:
           root: .
           paths:
-            - images
+            - images/nginx-nodejs-24-2023-supervisord.tar.gz
 
   build_s3_web_proxy_image:
     machine:
@@ -396,7 +396,8 @@ jobs:
       - persist_to_workspace:
           root: .
           paths:
-            - images
+            - images/audit-log-api.tar.gz
+            - images/event-handler.tar.gz
 
   build_postgres_image:
     machine:
@@ -421,7 +422,7 @@ jobs:
       - persist_to_workspace:
           root: .
           paths:
-            - images
+            - images/postgres.tar.gz
 
   build_message_forwarder_image:
     machine:
@@ -451,7 +452,7 @@ jobs:
       - persist_to_workspace:
           root: .
           paths:
-            - images
+            - images/message-forwarder.tar.gz
 
   build_worker_image:
     machine:
@@ -481,7 +482,7 @@ jobs:
       - persist_to_workspace:
           root: .
           paths:
-            - images
+            - images/worker.tar.gz
 
   build_ui_image:
     machine:
@@ -511,7 +512,7 @@ jobs:
       - persist_to_workspace:
           root: .
           paths:
-            - images
+            - images/ui.tar.gz
 
   build_api_image:
     machine:
@@ -541,7 +542,7 @@ jobs:
       - persist_to_workspace:
           root: .
           paths:
-            - images
+            - images/api.tar.gz
 
   build_user_service_image:
     machine:
@@ -571,7 +572,7 @@ jobs:
       - persist_to_workspace:
           root: .
           paths:
-            - images
+            - images/user-service.tar.gz
 
   test_conductor:
     machine:
