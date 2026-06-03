@@ -517,8 +517,8 @@ workflows:
             - build_node_image
 
       - build_audit_logging_images:
-        requires:
-          - build_node_nginx_supervisord_image
+          requires:
+            - build_node_nginx_supervisord_image
       - build_postgres_image
       - build_message_forwarder_image:
           requires:
