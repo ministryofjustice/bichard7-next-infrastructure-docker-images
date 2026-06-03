@@ -252,6 +252,7 @@ jobs:
           dockerfile: ~/bichard7-next-core/packages/conductor/Dockerfile
           cache_key: buildkit-worker
           lockfile: ~/bichard7-next-core/package-lock.json
+          context: ~/bichard7-next-core
       - run:
           name: Save Docker image
           command: |
@@ -279,6 +280,7 @@ jobs:
           dockerfile: ~/bichard7-next-core/packages/ui/Dockerfile
           cache_key: buildkit-ui
           lockfile: ~/bichard7-next-core/package-lock.json
+          context: ~/bichard7-next-core
       - run:
           name: Save Docker image
           command: |
@@ -306,6 +308,7 @@ jobs:
           dockerfile: ~/bichard7-next-core/packages/api/Dockerfile
           cache_key: buildkit-api
           lockfile: ~/bichard7-next-core/package-lock.json
+          context: ~/bichard7-next-core
       - run:
           name: Save Docker image
           command: |
@@ -333,6 +336,7 @@ jobs:
           dockerfile: ~/bichard7-next-core/packages/user-service/Dockerfile
           cache_key: buildkit-user-service
           lockfile: ~/bichard7-next-core/package-lock.json
+          context: ~/bichard7-next-core
       - run:
           name: Save Docker image
           command: |
