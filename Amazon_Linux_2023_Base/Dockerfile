@@ -1,11 +1,11 @@
 FROM amazonlinux:2023@sha256:c1872fb69ff9ed9581c999509dd0dcb4288235087f1df4999b866affdac0278d
 
 LABEL org.opencontainers.image.authors="CJSE"
-ARG DNF_PACKAGES="pip gzip tar unzip openssl shadow-utils xz wget gnupg"
+ARG DNF_PACKAGES="pip gzip tar unzip openssl shadow-utils xz wget gnupg dirmngr systemd-networkd"
 
 # Install required packages
 RUN dnf update -y && \
-    dnf install -y --setopt=install_weak_deps=False --allowerasing ${DNF_PACKAGES} dirmngr
+    dnf install -y --setopt=install_weak_deps=False --allowerasing ${DNF_PACKAGES}
 
 # Install updates
 RUN dnf update -y ca-certificates --releasever 2023.1.20230823 && \
