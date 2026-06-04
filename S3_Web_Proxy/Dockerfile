@@ -13,7 +13,7 @@ USER root
 
 COPY s3-server ${NODE_DIR}
 
-RUN yum install -y \
+RUN yum install -y --setopt=install_weak_deps=False \
     cronie \
     git && \
     mkdir -p /root/.aws && \
