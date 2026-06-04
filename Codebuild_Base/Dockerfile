@@ -11,8 +11,8 @@ ARG NODE_VERSION="16.18.1"
 
 COPY ./scripts /tmp
 
-RUN amazon-linux-extras install -y epel &&\
-    yum install -y --setopt=install_weak_deps=False deltarpm &&\
+RUN amazon-linux-extras install -y epel && \
+    yum install -y --setopt=install_weak_deps=False deltarpm && \
     bash /tmp/install_packages.sh && \
     bash /tmp/install_terraform.sh && \
     bash /tmp/install_nodejs.sh && \
