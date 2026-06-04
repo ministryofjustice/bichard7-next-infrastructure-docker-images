@@ -1,7 +1,134 @@
 ---
 version: 2.1
 
-# Define the jobs we want to run for this project
+commands:
+  set_docker_tag:
+    steps:
+      - run:
+          name: Export dynamic DOCKER_TAG
+          command: |
+            SANITIZED_BRANCH=$(echo "$CIRCLE_BRANCH" | sed 's/[^a-zA-Z0-9_.-]/-/g')
+            echo "export DOCKER_TAG=${SANITIZED_BRANCH:-latest}" >> $BASH_ENV
+
+  checkout_core:
+    steps:
+      - run:
+          name: Checkout the Core repo
+          command: git clone --depth 1 https://github.com/ministryofjustice/bichard7-next-core.git ~/bichard7-next-core
+
+  build_node_image:
+    steps:
+      - run:
+          name: Build Nodejs image
+          command: make NodeJS_24_2023
+
+  build_node_nginx_supervisord_image:
+    steps:
+      - run:
+          name: Build Nodejs Nginx Supervisord image
+          command: make Nginx_NodeJS_24_2023_Supervisord
+
+  build_and_cache_image:
+    parameters:
+      image_name:
+        type: string
+      dockerfile:
+        type: string
+      cache_key:
+        type: string
+      image_tag:
+        type: string
+        default: ""
+      context:
+        type: string
+        default: "."
+      lockfile:
+        type: string
+        default: "package-lock.json"
+    steps:
+      - restore_cache:
+          name: Restore BuildKit cache for << parameters.image_name >>
+          keys:
+            - << parameters.cache_key >>-{{ checksum "<< parameters.dockerfile >>" }}-{{ checksum "<< parameters.lockfile >>" }}
+            - << parameters.cache_key >>-{{ checksum "<< parameters.dockerfile >>" }}-
+            - << parameters.cache_key >>-
+      - run:
+          name: Build << parameters.image_name >> Docker image
+          command: |
+            IMAGE_TAG="<< parameters.image_tag >>"
+            if [ -z "$IMAGE_TAG" ]; then
+              IMAGE_TAG="${DOCKER_TAG}"
+            fi
+            docker buildx build \
+              --cache-from type=local,src=/tmp/buildx-cache-<< parameters.image_name >> \
+              --cache-to type=local,dest=/tmp/buildx-cache-<< parameters.image_name >>-new,mode=max \
+              -f << parameters.dockerfile >> \
+              -t "<< parameters.image_name >>:${IMAGE_TAG}" \
+              --load \
+              << parameters.context >>
+      - run:
+          name: Rotate cache for << parameters.image_name >>
+          when: always
+          command: |
+            rm -rf /tmp/buildx-cache-<< parameters.image_name >>
+            mv /tmp/buildx-cache-<< parameters.image_name >>-new /tmp/buildx-cache-<< parameters.image_name >>
+      - save_cache:
+          name: Save BuildKit cache for << parameters.image_name >>
+          key: << parameters.cache_key >>-{{ checksum "<< parameters.dockerfile >>" }}-{{ checksum "<< parameters.lockfile >>" }}
+          paths:
+            - /tmp/buildx-cache-<< parameters.image_name >>
+
+  load_conductor_image:
+    steps:
+      - run:
+          name: Load conductor image
+          command: docker image load < "images/conductor.tar.gz"
+
+  load_audit_logging_images:
+    steps:
+      - run:
+          name: Load audit log api image
+          command: docker image load < "images/audit-log-api.tar.gz"
+      - run:
+          name: Load event handler image
+          command: docker image load < "images/event-handler.tar.gz"
+
+  load_postgres_image:
+    steps:
+      - run:
+          name: Load postgres image
+          command: docker image load < "images/postgres.tar.gz"
+
+  load_message_forwarder_image:
+    steps:
+      - run:
+          name: Load message-forwarder image
+          command: docker image load < "images/message-forwarder.tar.gz"
+
+  load_worker_image:
+    steps:
+      - run:
+          name: Load worker image
+          command: docker image load < "images/worker.tar.gz"
+
+  load_ui_image:
+    steps:
+      - run:
+          name: Load ui image
+          command: docker image load < "images/ui.tar.gz"
+
+  load_api_image:
+    steps:
+      - run:
+          name: Load api image
+          command: docker image load < "images/api.tar.gz"
+
+  load_user_service_image:
+    steps:
+      - run:
+          name: Load user-service image
+          command: docker image load < "images/user-service.tar.gz"
+
 jobs:
   build_amazon_linux_2_images:
     machine:
@@ -12,6 +139,7 @@ jobs:
       - checkout
       - run: sudo bash scripts/install_goss.sh
       - run: make build-al2
+
   build_amazon_linux_2023_images:
     machine:
       image: ubuntu-2204:current
@@ -21,6 +149,233 @@ jobs:
       - checkout
       - run: sudo bash scripts/install_goss.sh
       - run: make build-al2023
+
+  build_conductor_image:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: medium
+    steps:
+      - checkout
+      - run: sudo apt-get update && sudo apt-get install -y pigz
+      - run:
+          name: Install goss
+          command: sudo bash scripts/install_goss.sh
+      - run:
+          name: Build Conductor image
+          command: make Conductor
+      - run:
+          name: Save Docker image
+          command: |
+            mkdir -p images
+            docker image save "conductor:latest" | pigz > "images/conductor.tar.gz"
+      - persist_to_workspace:
+          root: .
+          paths:
+            - images
+
+  build_audit_logging_images:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: medium
+    environment:
+      SKIP_GOSS: true
+    steps:
+      - checkout
+      - run: sudo apt-get update && sudo apt-get install -y pigz
+      - build_node_nginx_supervisord_image
+      - run:
+          name: Clone bichard7-next-audit-logging
+          command: git clone --depth 1 https://github.com/ministryofjustice/bichard7-next-audit-logging.git /home/circleci/bichard7-next-audit-logging
+      - build_and_cache_image:
+          image_name: "audit-log-api"
+          dockerfile: "/home/circleci/bichard7-next-audit-logging/src/audit-log-api/Dockerfile"
+          context: "/home/circleci/bichard7-next-audit-logging"
+          cache_key: "audit-log-api-cache-v1"
+          image_tag: "latest"
+          lockfile: "/home/circleci/bichard7-next-audit-logging/package-lock.json"
+      - build_and_cache_image:
+          image_name: "event-handler"
+          dockerfile: "/home/circleci/bichard7-next-audit-logging/src/event-handler/Dockerfile"
+          context: "/home/circleci/bichard7-next-audit-logging"
+          cache_key: "event-handler-cache-v1"
+          image_tag: "latest"
+          lockfile: "/home/circleci/bichard7-next-audit-logging/package-lock.json"
+      - run:
+          name: Save Docker images
+          command: |
+            mkdir -p images
+            docker image save "audit-log-api:latest" | pigz > "images/audit-log-api.tar.gz"
+            docker image save "event-handler:latest" | pigz > "images/event-handler.tar.gz"
+      - persist_to_workspace:
+          root: .
+          paths:
+            - images
+
+  build_postgres_image:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: medium
+    environment:
+      SKIP_GOSS: true
+    steps:
+      - checkout_core
+      - run: sudo apt-get update && sudo apt-get install -y pigz
+      - build_and_cache_image:
+          image_name: bichard-postgres
+          dockerfile: ~/bichard7-next-core/environment/postgres/Dockerfile
+          cache_key: buildkit-postgres
+          image_tag: latest
+          context: ~/bichard7-next-core/environment/postgres
+      - run:
+          name: Save Docker image
+          command: |
+            mkdir -p images
+            docker image save "bichard-postgres:latest" | pigz > "images/postgres.tar.gz"
+      - persist_to_workspace:
+          root: .
+          paths:
+            - images
+
+  build_message_forwarder_image:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: medium
+    environment:
+      SKIP_GOSS: true
+    steps:
+      - checkout
+      - run: sudo apt-get update && sudo apt-get install -y pigz
+      - build_node_nginx_supervisord_image
+      - checkout_core
+      - build_and_cache_image:
+          image_name: message-forwarder
+          dockerfile: ~/bichard7-next-core/packages/message-forwarder/Dockerfile
+          cache_key: buildkit-message-forwarder
+          image_tag: latest
+          lockfile: ~/bichard7-next-core/package-lock.json
+          context: ~/bichard7-next-core
+      - run:
+          name: Save Docker image
+          command: |
+            mkdir -p images
+            docker image save "message-forwarder:latest" | pigz > "images/message-forwarder.tar.gz"
+      - persist_to_workspace:
+          root: .
+          paths:
+            - images
+
+  build_worker_image:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: medium
+    environment:
+      SKIP_GOSS: true
+    steps:
+      - checkout
+      - set_docker_tag
+      - run: sudo apt-get update && sudo apt-get install -y pigz
+      - build_node_image
+      - checkout_core
+      - build_and_cache_image:
+          image_name: bichard-worker
+          dockerfile: ~/bichard7-next-core/packages/conductor/Dockerfile
+          cache_key: buildkit-worker
+          lockfile: ~/bichard7-next-core/package-lock.json
+          context: ~/bichard7-next-core
+      - run:
+          name: Save Docker image
+          command: |
+            mkdir -p images
+            docker image save "bichard-worker:${DOCKER_TAG}" | pigz > "images/worker.tar.gz"
+      - persist_to_workspace:
+          root: .
+          paths:
+            - images
+
+  build_ui_image:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: medium
+    environment:
+      SKIP_GOSS: true
+    steps:
+      - checkout
+      - set_docker_tag
+      - run: sudo apt-get update && sudo apt-get install -y pigz
+      - checkout_core
+      - build_node_nginx_supervisord_image
+      - build_and_cache_image:
+          image_name: ui
+          dockerfile: ~/bichard7-next-core/packages/ui/Dockerfile
+          cache_key: buildkit-ui
+          lockfile: ~/bichard7-next-core/package-lock.json
+          context: ~/bichard7-next-core
+      - run:
+          name: Save Docker image
+          command: |
+            mkdir -p images
+            docker image save "ui:${DOCKER_TAG}" | pigz > "images/ui.tar.gz"
+      - persist_to_workspace:
+          root: .
+          paths:
+            - images
+
+  build_api_image:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: medium
+    environment:
+      SKIP_GOSS: true
+    steps:
+      - checkout
+      - set_docker_tag
+      - run: sudo apt-get update && sudo apt-get install -y pigz
+      - build_node_nginx_supervisord_image
+      - checkout_core
+      - build_and_cache_image:
+          image_name: api
+          dockerfile: ~/bichard7-next-core/packages/api/Dockerfile
+          cache_key: buildkit-api
+          lockfile: ~/bichard7-next-core/package-lock.json
+          context: ~/bichard7-next-core
+      - run:
+          name: Save Docker image
+          command: |
+            mkdir -p images
+            docker image save "api:${DOCKER_TAG}" | pigz > "images/api.tar.gz"
+      - persist_to_workspace:
+          root: .
+          paths:
+            - images
+
+  build_user_service_image:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: medium
+    environment:
+      SKIP_GOSS: true
+    steps:
+      - checkout
+      - set_docker_tag
+      - run: sudo apt-get update && sudo apt-get install -y pigz
+      - build_node_nginx_supervisord_image
+      - checkout_core
+      - build_and_cache_image:
+          image_name: user-service
+          dockerfile: ~/bichard7-next-core/packages/user-service/Dockerfile
+          cache_key: buildkit-user-service
+          lockfile: ~/bichard7-next-core/package-lock.json
+          context: ~/bichard7-next-core
+      - run:
+          name: Save Docker image
+          command: |
+            mkdir -p images
+            docker image save "user-service:${DOCKER_TAG}" | pigz > "images/user-service.tar.gz"
+      - persist_to_workspace:
+          root: .
+          paths:
+            - images
+
   test_conductor:
     machine:
       image: ubuntu-2204:current
@@ -30,27 +385,18 @@ jobs:
       SKIP_GOSS: true
     steps:
       - checkout
-      - run:
-          name: Install goss
-          command: sudo bash scripts/install_goss.sh
-      - run:
-          name: Build Conductor image
-          environment:
-            SKIP_GOSS: false
-          command: make Conductor
-      - run:
-          name: Build Nodejs Nginx Supervisord images
-          command: make Nginx_NodeJS_20_2023_Supervisord
-      - run:
-          name: Checkout the audit logging repo
-          command: git clone --depth 1 https://github.com/ministryofjustice/bichard7-next-audit-logging.git ~/bichard7-next-audit-logging
-      - run:
-          name: Build the audit logging images
-          working_directory: ~/bichard7-next-audit-logging
-          command: make build-api-server build-event-handler-server
-      - run:
-          name: Checkout the Core repo
-          command: git clone --depth 1 https://github.com/ministryofjustice/bichard7-next-core.git ~/bichard7-next-core
+      - set_docker_tag
+      - attach_workspace:
+          at: .
+      - load_conductor_image
+      - load_audit_logging_images
+      - load_postgres_image
+      - load_message_forwarder_image
+      - load_worker_image
+      - load_ui_image
+      - load_api_image
+      - load_user_service_image
+      - checkout_core
       - run:
           working_directory: ~/bichard7-next-core
           command: nvm install
@@ -68,11 +414,12 @@ jobs:
           environment:
             PHASE_2_QUEUE_NAME: TEST_PHASE2_QUEUE
             PHASE_3_QUEUE_NAME: TEST_PHASE3_QUEUE
-          command: bash .circleci/scripts/run-infrastructure.sh conductor all-build-worker
+          command: bash .circleci/scripts/run-infrastructure.sh 'conductor api ui user-service' all
       - run:
           name: Test the workflows
           working_directory: ~/bichard7-next-core
           command: nvm use && npm run -w packages/conductor test
+
   test_liquibase:
     machine:
       image: ubuntu-2204:current
@@ -83,11 +430,30 @@ jobs:
       - run: sudo bash scripts/install_goss.sh
       - run: make Liquibase
 
-# Orchestrate our job run sequence
 workflows:
   build_and_test:
     jobs:
       - build_amazon_linux_2_images
       - build_amazon_linux_2023_images
-      - test_conductor
+      - build_conductor_image
+
+      - build_audit_logging_images
+      - build_postgres_image
+      - build_message_forwarder_image
+      - build_worker_image
+      - build_ui_image
+      - build_api_image
+      - build_user_service_image
+
       - test_liquibase
+
+      - test_conductor:
+          requires:
+            - build_conductor_image
+            - build_audit_logging_images
+            - build_postgres_image
+            - build_message_forwarder_image
+            - build_worker_image
+            - build_ui_image
+            - build_api_image
+            - build_user_service_image
