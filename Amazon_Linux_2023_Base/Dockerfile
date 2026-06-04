@@ -5,18 +5,14 @@ ARG DNF_PACKAGES="pip gzip tar unzip openssl shadow-utils xz wget gnupg dirmngr 
 
 # Install required packages
 RUN dnf update -y && \
-    dnf install -y --setopt=install_weak_deps=False --allowerasing ${DNF_PACKAGES}
-
-# Install updates
-RUN dnf update -y ca-certificates --releasever 2023.1.20230823 && \
-    dnf update -y zlib --releasever 2023.2.20231030
+    dnf install -y --setopt=install_weak_deps=False --allowerasing ${DNF_PACKAGES} && \
+    dnf update -y ca-certificates --releasever 2023.1.20230823 && \
+    dnf update -y zlib --releasever 2023.2.20231030 && \
+    rm -rf /var/log/* && \
+    dnf clean all && \
+    rm -rf /var/cache/dnf
 
 RUN useradd -r -m -s /bin/bash appuser
-
-# Cleanup
-RUN rm -rf /var/log/* &&\
-    dnf clean all &&\
-    rm -rf /var/cache/dnf
 
 USER appuser
 
