@@ -18,7 +18,7 @@ FROM eclipse-temurin:17-jdk-jammy AS builder
 
 ARG CONDUCTOR_VERSION
 
-RUN apt-get update && apt-get install -y git && \
+RUN apt-get update && apt-get install -y --no-install-recommends git && \
     rm -rf /var/lib/apt/lists/*
 
 RUN git clone --depth=1 -b ${CONDUCTOR_VERSION} https://github.com/conductor-oss/conductor.git /conductor
@@ -50,10 +50,10 @@ USER root
 COPY files/openssl.cnf /tmp/openssl.cnf
 
 RUN mkdir -p /certs /var/log/supervisor && \
-    yum install -y nginx httpd-tools gettext && \
+    yum install -y --setopt=install_weak_deps=False nginx httpd-tools gettext && \
     yum clean all && \
     rm -rf /var/cache/yum && \
-    pip install supervisor && \
+    pip install --no-cache-dir supervisor && \
     openssl req -x509 -nodes -days 730 -newkey rsa:4096 \
     -out /certs/server.crt -keyout /certs/server.key \
     -config /tmp/openssl.cnf -extensions 'v3_req' && \
@@ -64,7 +64,7 @@ RUN mkdir -p /app/config /app/logs /app/libs
 
 # Install Java
 RUN dnf update && \
-    dnf install -y java-17-amazon-corretto && \
+    dnf install -y --setopt=install_weak_deps=False java-17-amazon-corretto && \
     dnf clean all
 
 # Copy the compiled output to new image

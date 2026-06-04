@@ -10,7 +10,7 @@ WORKDIR /opt/s3-server/
 RUN apk-install nodejs socat
 
 # Install s3-server
-ADD . /opt/s3-server/
+COPY . /opt/s3-server/
 RUN npm install --production
 
 # Keep RUN_CMD in sync with ENTRYPOINT and CMD or just use the wrapped shell with ENV VAR

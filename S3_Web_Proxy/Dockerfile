@@ -1,4 +1,4 @@
-ARG BUILD_IMAGE="nginx-nodejs-20-2023-supervisord"
+ARG BUILD_IMAGE="nginx-nodejs-24-2023-supervisord"
 FROM ${BUILD_IMAGE}
 
 LABEL org.opencontainers.image.authors="CJSE"
@@ -13,7 +13,7 @@ USER root
 
 COPY s3-server ${NODE_DIR}
 
-RUN yum install -y \
+RUN yum install -y --setopt=install_weak_deps=False \
     cronie \
     git && \
     mkdir -p /root/.aws && \
