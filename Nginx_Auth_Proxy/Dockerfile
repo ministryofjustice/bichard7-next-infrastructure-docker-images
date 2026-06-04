@@ -13,8 +13,8 @@ COPY files/nginx.repo /etc/yum.repos.d/nginx.repo
 
 RUN mkdir -p /certs /var/log/supervisor && \
     yum update -y && \
-    yum-config-manager --enable nginx-mainline && \
     yum install -y --setopt=install_weak_deps=False yum-utils nginx httpd-tools gettext && \
+    yum-config-manager --enable nginx-mainline && \
     yum clean all && \
     rm -rf /var/cache/yum && \
     openssl req -x509 -nodes -days 730 -newkey rsa:4096 -out /certs/server.crt \
