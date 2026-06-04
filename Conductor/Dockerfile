@@ -18,7 +18,7 @@ FROM eclipse-temurin:17-jdk-jammy AS builder
 
 ARG CONDUCTOR_VERSION
 
-RUN apt-get update && apt-get install -y git && \
+RUN apt-get update && apt-get install -y --no-install-recommends git && \
     rm -rf /var/lib/apt/lists/*
 
 RUN git clone --depth=1 -b ${CONDUCTOR_VERSION} https://github.com/conductor-oss/conductor.git /conductor
