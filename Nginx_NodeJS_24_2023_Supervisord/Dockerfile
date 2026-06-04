@@ -28,7 +28,7 @@ RUN mkdir -p /certs && \
       -extensions 'v3_req' && \
     rm -rf /tmp/openssl.cnf
 
-RUN pip install supervisor
+RUN pip install --no-cache-dir supervisor
 
 RUN chown -R node:node \
     /certs \

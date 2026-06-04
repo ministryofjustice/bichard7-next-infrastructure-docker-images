@@ -14,7 +14,7 @@ RUN yum install -y --setopt=install_weak_deps=False tzdata && \
 ENV TZ=Europe/London
 
 RUN yum install -y --setopt=install_weak_deps=False postfix cyrus-sasl rsyslog s-nail && \
-    pip install supervisor && \
+    pip install --no-cache-dir supervisor && \
     mkdir -p /var/log/supervisor && \
     sed -i -e 's/inet_interfaces = localhost/inet_interfaces = all/g' /etc/postfix/main.cf && \
     yum clean all && \

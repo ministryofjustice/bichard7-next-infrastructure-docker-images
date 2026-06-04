@@ -53,7 +53,7 @@ RUN mkdir -p /certs /var/log/supervisor && \
     yum install -y --setopt=install_weak_deps=False nginx httpd-tools gettext && \
     yum clean all && \
     rm -rf /var/cache/yum && \
-    pip install supervisor && \
+    pip install --no-cache-dir supervisor && \
     openssl req -x509 -nodes -days 730 -newkey rsa:4096 \
     -out /certs/server.crt -keyout /certs/server.key \
     -config /tmp/openssl.cnf -extensions 'v3_req' && \
