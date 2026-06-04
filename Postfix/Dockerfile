@@ -7,13 +7,13 @@ ARG CONFD_CHECKSUM="255d2559f3824dd64df059bdc533fd6b697c070db603c76aaf8d1d5e6b0c
 # We need to run as root for Postfix to work
 USER root
 
-RUN yum install -y tzdata && \
+RUN yum install -y --setopt=install_weak_deps=False tzdata && \
     ln -sf /usr/share/zoneinfo/Europe/London /etc/localtime && \
     echo "Europe/London" > /etc/timezone
 
 ENV TZ=Europe/London
 
-RUN yum install -y postfix cyrus-sasl rsyslog s-nail && \
+RUN yum install -y --setopt=install_weak_deps=False postfix cyrus-sasl rsyslog s-nail && \
     pip install supervisor && \
     mkdir -p /var/log/supervisor && \
     sed -i -e 's/inet_interfaces = localhost/inet_interfaces = all/g' /etc/postfix/main.cf && \

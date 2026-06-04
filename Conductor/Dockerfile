@@ -50,7 +50,7 @@ USER root
 COPY files/openssl.cnf /tmp/openssl.cnf
 
 RUN mkdir -p /certs /var/log/supervisor && \
-    yum install -y nginx httpd-tools gettext && \
+    yum install -y --setopt=install_weak_deps=False nginx httpd-tools gettext && \
     yum clean all && \
     rm -rf /var/cache/yum && \
     pip install supervisor && \
@@ -64,7 +64,7 @@ RUN mkdir -p /app/config /app/logs /app/libs
 
 # Install Java
 RUN dnf update && \
-    dnf install -y java-17-amazon-corretto && \
+    dnf install -y --setopt=install_weak_deps=False java-17-amazon-corretto && \
     dnf clean all
 
 # Copy the compiled output to new image
