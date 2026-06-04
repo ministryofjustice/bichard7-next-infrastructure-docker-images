@@ -12,13 +12,13 @@ USER root
 RUN mkdir -p /certs && \
     mkdir -p /var/log/supervisor && \
     yum update -y && \
-    yum install -y yum-utils
+    yum install -y --setopt=install_weak_deps=False yum-utils
 
 COPY files/nginx.repo /etc/yum.repos.d/nginx.repo
 
 RUN yum-config-manager --enable nginx-mainline && \
-    yum install -y nginx httpd-tools && \
-    pip install supervisor && \
+    yum install -y --setopt=install_weak_deps=False nginx httpd-tools && \
+    pip install --no-cache-dir supervisor && \
     yum clean all && \
     rm -rf /var/cache/yum && \
     openssl req -x509 -nodes -days 730 -newkey rsa:4096 -out /certs/server.crt \

@@ -33,7 +33,7 @@ file:
     filetype: directory
     owner: node
     group: node
-  /var/lib/nginx:
+  /var/cache/nginx:
     exists: true
     filetype: directory
     owner: node
@@ -81,7 +81,7 @@ user:
     exists: true
     groups:
       - nginx
-    home: /var/lib/nginx
+    home: /var/cache/nginx
     shell: /sbin/nologin
   nobody:
     exists: true
@@ -112,8 +112,6 @@ process:
     running: true
   nginx:
     running: true
-  node:
-    running: true
   python:
     running: false
   supervisord:
@@ -124,3 +122,7 @@ command:
     exit-status: 0
     stdout:
       - "node"
+  "supervisorctl status s3-server":
+    exit-status: 0
+    stdout:
+      - RUNNING

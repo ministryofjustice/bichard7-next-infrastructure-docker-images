@@ -14,7 +14,7 @@ export BROWSERS_SRC_DIR="/usr/src/browsers"
 mkdir -p $BROWSERS_SRC_DIR
 curl https://dl.google.com/linux/direct/google-chrome-stable_current_x86_64.rpm \
     --output $BROWSERS_SRC_DIR/google-chrome-stable_current_x86_64.rpm
-dnf install -y -q $BROWSERS_SRC_DIR/google-chrome-stable_current_x86_64.rpm
+dnf install -y --setopt=install_weak_deps=False -q $BROWSERS_SRC_DIR/google-chrome-stable_current_x86_64.rpm
 
 pip3 install --ignore-installed pip
 pip3 install ${PIP_PACKAGES}

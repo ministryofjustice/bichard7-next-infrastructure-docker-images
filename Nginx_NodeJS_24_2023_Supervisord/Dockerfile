@@ -12,7 +12,7 @@ USER root
 
 RUN mkdir -p /certs && \
     mkdir -p /var/log/supervisor && \
-    dnf install -y \
+    dnf install -y --setopt=install_weak_deps=False \
       nginx \
       httpd-tools && \
     dnf clean all && \
@@ -28,7 +28,7 @@ RUN mkdir -p /certs && \
       -extensions 'v3_req' && \
     rm -rf /tmp/openssl.cnf
 
-RUN pip install supervisor
+RUN pip install --no-cache-dir supervisor
 
 RUN chown -R node:node \
     /certs \

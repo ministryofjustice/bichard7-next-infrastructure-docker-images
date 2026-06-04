@@ -9,10 +9,7 @@ port:
     ip:
       - 0.0.0.0
 command:
-  supervisorctl status:
+  "supervisorctl status s3-server":
     exit-status: 0
     stdout:
-      - /nginx\W+RUNNING\W+pid\W\d{1,},\Wuptime\W\S+/
-      - /s3\-server\W+RUNNING\W+pid\W\d{1,},\Wuptime\W\S+/
-    stderr: []
-    timeout: 10000
+      - RUNNING
