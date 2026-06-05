@@ -4,12 +4,14 @@ FROM node:20-alpine AS ui-builder
 
 ARG CONDUCTOR_VERSION
 
-RUN apk add git
-RUN git clone --depth=1 -b ${CONDUCTOR_VERSION} https://github.com/conductor-oss/conductor.git /conductor
+RUN apk add git && \
+    git clone --depth=1 -b ${CONDUCTOR_VERSION} https://github.com/conductor-oss/conductor.git /conductor
 
 WORKDIR /conductor/ui
-RUN npm install --legacy-peer-deps
-RUN npm run build
+
+RUN npm install --legacy-peer-deps && \
+    npm cache clean --force && \
+    npm run build
 
 # ===========================================================================================================
 # 0. Builder stage
@@ -19,20 +21,20 @@ FROM eclipse-temurin:17-jdk-jammy AS builder
 ARG CONDUCTOR_VERSION
 
 RUN apt-get update && apt-get install -y --no-install-recommends git && \
+    git clone --depth=1 -b ${CONDUCTOR_VERSION} https://github.com/conductor-oss/conductor.git /conductor && \
     rm -rf /var/lib/apt/lists/*
-
-RUN git clone --depth=1 -b ${CONDUCTOR_VERSION} https://github.com/conductor-oss/conductor.git /conductor
 
 # Build the server
 
 WORKDIR /conductor
 
-RUN sed -i 's/^subprojects {$/ext["tomcat.version"] = "10.1.55"\n\n&/' build.gradle
-RUN sed -i "s/revRedisson = '3\.13\.3'/revRedisson = '3.22.0'/" dependencies.gradle
+RUN sed -i 's/^subprojects {$/ext["tomcat.version"] = "10.1.55"\n\n&/' build.gradle && \
+    sed -i "s/revRedisson = '3\.13\.3'/revRedisson = '3.22.0'/" dependencies.gradle
 
 #This will cache the downloaded gradle so repeated runs are faster
-RUN ./gradlew --version
-RUN ./gradlew build -x test
+RUN ./gradlew --version && \
+    ./gradlew build -x test && \
+    rm -rf /root/.gradle
 
 # ===========================================================================================================
 # 1. Bin stage
@@ -50,7 +52,7 @@ USER root
 COPY files/openssl.cnf /tmp/openssl.cnf
 
 RUN mkdir -p /certs /var/log/supervisor && \
-    yum install -y --setopt=install_weak_deps=False nginx httpd-tools gettext && \
+    yum install -y --setopt=install_weak_deps=False nginx httpd-tools gettext java-17-amazon-corretto && \
     yum clean all && \
     rm -rf /var/cache/yum && \
     pip install --no-cache-dir supervisor && \
@@ -61,11 +63,6 @@ RUN mkdir -p /certs /var/log/supervisor && \
 
 # Make app folders
 RUN mkdir -p /app/config /app/logs /app/libs
-
-# Install Java
-RUN dnf update && \
-    dnf install -y --setopt=install_weak_deps=False java-17-amazon-corretto && \
-    dnf clean all
 
 # Copy the compiled output to new image
 COPY --from=builder --chown=appuser:appuser /conductor/server/build/libs/*boot*.jar /app/libs/conductor-server.jar
