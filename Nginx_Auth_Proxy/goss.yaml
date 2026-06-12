@@ -121,3 +121,8 @@ command:
     exit-status: 0
     stdout:
       - "appuser"
+  nginx_package_source:
+    exec: "yum list installed nginx"
+    exit-status: 0
+    stdout:
+      - "@nginx-mainline"
