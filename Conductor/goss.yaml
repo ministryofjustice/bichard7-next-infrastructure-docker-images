@@ -35,7 +35,7 @@ file:
     filetype: directory
     owner: appuser
     group: appuser
-  /var/lib/nginx:
+  /var/cache/nginx:
     exists: true
     filetype: directory
     owner: appuser
@@ -135,7 +135,7 @@ user:
     exists: true
     groups:
       - nginx
-    home: /var/lib/nginx
+    home: /var/cache/nginx
     shell: /sbin/nologin
   nobody:
     exists: true
