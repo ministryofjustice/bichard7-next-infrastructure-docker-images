@@ -35,7 +35,7 @@ file:
     filetype: directory
     owner: appuser
     group: appuser
-  /var/lib/nginx:
+  /var/cache/nginx:
     exists: true
     filetype: directory
     owner: appuser
@@ -117,6 +117,11 @@ command:
     stdout:
       - /openjdk 17[\.\d]+ \d{4}-\d{2}-\d{2} LTS/
     timeout: 1000
+  nginx_package_source:
+    exec: "yum list installed nginx"
+    exit-status: 0
+    stdout:
+      - "@nginx-mainline"
 package:
   nginx:
     installed: true
@@ -135,7 +140,7 @@ user:
     exists: true
     groups:
       - nginx
-    home: /var/lib/nginx
+    home: /var/cache/nginx
     shell: /sbin/nologin
   nobody:
     exists: true

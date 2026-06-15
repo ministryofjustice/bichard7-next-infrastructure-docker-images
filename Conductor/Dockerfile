@@ -51,6 +51,8 @@ USER root
 
 COPY files/openssl.cnf /tmp/openssl.cnf
 
+COPY files/nginx.repo /etc/yum.repos.d/nginx.repo
+
 RUN mkdir -p /certs /var/log/supervisor && \
     yum install -y --setopt=install_weak_deps=False nginx httpd-tools gettext java-17-amazon-corretto && \
     yum clean all && \
@@ -84,7 +86,7 @@ RUN chmod 755 /bin/process_templates.sh && \
     chown -R appuser:appuser \
     /app \
     /certs \
-    /var/lib/nginx \
+    /var/cache/nginx \
     /var/log/nginx \
     /var/log/supervisor \
     /etc/nginx \
