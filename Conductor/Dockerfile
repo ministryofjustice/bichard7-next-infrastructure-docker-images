@@ -70,6 +70,7 @@ RUN mkdir -p /app/config /app/logs /app/libs
 COPY --from=builder --chown=appuser:appuser /conductor/server/build/libs/*boot*.jar /app/libs/conductor-server.jar
 
 # Copy the config files
+RUN rm /etc/nginx/conf.d/default.conf
 COPY files/nginx.conf /etc/nginx/nginx.conf
 COPY files/config.properties /app/config/config.properties
 COPY files/templates /etc/templates/
