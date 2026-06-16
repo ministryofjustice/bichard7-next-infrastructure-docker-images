@@ -450,6 +450,14 @@ describe("Testing Nginx config", () => {
           ).toEqual(`${protocol}://external.host`);
         }
       );
+
+      it("should not disclose web server", async () => {
+        const res = await axios.get(`${testHost}/`, {
+            ...axiosConfig,
+            maxRedirects: 0,
+        });
+        expect(res.headers.Server).toBeUndefined();
+      });
     });
   });
 });
