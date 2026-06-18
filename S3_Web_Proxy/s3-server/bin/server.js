@@ -20,6 +20,7 @@ var port = argv.p || argv.port || process.env.S3_SERVER_PORT || 3010;
 var securePort = argv.securePort || process.env.S3_SERVER_SECURE_PORT || 3020;
 var securePassphrase = argv.securePassphrase || process.env.S3_SERVER_SECURE_PASSPHRASE;
 var noCache = argv.noCache || process.env.NO_CACHE;
+const allowedOrigins = process.env.ALLOWED_ORIGINS || "*"
 
 var privateKey, certificate;
 if (process.env.S3_SERVER_SECURE_KEY_FILE || argv.secureKey) {
@@ -68,7 +69,7 @@ function serve(path, res){
       'Etag': data.ETag,
       'Content-Encoding': data.ContentEncoding,
       'Content-Type': data.ContentType,
-      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Origin': allowedOrigins,
       'Access-Control-Allow-Methods': 'GET',
       'Access-Control-Allow-Headers': 'Host,Content-*',
       'Access-Control-Max-Age': '3000',
