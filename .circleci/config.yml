@@ -10,6 +10,14 @@ commands:
             SANITIZED_BRANCH=$(echo "$CIRCLE_BRANCH" | sed 's/[^a-zA-Z0-9_.-]/-/g')
             echo "export DOCKER_TAG=${SANITIZED_BRANCH:-latest}" >> $BASH_ENV
 
+  enable_docker_container_image_store:
+    steps:
+      - run:
+          name: Enable Docker containerd image store
+          command: |
+            echo '{"features": {"containerd-snapshotter": true}}' | sudo tee /etc/docker/daemon.json
+            sudo systemctl restart docker
+
   checkout_core:
     steps:
       - run:
@@ -181,6 +189,7 @@ jobs:
       SKIP_GOSS: true
     steps:
       - checkout
+      - enable_docker_container_image_store
       - run: sudo apt-get update && sudo apt-get install -y pigz
       - build_node_nginx_supervisord_image
       - run:
@@ -219,6 +228,7 @@ jobs:
       SKIP_GOSS: true
     steps:
       - checkout_core
+      - enable_docker_container_image_store
       - run: sudo apt-get update && sudo apt-get install -y pigz
       - build_and_cache_image:
           image_name: bichard-postgres
@@ -244,6 +254,7 @@ jobs:
       SKIP_GOSS: true
     steps:
       - checkout
+      - enable_docker_container_image_store
       - run: sudo apt-get update && sudo apt-get install -y pigz
       - build_node_nginx_supervisord_image
       - checkout_core
@@ -272,6 +283,7 @@ jobs:
       SKIP_GOSS: true
     steps:
       - checkout
+      - enable_docker_container_image_store
       - set_docker_tag
       - run: sudo apt-get update && sudo apt-get install -y pigz
       - build_node_image
@@ -300,6 +312,7 @@ jobs:
       SKIP_GOSS: true
     steps:
       - checkout
+      - enable_docker_container_image_store
       - set_docker_tag
       - run: sudo apt-get update && sudo apt-get install -y pigz
       - checkout_core
@@ -328,6 +341,7 @@ jobs:
       SKIP_GOSS: true
     steps:
       - checkout
+      - enable_docker_container_image_store
       - set_docker_tag
       - run: sudo apt-get update && sudo apt-get install -y pigz
       - build_node_nginx_supervisord_image
@@ -356,6 +370,7 @@ jobs:
       SKIP_GOSS: true
     steps:
       - checkout
+      - enable_docker_container_image_store
       - set_docker_tag
       - run: sudo apt-get update && sudo apt-get install -y pigz
       - build_node_nginx_supervisord_image
