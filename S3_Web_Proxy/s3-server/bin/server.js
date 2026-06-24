@@ -96,8 +96,9 @@ app.use((req, res, next) => {
     } else {
         const allowedOrigins = process.env.ALLOWED_ORIGINS.split(",")
         const origin = req.headers.origin;
+        const originHostname = origin ? origin.replace(/^https?:\/\//, '') : '';
 
-        if (allowedOrigins.includes(origin)) {
+        if (allowedOrigins.includes(originHostname)) {
             res.setHeader('Access-Control-Allow-Origin', origin);
         }
     }
