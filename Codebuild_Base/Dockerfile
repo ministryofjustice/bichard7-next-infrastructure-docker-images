@@ -1,4 +1,4 @@
-FROM amazonlinux:2@sha256:a1e5e6cdff80b17052c02fe036cac59b4e85babb310470c1018bf46efbfa6999
+FROM amazonlinux:2@sha256:2582ac21e3f770177b45f8c9eb9e43b3a3034e2d2021c2a4ec97e2715f9c93b2
 
 ARG TERRAFORM_VERSION="1.8.4"
 ARG YUM_PACKAGES="python-pip python3-pip gzip tar unzip openssl shadow-utils xz wget gnupg curl jq git openvpn unzip"
