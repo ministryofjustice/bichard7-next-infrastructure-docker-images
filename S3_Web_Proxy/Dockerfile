@@ -25,14 +25,15 @@ RUN yum install -y --setopt=install_weak_deps=False \
     mkdir -p ${NODE_DIR} && \
     chown -R ${NODE_USER} ${NODE_DIR}
 
-RUN npm i -g npm-check-updates
+# RUN npm i -g npm-check-updates
 
-USER ${NODE_USER}
+    USER ${NODE_USER}
 
 WORKDIR ${NODE_DIR}
 
 # hadolint ignore=DL3002
-RUN ncu -u && npm i
+# RUN ncu -u && npm i
+RUN npm ci && npm cache clean --force
 
 USER root
 RUN npm link
