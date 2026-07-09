@@ -31,7 +31,9 @@ RUN yum install -y --setopt=install_weak_deps=False \
 
 WORKDIR ${NODE_DIR}
 
-RUN npm ci && npm cache --minimum-release-age=3 clean --force
+COPY package*.json ./
+
+RUN npm ci 
 
 
 USER root
