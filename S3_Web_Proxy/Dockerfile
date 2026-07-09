@@ -31,9 +31,8 @@ RUN yum install -y --setopt=install_weak_deps=False \
 
 WORKDIR ${NODE_DIR}
 
-# hadolint ignore=DL3002
-# RUN ncu -u && npm i
-RUN npm ci && npm cache clean --force
+RUN npm ci && npm cache --minimum-release-age=3 clean --force
+
 
 USER root
 RUN npm link
