@@ -30,7 +30,7 @@ USER ${NODE_USER}
 
 WORKDIR ${NODE_DIR}
 
-COPY s3-server/package*.json ${NODE_DIR}
+RUN COPY s3-server/package*.json ${NODE_DIR}
 
 RUN npm install --package-lock-only && \
 npm ci --ignore-scripts --no-audit \
