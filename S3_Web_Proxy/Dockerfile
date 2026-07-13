@@ -32,7 +32,7 @@ WORKDIR ${NODE_DIR}
 
 COPY s3-server/package*.json ${NODE_DIR}
 
-RUN npm install --ignore-scripts --no-audit \
+RUN npm ci --ignore-scripts --no-audit \
 && npm cache clean --force
 
 USER root
