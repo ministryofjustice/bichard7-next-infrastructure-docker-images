@@ -52,7 +52,7 @@ commands:
         default: "."
       lockfile:
         type: string
-        default: "package-lock.json"
+        default: "Dockerfile"
     steps:
       - restore_cache:
           name: Restore BuildKit cache for << parameters.image_name >>
