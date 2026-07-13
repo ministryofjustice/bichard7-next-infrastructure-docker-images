@@ -11,7 +11,6 @@ ARG NODE_USER="node"
 
 USER root
 
-
 RUN yum install -y --setopt=install_weak_deps=False \
     cronie \
     git && \
