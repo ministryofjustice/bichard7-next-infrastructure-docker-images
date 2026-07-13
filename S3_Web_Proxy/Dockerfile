@@ -23,13 +23,11 @@ RUN yum install -y --setopt=install_weak_deps=False \
     mkdir -p ${NODE_DIR} && \
     chown -R ${NODE_USER} ${NODE_DIR}
 
-COPY s3-server ${NODE_DIR}
-
-
 USER ${NODE_USER}
 
 WORKDIR ${NODE_DIR}
 
+COPY s3-server ${NODE_DIR}
 COPY s3-server/package.json ${NODE_DIR}
 
 RUN npm install --package-lock-only && \
