@@ -11,6 +11,8 @@ ARG NODE_USER="node"
 
 USER root
 
+COPY s3-server ${NODE_DIR}
+
 RUN yum install -y --setopt=install_weak_deps=False \
     cronie \
     git && \
@@ -27,7 +29,7 @@ USER ${NODE_USER}
 
 WORKDIR ${NODE_DIR}
 
-COPY s3-server ${NODE_DIR}
+COPY s3-server ${NODE_DIR}}
 COPY s3-server/package.json ${NODE_DIR}
 
 RUN npm install --package-lock-only && \
