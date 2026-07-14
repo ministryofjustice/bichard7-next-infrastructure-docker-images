@@ -28,7 +28,7 @@ USER ${NODE_USER}
 
 WORKDIR ${NODE_DIR}
 
-COPY s3-server/package.json ${NODE_DIR}
+COPY s3-server/package*.json ${NODE_DIR}
 
 RUN npm ci --ignore-scripts --no-audit \
 && npm cache clean --force
