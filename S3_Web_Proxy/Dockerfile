@@ -14,7 +14,6 @@ USER root
 RUN yum install -y --setopt=install_weak_deps=False \
     cronie \
     git && \
-    gottext-devel && \
     mkdir -p /root/.aws && \
     mkdir -p /nginx_auth && \
     chmod +x /bin/run_nginx && \
