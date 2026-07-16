@@ -11,8 +11,6 @@ ARG NODE_USER="node"
 
 USER root
 
-COPY s3-server ${NODE_DIR}
-
 RUN yum install -y --setopt=install_weak_deps=False \
     cronie \
     git && \
@@ -25,14 +23,17 @@ RUN yum install -y --setopt=install_weak_deps=False \
     mkdir -p ${NODE_DIR} && \
     chown -R ${NODE_USER} ${NODE_DIR}
 
-RUN npm i -g npm-check-updates
 
 USER ${NODE_USER}
 
 WORKDIR ${NODE_DIR}
 
-# hadolint ignore=DL3002
-RUN ncu -u && npm i
+COPY s3-server/package*.json ${NODE_DIR}
+
+RUN npm ci --ignore-scripts --no-audit \
+&& npm cache clean --force
+
+COPY s3-server ${NODE_DIR}
 
 USER root
 RUN npm link
