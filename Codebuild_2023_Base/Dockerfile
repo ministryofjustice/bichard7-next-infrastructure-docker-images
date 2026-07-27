@@ -3,6 +3,8 @@ FROM ${BUILD_IMAGE}
 
 ARG TERRAFORM_VERSION="1.12.1"
 ARG NODE_VERSION="24.14.0"
+# We're pinning NPM to fix CVE-2026-59873 - The version of NPM installed with Node 24.14.0 does not have a new enough version of NPM
+ARG NPM_VERSION="11.18.0"
 ARG DNF_PACKAGES="python python-pip python3-pip jq git ruby ruby-devel"
 ARG TEST_PACKAGES="which"
 ARG PIP_PACKAGES="awscli boto3 click botocore requests"
