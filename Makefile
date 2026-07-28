@@ -1,6 +1,8 @@
 BASE_CONTAINERS:= Postfix Codebuild_Base Codebuild_2023_Base Amazon_Linux_2023_Base NodeJS_24_2023
+NGINX_CONTAINERS:= Nginx_Auth_Proxy Conductor Nginx_NodeJS_24_2023_Supervisord
 
 AL2_IMAGES:= Codebuild_Base
+AL2023_IMAGES:= Codebuild_2023_Base NodeJS_24_2023 Nginx_NodeJS_24_2023_Supervisord Nginx_Auth_Proxy Postfix
 
 .PHONY: $(BASE_CONTAINERS) $(NGINX_CONTAINERS) Liquibase
 

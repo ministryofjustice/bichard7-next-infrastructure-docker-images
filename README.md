@@ -10,7 +10,6 @@ Docker image builds for the Bichard7 project
     -   [Postfix](./Postfix/Dockerfile) - Postfix Mail Server
     -   [NodeJS 20 2023](./NodeJS_20_2023/) - Node 20 on Amazon Linux 2023
         -   [Nginx Node.js 20 2023 Supervisord](./Nginx_NodeJS_20_2023_Supervisord/) - The above with Nginx and Supervisord installed
-            -   [S3 Web Proxy](./S3_Web_Proxy/Dockerfile) - Used to serve files from S3
             -   Used by: [Bichard UI](https://github.com/ministryofjustice/bichard7-next-core/blob/main/packages/ui/Dockerfile)
             -   Used by: [Bichard User Service](https://github.com/ministryofjustice/bichard7-next-core/blob/main/packages/user-service/Dockerfile)
             -   Used by: [Bichard API](https://github.com/ministryofjustice/bichard7-next-core/blob/main/packages/api/Dockerfile)
