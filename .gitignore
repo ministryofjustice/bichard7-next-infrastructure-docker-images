@@ -51,7 +51,6 @@ credentials
 packer.log
 .lock_token
 Nginx_Auth_Proxy/test/node_modules
-S3_Web_Proxy/s3-server/node_modules
 ci.docker/
 Grafana/*.env
 # Conductor source
