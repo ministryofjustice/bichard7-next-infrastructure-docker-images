@@ -2,9 +2,10 @@
 
 set -e
 
+BUILD_IMAGE="amazon-linux2023-base:${DOCKER_TAG:-latest}"
 IMAGE="codebuild-2023-base"
 
-docker build --platform=linux/amd64 -t "${IMAGE}" . 
+docker build --platform=linux/amd64 --build-arg BUILD_IMAGE="${BUILD_IMAGE}" -t "${IMAGE}" .
 
 if [ "$SKIP_GOSS" = "true" ]; then
   echo "Skipping dgoss tests"
