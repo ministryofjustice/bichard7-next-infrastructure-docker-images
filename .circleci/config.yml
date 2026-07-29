@@ -382,7 +382,7 @@ jobs:
       - checkout_core
       - build_and_cache_image:
           image_name: s3-web-proxy
-          dockerfile: ~/bichard7-next-core/packages/s3-web-proxy/s3-server/Dockerfile
+          dockerfile: ~/bichard7-next-core/packages/s3_web_proxy/s3_server/Dockerfile
           cache_key: buildkit-s3-web-proxy
           lockfile: ~/bichard7-next-core/package-lock.json
           context: ~/bichard7-next-core
