@@ -54,6 +54,3 @@ Nginx_Auth_Proxy/test/node_modules
 S3_Web_Proxy/s3-server/node_modules
 ci.docker/
 Grafana/*.env
-# Conductor source
-Conductor/conductor
-conductor.tar.gz
