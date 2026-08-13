@@ -168,9 +168,12 @@ jobs:
     machine:
       image: ubuntu-2204:current
     resource_class: medium
+    environment:
+      SKIP_GOSS: true
     steps:
       - checkout
       - install_goss
+      - run: make Amazon_Linux_2023_Base
       - enable_docker_container_image_store
       - set_docker_tag
       - run: sudo apt-get update && sudo apt-get install -y pigz
