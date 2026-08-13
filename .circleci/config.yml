@@ -164,13 +164,17 @@ jobs:
     resource_class: medium
     steps:
       - checkout
+      - enable_docker_container_image_store
+      - set_docker_tag
       - run: sudo apt-get update && sudo apt-get install -y pigz
-      - run:
-          name: Install goss
-          command: sudo bash scripts/install_goss.sh
-      - run:
-          name: Build Conductor image
-          command: make Conductor
+      - checkout_core
+      - build_node_nginx_supervisord_image
+      - build_and_cache_image:
+          image_name: conductor
+          dockerfile: ~/bichard7-next-core/environment/conductor/Dockerfile
+          cache_key: buildkit-conductor
+          image_tag: latest
+          context: ~/bichard7-next-core/environment/conductor
       - run:
           name: Save Docker image
           command: |
