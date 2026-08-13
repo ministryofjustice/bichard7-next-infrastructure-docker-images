@@ -454,8 +454,8 @@ workflows:
     jobs:
       - build_amazon_linux_2_images
       - build_amazon_linux_2023_images
-      - build_conductor_image
 
+      - build_conductor_image
       - build_audit_logging_images
       - build_postgres_image
       - build_message_forwarder_image
