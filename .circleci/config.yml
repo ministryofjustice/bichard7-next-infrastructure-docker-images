@@ -24,6 +24,12 @@ commands:
           name: Checkout the Core repo
           command: git clone --depth 1 https://github.com/ministryofjustice/bichard7-next-core.git ~/bichard7-next-core
 
+  install_goss:
+    steps:
+      - run:
+          name: Install Goss
+          command: sudo bash scripts/install_goss.sh
+
   build_node_image:
     steps:
       - run:
@@ -145,7 +151,7 @@ jobs:
     resource_class: xlarge
     steps:
       - checkout
-      - run: sudo bash scripts/install_goss.sh
+      - install_goss
       - run: make build-al2
 
   build_amazon_linux_2023_images:
@@ -155,7 +161,7 @@ jobs:
     resource_class: xlarge
     steps:
       - checkout
-      - run: sudo bash scripts/install_goss.sh
+      - install_goss
       - run: make build-al2023
 
   build_conductor_image:
@@ -164,11 +170,11 @@ jobs:
     resource_class: medium
     steps:
       - checkout
+      - install_goss
       - enable_docker_container_image_store
       - set_docker_tag
       - run: sudo apt-get update && sudo apt-get install -y pigz
       - checkout_core
-      - build_node_nginx_supervisord_image
       - build_and_cache_image:
           image_name: conductor
           dockerfile: ~/bichard7-next-core/environment/conductor/Dockerfile
@@ -180,6 +186,10 @@ jobs:
           command: |
             mkdir -p images
             docker image save "conductor:latest" | pigz > "images/conductor.tar.gz"
+      - run:
+          name: Run Goss Tests
+          working_directory: ~/bichard7-next-core/environment/conductor
+          command: make goss
       - persist_to_workspace:
           root: .
           paths:
@@ -446,7 +456,7 @@ jobs:
     resource_class: large
     steps:
       - checkout
-      - run: sudo bash scripts/install_goss.sh
+      - install_goss
       - run: make Liquibase
 
 workflows:
