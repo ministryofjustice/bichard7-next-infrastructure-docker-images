@@ -1,4 +1,4 @@
-FROM liquibase/liquibase:5.0@sha256:dfe136c26d39088d87d1bd27f833d6ac5b738a180d7c960b065c7be525725d01
+FROM liquibase/liquibase:5.0@sha256:060f96efff4811ccf03957ff3160f21ea04139b89940640f8ad54a065cdc6906
 
 LABEL org.opencontainers.image.authors="CJSE"
 
