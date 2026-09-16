@@ -14,6 +14,8 @@ RUN dnf update -y && \
 
 RUN useradd -r -m -s /bin/bash appuser
 
+COPY files/nginx.repo /etc/yum.repos.d/nginx.repo
+
 USER appuser
 
 CMD ["tail", "-f", "/dev/null"]
