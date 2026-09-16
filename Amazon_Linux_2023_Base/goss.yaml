@@ -6,6 +6,11 @@ file:
     group: root
     filetype: file
     contains: []
+  /etc/yum.repos.d/nginx.repo:
+    exists: true
+    owner: root
+    group: root
+    filetype: file
 user:
   nobody:
     exists: true
