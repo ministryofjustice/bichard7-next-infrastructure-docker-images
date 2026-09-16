@@ -9,8 +9,6 @@ COPY files/openssl.cnf /tmp/openssl.cnf
 
 USER root
 
-COPY files/nginx.repo /etc/yum.repos.d/nginx.repo
-
 RUN mkdir -p /certs /var/log/supervisor && \
     yum update -y && \
     yum install -y --setopt=install_weak_deps=False nginx httpd-tools gettext && \
