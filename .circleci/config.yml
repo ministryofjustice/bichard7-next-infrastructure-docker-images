@@ -63,7 +63,7 @@ commands:
       - restore_cache:
           name: Restore BuildKit cache for << parameters.image_name >>
           keys:
-            - << parameters.cache_key >>-{{ checksum "<< parameters.dockerfile >>" }}-{{ checksum "<< parameters.lockfile >>" }}
+            - << parameters.cache_key >>-{{ checksum "<< parameters.dockerfile >>" }}-{{ checksum "<< parameters.lockfile >>" }}-
             - << parameters.cache_key >>-{{ checksum "<< parameters.dockerfile >>" }}-
             - << parameters.cache_key >>-
       - run:
@@ -428,7 +428,7 @@ jobs:
           image_name: nginx-auth-proxy
           dockerfile: ~/bichard7-next-core/packages/nginx-auth-proxy/Dockerfile
           cache_key: buildkit-nginx-auth-proxy
-          context: ~/bichard7-next-core/package/nginx-auth-proxy
+          context: ~/bichard7-next-core/packages/nginx-auth-proxy
       - run:
           name: Save Docker image
           command: |
