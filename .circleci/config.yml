@@ -444,7 +444,7 @@ jobs:
           name: Save Docker image
           command: |
             mkdir -p images
-            docker image save "nginx-auth-proxy:latest" | pigz > "images/nginx-auth-proxy.tar.gz"
+            docker image save "nginx-auth-proxy:${DOCKER_TAG}" | pigz > "images/nginx-auth-proxy.tar.gz"
       - persist_to_workspace:
           root: .
           paths:
