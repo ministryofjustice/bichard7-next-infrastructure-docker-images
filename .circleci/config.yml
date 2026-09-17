@@ -430,14 +430,21 @@ jobs:
           cache_key: buildkit-nginx-auth-proxy
           context: ~/bichard7-next-core/packages/nginx-auth-proxy
       - run:
+          name: Run Goss Tests
+          working_directory: ~/bichard7-next-core/packages/nginx-auth-proxy
+          command: |
+            docker tag "nginx-auth-proxy:${DOCKER_TAG}" "nginx-auth-proxy:latest"
+            make goss
+      - build_node_image
+      - run:
+          name: Run unit tests
+          working_directory: ~/bichard7-next-core/packages/nginx-auth-proxy
+          command: make unit-test-nginx
+      - run:
           name: Save Docker image
           command: |
             mkdir -p images
             docker image save "nginx-auth-proxy:latest" | pigz > "images/nginx-auth-proxy.tar.gz"
-      - run:
-          name: Run Goss Tests
-          working_directory: ~/bichard7-next-core/packages/nginx-auth-proxy
-          command: make goss
       - persist_to_workspace:
           root: .
           paths:
