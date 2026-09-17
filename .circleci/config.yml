@@ -427,8 +427,7 @@ jobs:
       - build_and_cache_image:
           image_name: nginx-auth-proxy
           dockerfile: ~/bichard7-next-core/packages/nginx-auth-proxy/Dockerfile
-          cache_key: buildkit-conductor
-          image_tag: latest
+          cache_key: buildkit-nginx-auth-proxy
           context: ~/bichard7-next-core/package/nginx-auth-proxy
       - run:
           name: Save Docker image
