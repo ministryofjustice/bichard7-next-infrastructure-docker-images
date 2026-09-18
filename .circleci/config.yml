@@ -63,7 +63,7 @@ commands:
       - restore_cache:
           name: Restore BuildKit cache for << parameters.image_name >>
           keys:
-            - << parameters.cache_key >>-{{ checksum "<< parameters.dockerfile >>" }}-{{ checksum "<< parameters.lockfile >>" }}
+            - << parameters.cache_key >>-{{ checksum "<< parameters.dockerfile >>" }}-{{ checksum "<< parameters.lockfile >>" }}-
             - << parameters.cache_key >>-{{ checksum "<< parameters.dockerfile >>" }}-
             - << parameters.cache_key >>-
       - run:
@@ -142,6 +142,12 @@ commands:
       - run:
           name: Load user-service image
           command: docker image load < "images/user-service.tar.gz"
+
+  load_nginx_auth_proxy_image:
+    steps:
+      - run:
+          name: Load nginx auth proxy image
+          command: docker image load < "images/nginx-auth-proxy.tar.gz"
 
 jobs:
   build_amazon_linux_2_images:
@@ -406,6 +412,44 @@ jobs:
           paths:
             - images
 
+  build_nginx_auth_proxy_image:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: medium
+    steps:
+      - checkout
+      - install_goss
+      - enable_docker_container_image_store
+      - set_docker_tag
+      - run: sudo apt-get update && sudo apt-get install -y pigz
+      - run: SKIP_GOSS=true make Amazon_Linux_2023_Base
+      - checkout_core
+      - build_and_cache_image:
+          image_name: nginx-auth-proxy
+          dockerfile: ~/bichard7-next-core/packages/nginx-auth-proxy/Dockerfile
+          cache_key: buildkit-nginx-auth-proxy
+          context: ~/bichard7-next-core/packages/nginx-auth-proxy
+      - run:
+          name: Run Goss Tests
+          working_directory: ~/bichard7-next-core/packages/nginx-auth-proxy
+          command: |
+            docker tag "nginx-auth-proxy:${DOCKER_TAG}" "nginx-auth-proxy:latest"
+            make goss
+      - build_node_image
+      - run:
+          name: Run unit tests
+          working_directory: ~/bichard7-next-core/packages/nginx-auth-proxy
+          command: make unit-test-nginx
+      - run:
+          name: Save Docker image
+          command: |
+            mkdir -p images
+            docker image save "nginx-auth-proxy:${DOCKER_TAG}" | pigz > "images/nginx-auth-proxy.tar.gz"
+      - persist_to_workspace:
+          root: .
+          paths:
+            - images
+
   test_conductor:
     machine:
       image: ubuntu-2204:current
@@ -426,6 +470,7 @@ jobs:
       - load_ui_image
       - load_api_image
       - load_user_service_image
+      - load_nginx_auth_proxy_image
       - checkout_core
       - run:
           working_directory: ~/bichard7-next-core
@@ -474,6 +519,7 @@ workflows:
       - build_ui_image
       - build_api_image
       - build_user_service_image
+      - build_nginx_auth_proxy_image
 
       - test_liquibase
 
@@ -487,3 +533,4 @@ workflows:
             - build_ui_image
             - build_api_image
             - build_user_service_image
+            - build_nginx_auth_proxy_image
