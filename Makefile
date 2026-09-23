@@ -1,14 +1,12 @@
-BASE_CONTAINERS:= Postfix Codebuild_Base Codebuild_2023_Base Amazon_Linux_2023_Base NodeJS_24_2023
+BASE_CONTAINERS:= Postfix Codebuild_2023_Base Amazon_Linux_2023_Base NodeJS_24_2023
 NGINX_CONTAINERS:= Nginx_NodeJS_24_2023_Supervisord
 
-AL2_IMAGES:= Codebuild_Base
 AL2023_IMAGES:= Codebuild_2023_Base NodeJS_24_2023 Nginx_NodeJS_24_2023_Supervisord Postfix
 
 .PHONY: $(BASE_CONTAINERS) $(NGINX_CONTAINERS) Liquibase
 
 build-base: $(BASE_CONTAINERS)
 build-nginx: $(NGINX_CONTAINERS)
-build-al2: $(AL2_IMAGES)
 build-al2023: $(AL2023_IMAGES)
 
 build-all: build-base build-nginx
