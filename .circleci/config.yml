@@ -150,16 +150,6 @@ commands:
           command: docker image load < "images/nginx-auth-proxy.tar.gz"
 
 jobs:
-  build_amazon_linux_2_images:
-    machine:
-      image: ubuntu-2204:current
-      docker_layer_caching: false
-    resource_class: xlarge
-    steps:
-      - checkout
-      - install_goss
-      - run: make build-al2
-
   build_amazon_linux_2023_images:
     machine:
       image: ubuntu-2204:current
@@ -508,7 +498,6 @@ jobs:
 workflows:
   build_and_test:
     jobs:
-      - build_amazon_linux_2_images
       - build_amazon_linux_2023_images
 
       - build_conductor_image
