@@ -10,7 +10,6 @@ updates:
     directories:
       - "/Amazon_Linux_2023_Base/"
       - "/Liquibase/"
-      - "/Codebuild_Base/"
     registries:
       - dockerhub
     schedule:
