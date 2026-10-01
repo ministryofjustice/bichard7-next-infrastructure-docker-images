@@ -5,6 +5,7 @@ set -ex
 groupadd --gid ${NODE_GUID} ${NODE_USER}
 useradd --uid ${NODE_GUID} --gid ${NODE_USER} --shell /bin/bash --create-home ${NODE_USER}
 for key in \
+5BE8A3F6C8A5C01D106C0AD820B1A390B168D356 \
 4ED778F539E3634C779C87C6D7062848A1AB005C \
 94AE36675C464D64BAFA68DD7434390BDBE9B9C5 \
 74F12602B6F1C4E913FAA37AD3A89613643B6201 \
@@ -26,6 +27,5 @@ grep " node-v$NODE_VERSION-linux-$ARCH.tar.xz\$" SHASUMS256.txt | sha256sum -c -
 tar -xJf "node-v$NODE_VERSION-linux-$ARCH.tar.xz" -C /usr/local --strip-components=1 --no-same-owner
 rm "node-v$NODE_VERSION-linux-$ARCH.tar.xz" SHASUMS256.txt.asc SHASUMS256.txt
 ln -s /usr/local/bin/node /usr/local/bin/nodejs
-npm install -g npm@$NPM_VERSION
 node --version
 npm --version
