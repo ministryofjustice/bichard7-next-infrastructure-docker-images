@@ -1,7 +1,7 @@
 FROM amazonlinux:2@sha256:f962447192b7321863c0c15ebe3b52896a0fc175b5bbcc103e12275c0304f343
 
 ARG TERRAFORM_VERSION="1.8.4"
-ARG YUM_PACKAGES="python-pip python3-pip gzip tar unzip openssl shadow-utils xz wget gnupg curl jq git openvpn unzip"
+ARG YUM_PACKAGES="python-pip python3-pip gzip tar unzip openssl shadow-utils xz wget gnupg2 curl jq git openvpn unzip"
 ARG TEST_PACKAGES="which chromium"
 ARG PIP_PACKAGES="awscli boto3 click botocore requests"
 ARG ARCH="x64"
