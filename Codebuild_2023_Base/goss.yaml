@@ -55,16 +55,13 @@ command:
       - click
       - colorama
       - docutils
-      - gpg
       - idna
       - jmespath
-      - libcomps
       - pip
       - pyasn1
       - python-dateutil
       - PyYAML
       - requests
-      - rpm
       - rsa
       - s3transfer
       - six
@@ -72,11 +69,11 @@ command:
   python --version:
     exit-status: 0
     stdout:
-      - /Python 3.9.\d{2,}/
+      - /Python 3.11.\d{2,}/
   python3 --version:
     exit-status: 0
     stdout:
-      - /Python 3.9.\d{2,}/
+      - /Python 3.11.\d{2,}/
     timeout: 10000
   /usr/bin/google-chrome-stable --version:
     exit-status: 0

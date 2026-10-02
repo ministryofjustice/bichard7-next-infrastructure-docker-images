@@ -3,7 +3,7 @@ FROM ${BUILD_IMAGE}
 
 ARG TERRAFORM_VERSION="1.15.8"
 ARG NODE_VERSION="24.21.0"
-ARG DNF_PACKAGES="python python-pip python3-pip jq git ruby ruby-devel"
+ARG DNF_PACKAGES="python3.11 python3.11-pip python3.11-pip jq git ruby ruby-devel"
 ARG TEST_PACKAGES="which"
 ARG PIP_PACKAGES="awscli boto3 click botocore requests"
 ARG ARCH="x64"
