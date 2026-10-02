@@ -10,6 +10,7 @@ dnf install -y --allowerasing dirmngr
 
 # Point PATH-based 'python3' and 'pip3' calls to 3.11 safely
 ln -sf /usr/bin/python3.11 /usr/local/bin/python3
+ln -sf /usr/bin/python3.11 /usr/local/bin/python
 ln -sf /usr/bin/pip3.11 /usr/local/bin/pip3
 
 gem install bundler
