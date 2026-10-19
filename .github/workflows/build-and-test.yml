@@ -20,4 +20,4 @@ jobs:
 
       - name: Build Images And Run Goss Tests
         shell: bash
-        run: build-al2023
+        run: make build-al2023
