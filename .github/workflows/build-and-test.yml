@@ -16,7 +16,7 @@ jobs:
 
       - name: Install Goss
         shell: bash
-        run: ./scripts/install-goss.sh
+        run: ./scripts/install_goss.sh
 
       - name: Build Images And Run Goss Tests
         shell: bash
