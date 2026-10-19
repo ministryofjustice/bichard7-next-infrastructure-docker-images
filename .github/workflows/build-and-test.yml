@@ -1,0 +1,23 @@
+name: Build and Test
+on:
+  workflow_dispatch:
+  pull_request:
+  merge_group:
+    types: [checks_requested]
+
+jobs:
+  build_amazon_linux_2023_based_images:
+    name: Build Amazon Linux 2023 Based Images
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - name: Install Goss
+        shell: bash
+        run: ./scripts/install-goss.sh
+
+      - name: Build Images And Run Goss Tests
+        shell: bash
+        run: build-al2023
