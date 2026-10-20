@@ -21,3 +21,19 @@ jobs:
       - name: Build Images And Run Goss Tests
         shell: bash
         run: make build-al2023
+
+  build_liquibase:
+    name: Build Liquibase
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - name: Install Goss
+        shell: bash
+        run: ./scripts/install_goss.sh
+
+      - name: Build Image And Run Goss Tests
+        shell: bash
+        run: make Liquibase
