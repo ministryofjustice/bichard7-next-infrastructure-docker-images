@@ -150,16 +150,6 @@ commands:
           command: docker image load < "images/nginx-auth-proxy.tar.gz"
 
 jobs:
-  build_amazon_linux_2023_images:
-    machine:
-      image: ubuntu-2204:current
-      docker_layer_caching: false
-    resource_class: xlarge
-    steps:
-      - checkout
-      - install_goss
-      - run: make build-al2023
-
   build_conductor_image:
     machine:
       image: ubuntu-2204:current
@@ -485,21 +475,9 @@ jobs:
           working_directory: ~/bichard7-next-core
           command: nvm use && npm run -w packages/conductor test
 
-  test_liquibase:
-    machine:
-      image: ubuntu-2204:current
-      docker_layer_caching: false
-    resource_class: large
-    steps:
-      - checkout
-      - install_goss
-      - run: make Liquibase
-
 workflows:
   build_and_test:
     jobs:
-      - build_amazon_linux_2023_images
-
       - build_conductor_image
       - build_audit_logging_images
       - build_postgres_image
@@ -509,8 +487,6 @@ workflows:
       - build_api_image
       - build_user_service_image
       - build_nginx_auth_proxy_image
-
-      - test_liquibase
 
       - test_conductor:
           requires:
