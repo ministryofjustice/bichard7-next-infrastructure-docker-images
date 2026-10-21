@@ -5,7 +5,6 @@ ARG TERRAFORM_VERSION="1.15.8"
 ARG NODE_VERSION="24.21.0"
 ARG DNF_PACKAGES="python3.11 python3.11-pip python3.11-pip jq git ruby ruby-devel"
 ARG TEST_PACKAGES="which"
-ARG PIP_PACKAGES="awscli boto3 click botocore requests"
 ARG ARCH="x64"
 ARG NODE_USER="node"
 ARG NODE_GUID=1000
@@ -23,5 +22,10 @@ RUN bash /tmp/install_packages.sh && \
     rm -rf /var/cache/dnf && \
     rm -rf /tmp/*.zip && \
     rm -rf /tmp/*.sh
+
+COPY requirements.txt /tmp/requirements.txt
+RUN python3.11 -m pip install --no-cache-dir --upgrade pip && \
+    python3.11 -m pip install --no-cache-dir -r /tmp/requirements.txt && \
+    rm -f /tmp/requirements.txt
 
 CMD ["tail", "-f", "/dev/null"]
