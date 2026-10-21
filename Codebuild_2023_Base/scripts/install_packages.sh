@@ -20,7 +20,3 @@ mkdir -p $BROWSERS_SRC_DIR
 curl https://dl.google.com/linux/direct/google-chrome-stable_current_x86_64.rpm \
     --output $BROWSERS_SRC_DIR/google-chrome-stable_current_x86_64.rpm
 dnf install -y --setopt=install_weak_deps=False -q $BROWSERS_SRC_DIR/google-chrome-stable_current_x86_64.rpm
-
-# Upgrade pip and install packages targeting Python 3.11
-python3.11 -m pip install --upgrade pip
-python3.11 -m pip install ${PIP_PACKAGES}

@@ -29,3 +29,13 @@ updates:
       interval: "weekly"
     cooldown:
       default-days: 3
+  - package-ecosystem: "pip"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    cooldown:
+      default-days: 3
+    groups:
+      python-dependencies:
+        patterns:
+          - "*"
