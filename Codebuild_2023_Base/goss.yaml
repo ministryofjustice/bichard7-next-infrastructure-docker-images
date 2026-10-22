@@ -11,8 +11,6 @@ package:
     installed: true
   openssl:
     installed: true
-  python3-pip:
-    installed: true
   python3:
     installed: true
   unzip:
