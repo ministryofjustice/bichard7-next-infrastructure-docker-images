@@ -32,8 +32,12 @@ command:
     exit-status: 0
     stdout:
       - "appuser"
-  check_pip_version:
-    exec: "pip --version"
+  python3 --version:
+    exit-status: 0
+    stdout:
+      - /Python 3.11.\d{2,}/
+    timeout: 10000
+  pip --version:
     exit-status: 0
     stdout:
       - /26.2.2/
