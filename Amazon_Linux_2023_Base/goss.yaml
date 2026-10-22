@@ -35,6 +35,9 @@ command:
   check_pip_version:
     exec: "pip --version"
     exit-status: 0
+    stdout:
+      - /26.2.2/
+    timeout: 10000
 package:
   gzip:
     installed: true
