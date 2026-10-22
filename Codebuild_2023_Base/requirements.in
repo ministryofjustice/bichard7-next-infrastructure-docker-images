@@ -3,3 +3,4 @@ boto3
 botocore
 click
 requests
+slack_sdk
