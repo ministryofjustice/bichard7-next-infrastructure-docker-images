@@ -3,7 +3,7 @@ FROM amazonlinux:2023@sha256:8ed3c0a996841537f75607e7d1de2114d8150391f75792e8da9
 LABEL org.opencontainers.image.authors="CJSE"
 
 ARG PIP_VERSION="26.2.2"
-ARG DNF_PACKAGES="pip gzip tar unzip openssl shadow-utils xz wget gnupg dirmngr systemd-networkd"
+ARG DNF_PACKAGES="python3.11 python3.11-pip gzip tar unzip openssl shadow-utils xz wget gnupg dirmngr systemd-networkd"
 
 # Install required packages
 RUN dnf update -y && \
