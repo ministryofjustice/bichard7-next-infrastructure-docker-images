@@ -27,8 +27,8 @@ RUN groupadd --gid ${NODE_GUID} ${NODE_USER} && \
         655F3B5C1FB3FA8D1A0CA6BDE4A7D232B936D2FD \
         A363A499291CBBC940DD62E41F10027AF002F8B0 \
     ; do \
-      gpg --batch --keyserver hkp://keyserver.ubuntu.com --recv-keys "$key" || \
-      gpg --batch --keyserver hkp://pgp.mit.edu:80 --recv-keys "$key" ; \
+      gpg --batch --keyserver hkps://keyserver.ubuntu.com --recv-keys "$key" || \
+      gpg --batch --keyserver hkps://keys.openpgp.org --recv-keys "$key" ; \
     done && \
     curl -fsSLO --compressed "https://nodejs.org/dist/v$NODE_VERSION/node-v$NODE_VERSION-linux-$ARCH.tar.xz" && \
     curl -fsSLO --compressed "https://nodejs.org/dist/v$NODE_VERSION/SHASUMS256.txt.asc" && \

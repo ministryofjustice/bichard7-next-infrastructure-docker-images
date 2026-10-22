@@ -53,3 +53,6 @@ packer.log
 Nginx_Auth_Proxy/test/node_modules
 ci.docker/
 Grafana/*.env
+
+# Temporary goss variable for NODE_VERSION
+goss-vars.yml
