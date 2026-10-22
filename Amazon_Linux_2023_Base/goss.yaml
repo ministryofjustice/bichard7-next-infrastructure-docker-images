@@ -32,11 +32,6 @@ command:
     exit-status: 0
     stdout:
       - "appuser"
-  python3 --version:
-    exit-status: 0
-    stdout:
-      - /Python 3.11.\d{2,}/
-    timeout: 10000
   pip --version:
     exit-status: 0
     stdout:

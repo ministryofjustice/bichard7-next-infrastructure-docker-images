@@ -10,7 +10,7 @@ RUN dnf update -y && \
     dnf install -y --setopt=install_weak_deps=False --allowerasing ${DNF_PACKAGES} && \
     dnf update -y ca-certificates --releasever 2023.1.20230823 && \
     dnf update -y zlib --releasever 2023.2.20231030 && \
-    python3 -m pip install --no-cache-dir "pip==${PIP_VERSION}" && \
+    python3.11 -m pip install --no-cache-dir "pip==${PIP_VERSION}" && \
     rm -rf /var/log/* && \
     dnf clean all && \
     rm -rf /var/cache/dnf
