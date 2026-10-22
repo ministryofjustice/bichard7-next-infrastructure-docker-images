@@ -6,7 +6,7 @@ LABEL org.opencontainers.image.authors="CJSE"
 ARG NODE_USER="node"
 ARG NODE_GUID=1000
 ARG ARCH="x64"
-ARG NODE_VERSION="24.21.0"
+ARG NODE_VERSION="24.22.1"
 
 COPY scripts/docker-entrypoint.sh /usr/local/bin/
 
