@@ -2,7 +2,7 @@ ARG BUILD_IMAGE="amazon-linux2023-base"
 FROM ${BUILD_IMAGE}
 
 ARG TERRAFORM_VERSION="1.15.8"
-ARG NODE_VERSION="24.21.0"
+ARG NODE_VERSION="24.22.1"
 ARG DNF_PACKAGES="python3.11 python3.11-pip python3.11-pip jq git ruby ruby-devel"
 ARG TEST_PACKAGES="which"
 ARG ARCH="x64"
