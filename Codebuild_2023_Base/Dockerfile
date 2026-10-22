@@ -3,7 +3,8 @@ FROM ${BUILD_IMAGE}
 
 ARG TERRAFORM_VERSION="1.15.8"
 ARG NODE_VERSION="24.21.0"
-ARG DNF_PACKAGES="python3.11 python3.11-pip python3.11-pip jq git ruby ruby-devel"
+ARG PIP_VERSION="26.2.2"
+ARG DNF_PACKAGES="python3.11 python3.11-pip jq git ruby ruby-devel"
 ARG TEST_PACKAGES="which"
 ARG ARCH="x64"
 ARG NODE_USER="node"
@@ -24,7 +25,7 @@ RUN bash /tmp/install_packages.sh && \
     rm -rf /tmp/*.sh
 
 COPY requirements.txt /tmp/requirements.txt
-RUN python3.11 -m pip install --no-cache-dir --upgrade pip && \
+RUN python3.11 -m pip install --no-cache-dir "pip==${PIP_VERSION}" && \
     python3.11 -m pip install --no-cache-dir -r /tmp/requirements.txt && \
     rm -f /tmp/requirements.txt
 
