@@ -32,9 +32,11 @@ command:
     exit-status: 0
     stdout:
       - "appuser"
-  check_pip_version:
-    exec: "pip --version"
+  pip --version:
     exit-status: 0
+    stdout:
+      - /26.2.2/
+    timeout: 10000
 package:
   gzip:
     installed: true
